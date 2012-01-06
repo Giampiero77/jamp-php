@@ -1,0 +1,166 @@
+div.calendar_black {
+	background-color : #ffffff !important;
+	border-bottom-color : #316AC5 !important;
+	border-bottom-style : solid !important;
+	border-bottom-width : 1px !important;
+	border-left-color : #316AC5 !important;
+	border-left-style : solid !important;
+	border-left-width : 1px !important;
+	border-right-color : #316AC5 !important;
+	border-right-style : solid !important;
+	border-right-width : 1px !important;
+	border-top-color : #316AC5 !important;
+	border-top-style : solid !important;
+	border-top-width : 1px !important;
+	padding-bottom : 2px !important;
+	padding-left : 2px !important;
+	padding-right : 2px !important;
+	padding-top : 2px !important;
+}
+
+div.calendar_black div {
+	text-align : center !important;
+	padding-bottom : 2px !important;
+	padding-left : 2px !important;
+	padding-right : 2px !important;
+	padding-top : 2px !important;
+}
+
+div.calendar_black table.cal {
+	border-bottom-color : #316AC5 !important;
+	border-bottom-style : solid !important;
+	border-left-color : #316AC5 !important;
+	border-left-style : solid !important;
+	border-right-color : #316AC5 !important;
+	border-right-style : solid !important;
+	border-top-color : #316AC5 !important;
+	border-top-style : solid !important;
+}
+
+div.calendar_black table.cal td {
+	background-color : #FFFFFF !important;
+}
+
+div.calendar_black table.cal span {
+	background-color : #FFFFFF !important;
+	border: 0px;
+}
+
+div.calendar_black table thead {
+	background-color : #C6D0FF !important;
+}
+
+div.calendar_black table tbody {
+	color : #C6D0FF !important;
+}
+
+div.calendar_black table tbody span {
+	color : #000000 !important;
+	text-decoration : none !important;
+	cursor:pointer;
+}
+
+div.calendar_black span {
+	text-decoration : none !important;
+}
+
+div.calendar_black table tbody .selected {
+	background-color : #C6D0FF !important;
+	color : #000000 !important;
+	text-decoration : none !important;
+}
+
+div.calendar_black table tbody td.dayselected {
+	background-color : #FF0000 !important;
+	color : #000000 !important;
+	text-decoration : none !important;
+}
+
+div.calendar_black table tbody td.dayselected span {
+	background-color : #FF0000 !important;
+	color : #000000 !important;
+	text-decoration : none !important;
+}
+
+div.calendar_black table td {
+	padding: 1px;
+	text-align: center;
+}
+
+span.calendar_black_today {
+	background-image : url('calendar/1day.png') !important;
+	background-position : left !important;
+	background-repeat : no-repeat !important;
+	height : 16px !important;
+	padding-bottom : 2px !important;
+	padding-left : 16px !important;
+	padding-right : 2px !important;
+	padding-top : 0px !important;
+	text-decoration : none !important;
+	width : 16px !important;
+	background-color : white !important;
+	border : 0px !important;
+	margin : 0px !important;
+	float :none !important;
+  }
+
+
+span.calendar_black_cancel {
+	background-image : url('calendar/cancel.png');
+	background-position : left;
+	background-repeat : no-repeat;
+	height : 16px !important;
+	padding-bottom : 2px !important;
+	padding-left : 16px !important;
+	padding-right : 2px !important;
+	padding-top : 0px !important;
+	text-decoration : none !important;
+	width : 16px !important;
+	background-color : white !important;
+	border : 0px !important;
+	margin : 0px !important;
+	float :none !important;
+}
+
+span.calendar_black_confirm {
+	background : url('calendar/confirm.png') !important;
+	background-position : left !important;
+	background-repeat : no-repeat !important;
+	height : 16px !important;
+	padding-bottom : 2px !important;
+	padding-left : 16px !important;
+	padding-right : 2px !important;
+	padding-top : 2px !important;
+	text-decoration : none !important;
+	width : 16px !important;
+	background-color : white !important;
+	border : 0px !important;
+	margin : 0px !important;
+	float :none !important;
+   }
+
+span.calendar_black_close {
+	background : url('calendar/delete.png') !important;
+	background-position : left !important;
+	background-repeat : no-repeat !important;
+	height : 16px !important;
+	padding-bottom : 2px !important;
+	padding-left : 16px !important;
+	padding-right : 2px !important;
+	padding-top : 2px !important;
+	text-decoration : none !important;
+	width : 16px !important;
+	background-color : white !important;
+	border : 0px !important;
+	margin : 0px !important;
+	float :none !important;
+   }
+
+div.calendar_black select {
+	background-color: #FFF !important;
+	border: 1px #C6D0FF solid !important;
+	font-family : Verdana, Arial, Helvetica, sans-serif !important;
+	font-size : 12px !important;
+	margin-bottom: 3px !important;
+	float :none !important;
+  }

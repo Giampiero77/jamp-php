@@ -1,0 +1,143 @@
+div.tabs_black {
+    background-color: #656565;
+	overflow: hidden;
+	color: #FFFFFF;
+}
+
+div.tabs_black input,
+div.tabs_black select,
+div.tabs_black textarea
+{
+	background:#444444 none repeat scroll 0 0;
+	border:1px solid #080808;
+	color:#FFFFFF;
+}
+
+div.tabs_black input:hover,
+div.tabs_black select:hover,
+div.tabs_black textarea:hover
+{
+	background:#444444 none repeat scroll 0 0;
+	border:1px solid #9EDA29;
+	color:#FFFFFF;
+}
+
+div.tabs_black_tabs {
+	border: 1px solid #474747;
+	background-image: url('tabs/background.gif');
+	overflow: auto;
+	padding-left: 5px;
+}
+
+div.tabs_black_tabs div.tabs_black_tab {
+	padding: 2px;
+	overflow: auto;
+	display: none; 
+   text-align: left;
+}
+
+div.tabs_black_title {
+  	overflow:hide;
+	border-width: 0px; 
+	border-bottom: 0px none; 
+	cursor: pointer; 
+	background: url("tabs/center_on.gif") repeat-x; 
+	margin: 0px;
+	border: 0;
+	height: 33px;
+}
+
+div.tabs_black_box {
+	border-width: 0px; 
+	border-bottom: 0px none; 
+	cursor: pointer; 
+	background: url("tabs/center.gif") repeat-x; 
+	margin: 0px;
+	border: 0;
+}
+
+div.tabs_black_title table.selected,
+div.tabs_black_title table.unselected
+{
+ 	width: 100%; 
+}
+
+div.tabs_black_title table.unselected td.tab_text
+{
+	text-align: center;
+	white-space:nowrap;
+	font-family: Arial; 
+	font-style: normal; 
+	font-variant: normal; 
+	font-weight: bold; 
+	font-size: 12px; 
+	line-height: normal; 
+	font-size-adjust: none; 
+	font-stretch: normal; 
+	-x-system-font: none; 
+	text-decoration: none;
+	color: white;
+}
+
+div.tabs_black_title table.selected td.tab_text
+{
+	text-align: center;
+	white-space:nowrap;
+	font-family: Arial; 
+	font-style: normal; 
+	font-variant: normal; 
+	font-weight: bold; 
+	font-size: 12px; 
+	line-height: normal; 
+	font-size-adjust: none; 
+	font-stretch: normal; 
+	-x-system-font: none; 
+	text-decoration: none;
+	color: #9EDA29;
+}
+
+div.tabs_black_title table.selected td.tab_left {
+	padding: 0px; 
+	width: 7px; 
+	height: 33px; 
+	background: url("tabs/left.gif") no-repeat; 
+	white-space: nowrap;
+} 
+
+div.tabs_black_title table.selected td.tab_right {
+	padding: 0px; 
+	width: 7px; 
+	height: 33px; 
+	background: url("tabs/right.gif") no-repeat; 
+	white-space: nowrap;
+}
+
+div.tabs_black_title table.unselected {
+	border-width: 0px; 
+	border-bottom: 0px none; 
+	margin: 0px; 
+	cursor: pointer; 
+	background: url("tabs/center_on.gif") repeat-x; 
+}
+
+div.tabs_black_title table.unselected td.tab_left {
+	padding: 0px; 
+	width: 7px; 
+	height: 33px; 
+	background: url("tabs/left_on.gif") no-repeat; 
+	white-space: nowrap;
+}
+
+div.tabs_black_title table.unselected td.tab_right {
+	padding: 0px; 
+	width: 7px; 
+	height: 33px; 
+	background: url("tabs/right_on.gif") no-repeat; 
+	white-space: nowrap;
+}
+
+div.tabs_black_title_bottom {
+	padding: 0px; 
+	width: 0%; 
+	height: 0px; 
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+	<page typeobj="page" title="JdbAdmin" loaddata="true" bgcolor="#127397">
+		<ds1 typeobj="ds" readonly="true" />
+		<divLogo typeobj="div" style="top:0; position:absolute; z-index:2; width:299px height:93px;">
+			<img typeobj="img" src="./images/dbadmintop.png" alt="JdbAdmin" />
+		</divLogo>
+		<divBack typeobj="div" style="height : 388px; top:100%; position:absolute; width:100%; margin-left:-2px; margin-top : -388px; z-index:1">
+			<imgBack typeobj="img" src="./images/back.png" width="100%" height="388px"/>
+		</divBack>
+		<div1 typeobj="div" style="height:275px; top:50%; position:absolute; width:100%; margin-left:-2px; margin-top:-123px; z-index:2;">
+			<table1 typeobj="table" align="center" background="./images/dbadminlogin.png" width="444px" height="274px">
+				<tr1 typeobj="tr">
+					<td1 typeobj="td" align="right">
+						<img1 typeobj="img" width="123px" height="126px" src="./images/db.png"/>
+					</td1>
+					<td2 typeobj="td">
+						<engine typeobj="dsselect" style="width: 275px" label="Engine:\n" onchange="javascript:engine_change(this);">
+							<options>
+								<opt optiontext="mysql" optionvalue="mysql"/>
+							</options>
+						</engine>
+						<connection typeobj="dsselect" dsobjlist="ds1" dsitemlist="name" dsitemkeylist="name" label="\nConnection:\n" nav="true" style="width: 275px"/>
+						<server typeobj="text" label="\nServer:\n" size="25" dsobj="ds1" dsitem="host"/>
+						<port typeobj="text" label="Port:" maxlength="5" size="5" dsobj="ds1" dsitem="port"/>
+						<user typeobj="text" label="\nUser:\n" size="25" dsobj="ds1" dsitem="user"/>
+						<pwd typeobj="text" label="\nPassword:\n" size="25" password="true" dsobj="ds1" dsitem="pwd"/>
+						<br typeobj="br" />
+						<IT typeobj="radio" name="lang" label="IT"/>
+						<EN typeobj="radio" name="lang" label="EN"/>
+						<label2 typeobj="button" label="" value="TEST" onclick="login();" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:92px;"/>
+						<br1 typeobj="br" row="2"/>
+					</td2>
+				</tr1>
+			</table1>
+	</div1>
+	</page>
+</jamp>

@@ -1,0 +1,49 @@
+div.xgridds_default {
+	border : 1px solid #B1B1B1;
+	padding: 3px;
+	background-color : #F9F9F9;
+	overflow: auto;
+	cursor: pointer;
+}
+
+div.xgridds_default_row {
+/* 	border : 1px solid #AAAAAA; */
+	padding: 3px;
+	background-color: #F9F9F9;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+div.xgridds_default_row_event {
+/* 	border : 1px solid #AAAAAA; */
+	padding: 3px;
+	background-color: #F9F9F9;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+div.xgridds_default_row_pos {
+/* 	border : 1px solid #AAAAAA; */
+	padding: 3px;
+	background-color: #F9F9F9;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+div.xgridds_default_row_event:hover,
+div.xgridds_default_row_pos:hover,
+div.xgridds_default_row:hover {
+	border : 1px solid #319ACF;
+	padding: 2px;
+ 	background-color: #F3F6FB;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+div.xgridds_default_row_error {
+	border: 1px dashed red;
+	padding: 3px;
+	background-color: yellow;
+	overflow: hidden;
+	cursor: pointer;
+}

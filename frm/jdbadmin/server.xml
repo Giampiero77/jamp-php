@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+    <page typeobj="page" title="jdbadmin" loaddata="true">
+		<ds1 typeobj="ds" conn="custom" dskey="Database" focusnew="gridds1_1_$"/>
+		<ds2 typeobj="ds" conn="custom" dskey="User" loadall="false" focusnew="gridds2_1_$"/>
+		<ds3 typeobj="ds" conn="custom" loadall="false" />
+        <tabs1 typeobj="tabs" width="autosize" height="autosize" selected="tab1" align="left">
+            <tab1 typeobj="tab" label="DATABASE">
+				<importtxt typeobj="text" label=" Import :" fileupload="true" rewrite="true" />
+				<dsnav1 typeobj="dsnav" dsobj="ds1" objprint="gridds1" btPage="false" />
+				<gridds1 typeobj="gridds" dsobj="ds1" width="300px" height="autosize">
+					<coloumn>
+						<col objtype="text" itemlabel="Database" dsitem="Database" colwidth="250px" minlength="1" />
+					</coloumn>
+				</gridds1>
+			</tab1>
+			<tab2 typeobj="tab" label="USERS">
+				<dsnav2 typeobj="dsnav" dsobj="ds2" objprint="gridds2" btPage="false">
+					<button>
+						<bt onclick="ReloadPrivileges();" image="images/index.png" title="Reload Privileges"/>
+					</button>
+				</dsnav2>
+				<gridds2 typeobj="gridds" dsobj="ds2" width="autosize" height="autosize">
+					<header>
+						<head headlabel="User" headcol="3"/>
+						<head headlabel="Data" headcol="6"/>
+						<head headlabel="Structure" headcol="6"/>
+						<head headlabel="View" headcol="2"/>
+						<head headlabel="Routine" headcol="2"/>
+						<head headlabel="General" headcol="7"/>
+						<head headlabel="Replicator" headcol="2"/>
+						<head headlabel="User" headcol="2"/>
+						<head headlabel="Mazimium" headcol="4"/>
+					</header>
+					<coloumn>
+						<col objtype="text" itemlabel="User" dsitem="User" colwidth="100px" />
+						<col objtype="text" itemlabel="Host" dsitem="Host" colwidth="100px" />
+						<col objtype="text" itemlabel="Password" dsitem="Password" colwidth="100px" password="true" />
+						<col objtype="checkbox" itemlabel="Select" dsitem="Select_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Insert" dsitem="Insert_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Update" dsitem="Update_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Delete" dsitem="Delete_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="File" dsitem="File_priv" true="Y" false="N" colwidth="40px" />
+						
+						<col objtype="checkbox" itemlabel="Create" dsitem="Create_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Alter" dsitem="Alter_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Index" dsitem="Index_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Drop" dsitem="Drop_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Execute" dsitem="Execute_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Create_tmp_table" dsitem="Create_tmp_table_priv" true="Y" false="N" colwidth="80px" />
+						
+						<col objtype="checkbox" itemlabel="Create" dsitem="Create_view_priv" true="Y" false="N" colwidth="80px" />
+						<col objtype="checkbox" itemlabel="Show" dsitem="Show_view_priv" true="Y" false="N" colwidth="80px" />
+						
+						<col objtype="checkbox" itemlabel="Create" dsitem="Create_routine_priv" true="Y" false="N" colwidth="80px" />
+						<col objtype="checkbox" itemlabel="Alter" dsitem="Alter_routine_priv" true="Y" false="N" colwidth="80px" />
+	
+						<col objtype="checkbox" itemlabel="Grant" dsitem="Grant_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Super" dsitem="Super_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Process" dsitem="Process_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Reload" dsitem="Reload_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Shutdown" dsitem="Shutdown_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Show DB" dsitem="Show_db_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Lock" dsitem="Lock_tables_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="References" dsitem="References_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Client" dsitem="Repl_client_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Server" dsitem="Repl_slave_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="Create" dsitem="Create_user_priv" true="Y" false="N" colwidth="40px" />
+						<col objtype="checkbox" itemlabel="SSL" dsitem="ssl_type" true="Y" false="N" colwidth="40px" />
+						
+						<col objtype="text" itemlabel="Questions" dsitem="max_questions" colwidth="40px" keypress="number" size="5" />
+						<col objtype="text" itemlabel="Updates" dsitem="max_updates" colwidth="40px"  keypress="number" size="5" />
+						<col objtype="text" itemlabel="Connections" dsitem="max_connections" colwidth="40px"  keypress="number" size="5" />
+						<col objtype="text" itemlabel="User Connections" dsitem="max_user_connections" colwidth="40px"  keypress="number" size="5" />
+					</coloumn>
+				</gridds2>
+			</tab2>
+		</tabs1>
+    </page>
+</jamp> 

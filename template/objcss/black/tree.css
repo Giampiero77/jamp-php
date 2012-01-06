@@ -1,0 +1,350 @@
+/* CSS TREE */
+div.tree_black {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000;
+    text-decoration: none;
+    border: Solid 1px black;
+    padding: 10px;
+    left: 50px;
+    top: 50px;
+    overflow: auto;
+    background-color: #EFEFEF;
+    float:left;
+    position:static;
+/*     margin-right:5px; */
+  }
+
+.treenofloat {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000;
+    text-decoration: none;
+    border: Solid 1px black;
+    padding: 10px;
+    left: 50px;
+    top: 50px;
+    overflow: auto;
+    background-color: #EFEFEF;
+    position:static;
+    margin-right:5px;
+  }
+
+div.tree_black .nodeText {
+    cursor : pointer;
+    font-family : Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size : 11px;
+    -moz-user-select: none;
+    white-space: nowrap;
+  }
+
+div.tree_black .nodeLink {
+    cursor : pointer;
+    color : blue;
+    font-family : Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size : 11px;
+    -moz-user-select: none;
+  }
+
+div.tree_black .nodeSel {
+    cursor : pointer;
+    background-color : navy;
+    color:white;
+    font-family : Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size : 11px;
+    -moz-user-select: none;
+    white-space: nowrap;
+  }
+
+#dragContainer {
+    position: absolute;
+    display : none;
+    z-index : 100;
+}
+
+div.tree_black .TreeNode {
+	list-style: none;
+    padding-top : 2px;	
+}
+
+div.tree_black .Nodecontainer {
+    display : none;
+    padding-left : 16px;
+    padding-bottom : 0px;
+    padding-top : 0px;
+    margin : 5px;
+}
+
+div.tree_black .tree_plus,
+div.tree_black .tree_minus,
+div.tree_black .tree_base_open,
+div.tree_black .tree_base_close,
+div.tree_black .tree_folder_close,
+div.tree_black .tree_folderlink_close,
+div.tree_black .tree_folder_open,
+div.tree_black .tree_folderlink_open,
+div.tree_black .tree_file_open,
+div.tree_black .tree_file_close,
+div.tree_black .tree_page_open,
+div.tree_black .tree_page_close,
+div.tree_black .tree_icon_open,
+div.tree_black .tree_icon_close,
+div.tree_black .tree_filelink_open,
+div.tree_black .tree_filelink_close,
+div.tree_black .tree_dc_open,
+div.tree_black .tree_dc_close,
+div.tree_black .tree_home_open,
+div.tree_black .tree_home_close,
+div.tree_black .tree_ou_open,
+div.tree_black .tree_ou_close,
+div.tree_black .tree_cn_open,
+div.tree_black .tree_cn_close,
+div.tree_black .tree_uid_open,
+div.tree_black .tree_uid_close,
+div.tree_black .tree_sambaDomainName_open,
+div.tree_black .tree_sambaDomainName_close,
+div.tree_black .tree_link,
+div.tree_black .tree_plus,
+div.tree_black .tree_minus,
+div.tree_black .tree_checked,
+div.tree_black .tree_unchecked,
+div.tree_black .tree_semichecked,
+div.tree_black .tree_base_open,
+div.tree_black .tree_base_close,
+div.tree_black .tree_folder_close,
+div.tree_black .tree_folderlink_close,
+div.tree_black .tree_folder_open,
+div.tree_black .tree_folderlink_open,
+div.tree_black .tree_file_open,
+div.tree_black .tree_file_close,
+div.tree_black .tree_icon_open,
+div.tree_black .tree_icon_close,
+div.tree_black .tree_filelink_open,
+div.tree_black .tree_filelink_close,
+div.tree_black .tree_dc_open,
+div.tree_black .tree_dc_close,
+div.tree_black .tree_home_open,
+div.tree_black .tree_home_close,
+div.tree_black .tree_ou_open,
+div.tree_black .tree_ou_close,
+div.tree_black .tree_cn_open,
+div.tree_black .tree_cn_close,
+div.tree_black .tree_uid_open,
+div.tree_black .tree_uid_close,
+div.tree_black .tree_sambaDomainName_open,
+div.tree_black .tree_sambaDomainName_close,
+div.tree_black .tree_link,
+div.tree_black .tree_database_open,
+div.tree_black .tree_database_close,
+div.tree_black .tree_tables_open,
+div.tree_black .tree_tables_close,
+div.tree_black .tree_table_open,
+div.tree_black .tree_table_close,
+div.tree_black .tree_views_open,
+div.tree_black .tree_views_close,
+div.tree_black .tree_view_open,
+div.tree_black .tree_view_close,
+div.tree_black .tree_procedures_open,
+div.tree_black .tree_procedures_close,
+div.tree_black .tree_procedure_open,
+div.tree_black .tree_procedure_close,
+div.tree_black .tree_functions_open,
+div.tree_black .tree_functions_close,
+div.tree_black .tree_function_open,
+div.tree_black .tree_function_close,
+div.tree_black .tree_field_open,
+div.tree_black .tree_field_close
+{
+    cursor : pointer;
+	padding-left: 16px;
+}
+
+div.tree_black .tree_base_open,
+div.tree_black .tree_base_close {
+    background : url('tree/base.gif') no-repeat left;
+  }
+
+div.tree_black .tree_folder_close {
+    background : url('tree/folder.gif') no-repeat left;
+  }
+
+div.tree_black .tree_folderlink_close {
+    background : url('tree/folder.gif') no-repeat left;
+  }
+
+div.tree_black .tree_folder_open {
+    background : url('tree/folderopen.gif') no-repeat left;
+  }
+
+div.tree_black .tree_folderlink_open {
+    background : url('tree/folderopen.gif') no-repeat left;
+  }
+
+div.tree_black .tree_database_open,
+div.tree_black .tree_database_close
+{
+	background : url('tree/db.png') no-repeat left;
+}
+
+div.tree_black .tree_tables_open,
+div.tree_black .tree_tables_close{    
+	background : url('tree/folder.gif') no-repeat left;
+}
+
+div.tree_black .tree_table_open,
+div.tree_black .tree_table_close
+{
+	background : url('tree/table.png') no-repeat left;
+}
+
+div.tree_black .tree_views_open,
+div.tree_black .tree_views_close
+{ 
+	background : url('tree/folder.gif') no-repeat left;
+}
+
+div.tree_black .tree_view_open,
+div.tree_black .tree_view_close
+{    
+	background : url('tree/view.png') no-repeat left;
+}
+
+div.tree_black .tree_procedures_open,
+div.tree_black .tree_procedures_close
+{ 
+	background : url('tree/folder.gif') no-repeat left;
+}
+
+div.tree_black .tree_procedure_open,
+div.tree_black .tree_procedure_close
+{
+	background : url('tree/samba.png') no-repeat left;
+}
+
+div.tree_black .tree_functions_open,
+div.tree_black .tree_functions_close
+{    
+	background : url('tree/folder.gif') no-repeat left;
+}
+
+div.tree_black .tree_function_open,
+div.tree_black .tree_function_close
+{    
+	background : url('tree/function.png') no-repeat left;
+}
+
+div.tree_black .tree_field_open,
+div.tree_black .tree_field_close
+{    
+	background : url('tree/field.png') no-repeat left;
+}
+
+div.tree_black .tree_file_open,
+div.tree_black .tree_file_close
+{
+    background : url('tree/page.gif') no-repeat left;
+}
+
+div.tree_black .tree_icon_open,
+div.tree_black .tree_icon_close {
+    background : url('tree/page.gif') no-repeat left;
+  }
+
+div.tree_black .tree_filelink_open,
+div.tree_black .tree_filelink_close {
+    background : url('tree/page.gif') no-repeat left;
+  }
+
+div.tree_black .tree_dc_open,
+div.tree_black .tree_dc_close {
+    background : url('tree/dc.png') no-repeat left;
+  }
+
+div.tree_black .tree_ou_open,
+div.tree_black .tree_ou_close {
+    background : url('tree/ou.png') no-repeat left;
+  }
+
+div.tree_black .tree_cn_open,
+div.tree_black .tree_cn_close {
+    background : url('tree/ou.png') no-repeat left;
+  }
+
+div.tree_black .tree_uid_open,
+div.tree_black .tree_uid_close {
+    background : url('tree/uid.png') no-repeat left;
+  }
+
+div.tree_black .tree_sambaDomainName_open,
+div.tree_black .tree_sambaDomainName_close {
+    background : url('tree/samba.png') no-repeat left;
+  }
+
+div.tree_black .tree_link {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: blue;
+    text-decoration: none;
+  }
+
+div.tree_black .tree_plus {
+    background : url('tree/plus.gif') no-repeat left;
+  }
+
+div.tree_black .tree_minus {
+    background : url('tree/minus.gif') no-repeat left;
+  }
+
+div.tree_black .tree_blank {
+    background : url('tree/empty.gif') no-repeat left;
+  }
+
+div.tree_black .tree_checked {
+    background : url('tree/checked.gif') no-repeat left;
+	display:inline;
+  }
+
+div.tree_black .tree_unchecked {
+    background : url('tree/unchecked.gif') no-repeat left;
+	display:inline;
+  }
+
+div.tree_black .tree_semichecked {
+    background : url('tree/semichecked.gif') no-repeat left;
+	display:inline;
+  }
+
+div.tree .tree_page_open,
+div.tree .tree_page_close {
+    background : url('tree/page.gif') no-repeat left;
+}
+
+#menuContainer {
+    font-size: 11px;
+    font-family: Verdana;
+    background: #E0E0E0;
+    padding: 3px 3px 3px 3px;
+    width: 150px;
+    border: Solid 1px #AAAAAA;
+    visibility: hidden;
+    position: absolute;
+}
+
+#menuContainer a {
+    display: block;
+    background: #E0E0E0;
+    color: #000000;
+    text-decoration: None;
+    padding: 3px 3px 3px 3px;
+    border: Solid 1px #E0E0E0;
+}
+
+#menuContainer a:hover {
+    cursor : pointer;
+    display: block;
+    background: #336699;
+    color: #FFFFFF;
+    text-decoration: None;
+    padding: 3px 3px 3px 3px;
+    border: Solid 1px #000000;
+}

@@ -1,0 +1,25 @@
+span.radio_black_check {
+    cursor:pointer;
+    background : url('radio/check.gif') no-repeat center;
+    overflow: auto;
+    height: 20px;
+	 padding-right: 10px;
+  }
+
+span.radio_black_uncheck {
+    cursor:pointer;
+    background : url('radio/uncheck.gif') no-repeat center;
+    overflow: auto;
+    height: 20px;
+	 padding-right: 10px;
+  }
+
+span.radio_black,
+span.radio_black_undefined {
+    cursor:pointer;
+    background : url('radio/undefined.gif') no-repeat center;
+    overflow: auto;
+    height: 20px;
+	 padding-right: 10px;
+  }
+

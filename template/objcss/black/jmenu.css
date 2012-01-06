@@ -1,0 +1,132 @@
+/**
+* @version $Id: menu.css 5514 2006-10-19 13:38:35Z Jinx $
+* @copyright Copyright (C) 2005 - 2006 Open Source Matters. All rights reserved.
+* @license GNU/GPL, see LICENSE.php
+* Joomla! is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
+
+/**
+ * jmenu_black javascript behavior styling
+ *
+ * @author		Johan Janssens <johan.janssens@joomla.org>
+ * @package		Joomla
+ * @since		1.5
+ * @version    1.0
+ */
+
+/* ---- Basic menu styles ------------------- */
+
+.jmenu_black #frame-hidden
+{
+    position: absolute; 
+    visibility: visible;
+    z-index: -1;
+	border: 0px;
+}
+/* common styling */
+.jmenu_black, .jmenu_black ul, .jmenu_black li { margin: 0; padding: 0; border: 0 none; }
+
+.jmenu_black       { position:relative; z-index: 9999;}
+.jmenu_black li    { float:left;  position:relative; list-style: none; display: inline;}
+.jmenu_black li a  { display:block; white-space: nowrap;  }
+.jmenu_black li li { /*width: 100%;*/ clear: both;  /*FF 1.0.7 needs this */  }
+.jmenu_black li ul { visibility: hidden; position:absolute; }
+.jmenu_black li li ul {  top: 0; left: 0; }
+.jmenu_black li.hover ul               {  visibility: visible; }
+.jmenu_black li.hover ul li ul 	      {  visibility: hidden;  }
+.jmenu_black li.hover li.hover ul      {  visibility: visible;  left: 100%; }
+
+/* ---- Menu layout -------------------------- */
+
+.jmenu_black 
+{ 
+/*     background-image:url('jmenu/background.png'); */
+	background-color: #666;
+	height: 32px;
+}
+
+.jmenu_black li {}
+.jmenu_black li li { border: 0;}
+
+.jmenu_black ul { border: 0.1em solid black; background: #4f4f4f url('jmenu/bg-menu.png') repeat-y left; padding: 1px 0px 2px 4px;}
+.jmenu_black ul li.menu 
+{ 
+	background: transparent url('jmenu/j_arrow.png') no-repeat right 50%; 
+}
+.jmenu_black ul li.separator { <  height: 1px;  }
+
+.jmenu_black a {
+ 	padding: 0.5em 1em 0.2em;
+ 	margin: 1 2px 1 2px;
+	color: white;
+	line-height: 1.6em; 
+	vertical-align: middle;
+	font-size: 12px;
+	font-family: "Segoe UI",Arial,sans-serif;
+	text-decoration: none;
+	cursor: pointer;
+	background-repeat: no-repeat; 
+	background-position: left 50%
+}
+
+.jmenu_black li ul a { color: black; }
+
+.jmenu_black li.disabled a { color: #ECE9D8; }
+
+.jmenu_black ul a {
+	font-weight: normal;
+	padding-left: 25px;
+	padding-right: 20px;
+	line-height: 1.2em; 
+ 	font-size: 12px;
+	font-family: "Segoe UI",Arial,sans-serif;
+}
+
+/* 1 level - hover */
+.jmenu_black li.hover a { background-image: url('jmenu/background1.png'); background-repeat: repeat-x; color: #9EDA29; }
+/* 2 level - normal */
+.jmenu_black li.hover li a { background-repeat: no-repeat; border: 0 none; margin: 2px; color: white; }
+/* 2 level - hover */
+.jmenu_black li.hover li.hover a { background-color: #333333; border: 1px solid #232323; margin: 1px; color: #9EDA29; }
+/* 3 level - normal */
+.jmenu_black li.hover li.hover li a { background-color: transparent; background-repeat: no-repeat; border: 0 none; margin: 2px; color: white; }
+/* 3 level - hover */
+.jmenu_black li.hover li.hover li.hover a { background-color: #333333; border: 1px solid #232323;  margin: 1px; color: #9EDA29; }
+
+/* submenu styling */
+#submenu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#submenu li {
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+#submenu li a,
+#submenu span.nolink {
+	cursor: pointer;
+	padding: 0px 15px;
+	border-right: 1px solid #ccc;
+	font-weight: bold;
+	color: #0B55C4;
+	line-height: 12px;
+	height: 12px;
+}
+
+#submenu span.nolink {
+	color: #999;
+}
+
+#submenu a.active,
+#submenu span.nolink.active {
+	color: #000;
+	text-decoration: underline;
+}

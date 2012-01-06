@@ -1,0 +1,384 @@
+div.dsnav_default {
+	overflow : hidden;
+	margin-bottom: 2px;
+	width:auto;
+/* 	-moz-border-radius: 6px 6px 6px 6px; */
+/* 	border-radius: 6px 6px 6px 6px; */
+/* 	-moz-box-shadow: 0 4px 13px #999999; */
+/* 	box-shadow: 0 4px 13px #999999; */
+/* 	border: 1px solid transparent; */
+}
+
+div.dsnav_default div{
+	-moz-border-radius: 9px 9px 9px 9px;
+	border-radius: 9px 9px 9px 9px;
+}
+
+select.dsnav_default_totalpage {
+	margin-top: -1px;
+	height: 22px;
+	font-size:14px;
+	background-color: #FFF;
+	border: 0 none;	
+}
+
+div.dsnav_default_totalpage {
+	float: left;
+	background-color: #FFF;
+	border: 1px #FFFFFF solid;
+	height : 20px;
+	font-size: 12px;
+	float: left;
+	margin: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	white-space: nowrap; 	
+	overflow:visible;
+}
+
+div.dsnav_default_totalpage div {
+	 padding-top: 2px;
+}
+
+div.dsnav_default_totalpage:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_total {
+	background-color: #FFFFFF;
+	border: 1px #CCCCCC solid;
+	height : 20px;
+	min-width : 60px;
+	white-space: nowrap; 
+	text-align: center;
+	font-size: 12px;
+	float: left;
+	margin: 1px;
+	line-height: 20px;
+	overflow:visible;
+	padding-left:3px;
+	padding-right:3px;
+  }
+
+div.dsnav_default_new {
+	cursor:pointer;
+	background : url('dsnav/add.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+  }
+
+div.dsnav_default_new:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_reload {
+	cursor:pointer;
+	background : url('dsnav/reload.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_reload:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_reload_gray {
+	cursor: text;
+	background : url('dsnav/reload.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+  }
+
+div.dsnav_default_print {
+	cursor:pointer;
+	background : url('dsnav/print.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_print:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_print_gray {
+	cursor: text;
+	background : url('dsnav/print.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_new_gray {
+	cursor: text;
+	background : url('dsnav/add_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_cancel {
+	cursor:pointer;
+	background : url('dsnav/cancel.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+  }
+
+div.dsnav_default_cancel:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_cancel_gray {
+	cursor: text;
+	background : url('dsnav/cancel_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_delete {
+	cursor:pointer;
+	background : url('dsnav/delete.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_delete:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_delete_gray {
+	cursor:text;
+	background : url('dsnav/delete_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+  }
+
+div.dsnav_default_save {
+	cursor:pointer;
+	background : url('dsnav/save.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+    border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_save:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_save_gray {
+	cursor: text;
+	background : url('dsnav/save_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_first {
+	cursor:pointer;
+	background : url('dsnav/first.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_first:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_first_gray {
+	cursor:text;
+	background : url('dsnav/first_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+
+div.dsnav_default_prev {
+	cursor:pointer;
+	background : url('dsnav/left.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+  }
+
+
+div.dsnav_default_prev:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_prev_gray {
+	cursor:text;
+	background : url('dsnav/left_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_next {
+	cursor:pointer;
+	background : url('dsnav/right.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_next:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_next_gray {
+	cursor:text;
+	background : url('dsnav/right_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_last {
+	cursor:pointer;
+	background : url('dsnav/last.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_last:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_last_gray {
+	cursor:pointer;
+	background : url('dsnav/last_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+input.dsnav_default_find {
+	background-color: #FFF;
+	margin-top: 1px;
+	border: 0px none;
+}
+
+div.dsnav_default_find {
+	float: left;
+	background-color: #FFF;
+	border: 1px #FFFFFF solid;
+	height : 20px;
+	font-size: 12px;
+	float: left;
+	margin: 1px;
+	line-height: 20px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+div.dsnav_default_findicon {
+	cursor:pointer;
+	background : url('dsnav/search.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left; 
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_find:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_bt_custom {
+	cursor:pointer;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_bt_custom:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
