@@ -534,7 +534,11 @@ class ClsObj_ds extends ClsObject {
 				}
 				else
 				{
-					$filesetting = file($system->dir_real_jamp."/".$system->dir_conf."conn.inc.php");
+					if (defined('_JAMP_CONNECTIONS_')) {
+						$filesetting = file(_JAMP_CONNECTIONS_);
+					} else {
+						$filesetting = file($system->dir_real_jamp."/".$system->dir_conf."conn.inc.php");
+					}
 					unset($filesetting[0]);
 					$find = false;
 					foreach ($filesetting as $row){

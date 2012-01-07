@@ -56,7 +56,11 @@ class ClsSystem
 	public function loadConfig()
 	{
 		require_once($this->dir_real_jamp."/class/lang.class.php");
-		require_once($this->dir_real_jamp."/conf/setting.inc.php");
+		if (defined('_JAMP_SETTING_')) {
+			require_once(_JAMP_SETTING_);
+		} else {
+			require_once($this->dir_real_jamp."/conf/setting.inc.php");
+		}
 		$this->compressjs = COMPRESSJS;
 		require_once($this->dir_real_jamp."/".$this->dir_plugin.'packer-php/class.JavaScriptPacker.php');
 		error_reporting(ERROR_REPORTING);
