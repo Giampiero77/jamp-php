@@ -1,0 +1,31 @@
+#inspectorBorder {
+    display:none;
+  }
+
+#inspectorBorder.over {
+    display:block;
+    z-index:99999998;
+    position:absolute;
+    top:0;
+    left:0;
+    border:2px dashed #0000ff;
+    background:transparent;
+    opacity:0.5;
+    filter:Alpha(Opacity=50);
+    padding:0;
+    margin:0;
+  }
+
+#inspectorBorder.selected {
+    display:block;
+    z-index:99999998;
+    position:absolute;
+    top:0;
+    left:0;
+    border:2px solid #0000ff;
+    background:transparent;
+    opacity:0.5;
+    filter:Alpha(Opacity=50);
+    padding:0;
+    margin:0;
+  }

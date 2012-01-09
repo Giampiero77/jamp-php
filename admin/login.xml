@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+	<page typeobj="page" title="JAMP ADMIN" icon="../../favicon.ico" loaddata="true">
+		<ds1 typeobj="ds" conn="custom" event="none" />
+		<div1 typeobj="div" style="height : 150px; top : 50%; position : absolute; width:99%; margin-top : -50px;">
+			<table1 typeobj="table" align="center">
+				<tr1 typeobj="tr">
+					<td1 typeobj="td">
+						<img1 typeobj="img" src="test/jamp.gif"/>
+					</td1>
+					<td2 typeobj="td">
+						<label1 typeobj="label" value="JAMP ADMIN:" style="font-weight: bold; font-size: 2em;"/>
+						<user typeobj="text" label="\nUtente:\n" maxlength="20" size="20" dsitem="username"/>
+						<pwd typeobj="text" label="\nPassword:\n" maxlength="20" size="20" password="true" dsitem="password"/>
+						<label2 typeobj="button" label="\n" value="Accedi" onclick="AJAX.login('ds1', 'user', 'pwd');" style="font-weight: bold; font-size: 1.2em; cursor: pointer;"/>
+					</td2>
+				</tr1>
+			</table1>
+	</div1>
+	</page>
+</jamp>

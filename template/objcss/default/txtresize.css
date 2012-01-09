@@ -1,0 +1,31 @@
+/* CSS DS */
+div.txtresize_default {
+    height:18px;
+	 padding-bottom : 3px;
+}
+
+span.txtresize_default_plus {
+    cursor:pointer;
+    background : url('txtresize/viewmag+.png') no-repeat center;
+    background-color : #FFF;
+    padding: 0.3em 0.7em; 
+    border: 1px #C6D0FF solid;
+}
+
+span.txtresize_default_plus:hover {
+    border: 1px #316AC5 solid;
+    background-color: #C6D0FF;
+}
+
+span.txtresize_default_less {
+    cursor:pointer;
+    background : url('txtresize/viewmag-.png') no-repeat center;
+    background-color : #FFF;
+    padding: 0.3em 0.7em; 
+    border: 1px #C6D0FF solid;
+}
+
+span.txtresize_default_less:hover {
+    border: 1px #316AC5 solid;
+    background-color: #C6D0FF;
+}

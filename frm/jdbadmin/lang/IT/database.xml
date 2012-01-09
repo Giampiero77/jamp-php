@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+	<page typeobj="page">
+		<tab1 label="DATABASE"/>
+		<fimp legend="Importazione oggetti database(Tabelle, Viste, Funzioni, Procedure)"/>
+		<importtxt label=" Importazione:" labelwidth="92px"/>
+		<fpriv legend="Privilegi"/>
+		<select label="Utente "/>
+		<text1 label="Host"/>
+		<f1 legend="Dati"/>
+		<checkbox1 label="Select"/>
+		<checkbox2 label="Insert"/>
+		<checkbox3 label="Update"/>
+		<checkbox4 label="Delete"/>
+		<checkbox5 label="Create"/>
+		<checkbox6 label="Drop"/>
+		<f2 legend="Strutture"/>				
+		<checkbox7 label="Grant"/>
+		<checkbox8 label="References"/>
+		<checkbox9 label="Index"/>
+		<checkbox10 label="Alter"/>
+		<checkbox11 label="Create tmp table"/>
+		<checkbox12 label="Lock"/>
+		<f3 legend="Viste"/>
+		<checkbox13 label="Create"/>
+		<checkbox14 label="Show"/>
+		<checkbox15 label="Create"/>
+		<checkbox16 label="Alter"/>
+		<checkbox17 label="Execute"/>	
+		<tab2 label="QUERY"/>
+		<button1 value="esegui"/>
+		<tab3 label="ESPORTAZIONE"/>
+		<dsnav3>
+			<button>
+				<bt title="esporta"/>
+				<bt title="Stampa"/>
+				<bt title="Esporta su file"/>
+			</button>
+		</dsnav3>
+		<expnone label="nessuno"/>
+		<fil1 legend="Tabelle"/> 
+		<tablestruc label="Struttura"/>
+		<tabledata label="Dati"/>
+		<tablestartrow label="Riga di inizio"/>
+		<tablelimitrow label="Righe max"/>
+		<fil2 legend="Viste"/> 
+		<viewstruc label="Struttura"/>
+		<viewdata label="Dati"/>
+		<viewstartrow label="Riga di inizio"/>
+		<viewlimitrow label="Righe max"/>
+		<fil3 legend="Funzioni/Procedure"/> 	
+	</page>
+</jamp>

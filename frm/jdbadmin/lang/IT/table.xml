@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+	<page typeobj="page">
+		<tab1 label="STRUTTURA">
+			<dsnav1>
+				<button>
+						<bt title="Visualizza/Nascondi SQL"/>
+				</button>
+			</dsnav1>
+		</tab1>
+		<tab21 label="INDICI"/>
+		<dsnav2>
+			<button>
+				<bt title="Primaria"/>
+				<bt title="Univoca"/>
+				<bt title="Indice"/>
+				<bt title="Testo Completo"/>
+			</button>
+		</dsnav2>
+		<tab22 label="CHIAVI ESTERNE"/>
+		<dsnav23>
+			<button>
+				<bt title="chiave esterna"/>
+			</button>
+		</dsnav23>
+		<tab2 label="DATI"/>
+		<dsnav3>
+			<button>
+				<bt title="Svuota la Tabella"/>
+				<bt title="Visualizza/Nascondi SQL"/>
+			</button>
+		</dsnav3>
+		<gridds1>
+			<coloumn>
+				<col itemlabel="Campo"/>
+				<col itemlabel="Tipo"/>
+				<col itemlabel="Lunghezza/Set"/>
+				<col itemlabel="Nullo"/>
+				<col itemlabel="Extra"/>
+				<col itemlabel="Predefinito"/>
+				<col itemlabel="Commento"/>
+				<col itemlabel="Collation"/>
+			</coloumn>
+		</gridds1>
+		<gridds21>
+			<coloumn>
+				<col itemlabel="Nome Chiave"/>
+				<col itemlabel="Non univoca"/>
+				<col itemlabel="Colonna"/>
+			</coloumn>
+		</gridds21>
+		<gridds23>
+			<coloumn>
+				<col itemlabel="VINCOLO" colwidth="100px"/>
+				<col itemlabel="CHIAVE ESTERNA" colwidth="150px"/>
+				<col itemlabel="DB REFERENZE" colwidth="100px"/>
+				<col itemlabel="TABELLA REFERENZE" colwidth="150px"/>
+				<col itemlabel="CHIAVE REFERENZE" colwidth="150px"/>
+				<col itemlabel="IN ELIMINAZIONE" colwidth="125px"/>
+				<col itemlabel="IN MODIFICA" colwidth="125px"/>
+			</coloumn>
+		</gridds23>
+    </page>
+</jamp> 

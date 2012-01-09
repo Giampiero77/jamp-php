@@ -1,0 +1,39 @@
+div.Left_progressbar_default {
+	width:10px;
+	height:41px;
+	background:url('./progressbar/bg_bar_left.gif') no-repeat 0 0;
+	position:relative;
+	float: left;
+}
+
+div.Center_progressbar_default {
+	left: 0px; 
+	height:41px;
+	background:url('./progressbar/bg_bar_center.gif') repeat-x 0 0;
+	position:relative;
+	float: left;
+}
+
+div.Right_progressbar_default {
+	 width:10px;
+	 height:41px;
+	 background:url('./progressbar/bg_bar_right.gif') no-repeat 0 0;
+	 position:relative;
+}
+
+div.Center_progressbar_default span {
+	position:absolute;
+	display:block;
+	height:25px;
+	background:url('./progressbar/bar.gif') repeat-x 0 0;
+	top:8px;
+	left:-2px;
+	overflow:hidden;
+	text-indent:-8000px;
+}
+
+div.Text_progressbar_default 
+{
+	top:8px;
+	text-align:center;
+}

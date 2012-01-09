@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jamp>
+	<page typeobj="page" title="JdbAdmin" loaddata="true" style="background-color:#127397;" icon="../../favicon.ico">
+		<ds1 typeobj="ds" readonly="true" />
+		<divLogo typeobj="div" style="top:0; position:absolute; z-index:2; width:299px height:93px;">
+			<img typeobj="img" src="./images/dbadmintop.png" alt="JdbAdmin" />
+		</divLogo>
+		<divBack typeobj="div" style="height : 388px; top:100%; position:absolute; width:100%; margin-left:-2px; margin-top : -388px; z-index:1">
+			<imgBack typeobj="img" src="./images/back.png" width="100%" height="388px"/>
+		</divBack>
+		<div1 typeobj="div" style="height:275px; top:50%; position:absolute; width:100%; margin-left:-2px; margin-top:-123px; z-index:2;">
+			<table1 typeobj="table" align="center" style="background-image: url('./images/dbadminlogin.png'); height: 274px;width: 444px">
+				<tr1 typeobj="tr">
+					<td1 typeobj="td" align="center" width="170">
+						<img1 typeobj="img" width="123px" height="126px" src="./images/db.png"/>
+					</td1>
+					<td2 typeobj="td">
+						<engine typeobj="dsselect" style="width: 240px" label="Engine:\n" onchange="javascript:engine_change(this);">
+							<options>
+								<opt optiontext="mysql" optionvalue="mysql" optionselected="true" />
+							</options>
+						</engine>
+						<connection typeobj="dsselect" dsobjlist="ds1" dsitemlist="name" dsitemkeylist="name" label="\nConnection:\n" nav="true" style="width: 240px"/>
+						<server typeobj="text" label="\nServer:\n" size="20" dsobj="ds1" dsitem="host" onkeypress="REGEXP.nextFocus(event, 'port', 13);" style="width: 134px"/>
+						<port typeobj="text" label="Port:" size="5" dsobj="ds1" dsitem="port" maxlength="5" onkeypress="REGEXP.nextFocus(event, 'user', 13);" style="width: 46px"/>
+						<user typeobj="text" label="\nUser:\n" size="32" dsobj="ds1" dsitem="user" onkeypress="REGEXP.nextFocus(event, 'pwd', 13);" style="width: 230px"/>
+						<pwd typeobj="text" label="\nPassword:\n" size="32" password="true" dsobj="ds1" dsitem="pwd" onkeypress="REGEXP.actionClick(event, 'button1', 13);" style="width: 230px"/>
+						<br typeobj="br" />
+						<IT typeobj="radio" name="lang" label="IT"/>
+						<EN typeobj="radio" name="lang" label="EN"/>
+						<button1 typeobj="button" label="" value="Login" onclick="login();" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:92px;"/>
+						<br1 typeobj="br" row="2"/>
+					</td2>
+				</tr1>
+			</table1>
+	</div1>
+	</page>
+</jamp>
