@@ -95,7 +95,7 @@ class ClsObj_page extends ClsObject {
 	public function codeHTML($tab = "")
 	{
 		global $system, $xml;
-		$head = $xml->getObjById("head");
+		$head = !is_object($xml) ? null : $xml->getObjById("head");
 		if (!isset($head)) $head = $this->addChild("head", "head");
 		$code = $head->codeHEAD($this);
 		$code .= "\n<body ".$this->getProperty("html", true, false).">";
