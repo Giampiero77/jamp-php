@@ -1,9 +1,0 @@
-/*
- * CodePress color styles for JAMP syntax highlighting
- * by Alyx-Software Innovation
- */
-xml {color:black; font-weight:bold;} 				/* xml */
-tag {color:black; font-weight:bold;} 				/* tag */
-property {color:green; font-weight:normal;} 		/* property */
-text {color:red; font-weight:normal;} 				/* value */
-const {color:blue; font-weight:bold;} 				/* tag */
