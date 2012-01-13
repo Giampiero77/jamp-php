@@ -3,7 +3,7 @@
 * PHP Source File
 * @author	Alyx-Software Innovation <info@alyx.it>
 * @version 1.0
-* @copyright Alyx-Software Innovation 2008
+* @copyright Alyx-Software Innovation 2012
 * @license GNU Public License
 */
 
