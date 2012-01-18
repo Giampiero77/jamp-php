@@ -41,6 +41,7 @@ class ClsObj_page extends ClsObject {
 		$this->property["vlink"] 	 		= array("value" => null,	"inherit" => false, "html" => true);
 		$this->property["title"]			= array("value" => null,	"inherit" => false, "html" => false);
  		$this->property["keepalive"]		= array("value" => null,	"inherit" => false, "html" => false);
+ 		$this->property["keepaliveurl"]		= array("value" => null,	"inherit" => false, "html" => false);
  		$this->property["java"]				= array("value" => null,	"inherit" => false, "html" => false);
  		$this->property["forwardrequest"]= array("value" => null,	"inherit" => false, "html" => false);
 		$this->property["cssfile"] 		= array("value" => null, "inherit" => false, "html" => false);
@@ -160,7 +161,7 @@ class ClsObj_page extends ClsObject {
 		if (!empty($this->property["keepalive"]["value"]))
 		{
 			$second = intVal($this->property["keepalive"]["value"]) * 1000;
-			$this->setCodeJs("\t\tsetTimeout(function(){AJAX.keepAlive($second);}, $second);");
+			$this->setCodeJs("\t\tsetTimeout(function(){AJAX.keepAlive($second,'".$this->property["keepaliveurl"]["value"]."');}, $second);");
 		}
 		if (!empty($this->property["onmousemove"]["value"]))
 		{
