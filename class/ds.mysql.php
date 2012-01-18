@@ -1489,5 +1489,14 @@ class mysqlDs extends iDS
 		}
 		else ClsError::showError("DS003", $this->property["conn"], $qry);
 	}
+	
+	/**
+	* Get number of affected rows in previous MySQL operation
+	* @return integer Returns the number of affected rows on success, and -1 if the last query failed.
+	*/
+	public function affected()
+	{
+		return mysql_affected_rows();
+	}
 }
 ?>
