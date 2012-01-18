@@ -30,15 +30,15 @@ clsAJAX.prototype =
 		this.debug = true;
 	},
 
-	keepAlive : function(second)
+	keepAlive : function(second, url)
 	{
-		var hideloader = AJAX.hideloader;
+		url = (url==undefined) ? document.location.href : url;
 		AJAX.hideloader = true;
-		AJAX.request("POST", document.location.href, "data=keepalive", false, false);
-		AJAX.hideloader = hideloader;
-		setTimeout(function(){AJAX.keepAlive(second);}, second);
+		AJAX.request("POST", url, "data=keepalive", false, false);
+		AJAX.hideloader = false;
+		setTimeout(function(){AJAX.keepAlive(second,url);}, second);
 	},
-
+	
 	login : function(dsObjName, itemuser, itempwd)
 	{
 		var dsObj = $(dsObjName);
