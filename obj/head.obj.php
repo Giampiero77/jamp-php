@@ -27,7 +27,7 @@ class ClsObj_head extends ClsObject {
 		$this->property["icon"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["title"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["debug"]	= array("value" => null, "inherit" => false, "html" => false);
-
+		$this->property["html5"] 	= array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -76,6 +76,12 @@ class ClsObj_head extends ClsObject {
 		if ($this->property["debug"]["value"]=="true") $code .= $system->getCSS(array("objcss/default/firebug.css"));
 		if (!empty($this->property["icon"]["value"])) $code .= "\n\t<link rel=\"shortcut icon\" href=\"".$this->property["icon"]["value"]."\">";
 		foreach ($this->child as $obj) $code .= $obj->codeHTML("\t");
+		if ($this->property["html5"]["value"]=="true") 
+		{
+			 $code .= "\n\t<!--[if lt IE 9]>";
+			 $code .= "\n\t<script src=\"".$system->dir_web_jamp.$system->dir_js."html5.js\"></script>";
+			 $code .= "\n\t<![endif]-->";
+		}
 		$code .= "\n</head>";
 		return $code;
 	}
