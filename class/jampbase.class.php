@@ -10,7 +10,7 @@
 * http://jamp.alyx.it/
 */
 
-require('jampinterface.class.php');
+require(dirname(__FILE__).'/jampinterface.class.php');
 abstract class jampBase implements jampInterface {
 	protected $_system		= null;
 	protected $_event		= null;
