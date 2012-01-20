@@ -84,8 +84,8 @@ class ClsObj_export extends ClsObject {
 		$dsTo = $ds[$this->property["to"]["value"]];  
 		$dsTo->ds->dsConnect();
 		$dsTo->ds->dsImport($output, $this->property["method"]["value"]);
-		$event = "data_import_after";
-		if (function_exists($event)) call_user_func($event, $dsFrom, $dsTo);
+
+		userEvent::call("data_import_after", $dsFrom, $dsTo);
 	}
 
 	/**

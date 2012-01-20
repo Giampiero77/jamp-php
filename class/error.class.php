@@ -40,7 +40,7 @@ class ClsError
 				self::$param['message'] .= LANG::translate($e, array($obj, $extra));
 			break;
 		}
-		if(function_exists("before_error")) $return = call_user_func("before_error");
+		$return = userEvent::call("before_error");
 		if (is_null($return) || ($return==true))
 		{
 			if(!isset($_POST["data"]))
@@ -116,7 +116,7 @@ class ClsError
 				print "\n<br>";
 			}
 		}
-		if(function_exists("after_error")) $return = call_user_func("after_error");
+		$return = userEvent::call("after_error");
 		if (is_null($return) || ($return==true)) die();
 	}
 }

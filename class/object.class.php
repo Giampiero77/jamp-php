@@ -82,8 +82,8 @@ abstract class ClsObject
 	*/
 	protected function parseValue($value)
 	{
-		if (!is_array($value))
-		{				
+		if (!is_array($value) && !is_object($value))
+		{
 			preg_match_all('/\$\$[\w-_]{1,}\$\$/',$value, $vars);
 			foreach ($vars[0] as $var)
 			{

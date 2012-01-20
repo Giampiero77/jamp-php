@@ -28,7 +28,8 @@ class ClsEvent
 	* Construct
 	* @param class $xml class xml
 	*/
-	public function __construct(& $xml){
+	public function __construct(& $xml, $obj=null){
+		if (is_object($obj)) userEvent::setClassObject($obj);
 		$this->xml = $xml;
 	}
 
@@ -39,8 +40,7 @@ class ClsEvent
 	*/
 	function callEvent($event, $param = null)
 	{
-		if(function_exists($event)) return call_user_func($event, $param);
-		else return true;
+		return userEvent::call($event, $param);
 	}
 
 	/**
@@ -223,8 +223,8 @@ class ClsEvent
 							$res->dsUpdate($_POST);
 							$this->callEvent("data_after_update", $res);
 							$ghost = $res->getPropertyName("ghostdata");
-							$ghost = empty($ghost) ? GHOSTDATA."" : $ghost;
-							if ($ghost=="true") $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG1HOST")."','".LANG::translate("MSG1HOSTD")."')";
+							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
+							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG1HOST")."','".LANG::translate("MSG1HOSTD")."')";
 						}
 					break;
 			
@@ -239,8 +239,8 @@ class ClsEvent
 							$res->dsNew($_POST, $_POST["data"]=="new_update");
 							$this->callEvent("data_after_new", $res);
 							$ghost = $res->getPropertyName("ghostdata");
-							$ghost = empty($ghost) ? GHOSTDATA."" : $ghost;
-							if ($ghost=="true") $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG2HOST")."','".LANG::translate("MSG2HOSTD")."')";
+							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
+							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG2HOST")."','".LANG::translate("MSG2HOSTD")."')";
 						}
 					break;
 			
@@ -254,8 +254,8 @@ class ClsEvent
 							$res->dsDelete($_POST);
 							$this->callEvent("data_after_delete", $res);
 							$ghost = $res->getPropertyName("ghostdata");
-							$ghost = empty($ghost) ? GHOSTDATA."" : $ghost;
-							if ($ghost=="true") $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
+							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
+							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
 						}
 					break;
 	
@@ -269,8 +269,8 @@ class ClsEvent
 							$res->dsDeleteAll();
 							$this->callEvent("data_after_deleteall", $res);
 							$ghost = $res->getPropertyName("ghostdata");
-							$ghost = empty($ghost) ? GHOSTDATA."" : $ghost;
-							if ($ghost=="true") $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
+							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
+							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
 						}
 					break;
 	

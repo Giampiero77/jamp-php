@@ -30,8 +30,7 @@ class ClsException
 		$this->param["errfile"] = $e->getFile();
 		$this->param["errline"] = $e->getLine();
 		$this->param["title"] = $this->param["errno"];
-		$return = true;
-		if (function_exists("before_exception_error")) $return = call_user_func("before_exception_error", $this);
+		$return = userEvent::call("before_exception_error", $this);
 		if (is_null($return) || ($return==true))
 		{
 			global $system;
@@ -93,7 +92,7 @@ class ClsException
 			print "\n</body>";
 			print "\n</html>";
 		}
-		if (function_exists("after_exception_error")) $return = call_user_func("after_exception_error", $this);
+		$return = userEvent::call("after_exception_error", $this);
 	}
 
 	/**
@@ -123,8 +122,7 @@ class ClsException
 		$this->param["errfile"] = $errfile;
 		$this->param["errline"] = $errline;
 		$this->param["title"] = (isset($error[$errno])) ? $error[$errno] : $errno;
-		$return = true;
-		if (function_exists("before_exception_error")) $return = call_user_func("before_exception_error", $this);
+		$return = userEvent::call("before_exception_error", $this);
 		if (is_null($return) || ($return==true))
 		{
 			global $system;
@@ -186,8 +184,7 @@ class ClsException
 			print "\n</body>";
 			print "\n</html>";
 		}
-		$return = true;
-		if (function_exists("after_exception_error")) $return = call_user_func("after_exception_error", $this);
+		$return = userEvent::call("after_exception_error", $this);
 		if (isset($error[$errno]) && (is_null($return) || ($return==true))) die();
 	}
 }

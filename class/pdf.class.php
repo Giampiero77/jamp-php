@@ -625,9 +625,9 @@ class ClsPDF extends FPDF {
 
 	function AddPage($orientation='')
 	{
-		if (function_exists("pdf_before_addpage")) call_user_func("pdf_before_addpage", $this);
+		userEvent::call("pdf_before_addpage", $this);
 		parent::AddPage($orientation);
-		if (function_exists("pdf_after_addpage")) call_user_func("pdf_after_addpage", $this);
+		userEvent::call("pdf_after_addpage", $this);
 	}
 
 

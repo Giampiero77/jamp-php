@@ -21,59 +21,59 @@ class ClsObj_ds extends ClsObject {
 	* @param string $id ID object
 	*/
 	public function __construct($id)
-	{		
-		$this->property = array();
-		$this->property["id"] 		  	= array("value" => $id,  	"inherit" => false, "html" => true);
-		$this->property["debug"] 		= array("value" => "false",  "inherit" => true, "html" => false);
-		$this->property["out"] 		  	= array("value" => "json", 	"inherit" => false, "html" => false); //json,xml
-		$this->property["focusnew"]	= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["dshost"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["dsport"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["dsuser"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["dspwd"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["conn"]			= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["store"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["event"]		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["xml"]			= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["encpwd"] 	 	= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["printxml"] 	= array("value" => "true", 	"inherit" => false, "html" => false);
-		$this->property["loadall"] 	= array("value" => "true", 	"inherit" => false, "html" => false);
-		$this->property["load"] 		= array("value" => null, 	"inherit" => false, "html" => false);
-		$this->property["readonly"]	= array("value" => null,	"inherit" => false, "html" => false);
-		$this->property["confirm"] 	= array("value" => "false",	"inherit" => false, "html" => false);
+	{
+		$this->property							= array();
+		$this->property["id"]					= array("value" => $id,  	"inherit" => false, "html" => true);
+		$this->property["debug"]				= array("value" => "false",  "inherit" => true, "html" => false);
+		$this->property["out"]					= array("value" => "json", 	"inherit" => false, "html" => false); //json,xml
+		$this->property["focusnew"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["dshost"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["dsport"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["dsuser"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["dspwd"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["conn"]					= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["store"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["event"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["xml"]					= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["encpwd"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["printxml"]				= array("value" => "true", 	"inherit" => false, "html" => false);
+		$this->property["loadall"]				= array("value" => "true", 	"inherit" => false, "html" => false);
+		$this->property["load"]					= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["readonly"]				= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["confirm"]				= array("value" => "false",	"inherit" => false, "html" => false);
 
-		$this->property["selecteditems"]	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dsdefault"] 	  	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dstable"]   	  	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dsorder"]   	  	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dswhere"]   	  	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dskey"]   	  		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dssavetype"]		= array("value" => "row", "inherit" => false, "html" => false); //row, table
+		$this->property["selecteditems"]		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsdefault"]			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dstable"]				= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsorder"]				= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dswhere"]				= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dskey"]				= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dssavetype"]			= array("value" => "row", "inherit" => false, "html" => false); //row, table
 
-		$this->property["join"]   	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["joinsave"] = array("value" => "join",	"inherit" => false, "html" => false);
-		$this->property["jointype"] = array("value" => null, "inherit" => false, "html" => false);
-		$this->property["joinrule"] = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["join"]					= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["joinsave"]				= array("value" => "join",	"inherit" => false, "html" => false);
+		$this->property["jointype"]				= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["joinrule"]				= array("value" => null, "inherit" => false, "html" => false);
 
-		$this->property["dsrefresh"] 	    = array("value" => null,    "inherit" => false, "html" => false);
-		$this->property["dsreferences"]		= array("value" => null,    "inherit" => false, "html" => false);
-		$this->property["referencestable"]	= array("value" => null,   "inherit" => false, "html" => false);
-		$this->property["referenceskey"]  	= array("value" => null,   "inherit" => false, "html" => false);
-		$this->property["foreignkey"]	  	= array("value" => null,   "inherit" => false, "html" => false);
-		$this->property["deleteoncascate"] 	= array("value" => "false", "inherit" => false, "html" => false);
-		$this->property["deleteall"] 		= array("value" => "false", "inherit" => false, "html" => false);
+		$this->property["dsrefresh"]			= array("value" => null,    "inherit" => false, "html" => false);
+		$this->property["dsreferences"]			= array("value" => null,    "inherit" => false, "html" => false);
+		$this->property["referencestable"]		= array("value" => null,   "inherit" => false, "html" => false);
+		$this->property["referenceskey"]		= array("value" => null,   "inherit" => false, "html" => false);
+		$this->property["foreignkey"]			= array("value" => null,   "inherit" => false, "html" => false);
+		$this->property["deleteoncascate"]		= array("value" => "false", "inherit" => false, "html" => false);
+		$this->property["deleteall"]			= array("value" => "false", "inherit" => false, "html" => false);
 
-		$this->property["dsengine"]		= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dsquery_select"]	= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dsquery_insert"]	= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dsquery_update"]	= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dsquery_delete"]	= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dsengine"]				= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dsquery_select"]		= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dsquery_insert"]		= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dsquery_update"]		= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dsquery_delete"]		= array("value" => null,"inherit" => false, "html" => false);
 		$this->property["dsquery_deleteall"]	= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dsextraquery"]		= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["dslimit"]		= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["action"]		= array("value" => null,"inherit" => false, "html" => false);
-		$this->property["fetch"]		= array("value" => "object", "inherit" => false, "html" => false);
-		$this->property["ghostdata"]	= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsextraquery"]			= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["dslimit"]				= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["action"]				= array("value" => null,"inherit" => false, "html" => false);
+		$this->property["fetch"]				= array("value" => "object", "inherit" => false, "html" => false);
+		$this->property["ghostdata"]			= array("value" => null, "inherit" => false, "html" => false);
 
 		/**************************** SPECIFICATIONS FOR POSTGRESQL DATABASE *******************************/
 		$this->property["sslmode"]	= array("value" => null, "inherit" => false, "html" => false);
@@ -188,10 +188,9 @@ class ClsObj_ds extends ClsObject {
 	/**
 	* Call the event
 	*/
-	function callEvent($event, $param = null)
+	function callEvent($event, $param=null)
 	{
-		if(function_exists($event)) return call_user_func($event, $param);
-		return true;
+		return userEvent::call($event, $param);
 	}
 
 	/**	
@@ -235,7 +234,7 @@ class ClsObj_ds extends ClsObject {
 			if (is_array($_REQUEST['start']))  $this->ds->property["start"] = intval($_POST['start']);
 			else $this->ds->property["start"] = intval($_REQUEST['start']);
 		}
-   	$return = $this->callEvent("data_select_before", $this);
+		$return = $this->callEvent("data_select_before", $this);
 		if(is_null($return) || ($return == true)) $this->ds->dsQuerySelect($this->property["dsquery_select"]["value"]);
 		$return = $this->callEvent("data_select_after", $this);
 		if(is_null($return) || ($return == true))
@@ -472,8 +471,8 @@ class ClsObj_ds extends ClsObject {
 		$id1 = $this->property["id"]["value"];
 		if ($this->property["event"]["value"]!="none" && $this->property["unload"]["value"]!="false")
 		{
-			 $this->addEventListener("window", "unload", "pageUnload");
-			 $this->addEvent("page", "pageUnload", "DS.dssave(\"$id1\", ($(\"$id1\").p.DSconfirm != false));");
+			$this->addEventListener("window", "unload", "pageUnload");
+			$this->addEvent("page", "pageUnload", "DS.dssave(\"$id1\", ($(\"$id1\").p.DSconfirm != false));");
 		}
 		if (!empty($this->property["dsrefresh"]["value"]))
 		{

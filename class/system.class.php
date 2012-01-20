@@ -69,6 +69,7 @@ class ClsSystem
 		require_once($this->dir_real_jamp."/class/error.class.php");
 		require_once($this->dir_real_jamp."/class/object.class.php");
 		require_once($this->dir_real_jamp."/class/xml.class.php");
+		require_once($this->dir_real_jamp."/class/userevent.class.php");
 		require_once($this->dir_real_jamp."/class/event.class.php");
 		LANG::$language = LANGUAGE;
 		new ClsException();
