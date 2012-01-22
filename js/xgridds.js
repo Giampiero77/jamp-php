@@ -51,6 +51,8 @@ clsxGridds.prototype =
 		row.pos = i;
 		row.style.display = "";
 		row.className = (i % 2 == 0) ?  $(id).className + "_row" : $(id).className + "_row_event";
+		if ($(id).p.cellheight) row.style.height = parseInt($(id).p.cellheight)+'px';
+
 		var objects = row.getElementsByTagName('*');
 		var length = objects.length;
 		for (var ii = 0; ii < length; ii++)

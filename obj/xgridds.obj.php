@@ -28,20 +28,20 @@ class ClsObj_xgridds extends ClsObject {
 	*/
 	public function __construct($id)
 	{
-		$this->property["id"] 		  		= array("value" => $id, "inherit" => false, "html" => true);
-		$this->property["readonly"]   		= array("value" => "true", "inherit" => false, "html" => false);
-		$this->property["width"]	  		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["height"]	  		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["title"]      		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["background"] 		= array("value" => "#CCCCCC", "inherit" => false, "html" => false);
+		$this->property["id"]				= array("value" => $id, "inherit" => false, "html" => true);
+		$this->property["readonly"]		= array("value" => "true", "inherit" => false, "html" => false);
+		$this->property["width"]			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["height"]			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["title"]			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["background"]		= array("value" => "#CCCCCC", "inherit" => false, "html" => false);
 		$this->property["scrollbar"]		= array("value" => "scroll", "inherit" => false, "html" => false);
 		$this->property["pdffont"]			= array("value" => "Arial", "inherit" => false, "html" => true);
-		$this->property["pdffontsize"]		= array("value" => "9", "inherit" => false, "html" => true);
-		$this->property["dsobj"] 	   		= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["java"]  	   		= array("value" => "xgridds.js", "inherit" => false, "html" => false);
-		$this->property["cssfile"] 			= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["dsobj"]  			= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["dsobj"]  			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["pdffontsize"]	= array("value" => "9", "inherit" => false, "html" => true);
+		$this->property["dsobj"]			= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["java"]				= array("value" => "xgridds.js", "inherit" => false, "html" => false);
+		$this->property["cssfile"]			= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["dsobj"]			= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["cellheight"]		= array("value" => "false", "inherit" => false, "html" => false);
 		$this->multiObj = true;
 	}
 
@@ -182,6 +182,9 @@ class ClsObj_xgridds extends ClsObject {
 	{
 		switch($name)
 		{
+			case "cellheight":
+				$this->propertyJS[$name] = $this->property["cellheight"]["value"];
+			break;
 			case "height":
 				if ($this->property["height"]["value"] == "autosize")
 				{
