@@ -51,7 +51,9 @@ class ClsObj_page extends ClsObject {
 		$this->property["destination"] 	= array("value" => "", "inherit" => false, "html" => false);
  		$this->property["compressjs"]		= array("value" => null,	"inherit" => false, "html" => false);
  		$this->property["hideloader"]		= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["errorjs"]			= array("value" => "true",	"inherit" => false, "html" => false);
+ 		$this->property["hidehtmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
+ 		$this->property["hidejserror"]	= array("value" => null,	"inherit" => false, "html" => false);
+ 		$this->property["hidexmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
 
 		$this->addEventListener("window", "resize", "Resize");
 		$this->addEvent($id, "Resize", "//Autosize");
@@ -129,7 +131,6 @@ class ClsObj_page extends ClsObject {
 		$code .= $system->getJs(array("system.browser.js"));
 		$code .= $system->getJs(array("ajax.js"));
 		if ($this->property["hideloader"]["value"] == "true") $code .= $system->setJs("AJAX.hideloader = true;");
-		if ($this->property["errorjs"]["value"] == "true") $code .= $system->setJs("window.onerror = SYSTEMEVENT.errorJAVASCRIPT;");
 		$code .= $system->getJs($this->requireJavaScript());
 		$code .= $system->setEvent($this->getEvent());
 		$code .= $system->setJs($this->getValidate());
@@ -194,6 +195,11 @@ class ClsObj_page extends ClsObject {
 			case "lang":
 				LANG::$language = $this->property["lang"]["value"];
 			break;
+			case "hidehtmlerror":
+			case "hidejserror":
+			case "hidexmlerror":
+				$this->propertyJS[$name] = $this->property[$name]["value"];
+	  		break;
 		}
 	}
 }

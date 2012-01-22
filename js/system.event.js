@@ -21,16 +21,19 @@ clsSystemEvent.prototype =
 {
 	errorJAVASCRIPT : function(message, url, row)
 	{
+		if ($('page').p.hidexmlerror || $('page').p.hidexmlerror == "true") return; 
 		if (SYSTEMEVENT.messagebox.style.display!="block") SYSTEMEVENT.showMessage(message, LANG.translate("EVENT001"), url, row);
 	},
 
 	errorXML : function(message)
 	{
+		if ($('page').p.hidexmlerror || $('page').p.hidexmlerror == "true") return; 
  		if (SYSTEMEVENT.messagebox.style.display!="block") SYSTEMEVENT.showMessage(message, LANG.translate("EVENT002"), self.location.href, 0);
 	},
 
 	errorHTML : function(message)
 	{
+		if ($('page').p.hidehtmlerror == "true" || $('page').p.hidehtmlerror == "true") return; 
  		if (SYSTEMEVENT.messagebox.style.display!="block") SYSTEMEVENT.showMessage(message, LANG.translate("EVENT003"), self.location.href, 0);
 	},
 
@@ -172,3 +175,4 @@ clsSystemEvent.prototype =
 }
 
 var SYSTEMEVENT = new clsSystemEvent();
+window.onerror = SYSTEMEVENT.errorJAVASCRIPT;
