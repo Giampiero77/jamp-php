@@ -17,8 +17,9 @@ abstract class jampBase implements jampInterface {
 	protected $_xml			= null;
 
 	public function __construct() {
-		$GLOBALS['system'] = new ClsSystem(true, $this);
-		$this->_system = &$GLOBALS['system'];	// for compatibility
+		global $system;
+		$system = new ClsSystem(true, $this);
+		$this->_system = & $system;	// for compatibility
 	}
 
 	public function getVersion() {
@@ -73,10 +74,11 @@ abstract class jampBase implements jampInterface {
 	}
 
 	public function doEvent($xmlfile) {
-		$GLOBALS['xml']		= new ClsXML($xmlfile);
-		$GLOBALS['$event']	= new ClsEvent($xml, $this);	// "$this" is client class
-		$this->_xml			= &$GLOBALS['xml'];				// for compatibility
-		$this->_event		= &$GLOBALS['$event'];			// for compatibility
+		global $event, $xml;
+		$xml			= new ClsXML($xmlfile);
+		$event			= new ClsEvent($xml, $this);	// "$this" is client class
+		$this->_xml		= & $xml;						// for compatibility
+		$this->_event	= & $event;						// for compatibility
 
 		return $this->getEvent()->managerRequest();
 	}
