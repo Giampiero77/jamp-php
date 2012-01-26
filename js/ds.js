@@ -295,38 +295,36 @@ clsDs.prototype =
 			 error = DS.dsValidate(dsObjName, dsObj, "input", error);
 			 error = DS.dsValidate(dsObjName, dsObj, "textarea", error);
 			 if (error) return false;
-			if (dsObj.DSvalidate == true) 
-			{
+			 if (dsObj.DSvalidate == true) 
+			 {
 				if (AJAX.function_exists('Validate' + dsObjName + '()') && !eval('Validate' + dsObjName + '()')) 
 				{ 
 					 dsObj.DSchange = false; 
-					 return;
+					 return false;
 				}
-			}
-			if (dsObj.p.DSsavetype == "live")
-			{
+			 }
+			 if (dsObj.p.DSsavetype == "live")
+			 {
 				dsObj.DSchange = false;
 				AJAX.dssave(dsObjName, true);
-			}
-			else 
-			{
+				return true;
+			 }
+			 else 
+			 {
 				if (dsObj.DSpos >0) var msg = LANG.translate("JDS003");
 				else var msg = LANG.translate("JDS004");
 				var save = (dsObj.p.DSconfirm == true || conf) ? confirm(msg) : true;
 				if (save == true)
 				{
-					AJAX.loader(true);
-					dsObj.DSchange = false;
-					AJAX.dssave(dsObjName, true);
-					return true;
+					 AJAX.loader(true);
+					 dsObj.DSchange = false;
+					 AJAX.dssave(dsObjName, true);
+					 return true;
 				}
-				else
-				{
-					this.reload(dsObjName);
-					return false;
-				}
-			}
+				else this.reload(dsObjName);
+			 }
 		}
+		return false;
 	},
 
 	dsUpdate : function(id)
