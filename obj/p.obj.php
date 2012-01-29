@@ -22,8 +22,8 @@ class ClsObj_p extends ClsObject {
 	*/
 	public function __construct($id) 
 	{
-		$this->property["id"] 	 	  = array("value" => $id,  "inherit" => false, "html" => true);
-		$this->property["text"]   	  = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["id"] 	 	  = array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["value"] 	  = array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**

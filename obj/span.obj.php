@@ -30,7 +30,6 @@ class ClsObj_span extends ClsObject {
 		$this->property["height"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["display"]	= array("value" => null, "inherit" => true,  "html" => false);
  		$this->property["java"]  	= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["html"]  	= array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**
