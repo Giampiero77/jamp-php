@@ -46,6 +46,7 @@ class ClsObj_page extends ClsObject {
  		$this->property["forwardrequest"]= array("value" => null,	"inherit" => false, "html" => false);
 		$this->property["cssfile"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["java"]["value"] = array("animate.js");
+ 		$this->property["pageformat"]		= array("value" => "A4",	"inherit" => false, "html" => false);
 		$this->property["orientation"]	= array("value" => "L",	"inherit" => false, "html" => false);
 		$this->property["pdfname"] 		= array("value" => "", "inherit" => false, "html" => false);
 		$this->property["destination"] 	= array("value" => "", "inherit" => false, "html" => false);
@@ -69,7 +70,7 @@ class ClsObj_page extends ClsObject {
 		$allDs = $xml->getObjByType("ds");
 		foreach ($allDs as $ds) $ds->manualConnect();
 		$system->plugin("pdf");
-		$pdf = new ClsPDF();
+		$pdf = new ClsPDF($this->property["orientation"]["value"],"mm",$this->property["pageformat"]["value"]);
 
 		$footer = $xml->getObjById("footer");
 		$pdf->topFooter = 0;
