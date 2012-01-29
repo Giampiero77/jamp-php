@@ -17,10 +17,10 @@ class ClsPDF extends FPDF {
 	public $storerow_enable;
 	private $storerow_height;
 
-	public function __construct()
+	public function __construct($orientation,$unit,$pageformat)
 	{
  		require_once("format.class.php");
-		parent::FPDF();
+		parent::FPDF($orientation,$unit,$pageformat);
 		$this->format = new ClsFormat();
 		$this->property = array();
 		$this->storerow = null;
