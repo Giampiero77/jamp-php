@@ -29,6 +29,8 @@ class ClsObj_meta extends ClsObject {
 		$this->property["http-equiv"]	= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["content"]		= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["scheme"]		= array("value" => null, "inherit" => false, "html" => true);
+		$this->property["lang"]			= array("value" => null, "inherit" => false, "html" => true);
+		$this->property["dir"]			= array("value" => null, "inherit" => false, "html" => true);
 	}
 
 	/**
