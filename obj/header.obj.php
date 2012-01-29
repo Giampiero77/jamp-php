@@ -22,7 +22,6 @@ class ClsObj_header extends ClsObject {
 	*/
 	public function __construct($id)
 	{
-		unset($this->property);
 		$this->property["id"] 	 = array("value" => $id,  "inherit" => false, "html" => true);
 		$this->property["class"]	= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["value"] = array("value" => null, "inherit" => false, "html" => false);

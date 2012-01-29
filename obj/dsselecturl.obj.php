@@ -16,6 +16,8 @@ class ClsObj_dsselecturl extends ClsObject {
 	*/
 	public function __construct($id)
 	{
+		$this->property["id"] 	 		= array("value" => $id,  "inherit" => false, "html" => true);
+		$this->property["size"] 	   	= array("value" => null,  "inherit" => false, "html" => true);
 		$this->property["name"] 	   	= array("value" => null,  "inherit" => false, "html" => true);
 		$this->property["minlength"] 	= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["blur"] 		= array("value" => null,  "inherit" => false, "html" => false);
@@ -49,17 +51,13 @@ class ClsObj_dsselecturl extends ClsObject {
 		$this->property["disabled"] 	= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["format"] 		= array("value" => null,  "inherit" => false, "html" => false);
 		
-		$this->property["id"] 	 		= array("value" => $id,  "inherit" => false, "html" => true);
 		$this->property["target"] 	  	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["action"] 	  	= array("value" => basename(__FILE__), "inherit" => false, "html" => false);
 		$this->property["actionparam"]	= array("value" => "param", "inherit" => false, "html" => false);
-		$this->property["size"] 	  	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["value"] 	 	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["align"] 	 	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["defaultvalue"] = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["label"]   		= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["wrap"]   		= array("value" => false,  "inherit" => false, "html" => false);
-		$this->property["directory"]  = array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**

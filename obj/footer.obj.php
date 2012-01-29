@@ -22,10 +22,10 @@ class ClsObj_footer extends ClsObject {
 	*/
 	public function __construct($id)
 	{
-		unset($this->property);
 		$this->property["id"] 	= array("value" => $id,  "inherit" => false, "html" => true);
 		$this->property["top"] 	= array("value" => "-15",  "inherit" => false, "html" => false);
 		$this->property["class"] 	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["value"] = array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -59,6 +59,7 @@ class ClsObj_footer extends ClsObject {
 	public function codeHTML($tab = "")
 	{
 		$code = "\n$tab<footer ".$this->getProperty("html", true, false).">";
+		if (!empty($this->property["value"]["value"])) $code .= "\n\t".$tab.$this->property["value"]["value"];
 		foreach ($this->child as $obj) $code .= $obj->codeHTML($tab."\t");
 		$code .= "\n$tab</footer>";
 		return $code;
