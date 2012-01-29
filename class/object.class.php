@@ -484,18 +484,18 @@ abstract class ClsObject
 			require_once($system->dir_real_jamp."/".$system->dir_class.'graph.class.php');
 			ob_end_clean();
 			$js = "";
-			$graph = null;
+			$graphs = null;
 			$return = $event->callEvent("start_graph", $xml_graph);
 			if (is_null($return) || ($return == true))
 			{
 				foreach ($graphics as $id => $graphic) 
 				{
-					$clsgraph = new clsGraphics($graphic, $graph);
-					$graph[$id] = $clsgraph->Paint($system->dir_real_web.$graphic->getPropertyName("path"));
+					$clsgraph = new clsGraphics($graphic, $graphs);
+					$graphs[$id] = $clsgraph->Paint($system->dir_real_web.$graphic->getPropertyName("path"));
 					if ($clsgraph->refresh) $js .= "\nGRAPHIC.getDsValue(\"".$id."\");";
 				}
 			}
-			$event->callEvent("end_graph", $graph);
+			$event->callEvent("end_graph", $graphs);
 			if ($js!="") 
 			{
 				$code .= "<script>\n";
