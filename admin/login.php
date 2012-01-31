@@ -3,7 +3,7 @@
 * PHP Source File
 * @name JApp
 * @author Alyx-Software Innovation <info@alyx.it>
-* @version 1.0
+* @version	Factory
 * @copyright Alyx-Software Innovation 2008-2009
 * @license GNU Public License
 */

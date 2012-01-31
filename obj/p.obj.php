@@ -2,7 +2,7 @@
 /**
 * Object P
 * @author	Alyx Association <info@alyx.it>
-* @version	2.1.0_factory
+* @version	Factory
 * @package	Object
 * @copyright	Alyx Association 2008-2010
 * @license GNU Public License
@@ -32,7 +32,6 @@ class ClsObj_p extends ClsObject {
 	*/
 	public function codePDF($pdf)
 	{
-		$this->property["value"]["value"] = $this->property["text"]["value"];
 		$pdf->CellObj($this);
 	}
 

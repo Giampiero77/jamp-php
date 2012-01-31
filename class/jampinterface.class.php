@@ -3,7 +3,7 @@
 /**
 * Interface jampInterface
 * @author	Fulvio Alessio <afulvio@gmail.com>
-* @version	2.1.0_factory
+* @version	Factory
 * @package	Class
 * @copyright	Alyx Association 2008-2010
 * @license GNU Public License

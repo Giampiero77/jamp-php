@@ -2,7 +2,7 @@
 /**
 * @name 	Test File
 * @author	Alyx-Software Innovation <info@alyx.it>
-* @version	beta 3.0
+* @version	Factory
 * @package	Object
 * @copyright Alyx-Software Innovation 2008-2009
 * @license GNU Public License

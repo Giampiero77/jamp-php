@@ -2,7 +2,7 @@
 /**
 * Object JMENU
 * @author	Alyx Association <info@alyx.it>
-* @version	2.1.0_factory
+* @version	Factory
 * @package	Object
 * @copyright	Alyx Association 2008-2010
 * @license GNU Public License
