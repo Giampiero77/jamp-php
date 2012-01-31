@@ -49,7 +49,7 @@ class ClsObj_p extends ClsObject {
 	*/
 	public function codeHTML($tab = "")
 	{
-		$code = $tab."<p ".$this->getProperty("html", true, false).">".str_replace('\n',"<br>",$this->property["text"]["value"]);
+		$code = $tab."<p ".$this->getProperty("html", true, false).">".str_replace('\n',"<br>",$this->property["value"]["value"]);
 		foreach ($this->child as $obj) $code .= $obj->codeHTML($tab."\t");
 		$code .= "</p>";
 		return $code;

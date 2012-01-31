@@ -67,7 +67,7 @@ class ClsObj_include extends ClsObject {
 	{
 		global $system;
 
-		$code = file_get_contents($this->property["src"]["value"]);
+		$code = file_get_contents($this->parseValue($this->property["src"]["value"]));
 		return $code;
 	}
 
