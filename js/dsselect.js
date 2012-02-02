@@ -159,6 +159,10 @@ clsDsSelect.prototype =
 		}
 		this.getDsValue(id);
 		dsselectObj.lock = false;
+		if (dsselectObj.p.optionselected && dsselectObj.options.length>dsselectObj.p.optionselected) 
+		{
+			 dsselectObj.value = dsselectObj.options[dsselectObj.p.optionselected].value;
+		}		
 	},
 
 	setPosDSList : function(obj)

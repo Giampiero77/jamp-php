@@ -53,6 +53,7 @@ class ClsObj_dsselect extends ClsObject {
 		$this->property["dsitem"]  		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["disabled"] 	= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["format"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["optionselected"] = array("value" => null,  "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -258,6 +259,7 @@ class ClsObj_dsselect extends ClsObject {
 			case "valuezero":
 			case "format":
 			case "disabled":
+			case "optionselected":
 				$this->propertyJS[$name] = $this->property[$name]["value"];
 			break;
 
