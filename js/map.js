@@ -34,9 +34,19 @@ clsMap.prototype =
 		if (JMAP.Marker) JMAP.clearOverlays();
 		JMAP.Marker = new Array();
 		var p = JMAP.jmapObj.p;
+ 		var dsObj = p.dsObj;
+		var html = p.html;
+		var icon = p.icon;
+		var draggable = p.draggable;
+ 		if (p.dsObj && $(p.dsObj).DSresult[$(p.dsObj).DSpos]) 
+		{
+			 if ($(dsObj).DSresult[$(dsObj).DSpos]['html']) html = $(dsObj).DSresult[$(dsObj).DSpos]['html'];
+			 if ($(dsObj).DSresult[$(dsObj).DSpos]['icon']) icon = $(dsObj).DSresult[$(dsObj).DSpos]['icon'];
+			 if ($(dsObj).DSresult[$(dsObj).DSpos]['draggable']) draggable = $(dsObj).DSresult[$(dsObj).DSpos]['draggable'];
+		}
 		JMAP.Map.setCenter(point);
 		JMAP.Map.setZoom(parseInt(zoom));
-		if (p.marker == "true") JMAP.setMarker(point, p.icon, p.draggable, p.html);
+		if (p.marker == "true") JMAP.setMarker(point, icon, draggable, html);
 		if (p.traffic=="true") 
 		{
 		  JMAP.trafficInfo = new google.maps.TrafficLayer();
@@ -64,6 +74,7 @@ clsMap.prototype =
 			 if ($(dsObj).DSresult[$(dsObj).DSpos]['lng']) lng = $(dsObj).DSresult[$(dsObj).DSpos]['lng'];
 			 if ($(dsObj).DSresult[$(dsObj).DSpos]['zoom']) zoom = $(dsObj).DSresult[$(dsObj).DSpos]['zoom'];
 			 if ($(dsObj).DSresult[$(dsObj).DSpos]['address']) address = $(dsObj).DSresult[$(dsObj).DSpos]['address'];
+			 if ($(dsObj).DSresult[$(dsObj).DSpos]['html']) html = $(dsObj).DSresult[$(dsObj).DSpos]['html'];
 		}
 		if (lat && lng) 
 		{
