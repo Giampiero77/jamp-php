@@ -117,7 +117,7 @@ class ClsObj_page extends ClsObject {
 			$code .= "\n\t\telse window.addEventListener('DOMContentLoaded',LoadComplete,false);";
 			$code .= "\n\t</script>";
 		}
-		$code .= "\n\t<iframe frameborder=\"0\" id=\"pageLock\" style=\"display:none\"></iframe>";
+		$code .= "\n\t<iframe frameborder=\"0\" id=\"pageLock\" style=\"display:none;\"></iframe>";
 		$code .= "\n\t<div id=\"pageLoader\" style=\"display:none\"></div>";
 		$code .= "\n\t<div id=\"pageMessageBack\"></div>";
 		$code .= "\n\t<div id=\"pageMessage\"></div>";
