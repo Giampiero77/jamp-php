@@ -76,5 +76,8 @@ interface jampInterface {
 	public function before_error();
 	public function after_error($obj);
 	public function data_import_after($from, $to);
-	
+	public function before_plot($graph);
+	public function after_plot($graph);
+	public function start_graph($xml_graph);
+	public function end_graph($graphs);
 }
