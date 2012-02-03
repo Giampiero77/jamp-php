@@ -14,27 +14,27 @@ function clsPagination()
 
 clsPagination.prototype = 
 {
-	page : function(dsObjName, page) 
+	page : function(obj, page) 
 	{
-		var dsObj = $(dsObjName);
+		var dsObj = $(obj.p.dsObj);
 		dsObj.DSpre = dsObj.DSpos;
 		dsObj.DSpos = 1;
-		dsObj.DSstart = page;
-		AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObj.id + "&start=" + page);
+		dsObj.DSstart = (page-1) * dsObj.DSlimit;
+		AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObj.id + "&start=" + dsObj.DSstart);
 	},
 
-	refreshObj : function(dsObjName)
+	refreshObj : function(id)
 	{
-		var obj = $(dsObjName);
+		var obj = $(id);
 		obj.innerHTML = '';
 		var dsObj = $(obj.p.dsObj);
 		var res = dsObj.DSresult;
 		if (res.length > 0)
 		{
-			 var block_page = 5; 
+			 var block_page = (obj.p.blockpage == undefined) ? 5 : parseInt(obj.p.blockpage); 
 			 var limit = (dsObj.DSlimit == 0) ? 1 : dsObj.DSlimit;
 			 var tot_pages = Math.ceil(dsObj.DSrow / limit);
-			 var numpage = (dsObj.DSstart == 0) ? 1 : dsObj.DSstart;
+			 var numpage = (dsObj.DSstart / dsObj.DSlimit) + 1;
 			 var start_page = (Math.floor((numpage - 1) / block_page) * block_page) + 1;
 			 var end_page = (start_page + block_page > tot_pages) ? (tot_pages + 1) : (start_page + block_page);
 			 if (numpage > block_page) 
@@ -42,7 +42,7 @@ clsPagination.prototype =
 				  var prev = document.createElement('button');
 				  prev.className = 'prevpostslink';
 				  prev.innerHTML = '«';
-				  prev.onclick = function() {PAGINATION.page(obj.p.dsObj, start_page - 1);}
+				  prev.onclick = function() {PAGINATION.page(obj, start_page - 1);}
 				  obj.appendChild(prev);
 			 }
 			 for (var i = start_page; i < end_page; i++)
@@ -58,7 +58,7 @@ clsPagination.prototype =
 				  {
 						var page = document.createElement('button');
 						page.className = 'page';
-						page.onclick = function() {PAGINATION.page(obj.p.dsObj, this.innerHTML);}
+						page.onclick = function() {PAGINATION.page(obj, this.innerHTML);}
 						page.innerHTML = i;
 						obj.appendChild(page);
 				  }
@@ -74,7 +74,7 @@ clsPagination.prototype =
 				  var last = document.createElement('button');
 				  last.className = 'page';
 				  last.innerHTML = tot_pages;
-				  last.onclick = function() {PAGINATION.page(obj.p.dsObj, tot_pages);}
+				  last.onclick = function() {PAGINATION.page(obj, tot_pages);}
 				  obj.appendChild(last);
 			 }
 			 if (tot_pages > end_page) 
@@ -82,7 +82,7 @@ clsPagination.prototype =
 				  var next = document.createElement('button');
 				  next.className = 'nextpostslink';
 				  next.innerHTML = '»';
-				  next.onclick = function() {PAGINATION.page(obj.p.dsObj, end_page);}
+				  next.onclick = function() {PAGINATION.page(obj, end_page);}
 				  obj.appendChild(next);
 			 }
 		}

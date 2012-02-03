@@ -5,7 +5,7 @@ conn2|xml|../resource/filesystem.xml|none|none|none
 conn3|ldap|localhost|cn=admin,dc=jamp,dc=it|jampadmin|389
 conn4|xml|../resource/province.xml|none|none|none
 conn5|ssh|localhost|root|none|22
-conn6|mysql|localhost@jamp|root|mysqlpassword|3306
+conn6|mysql|localhost@jamp|root|myadmin|3306
 conn7|record|../resource/menu.rec|none|none|r
 conn8|xml|../resource/inputformat.xml|none|none|none
 conn9|ftp|ftp.jamp.it|root|segret|21
@@ -20,3 +20,4 @@ conn17|sms|none|demoalyx|demoalyx|none
 conn18|csv|../resource/file1.csv|none|none|r
 conn19|csv|../resource/file2.csv|none|none|r
 jdevelopfrm|filesystem|localhost|none|none|none
+project|xml|./source.xml|none|none|none

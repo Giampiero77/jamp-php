@@ -28,13 +28,13 @@ class ClsObj_pagination extends ClsObject {
 	*/
 	public function __construct($id)
 	{
-		$this->property["id"] 	 	 = array("value" => $id, "inherit" => false, "html" => true);
-		$this->property["class"] 	 = array("value" => "pagination", "inherit" => false, "html" => true);
- 		$this->property["java"]  	 = array("value" => "pagination.js", "inherit" => false, "html" => false);
+		$this->property["id"] 	 	= array("value" => $id, "inherit" => false, "html" => true);
+		$this->property["class"] 	= array("value" => "pagination", "inherit" => false, "html" => true);
+ 		$this->property["java"]  	= array("value" => "pagination.js", "inherit" => false, "html" => false);
  		$this->property["cssfile"]  = array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["dsobj"]  	 = array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["dsobj"]  	= array("value" => null, "inherit" => false, "html" => false);
  		$this->property["dsitem"]   = array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["btTotal"]  	 = array("value" => "true", "inherit" => false, "html" => false);
+ 		$this->property["blockpage"]  = array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -92,6 +92,12 @@ class ClsObj_pagination extends ClsObject {
 	*/
 	protected function setPropertyAfter($name)
 	{
+		switch($name)
+		{
+			case "blockpage":
+				$this->propertyJS[$name] = true;
+			break;
+		}
 	}
 
 	/**
