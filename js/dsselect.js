@@ -159,9 +159,9 @@ clsDsSelect.prototype =
 		}
 		this.getDsValue(id);
 		dsselectObj.lock = false;
-		if (dsselectObj.p.optionselected && dsselectObj.options.length>dsselectObj.p.optionselected) 
+		if (dsselectObj.p.indexselected && dsselectObj.options.length>dsselectObj.p.indexselected) 
 		{
-			 dsselectObj.value = dsselectObj.options[dsselectObj.p.optionselected].value;
+			 dsselectObj.value = dsselectObj.options[dsselectObj.p.indexselected].value;
 		}		
 	},
 
