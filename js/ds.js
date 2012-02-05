@@ -297,7 +297,7 @@ clsDs.prototype =
 			 if (error) return false;
 			 if (dsObj.DSvalidate == true) 
 			 {
-				if (AJAX.function_exists('Validate' + dsObjName + '()') && !eval('Validate' + dsObjName + '()')) 
+				if (AJAX.function_exists('Validate' + dsObjName) && !eval('Validate' + dsObjName + '()')) 
 				{ 
 					 dsObj.DSchange = false; 
 					 return false;
