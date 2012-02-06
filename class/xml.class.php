@@ -15,7 +15,6 @@ class ClsXML {
 	public $isJamp = true;
 	public $filexml;
 	public $typexml = null;
-	private $pagename;
 	private $ObjConn;
 	private $linkobj;
 	public $xmlpage = null;
@@ -28,7 +27,6 @@ class ClsXML {
 		$this->filexml = $input;
 		if (is_array($this->filexml)) $input = $this->filexml[0];
 		$this->pageObj	= null;
-		$this->pagename	= "page";
 		$this->ObjConn  = null;
 		$this->linkobj	= array();
 		$this->typexml	= $type;
@@ -74,12 +72,12 @@ class ClsXML {
 	{
 		if (count($node)>0) 
 		{
-			if (isset($node->children()->attributes()->typeobj)) return $node;
+			if (isset($node->children()->attributes()->id)) return $node;
 			foreach ($node->children() as $childnode) 
 			{	
 				$attr = array(); 
 				$j=0;
-				if (isset($childnode->children()->attributes()->typeobj)) 
+				if (isset($childnode->children()->attributes()->id)) 
 				{
 					foreach ($childnode->children() as $attribute => $value) 
 					{
@@ -90,7 +88,7 @@ class ClsXML {
 				else
 				{	
 					$i=0; 
-					foreach ($childnode->children() as $child) 
+					foreach ($childnode->children() as $typeobj => $child) 
 					{
 						foreach ($child->attributes() as $attribute => $value) 
 						{
@@ -111,6 +109,7 @@ class ClsXML {
 							}
 							$attr[$attribute][$i]=(string)$value;
 						}
+						$attr["objtype"][$i]=$typeobj;
 						$i++;
 					}
 				}
@@ -138,7 +137,6 @@ class ClsXML {
 			{
 				switch($value)
 				{
-					case "typeobj":
 					case "data":
 					case "dsobjname":
 					case "start":
@@ -150,7 +148,7 @@ class ClsXML {
 						if (!preg_match("/^[A-Za-z0-9_\-,àéèìùò]+$/", $value)) ClsError::showError("OBJ009", $obj->getPropertyName("id"), $value);
 				}
 			}
-			if ($attribute!="typeobj") $obj->setProperty($attribute, (string)$value);
+			$obj->setProperty($attribute, (string)$value);
 		}
 	}
 
@@ -174,8 +172,8 @@ class ClsXML {
 		$this->linkobj = Array();
 		global $system;
 		$node = $this->xmlpage->page;
-		$this->pageObj = $system->newObj($this->pagename, (string)$node->attributes()->typeobj);
-		$this->setLinkObj($this->pagename, $this->pageObj, (string)$node->attributes()->typeobj);
+		$this->pageObj = $system->newObj((string)$node->attributes()->id, "page");
+		$this->setLinkObj((string)$node->attributes()->id, $this->pageObj, "page");
 		$this->setAttributes($node, $this->pageObj);
 		return $node;	
 	}
@@ -196,9 +194,9 @@ class ClsXML {
 	private function ReadAllNodes($xml, $parent) 
 	{
 		global $system;
-		foreach($xml->children() as $id => $node) 
+		foreach($xml->children() as $type => $node) 
 		{
-			if ((string)$node->attributes()->typeobj=="xmlpage") 
+			if ($type=="xmlpage") 
 			{
 				$linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
@@ -206,15 +204,15 @@ class ClsXML {
 			}
 			else
 			{
-				$obj = $parent->addChild($id,(string)$node->attributes()->typeobj);
-				if (isset($this->linkobj[$id])) ClsError::showError("OBJ000", $id);
-				$this->setLinkObj($id, $obj, (string)$node->attributes()->typeobj);
+				$obj = $parent->addChild((string)$node->attributes()->id,$type);
+				if (isset($this->linkobj[(string)$node->attributes()->id])) ClsError::showError("OBJ000", (string)$node->attributes()->id);
+				$this->setLinkObj((string)$node->attributes()->id, $obj, $type);
 				$this->setAttributes($node, $obj);
 				$node = $this->setSubAttributes($node, $obj);
 				if($obj->getPropertyName("debug",false) == "true")
 				{
-					$system->Debug($id,"<font color=\"green\">Read OBJ from XML<\/font>");
-					$system->Debug($id,"<font color=\"green\">Read Property OBJ<\/font> ".$obj->getProperty(null, true, false));	
+					$system->Debug((string)$node->attributes()->id,"<font color=\"green\">Read OBJ from XML<\/font>");
+					$system->Debug((string)$node->attributes()->id,"<font color=\"green\">Read Property OBJ<\/font> ".$obj->getProperty(null, true, false));	
 				}
 				$this->ReadAllNodes($node, $obj);
 			}
@@ -239,19 +237,19 @@ class ClsXML {
 	*/
 	private function ReadTagNameNodes($xml, $typeobj) 
 	{
-		foreach($xml->children() as $id => $node) 
+		foreach($xml->children() as $type => $node) 
 		{
-			if ((string)$node->attributes()->typeobj=="xmlpage") 
+			if ($type=="xmlpage") 
 			{
 				$linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->ReadTagNameNodes($linkpage->LoadXMLFromFile(), $typeobj);	
 			}
-			else if ($node->attributes()->typeobj == $typeobj) 
+			else if ($type == $typeobj) 
 			{
-				$obj = $this->pageObj->addChild($id,(string)$node->attributes()->typeobj);
-				if (isset($this->linkobj[$id])) ClsError::showError("OBJ000", $id);
-				$this->setLinkObj($id, $obj, (string)$node->attributes()->typeobj);
+				$obj = $this->pageObj->addChild((string)$node->attributes()->id,$type);
+				if (isset($this->linkobj[(string)$node->attributes()->id])) ClsError::showError("OBJ000", (string)$node->attributes()->id);
+				$this->setLinkObj((string)$node->attributes()->id, $obj, $type);
 				$this->setAttributes($node, $obj);
 				$node = $this->setSubAttributes($node, $obj);
 			}
@@ -279,19 +277,19 @@ class ClsXML {
 	*/
 	private function ReadTagIdNodes($xml, $idobj) 
 	{
-		foreach($xml->children() as $id => $node) 
+		foreach($xml->children() as $type => $node) 
 		{
-			if ((string)$node->attributes()->typeobj=="xmlpage") 
+			if ($type=="xmlpage") 
 			{
 				$linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->ReadTagIdNodes($linkpage->LoadXMLFromFile(), $idobj);
 			}
-			else if ($id == $idobj) 
+			else if ((string)$node->attributes()->id == $idobj) 
 			{
-				$obj = $this->pageObj->addChild($id,(string)$node->attributes()->typeobj);
-				if (isset($this->linkobj[$id])) ClsError::showError("OBJ000", $id);
-				$this->setLinkObj($id, $obj, (string)$node->attributes()->typeobj);
+				$obj = $this->pageObj->addChild((string)$node->attributes()->id,$type);
+				if (isset($this->linkobj[(string)$node->attributes()->id])) ClsError::showError("OBJ000", (string)$node->attributes()->id);
+				$this->setLinkObj((string)$node->attributes()->id, $obj, $type);
 				$this->setAttributes($node, $obj);
 				$node = $this->setSubAttributes($node, $obj);
 				return;
@@ -321,9 +319,9 @@ class ClsXML {
 	private function overrideNodes($xml) 
 	{
 		global $system;
-		foreach($xml->children() as $id => $node) 
+		foreach($xml->children() as $type => $node) 
 		{
-			if ((string)$node->attributes()->typeobj=="xmlpage") 
+			if ($type=="xmlpage") 
 			{
 				$linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
@@ -331,9 +329,9 @@ class ClsXML {
 			}
 			else
 			{
- 				if (isset($this->linkobj[$id])) 
+ 				if (isset($this->linkobj[(string)$node->attributes()->id])) 
 				{
-					$obj = $this->linkobj[$id]["obj"];
+					$obj = $this->linkobj[(string)$node->attributes()->id]["obj"];
 					$this->setAttributes($node, $obj);
 					$node = $this->setSubAttributes($node, $obj);
 					$this->overrideNodes($node, $obj);
@@ -352,35 +350,6 @@ class ClsXML {
 			$ovveridepage = new ClsXML($this->filexml[$i], $this->typexml);
 			$node = $ovveridepage->LoadXMLFromFile();
 			$this->overrideNodes($node);
-		}
-	}
-
-	/**
-	* Print structure of object 
-	* @param object $obj object
-	* @param string hierarchy of classes
-	*/	
-	public function printObjStruct($obj, $path=null) 
-	{
-		if ($obj->getChilden()) {
-			foreach ($obj->getChilden() as $id => $object) 
-			{
-				if (!isset($path)) 
-				{
-					$path1 = $this->pagename;
-					$object = $obj;
-				}
-				else $path1 = $path."->".$id;
-				print "<b>".$path1."[</b>";
- 				foreach ($object->getProperty(null,true) as $property => $value) 
- 				{	
-					if (is_object($value)) $value=$value->getPropertyName("id");
-					else if (is_array($value)) $value="Array(".implode(",",$value).")";
-					print " ".$property."=\"".$value."\" ";
-				}
- 				print "<b>]</b><br><br>\n";
-				if (!$object->multiObj) $this->printObjStruct($object, $path1);
-			}
 		}
 	}
 
