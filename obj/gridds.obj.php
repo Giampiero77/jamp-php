@@ -200,7 +200,7 @@ class ClsObj_gridds extends ClsObject {
 				if (!empty($this->child_property["dsitem"][$i-1])) 
 				{
 					$col = $this->child_property["dsitem"][$i-1];
-					$ObjItem->setProperty("value", $row[$col]);
+					$ObjItem->setProperty("value", array_key_exists($col, $row) ? $row[$col] : null);
 				}
 				foreach ($ObjItem->enumProperty(true) as $name)
 				{
