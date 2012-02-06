@@ -23,7 +23,7 @@ class ClsObj_import extends ClsObject {
 		$this->property["from"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["to"] 			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["fieldFrom"]	= array("value" => false, "inherit" => false, "html" => false);
-		$this->property["fieldTo"] 	= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["fieldTo"] 		= array("value" => null, "inherit" => false, "html" => false);
  		$this->property["format"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["method"] 		= array("value" => "bypass", "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
