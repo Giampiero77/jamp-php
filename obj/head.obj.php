@@ -91,6 +91,7 @@ class ClsObj_head extends ClsObject {
 	*/
 	public function codeHTML($tab = "")
 	{
+		unset($this->property["id"]["value"]);
 	}
 
 	/**
