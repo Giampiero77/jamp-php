@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-	<page typeobj="page">
-		<engine label="Motore:\n"/>
-		<connection label="\nConnessione:\n"/>
-		<port label="Porta:" size="4"/>
-		<user label="\nUtente:\n"/>
-		<label2 value="Accedi" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:85px;"/>
+	<page id="page">
+		<engine label="Motore:\n" />
+		<connection label="\nConnessione:\n" />
+		<port label="Porta:" size="4" />
+		<user label="\nUtente:\n" />
+		<label2 value="Accedi" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:85px;" />
 	</page>
 </jamp>

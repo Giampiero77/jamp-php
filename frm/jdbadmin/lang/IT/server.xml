@@ -1,66 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-    <page typeobj="page">
+	<page id="page">
 		<importtxt label=" Importa :" />
-		<tab2 label="UTENTI"/>
+		<tab2 label="UTENTI" />
 		<dsnav2>
 			<button>
-				<bt title="Ricarica i Privilegi"/>
+				<bt title="Ricarica i Privilegi" />
 			</button>
 		</dsnav2>
-		<gridds2 typeobj="gridds" dsobj="ds2" width="autosize" height="autosize">
+		<gridds id="gridds2" dsobj="ds2" width="autosize" height="autosize">
 			<header>
-				<head headlabel="Utenti"/>
-				<head headlabel="Dati"/>
-				<head headlabel="Struttura"/>
-				<head headlabel="Viste"/>
-				<head headlabel="Routine"/>
-				<head headlabel="Generale"/>
-				<head headlabel="Replica"/>
-				<head headlabel="Utente"/>
-				<head headlabel="Limitazioni"/>
+				<head headlabel="Utenti" />
+				<head headlabel="Dati" />
+				<head headlabel="Struttura" />
+				<head headlabel="Viste" />
+				<head headlabel="Routine" />
+				<head headlabel="Generale" />
+				<head headlabel="Replica" />
+				<head headlabel="Utente" />
+				<head headlabel="Limitazioni" />
 			</header>
 			<coloumn>
 				<col itemlabel="Utente" />
-				<col itemlabel="Host"/>
-				<col itemlabel="Password"/>
-				<col itemlabel="Lettura"/>
-				<col itemlabel="Inserimento"/>
-				<col itemlabel="Modifica"/>
-				<col itemlabel="Eliminazione"/>
-				<col itemlabel="File"/>
-				
-				<col itemlabel="Creazione"/>
-				<col itemlabel="Modifica"/>
-				<col itemlabel="Indice"/>
-				<col itemlabel="Svuota"/>
-				<col itemlabel="Esegui"/>
-				<col itemlabel="Tabelle Temp."/>
-				
-				<col itemlabel="Creazione"/>
-				<col itemlabel="Visualizzazione"/>
-				
-				<col itemlabel="Creazione"/>
-				<col itemlabel="Modifica"/>
-
-				<col itemlabel="Grant"/>
-				<col itemlabel="Super"/>
-				<col itemlabel="Process"/>
-				<col itemlabel="Reload"/>
-				<col itemlabel="Shutdown"/>
-				<col itemlabel="Show DB"/>
-				<col itemlabel="Lock"/>
-				<col itemlabel="References"/>
-				<col itemlabel="Client"/>
-				<col itemlabel="Server"/>
-				<col itemlabel="Create"/>
-				<col itemlabel="SSL"/>
-				
+				<col itemlabel="Host" />
+				<col itemlabel="Password" />
+				<col itemlabel="Lettura" />
+				<col itemlabel="Inserimento" />
+				<col itemlabel="Modifica" />
+				<col itemlabel="Eliminazione" />
+				<col itemlabel="File" />
+				<col itemlabel="Creazione" />
+				<col itemlabel="Modifica" />
+				<col itemlabel="Indice" />
+				<col itemlabel="Svuota" />
+				<col itemlabel="Esegui" />
+				<col itemlabel="Tabelle Temp." />
+				<col itemlabel="Creazione" />
+				<col itemlabel="Visualizzazione" />
+				<col itemlabel="Creazione" />
+				<col itemlabel="Modifica" />
+				<col itemlabel="Grant" />
+				<col itemlabel="Super" />
+				<col itemlabel="Process" />
+				<col itemlabel="Reload" />
+				<col itemlabel="Shutdown" />
+				<col itemlabel="Show DB" />
+				<col itemlabel="Lock" />
+				<col itemlabel="References" />
+				<col itemlabel="Client" />
+				<col itemlabel="Server" />
+				<col itemlabel="Create" />
+				<col itemlabel="SSL" />
 				<col itemlabel="Richieste" />
-				<col itemlabel="Modifiche"/>
-				<col itemlabel="Connessioni"/>
-				<col itemlabel="Utenti Connessi"/>
+				<col itemlabel="Modifiche" />
+				<col itemlabel="Connessioni" />
+				<col itemlabel="Utenti Connessi" />
 			</coloumn>
-		</gridds2>
-    </page>
-</jamp> 
+		</gridds>
+	</page>
+</jamp>

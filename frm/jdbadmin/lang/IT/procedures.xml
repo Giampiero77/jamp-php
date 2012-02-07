@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-    <page typeobj="page">
-		<tab1 label="PROCEDURE"/>   
+	<page id="page">
+		<tab1 label="PROCEDURE" />
 		<gridds1>
 			<coloumn>
-				<col itemlabel="Nome"/>
-				<col itemlabel=" Utente: "/>
-				<col itemlabel=" Host: "/>
+				<col itemlabel="Nome" />
+				<col itemlabel=" Utente: " />
+				<col itemlabel=" Host: " />
 			</coloumn>
 		</gridds1>
 	</page>
-</jamp> 
+</jamp>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-    <page typeobj="page" title="jdbadmin" loaddata="true">
-		<ds1 typeobj="ds" conn="custom" dskey="Name" />
-		<tabs1 typeobj="tabs" width="autosize" height="autosize" selected="tab1" align="left">
-            <tab1 typeobj="tab" label="PROCEDURE">   
-				<dsnav1 typeobj="dsnav" dsobj="ds1" objprint="textarea_code" btPage="false" btNew="false" btNav="false" btDelete="false" btTotal="false" />
-				<label1 typeobj="label" label=" Database: " />
-				<text1 typeobj="text" dsobj="ds1" dsitem="User" label=" - User: " minlength="1" />
-				<text2 typeobj="text" dsobj="ds1" dsitem="Host" label=" - Host: " minlength="1" />
-				<textarea typeobj="textarea" label="\n" width="autosize" height="autosize" dsobj="ds1" dsitem="Code" editor-lang="sql" />
-            </tab1>
-        </tabs1>
-    </page>
-</jamp> 
+	<page id="page" title="jdbadmin" loaddata="true">
+		<ds id="ds1" conn="custom" dskey="Name" />
+		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
+			<tab id="tab1" label="PROCEDURE">
+				<dsnav id="dsnav1" dsobj="ds1" objprint="textarea_code" btPage="false" btNew="false" btNav="false" btDelete="false" btTotal="false" />
+				<label id="label1" label=" Database: " />
+				<text id="text1" dsobj="ds1" dsitem="User" label=" - User: " minlength="1" />
+				<text id="text2" dsobj="ds1" dsitem="Host" label=" - Host: " minlength="1" />
+				<textarea id="textarea" label="\n" width="autosize" height="autosize" dsobj="ds1" dsitem="Code" editor-lang="sql" />
+			</tab>
+		</tabs>
+	</page>
+</jamp>

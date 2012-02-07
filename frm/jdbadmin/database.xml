@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-    <page typeobj="page" title="jdbadmin" loaddata="true">
-		<ds0 typeobj="ds" conn="custom" dskey="User" />
-		<ds1 typeobj="ds" conn="custom" dskey="User" />
-		<dsGrid typeobj="ds" conn="custom" dslimit="20" dssavetype="row" loadall="false"/>
-		<dsTables typeobj="ds" conn="custom" dskey="Name" loadall="false" />
-		<dsViews typeobj="ds" conn="custom" dskey="Name" loadall="false" />
-		<dsFunctions typeobj="ds" conn="custom" dskey="Name" loadall="false" />
-		<dsProcedures typeobj="ds" conn="custom" dskey="Name" loadall="false" />
-		<dsExport typeobj="ds" conn="custom" dskey="Name" loadall="false" readonly="true" />
-		<tabs1 typeobj="tabs" width="autosize" height="autosize" selected="tab1" align="left">
-			<tab1 typeobj="tab" label="DATABASE">
-				<fimp typeobj="fieldset" legend="Import Database Object(Tables, Views, Functions, Procedures)" style="width: 550px;height: 30px">
-					<importtxt typeobj="text" labelwidth="60px" label=" Import:" fileupload="true" rewrite="true" />
-				</fimp>	
-				<fpriv typeobj="fieldset" legend="Privileges" style="width: 550px">
-					<dsnav1 typeobj="dsnav" dsobj="ds1" btPage="false" btPrint="false" style="height: 30px" />
-					<divrag typeobj="div" style="height: 30px">
-						<select typeobj="dsselect" label="User" dsobj="ds1" dsitem="User" dsobjlist="ds0" dsitemlist="User" dsitemkeylist="User" />
-						<text1 typeobj="text" label="Host" dsobj="ds1" dsitem="Host" size="15" minlength="1" />
-					</divrag>
-					<f1 typeobj="fieldset" legend="Data" style="width: 140px; height: 115px; float: left">
-						<checkbox1 typeobj="checkbox" label="Select" dsobj="ds1" dsitem="Select_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br1 typeobj="br" />
-						<checkbox2 typeobj="checkbox" label="Insert" dsobj="ds1" dsitem="Insert_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br2 typeobj="br" />
-						<checkbox3 typeobj="checkbox" label="Update" dsobj="ds1" dsitem="Update_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br3 typeobj="br" />
-						<checkbox4 typeobj="checkbox" label="Delete" dsobj="ds1" dsitem="Delete_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br4 typeobj="br" />
-						<checkbox5 typeobj="checkbox" label="Create" dsobj="ds1" dsitem="Create_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br5 typeobj="br" />
-						<checkbox6 typeobj="checkbox" label="Drop" dsobj="ds1" dsitem="Drop_priv" check="Y" uncheck="N" labelwidth="25px" />
-					</f1>
-					<f2 typeobj="fieldset" legend="Structure" style="width: 140px; height: 115px; float: left;">				
-						<checkbox7 typeobj="checkbox" label="Grant" dsobj="ds1" dsitem="Grant_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br7 typeobj="br" />
-						<checkbox8 typeobj="checkbox" label="References" dsobj="ds1" dsitem="References_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br8 typeobj="br" />
-						<checkbox9 typeobj="checkbox" label="Index" dsobj="ds1" dsitem="Index_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br9 typeobj="br" />
-						<checkbox10 typeobj="checkbox" label="Alter" dsobj="ds1" dsitem="Alter_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br10 typeobj="br" />
-						<checkbox11 typeobj="checkbox" label="Create tmp table" dsobj="ds1" dsitem="Create_tmp_table_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br11 typeobj="br" />
-						<checkbox12 typeobj="checkbox" label="Lock" dsobj="ds1" dsitem="Lock_tables_priv" check="Y" uncheck="N" labelwidth="25px" />
-					</f2>
-					<f3 typeobj="fieldset" legend="View" style="width: 140px; height: 115px;">
-						<checkbox13 typeobj="checkbox" label="Create" dsobj="ds1" dsitem="Create_view_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br12 typeobj="br" />
-						<checkbox14 typeobj="checkbox" label="Show" dsobj="ds1" dsitem="Show_view_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br13 typeobj="br" />
-						<checkbox15 typeobj="checkbox" label="Create" dsobj="ds1" dsitem="Create_routine_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br14 typeobj="br" />
-						<checkbox16 typeobj="checkbox" label="Alter" dsobj="ds1" dsitem="Alter_routine_priv" check="Y" uncheck="N" labelwidth="25px" />
-						<br15 typeobj="br" />
-						<checkbox17 typeobj="checkbox" label="Execute" dsobj="ds1" dsitem="Execute_priv" check="Y" uncheck="N" labelwidth="25px" />	
-					</f3>
-				</fpriv>
-			</tab1>
-			<tab2 typeobj="tab" label="QUERY">
-				<divSQL typeobj="div" height="50%" width="autosize">
-					<button1 typeobj="button" value="execute" onclick="javascript: execute();" />
-					<textSQL typeobj="textarea" label="\n" width="autosize" height="autosize" editor-lang="sql"/>
-				</divSQL>
-  				<split1 typeobj="splitbar" type="horizontal"/>
-  				<divGrid typeobj="div" width="autosize" height="autosize">
-					<dsnav2 typeobj="dsnav" dsobj="dsGrid" objprint="gridds2" btNew="false" btSave="false" btCancel="false" btDelete="false" btReload="false" />
- 					<gridds2 typeobj="gridds" dsobj="dsGrid" width="autosize" height="autosize" order="true"/>
-  				</divGrid>
-			</tab2>
-			<tab3 typeobj="tab" label="EXPORT">
-				<divexptype typeobj="div" style="width:100%; overflow:auto">
-					<dsnav3 typeobj="dsnav" dsobj="dsExport" objprint="textSQLExport_code" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false" btDelete="false" btReload="false" btPrint="false" style="width: 77px; float: left;">
+	<page id="page" title="jdbadmin" loaddata="true">
+		<ds id="ds0" conn="custom" dskey="User" />
+		<ds id="ds1" conn="custom" dskey="User" />
+		<ds id="dsGrid" conn="custom" dslimit="20" dssavetype="row" loadall="false" />
+		<ds id="dsTables" conn="custom" dskey="Name" loadall="false" />
+		<ds id="dsViews" conn="custom" dskey="Name" loadall="false" />
+		<ds id="dsFunctions" conn="custom" dskey="Name" loadall="false" />
+		<ds id="dsProcedures" conn="custom" dskey="Name" loadall="false" />
+		<ds id="dsExport" conn="custom" dskey="Name" loadall="false" readonly="true" />
+		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
+			<tab id="tab1" label="DATABASE">
+				<fieldset id="fimp" legend="Import Database Object(Tables, Views, Functions, Procedures)" style="width: 550px;height: 30px">
+					<text id="importtxt" labelwidth="60px" label=" Import:" fileupload="true" rewrite="true" />
+				</fieldset>
+				<fieldset id="fpriv" legend="Privileges" style="width: 550px">
+					<dsnav id="dsnav1" dsobj="ds1" btPage="false" btPrint="false" style="height: 30px" />
+					<div id="divrag" style="height: 30px">
+						<dsselect id="select" label="User" dsobj="ds1" dsitem="User" dsobjlist="ds0" dsitemlist="User" dsitemkeylist="User" />
+						<text id="text1" label="Host" dsobj="ds1" dsitem="Host" size="15" minlength="1" />
+					</div>
+					<fieldset id="f1" legend="Data" style="width: 140px; height: 115px; float: left">
+						<checkbox id="checkbox1" label="Select" dsobj="ds1" dsitem="Select_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br1" />
+						<checkbox id="checkbox2" label="Insert" dsobj="ds1" dsitem="Insert_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br2" />
+						<checkbox id="checkbox3" label="Update" dsobj="ds1" dsitem="Update_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br3" />
+						<checkbox id="checkbox4" label="Delete" dsobj="ds1" dsitem="Delete_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br4" />
+						<checkbox id="checkbox5" label="Create" dsobj="ds1" dsitem="Create_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br5" />
+						<checkbox id="checkbox6" label="Drop" dsobj="ds1" dsitem="Drop_priv" check="Y" uncheck="N" labelwidth="25px" />
+					</fieldset>
+					<fieldset id="f2" legend="Structure" style="width: 140px; height: 115px; float: left;">
+						<checkbox id="checkbox7" label="Grant" dsobj="ds1" dsitem="Grant_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br7" />
+						<checkbox id="checkbox8" label="References" dsobj="ds1" dsitem="References_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br8" />
+						<checkbox id="checkbox9" label="Index" dsobj="ds1" dsitem="Index_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br9" />
+						<checkbox id="checkbox10" label="Alter" dsobj="ds1" dsitem="Alter_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br10" />
+						<checkbox id="checkbox11" label="Create tmp table" dsobj="ds1" dsitem="Create_tmp_table_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br11" />
+						<checkbox id="checkbox12" label="Lock" dsobj="ds1" dsitem="Lock_tables_priv" check="Y" uncheck="N" labelwidth="25px" />
+					</fieldset>
+					<fieldset id="f3" legend="View" style="width: 140px; height: 115px;">
+						<checkbox id="checkbox13" label="Create" dsobj="ds1" dsitem="Create_view_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br12" />
+						<checkbox id="checkbox14" label="Show" dsobj="ds1" dsitem="Show_view_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br13" />
+						<checkbox id="checkbox15" label="Create" dsobj="ds1" dsitem="Create_routine_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br14" />
+						<checkbox id="checkbox16" label="Alter" dsobj="ds1" dsitem="Alter_routine_priv" check="Y" uncheck="N" labelwidth="25px" />
+						<br id="br15" />
+						<checkbox id="checkbox17" label="Execute" dsobj="ds1" dsitem="Execute_priv" check="Y" uncheck="N" labelwidth="25px" />
+					</fieldset>
+				</fieldset>
+			</tab>
+			<tab id="tab2" label="QUERY">
+				<div id="divSQL" height="50%" width="autosize">
+					<button id="button1" value="execute" onclick="javascript: execute();" />
+					<textarea id="textSQL" label="\n" width="autosize" height="autosize" editor-lang="sql" />
+				</div>
+				<splitbar id="split1" type="horizontal" />
+				<div id="divGrid" width="autosize" height="autosize">
+					<dsnav id="dsnav2" dsobj="dsGrid" objprint="gridds2" btNew="false" btSave="false" btCancel="false" btDelete="false" btReload="false" />
+					<gridds id="gridds2" dsobj="dsGrid" width="autosize" height="autosize" order="true" />
+				</div>
+			</tab>
+			<tab id="tab3" label="EXPORT">
+				<div id="divexptype" style="width:100%; overflow:auto">
+					<dsnav id="dsnav3" dsobj="dsExport" objprint="textSQLExport_code" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false" btDelete="false" btReload="false" btPrint="false" style="width: 77px; float: left;">
 						<button>
 							<bt title="export" onclick="javascript: exportdatabase(false);" image="images/text.png" />
 							<bt title="Print" onclick="SYSTEMBROWSER.printContent('textSQLExport_code');" image="images/print.png" />
 							<bt title="export to file" onclick="javascript: exportdatabase(true);" image="images/fileexport.png" />
 						</button>
-					</dsnav3>
-					<divExp typeobj="div" style="overflow:auto; margin-top:4px">
-						<expnone typeobj="radio" label="none" name="exptype" value="none" align="left" checked="true" />
-						<expgz typeobj="radio" label="gzip" name="exptype" value="gz" align="left" />
-						<expbz2 typeobj="radio" label="bz2" name="exptype" value="bz2" align="left" />
-						<expzip typeobj="radio" label="zip" name="exptype" value="zip" align="left" />
-					</divExp>
-				</divexptype>
-				<divsql typeobj="div" height="50%" width="autosize">
-					<textSQLExport typeobj="textarea" dsobj="dsExport" dsitem="SQL" width="autosize" height="autosize" editor-lang="sql"/>
-				</divsql>
-				<split2 typeobj="splitbar" type="horizontal"/>
-				<divexport typeobj="div" height="autosize" width="autosize">
-					<createdb typeobj="checkbox" label="Create Database" name="createdb" value="0" check="1" uncheck="0" align="left" />
-					<divscroll typeobj="div" height="autosize" width="autosize" style="overflow:auto">
-						<fil1 typeobj="fieldset" legend="Tables" style="width: 165px; height: 275px; float: left;"> 
-							<select1 typeobj="dsselect" dsobjlist="dsTables" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 200px;" />
-							<div1 typeobj="div" style="height: 20px; width: 80px; float: left;">
-								<tablestruc typeobj="checkbox" label="Structure" value="1" />
-							</div1>
-							<div2 typeobj="div"  style="height: 20px; width: 80px;float: left;">
-								<tabledata typeobj="checkbox"  label="Data" value="1" />
-							</div2>
-							<tablestartrow typeobj="text" label="Start Rows" labelwidth="80px" value="0" keypress="number" size="6" minlength="1" />
-							<tablelimitrow typeobj="text" label="Max Rows" labelwidth="80px" value="60000" keypress="number" size="6" minlength="1" />
-						</fil1>
-						<fil2 typeobj="fieldset" legend="Views" style="width: 165px; height: 275px; float: left;"> 	
-							<select2 typeobj="dsselect" dsobjlist="dsViews" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 200px;"/>
-							<div3 typeobj="div" style="height: 20px; width: 140px; width: 80px;float: left;">
-								<viewstruc typeobj="checkbox" label="Structure" value="1" />
-							</div3>
-							<div4 typeobj="div" style="height: 20px; width: 140px; width: 80px;float: left;">
-								<viewdata typeobj="checkbox" label="Data" value="1" />
-							</div4>
-							<viewstartrow typeobj="text" label="Start Rows" labelwidth="80px" value="0" keypress="number" size="6" minlength="1" />
-							<viewlimitrow typeobj="text" label="Max Rows" labelwidth="80px" value="60000" keypress="number" size="6" minlength="1" />
-						</fil2>
-						<fil3 typeobj="fieldset" legend="Functions/Procedures" style="width: 165px; height: 275px;"> 	
-							<select3 typeobj="dsselect" name="functions" dsobjlist="dsFunctions" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 130px;"/>
-							<select4 typeobj="dsselect" name="procedures" dsobjlist="dsProcedures" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 130px"/>
-						</fil3>
-					</divscroll>
-				</divexport>
-			</tab3>
-		</tabs1>
-		<exportfile typeobj="form" action="export.php" method="post" target="_blank">
-			<datapost typeobj="hidden" name="datapost" value="" />
-		</exportfile>
-    </page>
+					</dsnav>
+					<div id="divExp" style="overflow:auto; margin-top:4px">
+						<radio id="expnone" label="none" name="exptype" value="none" align="left" checked="true" />
+						<radio id="expgz" label="gzip" name="exptype" value="gz" align="left" />
+						<radio id="expbz2" label="bz2" name="exptype" value="bz2" align="left" />
+						<radio id="expzip" label="zip" name="exptype" value="zip" align="left" />
+					</div>
+				</div>
+				<div id="divsql" height="50%" width="autosize">
+					<textarea id="textSQLExport" dsobj="dsExport" dsitem="SQL" width="autosize" height="autosize" editor-lang="sql" />
+				</div>
+				<splitbar id="split2" type="horizontal" />
+				<div id="divexport" height="autosize" width="autosize">
+					<checkbox id="createdb" label="Create Database" name="createdb" value="0" check="1" uncheck="0" align="left" />
+					<div id="divscroll" height="autosize" width="autosize" style="overflow:auto">
+						<fieldset id="fil1" legend="Tables" style="width: 165px; height: 275px; float: left;">
+							<dsselect id="select1" dsobjlist="dsTables" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 200px;" />
+							<div id="div1" style="height: 20px; width: 80px; float: left;">
+								<checkbox id="tablestruc" label="Structure" value="1" />
+							</div>
+							<div id="div2" style="height: 20px; width: 80px;float: left;">
+								<checkbox id="tabledata" label="Data" value="1" />
+							</div>
+							<text id="tablestartrow" label="Start Rows" labelwidth="80px" value="0" keypress="number" size="6" minlength="1" />
+							<text id="tablelimitrow" label="Max Rows" labelwidth="80px" value="60000" keypress="number" size="6" minlength="1" />
+						</fieldset>
+						<fieldset id="fil2" legend="Views" style="width: 165px; height: 275px; float: left;">
+							<dsselect id="select2" dsobjlist="dsViews" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 200px;" />
+							<div id="div3" style="height: 20px; width: 140px; width: 80px;float: left;">
+								<checkbox id="viewstruc" label="Structure" value="1" />
+							</div>
+							<div id="div4" style="height: 20px; width: 140px; width: 80px;float: left;">
+								<checkbox id="viewdata" label="Data" value="1" />
+							</div>
+							<text id="viewstartrow" label="Start Rows" labelwidth="80px" value="0" keypress="number" size="6" minlength="1" />
+							<text id="viewlimitrow" label="Max Rows" labelwidth="80px" value="60000" keypress="number" size="6" minlength="1" />
+						</fieldset>
+						<fieldset id="fil3" legend="Functions/Procedures" style="width: 165px; height: 275px;">
+							<dsselect id="select3" name="functions" dsobjlist="dsFunctions" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 130px;" />
+							<dsselect id="select4" name="procedures" dsobjlist="dsProcedures" dsitemlist="Name" dsitemkeylist="Name" multiple="multiple" style="width: 165px; height: 130px" />
+						</fieldset>
+					</div>
+				</div>
+			</tab>
+		</tabs>
+		<form id="exportfile" action="export.php" method="post" target="_blank">
+			<hidden id="datapost" name="datapost" value="" />
+		</form>
+	</page>
 </jamp>

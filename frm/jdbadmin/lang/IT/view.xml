@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-	<page typeobj="page" title="jdbadmin" loaddata="true">
-		<tab1 label="VISTA"/>   
-		<text1 label="Utente"/>
-		<tab2 label="DATI"/>   
+	<page id="page" title="jdbadmin" loaddata="true">
+		<tab1 label="VISTA" />
+		<text1 label="Utente" />
+		<tab2 label="DATI" />
 		<dsnav2>
 			<button>
-				<bt title="Svuota Vista"/>
+				<bt title="Svuota Vista" />
 			</button>
 		</dsnav2>
-    </page>
-</jamp> 
+	</page>
+</jamp>

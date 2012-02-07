@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-	<page typeobj="page" title="jdbadmin" loaddata="true" icon="../../favicon.ico">
-		<ds1 typeobj="ds" conn="custom" />
-		<divTop typeobj="div" width="autosize" height="autosize">
-			<divSX typeobj="div" width="240px" height="autosize" style="float:left;">
-				<img typeobj="img" src="images/logo.png" />	
-				<tree1 typeobj="tree" dsobj="ds1" refresh="always" width="autosize" height="autosize" dragable="true" />
-			</divSX>
-			<split1 typeobj="splitbar" type="vertical"/>
-			<divDX typeobj="div" height="autosize" width="autosize" style="float:left;">
-				<iframe1 name="iframe1" typeobj="iframe" height="autosize" width="autosize" frameborder="0" marginheight="0"/>
-			</divDX>
-		</divTop>
-		<statusbar typeobj="div" style="position: absolute; background-color:#EFEDDE; z-index:999; height:16px; width:100%; left:0px; top:100%; margin-top: -16px;  font-weight:bold;" value="">
-			<logout typeobj="img" src="./images/logout.png" height="16" width="16" align="right" href="index.php?logout" alt="LOGOUT"/>
-			<status typeobj="div"/>
-		</statusbar>
+	<page id="page" title="jdbadmin" loaddata="true" icon="../../favicon.ico">
+		<ds id="ds1" conn="custom" />
+		<div id="divTop" width="autosize" height="autosize">
+			<div id="divSX" width="240px" height="autosize" style="float:left;">
+				<img id="img" src="images/logo.png" />
+				<tree id="tree1" dsobj="ds1" refresh="always" width="autosize" height="autosize" dragable="true" />
+			</div>
+			<splitbar id="split1" type="vertical" />
+			<div id="divDX" height="autosize" width="autosize" style="float:left;">
+				<iframe name="iframe1" id="iframe1" height="autosize" width="autosize" frameborder="0" marginheight="0" />
+			</div>
+		</div>
+		<div id="statusbar" style="position: absolute; background-color:#EFEDDE; z-index:999; height:16px; width:100%; left:0px; top:100%; margin-top: -16px;  font-weight:bold;" value="">
+			<img id="logout" src="./images/logout.png" height="16" width="16" align="right" href="index.php?logout" alt="LOGOUT" />
+			<div id="status" />
+		</div>
 	</page>
 </jamp>

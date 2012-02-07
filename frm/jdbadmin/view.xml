@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-    <page typeobj="page" title="jdbadmin" loaddata="true">
-		<ds1 typeobj="ds" conn="custom" dskey="Name" />
-		<dsGrid typeobj="ds" conn="custom" dslimit="20" dssavetype="table" loadall="false" />
-		<tabs1 typeobj="tabs" width="autosize" height="autosize" selected="tab1" align="left">
-            <tab1 typeobj="tab" label="VIEW">   
-				<div typeobj="div" style="width: 100%; height: 20px;">
-					<dsnav1 typeobj="dsnav" dsobj="ds1" objprint="textarea_code" btPage="false" btNew="false" btNav="false" btDelete="false" btTotal="false" style="width: 120px; float: left" />
-					<text1 typeobj="text" dsobj="ds1" dsitem="User" label="User: " minlength="1" />
-					<text2 typeobj="text" dsobj="ds1" dsitem="Host" label="Host: " minlength="1" />
+	<page id="page" title="jdbadmin" loaddata="true">
+		<ds id="ds1" conn="custom" dskey="Name" />
+		<ds id="dsGrid" conn="custom" dslimit="20" dssavetype="table" loadall="false" />
+		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
+			<tab id="tab1" label="VIEW">
+				<div id="div" style="width: 100%; height: 20px;">
+					<dsnav id="dsnav1" dsobj="ds1" objprint="textarea_code" btPage="false" btNew="false" btNav="false" btDelete="false" btTotal="false" style="width: 120px; float: left" />
+					<text id="text1" dsobj="ds1" dsitem="User" label="User: " minlength="1" />
+					<text id="text2" dsobj="ds1" dsitem="Host" label="Host: " minlength="1" />
 				</div>
-				<textSQL typeobj="textarea" label="\n" width="autosize" height="autosize" dsobj="ds1" dsitem="Code" editor-lang="sql" />
-			</tab1>
-			<tab2 typeobj="tab" label="DATA">   
-				<dsnav2 typeobj="dsnav" dsobj="dsGrid" objprint="gridds1">
+				<textarea id="textSQL" label="\n" width="autosize" height="autosize" dsobj="ds1" dsitem="Code" editor-lang="sql" />
+			</tab>
+			<tab id="tab2" label="DATA">
+				<dsnav id="dsnav2" dsobj="dsGrid" objprint="gridds1">
 					<button>
-						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate View"/>
+						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate View" />
 					</button>
-				</dsnav2>
-				<gridds1 typeobj="gridds" dsobj="dsGrid" width="autosize" height="autosize" order="true"/>
-			</tab2>
-		</tabs1>
-    </page>
-</jamp> 
+				</dsnav>
+				<gridds id="gridds1" dsobj="dsGrid" width="autosize" height="autosize" order="true" />
+			</tab>
+		</tabs>
+	</page>
+</jamp>

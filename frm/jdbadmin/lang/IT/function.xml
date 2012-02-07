@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-	<page typeobj="page">
-		 <tab1 label="FUNZIONI"/>   
-		 <label1 label=" Database: "/>
-		 <text1 label=" - Utente: "/>
-    </page>
-</jamp> 
+	<page id="page">
+		<tab1 label="FUNZIONI" />
+		<label1 label=" Database: " />
+		<text1 label=" - Utente: " />
+	</page>
+</jamp>

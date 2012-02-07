@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jamp>
-	 <page typeobj="page" title="jdbadmin" loaddata="true">
-		<script1 typeobj="script" src="./../../js/animate.js"/>
-		<ds0 typeobj="ds" conn="custom" dskey="Charset" />
-		<ds1 typeobj="ds" conn="custom" dskey="Field" dssavetype="row" focusnew="gridds1_1_$"/>
-		<ds21 typeobj="ds" conn="custom" dskey="Key_name"/>
-		<dsFK typeobj="ds" conn="custom" dssavetype="row" dskey="constraint" />
-		<dsGrid typeobj="ds" conn="custom" dssavetype="table" dslimit="20" loadall="false" />
-		<tabs1 typeobj="tabs" width="autosize" height="autosize" selected="tab1" align="left">
-		      <tab1 typeobj="tab" label="STRUCTURE">
-				<dsnav1 typeobj="dsnav" dsobj="ds1" objprint="gridds1" btPage="false">
+	<page id="page" title="jdbadmin" loaddata="true">
+		<script id="script1" src="./../../js/animate.js" />
+		<ds id="ds0" conn="custom" dskey="Charset" />
+		<ds id="ds1" conn="custom" dskey="Field" dssavetype="row" focusnew="gridds1_1_$" />
+		<ds id="ds21" conn="custom" dskey="Key_name" />
+		<ds id="dsFK" conn="custom" dssavetype="row" dskey="constraint" />
+		<ds id="dsGrid" conn="custom" dssavetype="table" dslimit="20" loadall="false" />
+		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
+			<tab id="tab1" label="STRUCTURE">
+				<dsnav id="dsnav1" dsobj="ds1" objprint="gridds1" btPage="false">
 					<button>
-							<bt id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL"/>
+						<bt id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
 					</button>
-				</dsnav1>
-				<divTop typeobj="div" width="autosize" height="autosize">
-					<gridds1 typeobj="gridds" dsobj="ds1" width="autosize" height="autosize">
+				</dsnav>
+				<div id="divTop" width="autosize" height="autosize">
+					<gridds id="gridds1" dsobj="ds1" width="autosize" height="autosize">
 						<coloumn>
-							<col objtype="text" itemlabel="Field" dsitem="Field" colwidth="120px" />
-							<col objtype="dsselect" itemlabel="Type" dsitem="Type" colwidth="100px" optiontext="VARCHAR,TINYINT,TEXT,DATE,SMALLINT,MEDIUMINT,INT,BIGINT,FLOAT,DOUBLE,DECIMAL,DATETIME,TIMESTAMP,TIME,YEAR,CHAR,TINYBLOB,TINYTEXT,BLOB,MEDIUMBLOB,MEDIUMTEXT,LONGBLOB,LONGTEXT,ENUM,SET,BOOL,BINARY,VARBINARY" optionvalue="varchar,tinyint,text,date,smallint,mediumint,int,bigint,float,double,decimal,datetime,timestamp,time,year,char,tinyblob,tinytext,blob,mediumblob,mediumtext,longblob,longtext,enum,set,bool,binary,varbinary" />
-							<col objtype="text" itemlabel="Length/Set" dsitem="Lenght" colwidth="100px" />
-							<col objtype="dsselect" itemlabel="Null" dsitem="Null" optionvalue="YES,NO" colwidth="30px" />
-							<col objtype="dsselect" itemlabel="Extra" dsitem="Extra" optionvalue=",auto_increment" colwidth="100px" />
-							<col objtype="text" itemlabel="Default" dsitem="Default" colwidth="120px" />
-							<col objtype="text" itemlabel="Comment" dsitem="Comment" colwidth="120px" />
-							<col objtype="dsselect" itemlabel="Collation" dsitem="Collation" dsobjlist="ds0" dsitemlist="Collation" dsitemkeylist="Collation" allselect="" colwidth="110px" />
+							<text itemlabel="Field" dsitem="Field" colwidth="120px" />
+							<dsselect itemlabel="Type" dsitem="Type" colwidth="100px" optiontext="VARCHAR,TINYINT,TEXT,DATE,SMALLINT,MEDIUMINT,INT,BIGINT,FLOAT,DOUBLE,DECIMAL,DATETIME,TIMESTAMP,TIME,YEAR,CHAR,TINYBLOB,TINYTEXT,BLOB,MEDIUMBLOB,MEDIUMTEXT,LONGBLOB,LONGTEXT,ENUM,SET,BOOL,BINARY,VARBINARY" optionvalue="varchar,tinyint,text,date,smallint,mediumint,int,bigint,float,double,decimal,datetime,timestamp,time,year,char,tinyblob,tinytext,blob,mediumblob,mediumtext,longblob,longtext,enum,set,bool,binary,varbinary" />
+							<text itemlabel="Length/Set" dsitem="Lenght" colwidth="100px" />
+							<dsselect itemlabel="Null" dsitem="Null" optionvalue="YES,NO" colwidth="30px" />
+							<dsselect itemlabel="Extra" dsitem="Extra" optionvalue=",auto_increment" colwidth="100px" />
+							<text itemlabel="Default" dsitem="Default" colwidth="120px" />
+							<text itemlabel="Comment" dsitem="Comment" colwidth="120px" />
+							<dsselect itemlabel="Collation" dsitem="Collation" dsobjlist="ds0" dsitemlist="Collation" dsitemkeylist="Collation" allselect="" colwidth="110px" />
 						</coloumn>
-					</gridds1>
-				</divTop>	
-				<split typeobj="splitbar" type="horizontal" />
-				<divBottom typeobj="div" width="autosize" height="200px">
-					<tabs2 typeobj="tabs" width="autosize" height="autosize" selected="tab21" align="left">
-						<tab21 typeobj="tab" label="INDICES">
-							<dsnav2 typeobj="dsnav" dsobj="ds21" objprint="gridds21" btNew="false" btSave="false" btCancel="false" btReload="false" btPage="false" btNav="false" btTotal="false">
+					</gridds>
+				</div>
+				<splitbar id="split" type="horizontal" />
+				<div id="divBottom" width="autosize" height="200px">
+					<tabs id="tabs2" width="autosize" height="autosize" selected="tab21" align="left">
+						<tab id="tab21" label="INDICES">
+							<dsnav id="dsnav2" dsobj="ds21" objprint="gridds21" btNew="false" btSave="false" btCancel="false" btReload="false" btPage="false" btNav="false" btTotal="false">
 								<button>
-									<bt onclick="CreateIndex('primary');" image="images/primary.png" title="Primary"/>
-									<bt onclick="CreateIndex('unique');" image="images/unique.png" title="Unique"/>
-									<bt onclick="CreateIndex('index');" image="images/index.png" title="Index"/>
-									<bt onclick="CreateIndex('fulltext');" image="images/text.png" title="Full Text"/>
+									<bt onclick="CreateIndex('primary');" image="images/primary.png" title="Primary" />
+									<bt onclick="CreateIndex('unique');" image="images/unique.png" title="Unique" />
+									<bt onclick="CreateIndex('index');" image="images/index.png" title="Index" />
+									<bt onclick="CreateIndex('fulltext');" image="images/text.png" title="Full Text" />
 								</button>
-							</dsnav2>
-							<gridds21 typeobj="gridds" dsobj="ds21" width="autosize" height="autosize">
+							</dsnav>
+							<gridds id="gridds21" dsobj="ds21" width="autosize" height="autosize">
 								<coloumn>
-									<col objtype="label" itemlabel="Key name" dsitem="Key_name" colwidth="150px" />
-									<col objtype="label" itemlabel="Non unique" dsitem="Non_unique" colwidth="100px" />
-									<col objtype="label" itemlabel="Column name" dsitem="Column_name" colwidth="150px" />
+									<label itemlabel="Key name" dsitem="Key_name" colwidth="150px" />
+									<label itemlabel="Non unique" dsitem="Non_unique" colwidth="100px" />
+									<label itemlabel="Column name" dsitem="Column_name" colwidth="150px" />
 								</coloumn>
-							</gridds21>
-						</tab21>
-						<tab22 typeobj="tab" label="FOREIGN KEYS">
-							<dsnav23 typeobj="dsnav" dsobj="dsFK" objprint="gridds23" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false">
+							</gridds>
+						</tab>
+						<tab id="tab22" label="FOREIGN KEYS">
+							<dsnav id="dsnav23" dsobj="dsFK" objprint="gridds23" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false">
 								<button>
-									<bt onclick="CreateFK();" image="images/primary.png" title="foreign key"/>
+									<bt onclick="CreateFK();" image="images/primary.png" title="foreign key" />
 								</button>
-							</dsnav23>
-							<gridds23 typeobj="gridds" dsobj="dsFK" width="autosize" height="autosize">
+							</dsnav>
+							<gridds id="gridds23" dsobj="dsFK" width="autosize" height="autosize">
 								<coloumn>
-									<col objtype="label" itemlabel="CONSTRAINT" dsitem="constraint" colwidth="100px" />
-									<col objtype="label" itemlabel="FOREIGN KEY" dsitem="foreignkey" colwidth="150px" />
-									<col objtype="label" itemlabel="DB REFERENCES" dsitem="referencedb" colwidth="100px" />
-									<col objtype="label" itemlabel="TABLE REFERENCES" dsitem="referencetable" colwidth="150px" />
-									<col objtype="label" itemlabel="KEY REFERENCES" dsitem="referencekey" colwidth="150px" />
-									<col objtype="label" itemlabel="ON DELETE" dsitem="ondelete" colwidth="100px" />
-									<col objtype="label" itemlabel="ON UPDATE" dsitem="onupdate" colwidth="100px" />
+									<label itemlabel="CONSTRAINT" dsitem="constraint" colwidth="100px" />
+									<label itemlabel="FOREIGN KEY" dsitem="foreignkey" colwidth="150px" />
+									<label itemlabel="DB REFERENCES" dsitem="referencedb" colwidth="100px" />
+									<label itemlabel="TABLE REFERENCES" dsitem="referencetable" colwidth="150px" />
+									<label itemlabel="KEY REFERENCES" dsitem="referencekey" colwidth="150px" />
+									<label itemlabel="ON DELETE" dsitem="ondelete" colwidth="100px" />
+									<label itemlabel="ON UPDATE" dsitem="onupdate" colwidth="100px" />
 								</coloumn>
-							</gridds23>
-						</tab22>
-					</tabs2>
-				</divBottom>
-				</tab1>
-				<tab2 typeobj="tab" label="DATA">
-					<dsnav3 typeobj="dsnav" dsobj="dsGrid" objprint="gridds2">
-						<button>
-							<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate Table"/>
-							<bt id="btSQL2" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL"/>
-						</button>
-					</dsnav3>
-					<divTop1 typeobj="div" width="autosize" height="autosize">
-						<gridds2 typeobj="gridds" dsobj="dsGrid" width="autosize" height="autosize" order="true"/>
-					</divTop1>
-				</tab2>
-		  </tabs1>
-		<textSQL typeobj="textarea" label="\n" style="position:absolute;display:none;" editor-lang="sql"/>
+							</gridds>
+						</tab>
+					</tabs>
+				</div>
+			</tab>
+			<tab id="tab2" label="DATA">
+				<dsnav id="dsnav3" dsobj="dsGrid" objprint="gridds2">
+					<button>
+						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate Table" />
+						<bt id="btSQL2" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
+					</button>
+				</dsnav>
+				<div id="divTop1" width="autosize" height="autosize">
+					<gridds id="gridds2" dsobj="dsGrid" width="autosize" height="autosize" order="true" />
+				</div>
+			</tab>
+		</tabs>
+		<textarea id="textSQL" label="\n" style="position:absolute;display:none;" editor-lang="sql" />
 	</page>
-</jamp> 
+</jamp>
