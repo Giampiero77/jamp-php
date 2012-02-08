@@ -50,6 +50,7 @@ class ClsObj_dsnav extends ClsObject {
  		$this->property["cssfile"]   	 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["dsitem"]  		 = array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["objtype"]  	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["searchonkeyup"] = array("value" => "false", "inherit" => false, "html" => false);
 	}
 
