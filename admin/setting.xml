@@ -1,64 +1,65 @@
-<?xml version="1.0"  encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
-	<page typeobj="page" title="JAMP - Modifica connessione" loaddata="false">
-		<header typeobj="div" style="height: 30px; width: 100%; background-color: blue">
-			<img typeobj="img" align="left" alt="setting.png" src="test/setting.png"/>
-			<title typeobj="label" value="" style="color: yellow; font-size: 22px;font-weight: bold" />
-		</header>
-		<br typeobj="br" />	
-		<LANGUAGE typeobj="dsselect" label="LANGUAGE" labelwidth="150px">
+	<page id="page" title="JAMP - Modifica connessione" loaddata="false">
+		<div id="header" style="height: 30px; width: 100%; background-color: blue">
+			<img id="img" align="left" alt="setting.png" src="test/setting.png" />
+			<label id="title" value="" style="color: yellow; font-size: 22px;font-weight: bold" />
+		</div>
+		<br id="br" />
+		<dsselect id="LANGUAGE" label="LANGUAGE" labelwidth="150px">
 			<options>
-				<opt optionvalue="IT"/>
-				<opt optionvalue="EN"/>
+				<opt optionvalue="IT" />
+				<opt optionvalue="EN" />
 			</options>
-		</LANGUAGE>
-		<TIMEZONE typeobj="text" label="TIMEZONE:" minlength="1" maxlength="20" size="50" labelwidth="150px" />	
-		<TEMPLATE typeobj="text" label="TEMPLATE:" minlength="1" maxlength="20" size="50" labelwidth="150px" />	
-		<ERROR_LEVEL typeobj="dsselect" label="ERROR_LEVEL" labelwidth="150px">
+		</dsselect>
+		<text id="TIMEZONE" label="TIMEZONE:" minlength="1" maxlength="20" size="50" labelwidth="150px" />
+		<text id="TEMPLATE" label="TEMPLATE:" minlength="1" maxlength="20" size="50" labelwidth="150px" />
+		<dsselect id="ERROR_LEVEL" label="ERROR_LEVEL" labelwidth="150px">
 			<options>
 				<opt optiontext="Error" optionvalue="0" />
 				<opt optiontext="Debug" optionvalue="1" />
 			</options>
-		</ERROR_LEVEL>
-		<ERROR_REPORTING typeobj="text" label="ERROR REPORTING:" minlength="1" size="50" labelwidth="150px" />	
-		<COMPRESSHTML typeobj="dsselect" label="COMPRESSHTML" labelwidth="150px">
+		</dsselect>
+		<text id="ERROR_REPORTING" label="ERROR REPORTING:" minlength="1" size="50" labelwidth="150px" />
+		<dsselect id="COMPRESSHTML" label="COMPRESSHTML" labelwidth="150px">
 			<options>
 				<opt optionvalue="true" />
 				<opt optionvalue="false" />
 			</options>
-		</COMPRESSHTML>
-		<COMPRESSXML typeobj="dsselect" label="COMPRESSXML" labelwidth="150px">
+		</dsselect>
+		<dsselect id="COMPRESSXML" label="COMPRESSXML" labelwidth="150px">
 			<options>
 				<opt optionvalue="true" />
 				<opt optionvalue="false" />
 			</options>
-		</COMPRESSXML>
-		<COMPRESSJS typeobj="dsselect" label="COMPRESSJS" labelwidth="150px">
-                        <options>
-                                <opt optionvalue="true" />
-                                <opt optionvalue="false" />
-                        </options>
-                </COMPRESSJS>
-		<NOCACHEPHP typeobj="dsselect" label="NOCACHEPHP" labelwidth="150px">
+		</dsselect>
+		<dsselect id="COMPRESSJS" label="COMPRESSJS" labelwidth="150px">
 			<options>
 				<opt optionvalue="true" />
 				<opt optionvalue="false" />
 			</options>
-		</NOCACHEPHP>
-		<NOCACHEJS typeobj="text" label="NOCACHEJS:" minlength="1" maxlength="250" size="50"  labelwidth="150px" />	
-		<NOCACHECSS typeobj="text" label="NOCACHECSS:" minlength="1" maxlength="250" size="50"  labelwidth="150px" />	
-		<NOUPLOAD typeobj="dsselect" label="NOUPLOAD"  labelwidth="150px">
+		</dsselect>
+		<dsselect id="NOCACHEPHP" label="NOCACHEPHP" labelwidth="150px">
 			<options>
 				<opt optionvalue="true" />
 				<opt optionvalue="false" />
 			</options>
-		</NOUPLOAD>
-		<GHOSTDATA typeobj="dsselect" label="GHOSTDATA"  labelwidth="150px">
+		</dsselect>
+		<text id="NOCACHEJS" label="NOCACHEJS:" minlength="1" maxlength="250" size="50" labelwidth="150px" />
+		<text id="NOCACHECSS" label="NOCACHECSS:" minlength="1" maxlength="250" size="50" labelwidth="150px" />
+		<dsselect id="NOUPLOAD" label="NOUPLOAD" labelwidth="150px">
 			<options>
 				<opt optionvalue="true" />
 				<opt optionvalue="false" />
 			</options>
-		</GHOSTDATA>
-		<button typeobj="button" label="\n\n" value="Conferma" onclick="Confirm()" style="font-weight: bold; font-size: 1.2em; cursor: pointer;"/>	
+		</dsselect>
+		<dsselect id="GHOSTDATA" label="GHOSTDATA" labelwidth="150px">
+			<options>
+				<opt optionvalue="true" />
+				<opt optionvalue="false" />
+			</options>
+		</dsselect>
+		<button id="button" label="\n\n" value="Conferma" onclick="Confirm()" style="font-weight: bold; font-size: 1.2em; cursor: pointer;" />
 	</page>
 </jamp>

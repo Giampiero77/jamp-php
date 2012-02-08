@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
-	<page typeobj="page" title="JAMP" loaddata="true" style="margin: 10px;" icon="../favicon.ico">
-		<table typeobj="table" width="100%">
-			<tr typeobj="tr">
-				<td typeobj="td" align="center">
-					<jamp typeobj="img" src="test/jamp.gif" style="vertical-align:middle"/>
-					<label1 typeobj="label" value="Test JAMP ver: $$JAMP-VERSION$$" style="font-weight: bold; font-size: 2em; color:#127397;"/>
+	<page id="page" title="JAMP" loaddata="true" style="margin: 10px;" icon="../favicon.ico">
+		<table id="table" width="100%">
+			<tr id="tr">
+				<td id="td" align="center">
+					<img id="jamp" src="test/jamp.gif" style="vertical-align:middle" />
+					<label id="label1" value="Test JAMP ver: $$JAMP-VERSION$$" style="font-weight: bold; font-size: 2em; color:#127397;" />
 				</td>
 			</tr>
 		</table>
-		<lightbox typeobj="lightbox" width="700" height="autosize" />
-		<hr typeobj="hr" />
-		<div1 typeobj="div"/>
+		<lightbox id="lightbox" width="700" height="autosize" />
+		<hr id="hr" />
+		<div id="div1" />
 	</page>
 </jamp>

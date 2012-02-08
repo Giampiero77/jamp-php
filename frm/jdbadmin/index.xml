@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page" title="JdbAdmin" loaddata="true" style="background-color:#127397;" icon="../../favicon.ico">
 		<ds id="ds1" readonly="true" />
