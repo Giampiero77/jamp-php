@@ -98,7 +98,7 @@ class ClsObj_window extends ClsObject {
     		$this->property["style"]["value"] .= " height:".$this->property["height"]["value"].";float: left;";
 		}
 		$this->property["id"]["value"] = $id;
-		$this->property["class"]["value"] = $class;
+		$this->property["class"]["value"] = $class."_".$this->property["type"]["value"];
 		if ($this->property["expanded"]["value"] == "false") $this->property["style"]["value"] .= " display: none";
 		$code .= "\n$tab<div ".$this->getProperty("html", true, false).">";
 		if (!empty($this->property["value"]["value"])) $code .= "\n\t".$tab.$this->property["value"]["value"];
