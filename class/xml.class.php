@@ -77,7 +77,7 @@ class ClsXML {
 			{	
 				$attr = array(); 
 				$j=0;
-				if (isset($childnode->children()->attributes()->id)) 
+				if (isset($childnode->children()->isChild)) 
 				{
 					foreach ($childnode->children() as $attribute => $value) 
 					{
@@ -117,7 +117,12 @@ class ClsXML {
 				{
 					$obj->setProperty($attribute, $value);
 				}
-				$node = $child;
+				if(isset($child)) $node = $child;
+				else 
+				{
+					$node = $childnode->children();
+					$node->isChild = true;
+				}
 			}
 		}
 		return $node;
