@@ -41,7 +41,8 @@ class ClsObj_ds extends ClsObject {
 		$this->property["load"]					= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["readonly"]				= array("value" => null,	"inherit" => false, "html" => false);
 		$this->property["confirm"]				= array("value" => "false",	"inherit" => false, "html" => false);
-
+ 		$this->property["objtype"]  			= array("value" => null, "inherit" => false, "html" => false);
+		
 		$this->property["selecteditems"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsdefault"]			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dstable"]				= array("value" => null, "inherit" => false, "html" => false);
