@@ -50,6 +50,7 @@ class ClsObj_dsselect extends ClsObject {
 		$this->property["height"]	  	= array("value" => null,  "inherit" => false, "html" => false);
  		$this->property["java"]  		= array("value" => array("dsselect.js", "format.js"), "inherit" => false, "html" => false);
 		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["objtype"]  	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsitem"]  		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["disabled"] 	= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["format"] 		= array("value" => null,  "inherit" => false, "html" => false);
