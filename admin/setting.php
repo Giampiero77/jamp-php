@@ -77,6 +77,7 @@ function modify_setting()
 	$lines[] = "\tdefine(\"ERROR_REPORTING\", ".$_POST['ERROR_REPORTING'].");\t// use these constant names in php.ini".PHP_EOL;
 	$lines[] = "\tdefine(\"COMPRESSHTML\", ".$_POST['COMPRESSHTML'].");\t// Compress html output".PHP_EOL;
 	$lines[] = "\tdefine(\"COMPRESSXML\", ".$_POST['COMPRESSXML'].");\t// Compress data xml output".PHP_EOL;
+  $lines[] = "\tdefine(\"COMPRESSJS\", ".$_POST['COMPRESSJS'].");\t// Compress javascript output".PHP_EOL;
 	$lines[] = "\tdefine(\"NOCACHEPHP\", ".$_POST['NOCACHEPHP'].");\t// true - No cache php, false - Browser/Proxy setting".PHP_EOL;
 	$lines[] = "\tdefine(\"NOCACHEJS\", ".$_POST['NOCACHEJS'].");\t// time(): No cache javascript, <constant>(es. 0505023232), false: Browser/Proxy setting".PHP_EOL;
 	$lines[] = "\tdefine(\"NOCACHECSS\", ".$_POST['NOCACHECSS'].");\t// time(): No chache CSS, <constant>(es. 0505023232), false: Browser/Proxy setting".PHP_EOL;
