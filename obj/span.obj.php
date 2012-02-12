@@ -62,7 +62,6 @@ class ClsObj_span extends ClsObject {
 		$code .= "\n$tab<span ".$this->getProperty("html", true, false).">";
 		if (!empty($this->property["value"]["value"])) $code .= "\n\t".$tab.$this->property["value"]["value"];
 		foreach ($this->child as $obj) $code .= $obj->codeHTML($tab."\t");
-		$code .= $this->property["html"]["value"];
 		$code .= "\n$tab</span>";
 		return $code;
 	}
