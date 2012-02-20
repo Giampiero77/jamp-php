@@ -175,7 +175,7 @@ class ClsMail
 		$message  = "--{$boundary2}".PHP_EOL;
 		$message .= "Content-type:text/plain; charset=\"iso-8859-1\"".PHP_EOL;
 		$message .= "Content-Transfer-Encoding: 7bit".PHP_EOL.PHP_EOL;
-		$message .= strip_tags(str_replace("<br />", str_replace("<br>", "\n", $this->message))).PHP_EOL;
+		$message .= strip_tags(str_replace("<br />", "\n", str_replace("<br>", "\n", $this->message))).PHP_EOL;
 
 		//mail html
 		if ($this->type=="html")
