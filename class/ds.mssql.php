@@ -194,6 +194,7 @@ return 1; // mssql_affected_rows();
 		}
 		else if (($where == null) && ($item != null) && ($value != null)) $this->property["where"][] = "$item = '$value'" ;
 		else $this->property["where"] = $where;
+    if (stripos($this->property["where"], "UNION") !== false) $this->property["where"]="";
 	}
 
 	/**
