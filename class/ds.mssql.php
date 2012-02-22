@@ -194,11 +194,14 @@ return 1; // mssql_affected_rows();
 		}
 		else if (($where == null) && ($item != null) && ($value != null)) $this->property["where"][] = "$item = '$value'" ;
 		else $this->property["where"] = $where;
-		foreach ($this->property["where"] as $k => $value)
+		if(is_array($this->property["where"]))
 		{
-			if (stripos($value, "UNION") !== false) $value="";
-			$this->property["where"][$k] = $value;
-		}	
+			foreach ($this->property["where"] as $k => $value)
+			{
+				if (stripos($value, "UNION") !== false) $value="";
+				$this->property["where"][$k] = $value;
+			}
+		} else if (stripos($this->property["where"], "UNION") !== false) $this->property["where"]="";	
 	}
 
 	/**
