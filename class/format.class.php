@@ -299,7 +299,7 @@ class ClsFormat
 		{
 			 if  ((($year%4==0) && ($year%100 != 0)) || ($year%400==0))
 			 { 
-				  if (day > 29) return 0;
+				  if ($day > 29) return 0;
 			 }
 			else return 0;
 		}
