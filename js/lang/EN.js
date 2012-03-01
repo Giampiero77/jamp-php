@@ -28,6 +28,7 @@ function clsLANG()
 		"EVENT005"	: "Row:",
 		"EVENT006"	: "Message:",
 		"DSNAV001"	: "NEW",
+		"DSNAV002"	: "SEARCH",
 		"IMAGE001"	: "Error while uploading image",
 		"TEXT001"	: "Error while uploading file",
 		"DOTPAD"	: "."

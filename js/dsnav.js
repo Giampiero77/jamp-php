@@ -146,7 +146,7 @@ clsDsnav.prototype =
 		this.setButton(dsObjName, "reload", true);
 		if (dsObj.DSpos < 0)
 		{
-	 		if (total != undefined) total.innerHTML = LANG.translate("DSNAV001");
+	 		if (total != undefined) total.innerHTML = LANG.translate((obj.search==true)? "DSNAV002" : "DSNAV001");
 	 		if (obj.search==true)
 	 		{
 				this.setButton(dsObjName,"new",false);
