@@ -18,10 +18,10 @@ $event = new ClsEvent($xml);
 $event->managerRequest();
 
 global $error;
-function before_exception_error($exception) { global $error; $error = $exception->param['message']; return false; };
-function after_exception_error()  { return false; };
-function before_error() { global $error; $error = ClsError::$param['message']; return false; };
-function after_error()  { return false; };
+// function before_exception_error($exception) { global $error; $error = $exception->param['message']; return false; };
+// function after_exception_error()  { return false; };
+// function before_error() { global $error; $error = ClsError::$param['message']; return false; };
+// function after_error()  { return false; };
 
 function testExtension($name)
 {
@@ -124,7 +124,7 @@ function testConnect($LNG)
 	$extension = array_unique($extension);
 	foreach($extension as $row) $code .= checkExtension($row, $LNG);
 
-	$jdbadmin .= "<a href=\"../frm/jdbadmin/index.php\" target=\"_black\" />Jdbadmin</a>";
+	$jdbadmin = "<a href=\"../frm/jdbadmin/index.php\" target=\"_black\" />Jdbadmin</a>";
 	$code .= testTitle($jdbadmin, "database.png");
 
 	$newconn  = "<a href=\"connection.php?action=new_connection\" rel=\"lightframe\" rev=\"width: 600px; height: 320px;\" onclick=\"LIGHTBOX.start($('lightbox'), this, false, true);return false;\" />".$LNG["txt0"]."</a>";
