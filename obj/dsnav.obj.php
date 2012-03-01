@@ -45,6 +45,7 @@ class ClsObj_dsnav extends ClsObject {
 		$this->property["maxlength"]	 = array("value" => 255, "inherit" => false, "html" => false);
 		$this->property["size"] 		 = array("value" => 30, "inherit" => false, "html" => false);
 		$this->property["dssearch"] 	 = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsfullsearch"]	 = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsobj"] 	 	 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["java"]  	 	 = array("value" => "dsnav.js", "inherit" => false, "html" => false);
  		$this->property["cssfile"]   	 = array("value" => null, "inherit" => false, "html" => false);
@@ -87,9 +88,13 @@ class ClsObj_dsnav extends ClsObject {
 		{
 			$code .= "\n$tab\t<div class=\"".$class."_delete\" id=\"".$id."_delete\" title=\"".LANG::translate("DSNAV003")."\" onclick=\"if (this.className == '".$class."_delete') DSNAV.dsdelete('$obj', event);\">&nbsp;</div>";
 		}
+		if (!is_null($this->property["dsfullsearch"]["value"])) 
+		{
+			$code .= "\n$tab\t<div class=\"".$class."_fullsearch\" id=\"".$id."_fullsearch\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"if (this.className == '".$class."_fullsearch') DSNAV.fullsearch('$id','$obj');\">&nbsp;</div>";
+		}
 		if ($this->property["btCancel"]["value"] == "true") 
 		{
-			$code .= "\n$tab\t<div class=\"".$class."_cancel\" id=\"".$id."_cancel\" title=\"".LANG::translate("DSNAV004")."\" onclick=\"if (this.className == '".$class."_cancel') DS.dscancel('$obj');\">&nbsp;</div>";
+			$code .= "\n$tab\t<div class=\"".$class."_cancel\" id=\"".$id."_cancel\" title=\"".LANG::translate("DSNAV004")."\" onclick=\"if (this.className == '".$class."_cancel') DSNAV.cancel('$id','$obj');\">&nbsp;</div>";
 		}
 		if ($this->property["btNav"]["value"] == "true") 
 		{
@@ -150,7 +155,7 @@ class ClsObj_dsnav extends ClsObject {
 		$id = $this->property["id"]["value"];
 		$dsobj = $this->property["dsobj"]["value"];
 		$this->propertyJS["DSsearch"] = $this->property["dssearch"]["value"];
-
+		$this->propertyJS["DSfullsearch"] = $this->property["dsfullsearch"]["value"];
 		$this->addEvent($id, $dsobj."Move", "DSNAV.refreshObj(\"$id\");");
 		$this->addEvent($id, $dsobj."Refresh", "DSNAV.refreshObj(\"$id\");");
 		$this->addEventAfter($id, $dsobj."ChangeItem", "DSNAV.ChangeItem(\"$id\");");

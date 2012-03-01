@@ -382,3 +382,31 @@ div.dsnav_default_bt_custom:hover {
 	border: 1px transparent solid;
 	background-color: transparent;
 }
+
+div.dsnav_default_fullsearch {
+	cursor:pointer;
+	background : url('dsnav/fullsearch.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left; 
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_fullsearch:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_fullsearch_gray {
+	cursor:pointer;
+	background : url('dsnav/fullsearch_gray.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
