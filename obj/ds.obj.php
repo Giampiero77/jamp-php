@@ -15,6 +15,7 @@ class ClsObj_ds extends ClsObject {
 	* @var $ds Contains the class for managing the DS
 	*/
 	var $ds = null;
+	var $locktime = null;
 
 	/**
 	* Construct
@@ -56,6 +57,7 @@ class ClsObj_ds extends ClsObject {
 		$this->property["jointype"]				= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["joinrule"]				= array("value" => null, "inherit" => false, "html" => false);
 
+		$this->property["dslock"]				= array("value" => null,    "inherit" => false, "html" => false);
 		$this->property["dsrefresh"]			= array("value" => null,    "inherit" => false, "html" => false);
 		$this->property["dsreferences"]			= array("value" => null,    "inherit" => false, "html" => false);
 		$this->property["referencestable"]		= array("value" => null,   "inherit" => false, "html" => false);
@@ -247,7 +249,7 @@ class ClsObj_ds extends ClsObject {
 				$id = $this->property["id"]["value"];
 				$code .= "<script>\n";
 				$code .= "<![CDATA[";
-				if ($this->ds->property["inslast"] == 0) $code .= "\nDS.dsUpdate(\"$id\");"; //Update
+				if ($this->ds->property["inslast"] == 0) $code .= "\nDS.dsUpdate(\"$id\", \"$this->locktime\");"; //Update
 				else $code .= "\nDS.dsInsert(\"$id\", \"".$this->ds->property["inslast"]."\");"; // Insert
 				$code .= "\n]]>\n";
 				$code .= "</script>\n";
@@ -362,10 +364,34 @@ class ClsObj_ds extends ClsObject {
 		unset($post["keyname"]);
 		unset($post["keynamevalue"]);
 		unset($post["start"]);
-		$this->ds->property["item"] = $post;
 		$this->ds->dsQueryFilter(null, $keyname, $key);
+		if(!empty($this->property["dslock"]["value"]))
+		{
+			if ($post[$this->property["dslock"]["value"]]!="force") $this->ds->dsQueryFilter(null, $this->property["dslock"]["value"], $post[$this->property["dslock"]["value"]]);
+			$this->locktime = time();
+			$post[$this->property["dslock"]["value"]] = $this->locktime;
+		}
+		$this->ds->property["item"] = $post;
 		$this->ds->dsConnect();
-		$this->ds->dsQueryUpdate($this->property["dsquery_update"]["value"]);
+		$tot = $this->ds->dsQueryUpdate($this->property["dsquery_update"]["value"]);
+		if(!empty($this->property["dslock"]["value"]))
+		{
+			global $event;
+			if ($tot==0)
+			{
+				$code ="
+					DS.dschange($('".$this->property["id"]["value"]."'));
+					if(confirm('I dati sono stati modificati da un altro utente, vuoi forzare il salvataggio?'))
+					{
+						var dsobj=$('".$this->property["id"]["value"]."');
+						dsobj.DSresult[dsobj.DSpos][dsobj.p.dslock]='force';
+						DS.dssave('".$this->property["id"]["value"]."');
+					} else SYSTEMEVENT.showErrorGhost('DATI NON SALVATI!','I dati sono stati modificati da un altro utente!');
+				";
+				$event->returnRequest(null,$code);
+				die();
+			}
+		} 
 		$this->ds->property["where"] = $pre;
 	}
 
@@ -406,7 +432,7 @@ class ClsObj_ds extends ClsObject {
 		unset($post["data"]);
 		unset($post["dsobjname"]);
 		$keyname = isset($post["keyname"]) ? $post["keyname"]: "";
-		$key 		= isset($post["keynamevalue"]) ? $post["keynamevalue"]: "";
+		$key = isset($post["keynamevalue"]) ? $post["keynamevalue"]: "";
 		unset($post["keynamevalue"]);
 		unset($post["keyname"]);
 		unset($post["start"]);
@@ -653,6 +679,10 @@ class ClsObj_ds extends ClsObject {
 			
 			case "loadall":
 			case "load":
+			break;
+			
+			case "dslock":
+				$this->propertyJS["dslock"] = $this->property["dslock"]["value"];
 			break;
 
 			default:

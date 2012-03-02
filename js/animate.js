@@ -192,10 +192,11 @@ clsAnimate.prototype =
 		return parseInt(number, 10).toString(16);
 	},
 
-	ghost : function(id)
+	ghost : function(id, duration)
 	{
+		duration = (duration==undefined) ? 1000 : duration;
 		$(id).style.display = "block";
-		ANIMATE.animate(id, 'opacity:0.8', 500, function(){ANIMATE.animate(id, 'opacity:0.8', 1000, function(){ANIMATE.animate(id, 'opacity:0;display:none', 500, '', 'default');}, 'default');}, 'default');
+		ANIMATE.animate(id, 'opacity:0.8', 500, function(){ANIMATE.animate(id, 'opacity:0.8', duration, function(){ANIMATE.animate(id, 'opacity:0;display:none', 500, '', 'default');}, 'default');}, 'default');
 	},
 
 	scroll : function(id)

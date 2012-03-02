@@ -327,11 +327,12 @@ clsDs.prototype =
 		return false;
 	},
 
-	dsUpdate : function(id)
+	dsUpdate : function(id, locktime)
 	{
  		var objdsXML = $(id);
  		objdsXML.DSchange = false;
  		objdsXML.DSmodpos = objdsXML.DSpos;
+ 		if(locktime>0) objdsXML.DSresult[objdsXML.DSpos][objdsXML.p.dslock] = locktime;
  		eval(id + 'SaveRow();');
  		eval(id + 'Move();');
 	},

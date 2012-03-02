@@ -62,6 +62,18 @@ clsSystemEvent.prototype =
 		ANIMATE.ghost(SYSTEMEVENT.messagebox_ghost.id);
 	},
 
+	showErrorGhost : function(message, note, custom)
+	{
+		if (custom == undefined)
+		{
+		  var msg = '';
+		  if (note && note != '') msg = "<br><font color='gray'>"+note+"</font>";
+		  SYSTEMEVENT.messagebox_ghost.innerHTML = "<p style='width:350;margin-left:50px'><font color='red'><b>"+message+"</b></font>"+msg;
+		} 
+		else SYSTEMEVENT.messagebox_ghost.innerHTML = custom;
+		ANIMATE.ghost(SYSTEMEVENT.messagebox_ghost.id, 3000);
+	},
+
 	showMessage : function(message, title, url, row) 
 	{
 		var errortxt =  '<h2 class="dialog_title"><span>'+title+'</span></h2>';
