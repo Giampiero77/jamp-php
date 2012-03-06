@@ -172,8 +172,11 @@ class ClsObj_text extends ClsObject {
 			$dsobj = $this->property["dsobj"]["value"];
 			$this->addEvent($id, $dsobj."Move", "TEXT.getDsValue(\"$id\");");
 			$this->addEvent($id, $dsobj."Refresh", "TEXT.refreshObj(\"$id\");");
-			$this->property["onchange"]["value"] = "TEXT.setDsValue(this); ".$this->property["onchange"]["value"];
-			$this->property["onkeyup"]["value"] = "TEXT.checkDsValue(this); ".$this->property["onkeyup"]["value"];
+			if ($this->property["readonly"]["value"]!="true")
+			{
+				$this->property["onchange"]["value"] = "TEXT.setDsValue(this); ".$this->property["onchange"]["value"];
+				$this->property["onkeyup"]["value"] = "TEXT.checkDsValue(this); ".$this->property["onkeyup"]["value"];
+			}
 		}
 		else if (!empty($this->property["format"]["value"]))
 		{
