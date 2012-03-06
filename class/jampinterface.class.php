@@ -66,6 +66,7 @@ interface jampInterface {
 	public function data_before_store();
 	public function data_store();
 	public function data_after_store();
+	public function data_last_multirequest();
 	public function data_keepalive();
 	public function pdf_before_addpage($obj);
 	public function pdf_after_addpage($obj);
