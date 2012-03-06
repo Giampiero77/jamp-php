@@ -381,12 +381,12 @@ class ClsObj_ds extends ClsObject {
 			{
 				$code ="
 					DS.dschange($('".$this->property["id"]["value"]."'));
-					if(confirm('I dati sono stati modificati da un altro utente, vuoi forzare il salvataggio?'))
+					if(confirm('".LANG::translate("DS010")."'))
 					{
 						var dsobj=$('".$this->property["id"]["value"]."');
 						dsobj.DSresult[dsobj.DSpos][dsobj.p.dslock]='force';
 						DS.dssave('".$this->property["id"]["value"]."');
-					} else SYSTEMEVENT.showErrorGhost('DATI NON SALVATI!','I dati sono stati modificati da un altro utente!');
+					} else SYSTEMEVENT.showErrorGhost('".LANG::translate("DS011")."','".LANG::translate("DS012")."');
 				";
 				$event->returnRequest(null,$code);
 				die();
