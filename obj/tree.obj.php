@@ -48,6 +48,7 @@ class ClsObj_tree extends ClsObject {
 		$this->property["dsobj"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsitem"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["nav"]		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["objtype"]  	= array("value" => null, "inherit" => false, "html" => false);
 	}
 
 	/**
