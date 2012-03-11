@@ -68,7 +68,7 @@ class ClsObj_head extends ClsObject {
 		$code .= "\n\t<title>".$this->property["title"]["value"]."</title>";
 		$code .= "\n\t<meta name=\"GENERATOR\" content=\"JAMP\" />";
 		$code .= "\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />";
-		$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\" />";
+		$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">";
 		$code .= "\n\t\tfunction $(id) { return document.getElementById(id); }";
 		$code .= "\n\t</script>";
 		$code .= $system->getCSS($page->requireCSS());
