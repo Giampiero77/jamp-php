@@ -177,6 +177,7 @@ clsDs.prototype =
 		{
 			var objfocus = dsObj.p.DSfocus.replace('$', dsObj.DSpos);
 			SYSTEMEVENT.setFocus($(objfocus));
+			$(objfocus).select();
 		}
 	},
 
