@@ -123,7 +123,7 @@ clsDscombo.prototype =
 		var dsObjRow = $(dscomboObj.p.dsObj);
 		if (dsObjRow != undefined)
 		{
-			this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] = Array(dscomboObj.valuekey, dscomboObj.value);
+			if (dscomboObj.p.dsItemLabel == undefined) this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] = Array(dscomboObj.valuekey, dscomboObj.value);
 			var row = (dscomboObj.row == undefined) ? dsObjRow.DSpos : dscomboObj.row;
 			dsObjRow.DSresult[row][dscomboObj.p.dsItem] = dscomboObj.valuekey;
 			dsObj.DSposalter = row;
