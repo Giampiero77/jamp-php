@@ -32,7 +32,7 @@ clsAJAX.prototype =
 
 	keepAlive : function(second, url)
 	{
-		url = (url==undefined) ? document.location.href : url;
+		var url = (url==undefined || url=='') ? document.location.href : url;
 		AJAX.hideloader = true;
 		AJAX.request("POST", url, "data=keepalive", false, false);
 		AJAX.hideloader = false;
