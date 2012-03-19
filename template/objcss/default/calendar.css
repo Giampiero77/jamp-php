@@ -100,7 +100,7 @@ div.calendar_default table td {
 }
 
 span.calendar_default_today {
-	background : url('calendar/1day.png') no-repeat scroll 0 0 transparent;
+	background : url('calendar/1day.png') no-repeat scroll 0 0 transparent !important;
 	height : 16px !important;
 	padding-bottom : 2px !important;
 	padding-left : 16px !important;
@@ -114,7 +114,7 @@ span.calendar_default_today {
 }
 
 span.calendar_default_cancel {
-	background: url("calendar/cancel.png") no-repeat scroll 0 0 transparent;
+	background: url("calendar/cancel.png") no-repeat scroll 0 0 transparent !important;
 	height : 16px !important;
 	padding-bottom : 2px !important;
 	padding-left : 16px !important;
@@ -128,7 +128,7 @@ span.calendar_default_cancel {
 }
 
 span.calendar_default_close {
-	background : url('calendar/delete.png') no-repeat scroll 0 0 transparent;
+	background : url('calendar/delete.png') no-repeat scroll 0 0 transparent !important;
 	height : 16px !important;
 	padding-bottom : 2px !important;
 	padding-left : 16px !important;
@@ -142,7 +142,7 @@ span.calendar_default_close {
 }
 
 span.calendar_default_confirm {
-	background : url('calendar/confirm.png') no-repeat scroll 0 0 transparent;
+	background : url('calendar/confirm.png') no-repeat scroll 0 0 transparent !important;
 	height : 16px !important;
 	padding-bottom : 2px !important;
 	padding-left : 16px !important;
