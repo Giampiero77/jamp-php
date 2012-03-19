@@ -123,7 +123,9 @@ clsFormat.prototype =
 	{
 		var i_format=0;
 		var format=reg[4]+"";
-		var result = c = token = "";
+		var result = "";
+		var c = "";
+		var token = "";
 		var timestamp = this.getDateFromFormat(date, reg);
 		if (!fixed && timestamp==0) 
 		{
@@ -244,9 +246,13 @@ clsFormat.prototype =
 	{
 		if (reg[2] == "TIMESTAMP") return parseInt(val*1000);
 		val=val+"";
-		format=reg[2]+"";
-		var i_val=i_format=0;
-		var c=token=token2=ampm="";
+		var format=reg[2]+"";
+		var i_val=0;
+		var i_format=0;
+		var c="";
+		var token="";
+		var token2="";
+		var ampm="";
 		var x,y;
 		var day=1;
 		var now=new Date();
@@ -383,6 +389,7 @@ clsFormat.prototype =
  	{
 		//number|EN|,0.00|IT|.0,00
 		text = text.toString();
+		var pos = 0;
 		var decimal = ((pos = format[4].indexOf(this.intSetting[format[3]]['decimal']))>-1) ? (format[4].length-pos-1) : 0;
  		var thousands = format[4].replace(/[.,]/g,"").length - decimal;
   		text = text.replaceAll(this.intSetting[format[1]]['thousand'], "");
