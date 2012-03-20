@@ -173,6 +173,11 @@ clsDs.prototype =
 
 	setFocusNew : function(dsObj)
 	{
+		if (dsObj.p.DSfocustab != undefined)
+		{
+			var t = dsObj.p.DSfocustab.split(",");
+			TABS.setFocus(t[0], t[1]);
+		}
 		if (dsObj.p.DSfocus != undefined)
 		{
 			var objfocus = dsObj.p.DSfocus.replace('$', dsObj.DSpos);

@@ -28,6 +28,7 @@ class ClsObj_ds extends ClsObject {
 		$this->property["debug"]				= array("value" => "false",  "inherit" => true, "html" => false);
 		$this->property["out"]					= array("value" => "json", 	"inherit" => false, "html" => false); //json,xml
 		$this->property["focusnew"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["focustabnew"]			= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["dshost"]				= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["dsport"]				= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["dsuser"]				= array("value" => null, 	"inherit" => false, "html" => false);
@@ -596,6 +597,10 @@ class ClsObj_ds extends ClsObject {
 				$this->propertyJS["DSfocus"] = $this->property["focusnew"]["value"];
 			break;
 
+			case "focustabnew":
+				$this->propertyJS["DSfocustab"] = $this->property["focustabnew"]["value"];
+			break;
+					
 			case "readonly":
 				if ($this->property["readonly"]["value"]=="true") $this->propertyJS["DSreadonly"] = true;
 				else if ($this->property["readonly"]["value"]=="false") $this->propertyJS["DSreadonly"] = false;
