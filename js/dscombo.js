@@ -153,7 +153,14 @@ clsDscombo.prototype =
 
 		post += "&" + obj.p.dsObjList + "where=" + encodeURIComponent(dssearch);
 
-		AJAX.request("POST", dsObj.p.DSaction, post, true, true);
+		if(dsObj.p.DSreferences==undefined) AJAX.request("POST", dsObj.p.DSaction, post, true, true);
+		else
+		{
+			var old = obj.DSsearch;
+			dsObj.DSsearch = dssearch;
+			AJAX.dslink(dsObj.id)
+			obj.DSsearch = old;
+		}
 
 		if (dsObj.DSresult.length == 2)
 		{
