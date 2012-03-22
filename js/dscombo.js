@@ -106,6 +106,7 @@ clsDscombo.prototype =
 			 if (dsObj != undefined) 
 			 {
 				dsObj.DSresult[dsObj.DSpos][obj.p.dsItem] = "";
+				if (this.lastds[obj.p.dsObj]==undefined) this.lastds[obj.p.dsObj]=Array();
 				this.lastds[obj.p.dsObj][obj.p.dsItem] = Array("", "");
 				DS.dschange(dsObj);
 			 }
