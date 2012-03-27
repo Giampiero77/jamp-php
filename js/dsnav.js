@@ -61,7 +61,7 @@ clsDsnav.prototype =
 		{
 			this.setButton(dsObjName, "new", 	false)
 			this.setButton(dsObjName, "cancel", false);
-		}
+		} else this.setButton(dsObjName, "cancel", dsObj.DSchange);
 	},
 
 	dsfind : function(dsObjName)
@@ -134,14 +134,32 @@ clsDsnav.prototype =
 			var txtSearch = $(id + "_search");
 			if (txtSearch != undefined) txtSearch.value = "";
 			AJAX.dsmore(dsObj, 'data=load&dsobjname=' + dsObj.id + '&start=' + dsObj.DSstart );
+		} 
+		else if(dsObj.DSpos>0)
+		{
+			dsObj.DSresult[dsObj.DSpos] = this.Clone(obj.record);
+			dsObj.DSchange = false;
+			eval(dsObjName+"Move();");
 		} else DS.dscancel(dsObjName);
 	},
 
+	Clone : function(_ArryToClone)
+	{
+		var _Clone = new Array();
+		for (_IdClone in _ArryToClone)
+			if (_ArryToClone[_IdClone].Constructor == Array)
+				this.Clone(_ArryToClone[_IdClone])
+			else
+				_Clone[_IdClone] = _ArryToClone[_IdClone]
+		return _Clone
+	},
+	
 	refreshObj : function(dsObjName)
 	{
 		var total = $(dsObjName + "_total");
 		var obj = $(dsObjName);
 		var dsObj = $(obj.p.dsObj);
+		obj.record = this.Clone(dsObj.DSresult[dsObj.DSpos]);
 		this.setPage(dsObj, dsObjName);
 		this.setButton(dsObjName, "reload", true);
 		if (dsObj.DSpos < 0)
@@ -175,14 +193,14 @@ clsDsnav.prototype =
 				var dsref = dsObj.p.DSreferences.split(",");
 				var dsreflength = dsref.length;
 				for (var i = 0; i < dsreflength; i++)
-			{
-				var objref = $(dsref[i]);
-				if (objref.DSpos < 0 || objref.DSrow == 0) this.setButton(dsObjName, "new", 	false);
+				{
+					var objref = $(dsref[i]);
+					if (objref.DSpos < 0 || objref.DSrow == 0) this.setButton(dsObjName, "new",false);
 				}
 			 }
-			 	if (total != undefined) total.innerHTML = (parseInt(dsObj.DSstart) + parseInt(dsObj.DSpos)) + " / " + dsObj.DSrow;
-			 	this.setButton(dsObjName, "cancel", false);
-			 	if (dsObj.DSresult.length == 0)
+			 if (total != undefined) total.innerHTML = (parseInt(dsObj.DSstart) + parseInt(dsObj.DSpos)) + " / " + dsObj.DSrow;
+			 this.setButton(dsObjName, "cancel", false);
+			 if (dsObj.DSresult.length == 0)
 			 {
 				this.setButton(dsObjName,"save",false);
 				this.setButton(dsObjName,"delete",false);
@@ -192,14 +210,14 @@ clsDsnav.prototype =
 				this.setButton(dsObjName,"next",false);
 			 }
 			 else
-			 {
+			{
 				this.setButton(dsObjName,"save",dsObj.DSchange);
 				this.setButton(dsObjName,"delete",true);
 				this.setButton(dsObjName,"first",true);
 				this.setButton(dsObjName,"last",true);
 				this.setButton(dsObjName,"prev",true);
 				this.setButton(dsObjName,"next",true);
-			 }
+			}
 		}
 		if (dsObj.DSsearch.length>0) this.setButton(dsObjName, "cancel", true);
 	}
