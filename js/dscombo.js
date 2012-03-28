@@ -84,6 +84,7 @@ clsDscombo.prototype =
 		for (var i = 0; i < itemlength; i++) valueDs[i] = (dsObjRow.DSresult[row][item[i]] == undefined) ? "" : dsObjRow.DSresult[row][item[i]];
 		valueDs = valueDs.join(" - ");
 		dscomboObj.value = valueDs;
+		if ((itemlength-1)*3 == dscomboObj.value.length) dscomboObj.value = ""; 
 	},
 
 	refreshObj : function(id)
