@@ -146,10 +146,7 @@ clsDsnav.prototype =
 	Clone : function(source)
 	{
 		var a = new Array(); 
-		for (var k in source)
-		{
-			if (source.hasOwnProperty(k)) a[k] = source[k];
-		}
+		for (var k in source) if (source.hasOwnProperty(k)) a[k] = source[k];
 		return a;
 	},
 	
