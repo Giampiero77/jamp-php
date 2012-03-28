@@ -143,15 +143,14 @@ clsDsnav.prototype =
 		} else DS.dscancel(dsObjName);
 	},
 
-	Clone : function(_ArryToClone)
+	Clone : function(source)
 	{
-		var _Clone = new Array();
-		for (_IdClone in _ArryToClone)
-			if (_ArryToClone[_IdClone].Constructor == Array)
-				this.Clone(_ArryToClone[_IdClone])
-			else
-				_Clone[_IdClone] = _ArryToClone[_IdClone]
-		return _Clone
+		var a = new Array(); 
+		for (var k in source)
+		{
+			if (source.hasOwnProperty(k)) a[k] = source[k];
+		}
+		return a;
 	},
 	
 	refreshObj : function(dsObjName)
