@@ -150,6 +150,7 @@ function testConnect($LNG)
 	foreach($conn as $row)
 	{
 		$error = "";
+		if ($row[0][0] == "#") continue; 
 		if ($row[0] == "jamp") 
 		{
 			if ($row[4] == "none") $status = "<img src=\"test/decrypted.png\" alt=\"ALERT\">";
@@ -350,7 +351,7 @@ function html_load()
 	}
 
 	$code .= "\n</table>";
-	$code .= "<br><center><a href=\"http://validator.w3.org/check?uri=referer\"><img border=\"0\" src=\"test/valid-html401-blue.png\" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\"></a>&nbsp;<a href=\"./../gpl-3.0.txt\" target=\"gpl\"><img alt=\"GPL3\" src=\"test/gplv3.png\" border=\"0\" > GNU Public License</a><br><a href=\"http://www.alyx.it\">&copy; 2008 - ".date(Y).", ALYX - Software Innovation</a></center>";
+	$code .= "<br><center><a href=\"http://validator.w3.org/check?uri=referer\"><img border=\"0\" src=\"test/valid-html401-blue.png\" alt=\"Valid HTML 4.01 Transitional\" height=\"31\" width=\"88\"></a>&nbsp;<a href=\"./../gpl-3.0.txt\" target=\"gpl\"><img alt=\"GPL3\" src=\"test/gplv3.png\" border=\"0\" > GNU Public License</a><br><a href=\"http://www.alyx.it\">&copy; 2008 - ".date("Y").", ALYX - Software Innovation</a></center>";
 	
 	$label1->setProperty("value", $code);
 } 
