@@ -94,7 +94,7 @@ class ClsEvent
 					$ret = true;
 					if($returnxml == false) $ret = false; 
 				}
-				$this->sendRequest($ret, $lastmulti);
+				$this->sendRequest($ret, $lastmulti, true);
 			}
 		}
 		else $this->sendRequest($returnxml);
@@ -147,7 +147,7 @@ class ClsEvent
 	* @param string $returnxml Datasource filter
 	* @param string $lastmulti Indicates whether the last request for a multi-post
 	*/
-	function sendRequest($returnxml, $lastmulti = false)
+	function sendRequest($returnxml, $lastmulti = false, $multi = false)
 	{
 		if (!get_magic_quotes_gpc())
 		{
@@ -224,7 +224,7 @@ class ClsEvent
 							$this->callEvent("data_after_update", $res);
 							$ghost = $res->getPropertyName("ghostdata");
 							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
-							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG1HOST")."','".LANG::translate("MSG1HOSTD")."')";
+							if (($ghost=="true"||$ghost===true) && ($multi==false||($multi==true&&$lastmulti==true))) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG1HOST")."','".LANG::translate("MSG1HOSTD")."');";
 						}
 					break;
 			
@@ -240,7 +240,7 @@ class ClsEvent
 							$this->callEvent("data_after_new", $res);
 							$ghost = $res->getPropertyName("ghostdata");
 							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
-							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG2HOST")."','".LANG::translate("MSG2HOSTD")."')";
+							if (($ghost=="true"||$ghost===true) && ($multi==false||($multi==true&&$lastmulti==true))) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG2HOST")."','".LANG::translate("MSG2HOSTD")."');";
 						}
 					break;
 			
@@ -255,7 +255,7 @@ class ClsEvent
 							$this->callEvent("data_after_delete", $res);
 							$ghost = $res->getPropertyName("ghostdata");
 							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
-							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
+							if (($ghost=="true"||$ghost===true) && ($multi==false||($multi==true&&$lastmulti==true))) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."');";
 						}
 					break;
 	
@@ -270,7 +270,7 @@ class ClsEvent
 							$this->callEvent("data_after_deleteall", $res);
 							$ghost = $res->getPropertyName("ghostdata");
 							$ghost = empty($ghost) ? GHOSTDATA : $ghost;
-							if ($ghost=="true"||$ghost===true) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."')";
+							if (($ghost=="true"||$ghost===true) && ($multi==false||($multi==true&&$lastmulti==true))) $this->codejs .= "\nSYSTEMEVENT.showMessageGhost('".LANG::translate("MSG3HOST")."','".LANG::translate("MSG3HOSTD")."');";
 						}
 					break;
 	
