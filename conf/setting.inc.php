@@ -12,4 +12,5 @@
 	define("NOCACHECSS", "17012012");	// time(): No chache CSS, <constant>(es. 0505023232), false: Browser/Proxy setting
 	define("NOUPLOAD", false);			// true - disable UPLOAD, false enable upload
 	define("GHOSTDATA", true);			// true - display action ghost message, false - no display action ghost message
+	define("FPDF_VERSION", "17");			// Version of fpdf to use
 ?>

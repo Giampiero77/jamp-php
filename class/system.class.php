@@ -36,7 +36,7 @@ class ClsSystem
 		$this->dir_real_web  = str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF'])));
 		$this->dir_real_jamp = realpath(dirname(__FILE__).'/../');
 		$this->dir_web_jamp  = str_replace('\\','/', substr($this->dir_real_jamp, strlen($this->dir_real_web)))."/";
-		$this->version	= "2.1.0_factory";	
+		$this->version	= "2.2.0_beta";	
 		$this->dir_class	= "class/";	
 		$this->dir_conf	= "conf/";
 		$this->dir_develop = "develop/";
@@ -225,9 +225,9 @@ class ClsSystem
 	{
 		switch($name)
 		{
-			case "pdf": //FPDF153
-				define('FPDF_FONTPATH', $this->dir_real_jamp."/".$this->dir_plugin.'fpdf153/font/');
-				require_once($this->dir_real_jamp."/".$this->dir_plugin.'fpdf153/fpdf.php');
+			case "pdf": //FPDF
+				define('FPDF_FONTPATH', $this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.FPDF_VERSION.'/font/');
+				require_once($this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.FPDF_VERSION.'/fpdf.php');
 				require_once($this->dir_real_jamp."/class/pdf.class.php");
 			break;
 

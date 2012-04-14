@@ -19,7 +19,7 @@ class ClsPDF extends FPDF {
 
 	public function __construct($orientation,$unit,$pageformat)
 	{
- 		require_once("format.class.php");
+		require_once("format.class.php");
 		parent::FPDF($orientation,$unit,$pageformat);
 		$this->format = new ClsFormat();
 		$this->property = array();
@@ -115,7 +115,7 @@ class ClsPDF extends FPDF {
 			if (isset($outtext) && $outtext!="")
 			{
 			    $bg = (empty($this->property["background-color"])) ? 0 : 1; 
-	  			if (!empty($this->property["wrap"]) && $outtext!="") $this->Write($this->property["wrap"], $left,$outtext);
+	  			if (!empty($this->property["wrap"]) && $outtext!="") $this->pdfWrite($this->property["wrap"], $left,$outtext);
 	  			else if ($this->property["multi"]) $this->MultiCell($this->property["width"],$this->property["height"], $outtext, $this->property["border-width"], $this->property["align"]);
 				else $this->Cell($this->property["width"], $this->property["height"], $outtext, $this->property["border-width"], $this->property["ln"], $this->property["align"],$bg);
 			}
@@ -314,7 +314,11 @@ class ClsPDF extends FPDF {
 			}
 			$this->setY($y + $row["height"]);
 		}
-		foreach($this->storerow as $cell) $y = $this->Print_Store_Cell($cell, $height);
+		if (is_array($this->storerow)) {
+			foreach($this->storerow as $cell) $y = $this->Print_Store_Cell($cell, $height);
+		} else {
+			$y = 0;
+		}
 		$this->setY($y + $height - $this->maxsize);
 		$this->storerow = null;
 		$this->maxheight = $this->maxsize = 0;
@@ -623,16 +627,15 @@ class ClsPDF extends FPDF {
 		$this->Text($x,$y+$h+11/$this->k,substr($barcode,-13));
 	}
 
-	function AddPage($orientation='')
+	function AddPage($orientation='', $size='')
 	{
 		userEvent::call("pdf_before_addpage", $this);
-		parent::AddPage($orientation);
+		parent::AddPage($orientation, $size);
 		userEvent::call("pdf_after_addpage", $this);
 	}
 
 
-
-    function Write($h,$left,$txt,$link='')
+    function pdfWrite($h,$left,$txt,$link='')
     {
     	$cw=&$this->CurrentFont['cw'];
     	$w=$this->w-$this->rMargin-$this->x;

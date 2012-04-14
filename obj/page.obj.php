@@ -76,7 +76,7 @@ class ClsObj_page extends ClsObject {
 		$pdf->topFooter = 0;
 		if($footer != null) $pdf->topFooter = abs(intval($footer->getPropertyName("top", true, false)));
 
-		$pdf->AddPage($this->property["orientation"]["value"],'mm','A4');
+		$pdf->AddPage($this->property["orientation"]["value"],'A4');
 		$pdf->AliasNbPages('{nb}');
 		userEvent::call("pdf_before_code", $pdf);
 		foreach ($this->child as $obj) $obj->codePDF($pdf);
