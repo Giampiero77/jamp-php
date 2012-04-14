@@ -226,8 +226,8 @@ class ClsSystem
 		switch($name)
 		{
 			case "pdf": //FPDF
-				define('FPDF_FONTPATH', $this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.FPDF_VERSION.'/font/');
-				require_once($this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.FPDF_VERSION.'/fpdf.php');
+				define('FPDF_FONTPATH', $this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.JAMP_FPDF_VERSION.'/font/');
+				require_once($this->dir_real_jamp."/".$this->dir_plugin.'fpdf'.JAMP_FPDF_VERSION.'/fpdf.php');
 				require_once($this->dir_real_jamp."/class/pdf.class.php");
 			break;
 
