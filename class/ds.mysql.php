@@ -265,6 +265,7 @@ class mysqlDs extends iDS
 			}
 			 
 			$limit = "";
+			if ($table == "``") return false;
 			$qry = "SELECT $alias FROM $table";
 			if ($this->property["limit"] > 0) 
 			{
