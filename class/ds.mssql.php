@@ -95,6 +95,13 @@ class mssqlDs extends iDS
 		$this->dsConnect();
 		$this->dsQuerySelect();
 
+		if(!empty($_POST['remember_me']) && $_POST['remember_me']=="1")
+		{
+		    $expire = time() + 1728000; // Expire in 20 days		    
+		    setcookie("user", $user, $expire);
+		    setcookie("pwd", $pwd, $expire);
+		}
+				
 		$this->property["row"] = mssql_fetch_array($this->property["result"]);
 		if (($this->property["row"][$itemuser] == $user) && ($this->property["row"][$itempwd] == $pwd))
 		{

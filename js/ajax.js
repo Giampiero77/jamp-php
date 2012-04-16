@@ -44,11 +44,13 @@ clsAJAX.prototype =
 		var dsObj = $(dsObjName);
 		var user = $(itemuser);
 		var pwd = $(itempwd);
+		var remember = $(itemremember);
 		if (dsObj.DSvalidate == true && AJAX.function_exists('Validate' + dsObjName + '()'))
 		{
 			 if (!eval('Validate' + dsObjName + '()')) { dsObj.DSchange == false; return;}
 		}
 		post = "data=login&dsobjname="+dsObj.id+"&user="+user.value+"&pwd="+pwd.value+"&itemuser="+user.p.dsItem+"&itempwd="+pwd.p.dsItem;
+		if (remember) post += "&remember_me="+remember.value;
 		this.request("POST", dsObj.p.DSaction, post, true, true);
 	},
 
