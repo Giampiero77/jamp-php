@@ -268,6 +268,8 @@ class mysqlDs extends iDS
 				$on = str_replace(" ", "", $on);
 				$on = " ON(`".str_replace("=", "`=`", $on)."`)";
 				$on = str_replace("AND", "` AND `", $on);
+				$on = str_replace("`'", "'", $on);
+				$on = str_replace("'`", "'", $on);
 				$table .= $on;
 			}
 			 
