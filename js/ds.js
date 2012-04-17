@@ -147,6 +147,7 @@ clsDs.prototype =
 	reload : function(dsObjName)
 	{
  		var dsObj = $(dsObjName);
+ 		this.dssave(dsObjName, true, false);
 		if (dsObj.p.DSreferences == undefined) AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObjName + "&start=" + dsObj.DSstart, undefined, dsObj.handleResponse);
 		else AJAX.dslink(dsObjName);
 	},
@@ -291,7 +292,7 @@ clsDs.prototype =
 		return error;
 	},
  
-	dssave : function(dsObjName, conf)
+	dssave : function(dsObjName, conf, reload)
 	{
 		var dsObj = $(dsObjName);
 		if (dsObj.DSchange == true)
@@ -320,14 +321,14 @@ clsDs.prototype =
 				if (dsObj.DSpos >0) var msg = LANG.translate("JDS003");
 				else var msg = LANG.translate("JDS004");
 				var save = (dsObj.p.DSconfirm == true || conf) ? confirm(msg) : true;
+				dsObj.DSchange = false;
 				if (save == true)
 				{
 					 AJAX.loader(true);
-					 dsObj.DSchange = false;
 					 AJAX.dssave(dsObjName, true);
 					 return true;
 				}
-				else this.reload(dsObjName);
+				else if(reload!=false) this.reload(dsObjName);
 			 }
 		}
 		return false;
