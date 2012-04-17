@@ -2,17 +2,17 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page">
-		<tab1 label="TABELLE" />
+		<tab id="tab1" label="TABELLE" />
 		<gridds id="gridds1" dsobj="ds1" width="autosize" height="autosize">
 			<coloumn>
-				<col itemlabel="Nome" />
-				<col itemlabel="Motore" />
-				<col itemlabel="Collation" />
-				<col itemlabel="Righe" />
-				<col itemlabel="Media Righe" />
-				<col itemlabel="Dim. Dati" />
-				<col itemlabel="Dim. Indici" />
-				<col itemlabel="Data Modifica" />
+				<text itemlabel="Nome" />
+				<dsselect itemlabel="Motore" />
+				<dsselect itemlabel="Collation" />
+				<label itemlabel="Righe" />
+				<label itemlabel="Media Righe" />
+				<label itemlabel="Dim. Dati" />
+				<label itemlabel="Dim. Indici" />
+				<label itemlabel="Data Modifica" />
 			</coloumn>
 		</gridds>
 	</page>
