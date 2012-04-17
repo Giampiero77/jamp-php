@@ -14,6 +14,7 @@ else $xml = new ClsXML(array("view.xml", "lang/".$_SESSION["jdbadmin"]['lang']."
 $event = new ClsEvent($xml);
 $DS_CONN["ds1"] = $conn; 
 $DS_CONN["dsGrid"] = $conn;
+$DS_CONN["dsExplain"] = $conn;
 $event->managerRequest();
 
 function html_load()
@@ -28,6 +29,10 @@ function html_load()
 			{
 				AJAX.rewriteObj("gridds1", "view.php");
  				AJAX.request("POST", "view.php", "data=load&dsobjname=dsGrid", true, true);
+			}
+ 			if(box == "tab3")
+			{
+ 				AJAX.request("POST", "view.php", "data=load&dsobjname=dsExplain", true, true);
 			}
 		}
      	SYSTEMEVENT.addAfterCustomFunction("TABS","setFocus", "updateGrid");
@@ -82,6 +87,7 @@ function data_select_before($ds)
 		$result[1]["Code"] = $result[1]["Code"];
 		$ds->ds->property['tot'] = "1";
 		$ds->setProperty("xml", $xml->dataJSON($result));
+		
 	}
 	else if ($ds->getPropertyName("id")=="dsGrid")
 	{
@@ -108,6 +114,10 @@ function data_select_before($ds)
 		}
 		$ds->setProperty("dsquery_select", $qry);
 		$ds->ds->setQryCount($qry);
+	}
+	else if ($ds->getPropertyName("id")=="dsExplain")
+	{
+		$ds->setProperty("dsquery_select","EXPLAIN SELECT * FROM `".$_SESSION["jdbadmin"]["database"]."`.`".$_SESSION["jdbadmin"]["view"]."`");
 	}
 }
 

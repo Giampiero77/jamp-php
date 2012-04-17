@@ -10,5 +10,18 @@
 				<bt title="Svuota Vista" />
 			</button>
 		</dsnav2>
+		<gridds id="gridds2" >
+			<coloumn>
+				<label itemlabel="ID"/>
+				<label itemlabel="TIPO SELECT"/>
+				<label itemlabel="TABELLA"/>
+				<label itemlabel="TIPO"/>
+				<label itemlabel="KEY POSSIBILI"/>
+				<label itemlabel="KEY"/>
+				<label itemlabel="KEY LUN"/>
+				<label itemlabel="RIFERIMENTO"/>
+				<label itemlabel="RIGHE"/>
+			</coloumn>
+		</gridds>
 	</page>
 </jamp>

@@ -4,6 +4,7 @@
 	<page id="page" title="jdbadmin" loaddata="true">
 		<ds id="ds1" conn="custom" dskey="Name" />
 		<ds id="dsGrid" conn="custom" dslimit="20" dssavetype="table" loadall="false" />
+		<ds id="dsExplain" conn="custom" dssavetype="table" loadall="false" />
 		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
 			<tab id="tab1" label="VIEW">
 				<div id="div" style="width: 100%; height: 20px;">
@@ -20,6 +21,21 @@
 					</button>
 				</dsnav>
 				<gridds id="gridds1" dsobj="dsGrid" width="autosize" height="autosize" order="true" />
+			</tab>
+			<tab id="tab3" label="EXPLAIN">
+				<gridds id="gridds2" dsobj="dsExplain" width="autosize" height="autosize" order="true" >
+					<coloumn>
+						<label itemlabel="ID" dsitem="id" colwidth="30px"/>
+						<label itemlabel="SELECT TYPE" dsitem="select_type"/>
+						<label itemlabel="TABLE" dsitem="table"/>
+						<label itemlabel="TYPE" dsitem="type" colwidth="50px"/>
+						<label itemlabel="POSSIBLE KEYS" dsitem="possible_keys" colwidth="150px"/>
+						<label itemlabel="KEY" dsitem="key" colwidth="50px"/>
+						<label itemlabel="KEY LEN" dsitem="key_len" colwidth="30px"/>
+						<label itemlabel="REFERENCE" dsitem="ref" colwidth="150px"/>
+						<label itemlabel="ROWS" dsitem="rows" colwidth="50px"/>
+					</coloumn>
+				</gridds>
 			</tab>
 		</tabs>
 	</page>
