@@ -35,7 +35,12 @@ class ClsXML {
 			switch($type)
 			{
 				case "file":
-					$this->xmlpage = simplexml_load_file($input) or ClsError::showError("XML001");
+					if (defined('JAMP_USER_XML_FUNCTION')) {
+						$func = JAMP_USER_XML_FUNCTION;
+						$this->xmlpage = simplexml_load_string ($func ($input)) or ClsError::showError("XML001");
+					} else {
+						$this->xmlpage = simplexml_load_file($input) or ClsError::showError("XML001");
+					}
 				break;
 				case "string":
 					$this->xmlpage = simplexml_load_string($input) or ClsError::showError("XML001");
