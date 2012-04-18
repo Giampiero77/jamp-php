@@ -39,12 +39,12 @@ clsAJAX.prototype =
 		setTimeout(function(){AJAX.keepAlive(second,url);}, second);
 	},
 	
-	login : function(dsObjName, itemuser, itempwd)
+	login : function(dsObjName, itemuser, itempwd, itemremember)
 	{
 		var dsObj = $(dsObjName);
 		var user = $(itemuser);
 		var pwd = $(itempwd);
-		var remember = $(itemremember);
+		var remember = (itemremember == undefined) ? false : $(itemremember);
 		if (dsObj.DSvalidate == true && AJAX.function_exists('Validate' + dsObjName + '()'))
 		{
 			 if (!eval('Validate' + dsObjName + '()')) { dsObj.DSchange == false; return;}
