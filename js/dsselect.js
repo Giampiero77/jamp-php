@@ -155,7 +155,7 @@ clsDsSelect.prototype =
 						if(items.hasOwnProperty(k)) //Bug Fix
 						{
 							itemvalue[k] = (dsselectObj.p.format == undefined) ? dsObj.DSresult[i][items[k]] : FORMAT.Format(dsObj.DSresult[i][items[k]], dsselectObj.p.format);
-							if (dsselectObj.p.dsItemSelected != undefined && dsObj.DSresult[i][dsselectObj.p.dsItemSelected]=="1") dsselectObj.p.indexselected = i;
+							if (dsselectObj.p.dsItemSelected != undefined && dsObj.DSresult[i][dsselectObj.p.dsItemSelected]=="1") dsselectObj.p.indexselected = i-1;
 						}
 					}
  					dsselectObj.options[dsselectObj.options.length] = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);
