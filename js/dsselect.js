@@ -49,6 +49,10 @@ clsDsSelect.prototype =
 			dsselectObj.disabled = (dsObj.DSpos != 0) ? false : true;
 			if (dsselectObj.p.dsObj == undefined) dsselectObj.disabled = false;
 		}
+		if (dsObj.DSpos < 0 && dsselectObj.p.dsItemSelected != undefined)
+		{
+			dsselectObj.value = dsselectObj.options[dsselectObj.p.indexselected].value;
+		}
 		if (dsObj.DSresult == undefined) return;
 		if (dsObj.DSresult.length == 0) return;
 		var itemrow = (dsselectObj.p.dsItem == undefined) ? dsselectObj.p.dsItemList : dsselectObj.p.dsItem;
@@ -150,6 +154,7 @@ clsDsSelect.prototype =
 						if(items.hasOwnProperty(k)) //Bug Fix
 						{
 							itemvalue[k] = (dsselectObj.p.format == undefined) ? dsObj.DSresult[i][items[k]] : FORMAT.Format(dsObj.DSresult[i][items[k]], dsselectObj.p.format);
+							if (dsselectObj.p.dsItemSelected != undefined && dsObj.DSresult[i][dsselectObj.p.dsItemSelected]=="1") dsselectObj.p.indexselected = i;
 						}
 					}
  					dsselectObj.options[dsselectObj.options.length] = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);

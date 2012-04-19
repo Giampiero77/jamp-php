@@ -17,44 +17,45 @@ class ClsObj_dsselect extends ClsObject {
 	*/
 	public function __construct($id)
 	{
-		$this->property["name"] 	   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["value"] 	   	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["minlength"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["blur"] 		= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["size"] 	   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["tabindex"]   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["onfocus"]    	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["onselect"]   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["onblur"] 	   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["onchange"]   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["id"] 		   	= array("value" => $id,   "inherit" => false, "html" => true);
-		$this->property["dsitemkeylist"]= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["nav"] 		   	= array("value" => false, "inherit" => false, "html" => false);
-		$this->property["memory"] 	   	= array("value" => false, "inherit" => false, "html" => false);
-		$this->property["multiple"]   	= array("value" => null,  "inherit" => false, "html" => true);
-		$this->property["dsitemlist"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["dsobjlist"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["directory"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["allselect"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["valuezero"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["label"] 	   	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["labelalign"]	= array("value" => "left",  "inherit" => false, "html" => false);
-		$this->property["labelwidth"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["labelstyle"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["outlabel"]		= array("value" => "false", "inherit" => false, "html" => false);
-		$this->property["optionvalue"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["optiontext"]  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["optionselected"] = array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["optionimage"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["width"]	  	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["height"]	  	= array("value" => null,  "inherit" => false, "html" => false);
- 		$this->property["java"]  		= array("value" => array("dsselect.js", "format.js"), "inherit" => false, "html" => false);
-		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["objtype"]  	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["dsitem"]  		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["disabled"] 	= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["format"] 		= array("value" => null,  "inherit" => false, "html" => false);
-		$this->property["indexselected"] = array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["name"] 	   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["value"] 	   		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["minlength"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["blur"] 			= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["size"] 	   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["tabindex"]   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["onfocus"]    		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["onselect"]   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["onblur"] 	   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["onchange"]   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["id"] 		   		= array("value" => $id,   "inherit" => false, "html" => true);
+		$this->property["dsitemkeylist"]	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["nav"] 		   		= array("value" => false, "inherit" => false, "html" => false);
+		$this->property["memory"] 	   		= array("value" => false, "inherit" => false, "html" => false);
+		$this->property["multiple"]   		= array("value" => null,  "inherit" => false, "html" => true);
+		$this->property["dsitemlist"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["dsobjlist"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["directory"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["allselect"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["valuezero"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["label"] 	   		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["labelalign"]		= array("value" => "left",  "inherit" => false, "html" => false);
+		$this->property["labelwidth"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["labelstyle"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["outlabel"]			= array("value" => "false", "inherit" => false, "html" => false);
+		$this->property["optionvalue"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["optiontext"]  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["optionselected"] 	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["optionimage"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["width"]	  		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["height"]	  		= array("value" => null,  "inherit" => false, "html" => false);
+ 		$this->property["java"]  			= array("value" => array("dsselect.js", "format.js"), "inherit" => false, "html" => false);
+		$this->property["dsobj"]  			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["objtype"]  		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsitem"]  			= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["disabled"] 		= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["format"] 			= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["indexselected"]	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["dsitemselected"] 	= array("value" => null,  "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -219,6 +220,10 @@ class ClsObj_dsselect extends ClsObject {
 		$id = $this->property["id"]["value"];
 		switch($name)
 		{
+			case "dsitemselected":
+				$this->propertyJS["dsItemSelected"] = $this->property["dsitemselected"]["value"];
+			break;
+				
 			case "dsitemkeylist":
 				$this->propertyJS["dsItemKeyList"] = $this->property["dsitemkeylist"]["value"];
 			break;
