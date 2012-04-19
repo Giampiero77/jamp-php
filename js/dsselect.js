@@ -51,7 +51,8 @@ clsDsSelect.prototype =
 		}
 		if (dsObj.DSpos < 0 && dsselectObj.p.dsItemSelected != undefined)
 		{
-			dsselectObj.value = dsselectObj.options[dsselectObj.p.indexselected].value;
+			this.setDsValue(dsselectObj,dsselectObj.options[dsselectObj.p.indexselected].value);
+			return;
 		}
 		if (dsObj.DSresult == undefined) return;
 		if (dsObj.DSresult.length == 0) return;
