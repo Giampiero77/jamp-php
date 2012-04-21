@@ -6,7 +6,15 @@
 		<div id="divTop" width="autosize" height="autosize">
 			<div id="divSX" width="240px" height="autosize" style="float:left;">
 				<img id="img" src="images/logo.png" />
-				<tree id="tree1" dsobj="ds1" refresh="always" width="autosize" height="autosize" dragable="true" />
+				<tree id="tree1" dsobj="ds1" refresh="always" width="autosize" height="autosize" dragable="true" oncontextmenu="true">
+				    <contextmenu>
+        				<menu menuname="Aggiungi XXXX," menufunction="Ins1" menufilter="^field$"/>
+        				<menu menuname="Aggiungi XXXX,\n" menufunction="Ins2" menufilter="^field$"/>
+        				<menu menuname="Aggiungi XXXX" menufunction="Ins3" menufilter="^field$"/>
+        				<menu menuname="Aggiungi XXXX\n" menufunction="Ins4" menufilter="^field$"/>
+        				<menu menuname="Aggiungi XXXX" menufunction="Ins3" menufilter="^table$"/>
+				    </contextmenu>
+				</tree>
 			</div>
 			<splitbar id="split1" type="vertical" />
 			<div id="divDX" height="autosize" width="autosize" style="float:left;">

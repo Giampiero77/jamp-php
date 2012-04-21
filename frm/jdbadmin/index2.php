@@ -82,6 +82,32 @@ function html_load()
 		SYSTEMEVENT.addBeforeCustomFunction('TREE', 'onStartDragNode', 'startDrag');
 		SYSTEMEVENT.addBeforeCustomFunction('TREE', 'onDropNode', 'DropNode');
 		$('status').innerHTML = '<font color=\"#127397\">JdbAdmin ver.".$version."<\/font>' 
+		
+		function Ins(obj,pre,post)
+		{
+			if(iframe1 != undefined)
+			{
+				var txtCODE = (iframe1.$('textSQL_code') == undefined) ? iframe1.$('textarea_code') : iframe1.$('textSQL_code'); 
+				if (txtCODE != undefined)
+				{ 
+					if (obj.nodetype=='table')
+					{
+						txtCODE.editor.insertCode(pre+'`'+obj.name+'`'+post);
+					}
+					else
+					{	
+						var code = obj.parentkey.split(' ');
+						txtCODE.editor.insertCode(pre+'`'+code[1]+'`.`'+obj.name+'`'+post);
+					}
+					iframe1.DS.dschange(iframe1.$('ds1'));
+				}
+			}
+		}
+
+		function Ins1(obj) Ins(obj, '', ',');
+		function Ins2(obj) Ins(obj, '\\t', ',\\n');
+		function Ins3(obj) Ins(obj, '', '');
+		function Ins4(obj) Ins(obj, '\\t', '\\n');
 	";
 	$event->setCodeJs($code);
 }
