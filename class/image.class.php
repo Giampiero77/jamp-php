@@ -95,14 +95,34 @@ class ClsImage
 
     /**
     * resize the value in the original formatting
+    * @param string $color path of image
+    * @return boolean Function result
+    */   	
+     public function ColorDec($color)
+	{
+		if (strpos($color, ",")===false) 
+		{
+		    $color = str_replace("#", "", $color);
+		    $rgb[0] = hexdec(substr($color, 0, 2));
+		    $rgb[1] = hexdec(substr($color, 2, 2));
+		    $rgb[2] = hexdec(substr($color, 4, 2));  
+		}
+		else $rgb = explode(",", $color);
+		return $rgb;
+	}
+		
+    /**
+    * resize the value in the original formatting
     * @param string $old_image path of image
     * @param string $new_image path of new image
     * @param string $width new image width
     * @param string $height new image height
+    * @param string $position indicates the portion of the picture to crop
+    * @param string $backgroundColor Background color
     * @return boolean Function result
     */   
 
-    public function cutImage($old_image, $new_image, $width, $height, $position = 0) 
+    public function cutImage($old_image, $new_image, $width, $height, $position = 0, $backgroundColor = false) 
     {
 		$width = intVal($width);
 		$height = intVal($height);
@@ -131,8 +151,14 @@ class ClsImage
 		  if ($height == 0) 		$height = $old_height;
 		  else if ($width == 0) $width = $old_width;
 
-	    $new_res = imagecreatetruecolor($width, $height);
-// 		 imagecopy($dst_im,$src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h)
+	    	$new_res = imagecreatetruecolor($width, $height);
+			if ($backgroundColor)
+			{
+			    $rgb = $this->ColorDec($backgroundColor);
+			    $background = imagecolorallocate($new_res, $rgb[0], $rgb[1], $rgb[2]);
+			    imagefill($new_res, 0, 0, $background);
+			}
+			// 		 imagecopy($dst_im,$src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h)
 		  $left = $top = 0; // left top
 		  $right = ($old_width-$width);
 		  $bottom = ($old_height-$height);

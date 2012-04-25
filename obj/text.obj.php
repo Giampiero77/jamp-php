@@ -66,7 +66,8 @@ class ClsObj_text extends ClsObject {
 		$this->property["forcename"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dimension"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["createdir"]	= array("value" => null, "inherit" => false, "html" => false);
-
+		$this->property["backgroundcolor"] = array("value" => null, "inherit" => false, "html" => false);		
+		
 		$this->property["width"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["height"]	= array("value" => null, "inherit" => false, "html" => false);
 
@@ -147,6 +148,7 @@ class ClsObj_text extends ClsObject {
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"forcename\" value=\"".$this->property["forcename"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"rewrite\" value=\"".$this->property["rewrite"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"createdir\" value=\"".$this->property["createdir"]["value"]."\">";
+			$code .= "\n$tab\t<input type=\"hidden\" name=\"backgroundcolor\" value=\"".$this->property["backgroundcolor"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"text\" ".$this->getProperty("html", true, false)."$disabled>";
 			$code .= "\n$tab\t<input style=\"width: 50px;position: relative;filter:alpha(opacity: 0);opacity: 0;z-index: 10\" type=\"file\" id=\"".$id."_file\" name=\"$id\""." size=\"1\" onchange=\"TEXT.postObj('$id');\" $disabled>";
 			$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];

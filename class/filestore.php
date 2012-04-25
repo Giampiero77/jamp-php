@@ -127,7 +127,11 @@ if(NOUPLOAD == false)
 								else $filename = substr($filename, 0, $pos)."_".strtolower($picture).substr($filename, $pos);
 						  }
 						  if ($typedim == "resize") $image->resize($rif_filename, $filename, $width, $height);
-						  else if ($typedim == "cut") $image->cutImage($rif_filename, $filename, $width, $height, $position);  
+					 	  else if ($typedim == "cut") 
+						  {
+							 $backgroundcolor = empty($_REQUEST["backgroundcolor"]) ? false : $_REQUEST["backgroundcolor"];
+							 $image->cutImage($rif_filename, $filename, $width, $height, $position, $backgroundcolor);
+						  }						    
 						  if ($i>0 && $y>0) unlink($rif_filename);
 						  $rif_filename = $filename;
 					}

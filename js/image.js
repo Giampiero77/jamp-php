@@ -57,6 +57,10 @@ function clsImage()
 	this.createdir.name = "createdir";
 	this.createdir.type = "hidden";
 
+	this.backgroundcolor = document.createElement('input');
+	this.backgroundcolor.name = "backgroundcolor";
+	this.backgroundcolor.type = "hidden";
+	
 	this.form.appendChild(this.directory);
 	this.form.appendChild(this.extension);
 	this.form.appendChild(this.classname);
@@ -64,6 +68,7 @@ function clsImage()
 	this.form.appendChild(this.dimension);
 	this.form.appendChild(this.forcename);
 	this.form.appendChild(this.createdir);
+	this.form.appendChild(this.backgroundcolor);	
 	document.body.appendChild(this.form);		
 	document.body.appendChild(this.iframe);
 }
@@ -123,6 +128,7 @@ clsImage.prototype =
 		IMAGE.setSelect(id, IMAGE.dimension, $(id).p.dimension);
 		if (IMAGE.objImage.p.forcename) IMAGE.forcename.value 	= (IMAGE.objImage.p.forcename == '$$TIMESTAMP$$') ? new Date().getTime() : IMAGE.objImage.p.forcename;
 		IMAGE.createdir.value  	= (IMAGE.objImage.p.createdir == 'true') ? 'true' : 'false';
+		IMAGE.backgroundcolor.value   	= IMAGE.objImage.p.backgroundcolor;		
 		IMAGE.form.action 	= IMAGE.objImage.p.action;	
 		IMAGE.form.appendChild(IMAGE.file);
 		IMAGE.form.submit();

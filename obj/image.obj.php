@@ -58,6 +58,7 @@ class ClsObj_image extends ClsObject {
 		$this->property["dimension"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["forcename"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["createdir"]	= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["backgroundcolor"] = array("value" => null, "inherit" => false, "html" => false);		
 	}
 
 	/**
@@ -154,6 +155,7 @@ class ClsObj_image extends ClsObject {
 			case "dimension":
 			case "forcename":
 			case "createdir":
+			case "backgroundcolor":
 				$this->propertyJS[$name] = $this->property[$name]["value"];
 			break;	
 		}
