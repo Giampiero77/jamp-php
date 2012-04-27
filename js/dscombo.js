@@ -15,9 +15,16 @@ function clsDscombo()
 
 clsDscombo.prototype =
 {
+
 	getDsValue : function(id)
 	{
 		var dscomboObj = $(id);
+		if (dscomboObj.p.dsItemLabel==undefined) this.getDsValueDB(dscomboObj);
+		else this.getDsValueLabel(dscomboObj);
+	},
+	
+	getDsValueDB : function(dscomboObj)
+	{
 		var dsObjRow = $(dscomboObj.p.dsObj);
 		if (this.lastds[dscomboObj.p.dsObj] == undefined) this.lastds[dscomboObj.p.dsObj] = Array();
 		if (this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] == undefined) this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] = Array("", "");
@@ -70,9 +77,8 @@ clsDscombo.prototype =
 		if (dscomboObj.p.outlabel != null) dscomboObj.innerHTML = dscomboObj.value;
 	},
 
-	getDsValueLabel : function(id)
+	getDsValueLabel : function(dscomboObj)
 	{
-		var dscomboObj = $(id);
 		var dsObjRow = $(dscomboObj.p.dsObj);
 		dscomboObj.value = "";
 		dscomboObj.readOnly = (dsObjRow.DSpos != 0) ? false : true;

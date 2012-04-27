@@ -127,16 +127,8 @@ class ClsObj_dscombo extends ClsObject {
 		if (!empty($this->property["dsobj"]["value"]))
 		{
 			$dsobj = $this->property["dsobj"]["value"];
-			if (empty($this->property["dsitemlabel"]["value"]))
-			{
-				$this->addEvent($id, $dsobj."Move", "DSCOMBO.getDsValue(\"$id\");");
-				$this->addEvent($id, $dsobj."Refresh", "DSCOMBO.getDsValue(\"$id\");");
-			}
-			else
-			{
-				$this->addEvent($id, $dsobj."Move", "DSCOMBO.getDsValueLabel(\"$id\");");
-				$this->addEvent($id, $dsobj."Refresh", "DSCOMBO.getDsValueLabel(\"$id\");");
-			}
+			$this->addEvent($id, $dsobj."Move", "DSCOMBO.getDsValue(\"$id\");");
+			$this->addEvent($id, $dsobj."Refresh", "DSCOMBO.getDsValue(\"$id\");");
 		}
 		if (!empty($this->property["minlength"]["value"]) || !empty($this->property["blur"]["value"]))
 		{
