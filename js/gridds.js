@@ -282,13 +282,22 @@ clsGridds.prototype =
  		if (obj.DS.DSpos > 0 && obj.bodyObj.rows[obj.DS.DSpos]!=undefined)
 		{
 			obj.bodyObj.rows[obj.DS.DSpos].className = obj.className + "_row_pos";
-			if (obj.p.autoscroll == true)
-			{
-				var topscroll = -(obj.bodyObj.clientHeight - obj.bodyObj.rows[obj.DS.DSpos].offsetTop + obj.bodyObj.offsetTop - obj.bodyObj.rows[obj.DS.DSpos].clientHeight );
-				obj.bodyObj.scrollTop = (topscroll < 0) ? 0 : topscroll;
-			}
+			this.AutoScroll(obj);
 		}
-		if (obj.DS.DSpos < 0 && obj.p.insertNew == true) this.addROW(obj, obj.DS.DSpos);
+		if (obj.DS.DSpos < 0 && obj.p.insertNew == true)
+		{
+			this.addROW(obj, obj.DS.DSpos);
+			this.AutoScroll(obj);
+		}
+	},
+	
+	AutoScroll : function(obj)
+	{
+		if (obj.p.autoscroll == undefined)
+		{
+			var topscroll = -(obj.bodyObj.clientHeight - obj.bodyObj.rows[obj.DS.DSpos].offsetTop + obj.bodyObj.offsetTop - obj.bodyObj.rows[obj.DS.DSpos].clientHeight );
+			obj.bodyObj.scrollTop = (topscroll < 0) ? 0 : topscroll;
+		}		
 	},
 
 	unselected : function(obj)

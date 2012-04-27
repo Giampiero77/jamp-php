@@ -41,7 +41,7 @@ class ClsObj_gridds extends ClsObject {
 		$this->property["pdffont"]	  	= array("value" => "Arial", "inherit" => false, "html" => false);
 		$this->property["pdffontsize"]	= array("value" => "8", "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["autoscroll"]	= array("value" => "false", "inherit" => false, "html" => false);
+ 		$this->property["autoscroll"]	= array("value" => "true", "inherit" => false, "html" => false);
 		$this->multiObj = true;
 	}
 
@@ -286,7 +286,7 @@ class ClsObj_gridds extends ClsObject {
 		switch($name)
 		{
 			case "autoscroll":
-				if ($this->property["autoscroll"]["value"] == "true")	$this->propertyJS["autoscroll"] = true;
+				if ($this->property["autoscroll"]["value"] == "false")	$this->propertyJS["autoscroll"] = false;
 			break;
 
 			case "height":
