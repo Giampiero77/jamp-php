@@ -1,0 +1,72 @@
+div.editorpdf 
+{
+	overflow:auto;
+	background-color: #BBBCB6;
+	text-align: center;
+}
+  
+div.editorpdf div.sheet 
+{
+  	background-color: white;
+  	-moz-box-shadow: 0 6px 22px #999999;	
+  	box-shadow: 0 6px 22px #999999;
+	border: 1px solid gray;
+	box-shadow: 0 6px 22px #000000;
+	margin-right: 10mm;
+	margin-top: 10mm;
+	margin-bottom: 10mm;
+	position: relative;
+	padding-left: 10mm;
+	padding-top: 10mm;
+}
+
+div.editorpdf div.setting 
+{
+  	background-color: white;
+  	-moz-box-shadow: 0 6px 22px #999999;	
+  	box-shadow: 0 6px 22px #999999;
+	border: 1px solid gray;
+	box-shadow: 0 6px 22px #000000;
+	position: absolute;
+	padding-left: 2mm;
+	padding-top: 2mm;
+	width: 230px;
+	z-index: 901;
+	display: none;
+	text-align: left;
+}
+
+div.editorpdf div.setting H1 
+{
+	font-size:11pt;
+}
+
+div.editorpdf div.sheet div.margin
+{
+	border: 1px dotted blue;
+}
+
+div.editorpdf div.sheet div.margin div.multicell
+{
+	position: absolute;
+	overflow: hidden;
+	vertical-align:middle;
+}
+
+div.editorpdf div.rulerX
+{
+	border-top: 1px dotted red;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	z-index: 900;
+	display: none;
+}
+
+div.editorpdf div.rulerY
+{
+	border-left: 1px dotted red;
+	position: absolute;
+	z-index: 900;
+	display: none;
+}

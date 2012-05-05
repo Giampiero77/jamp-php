@@ -15,6 +15,8 @@ class ClsPDF extends FPDF {
 	private $breakpage;
 	private $storerow;
 	public $storerow_enable;
+	public $print_header;
+	public $print_footer;
 	private $storerow_height;
 
 	public function __construct($orientation,$unit,$pageformat)
@@ -31,6 +33,8 @@ class ClsPDF extends FPDF {
 		$this->maxsize = 0;
 		$this->headrow["data"] = null;
 		$this->headrow["row"] = 0;
+		$this->print_footer = true;
+		$this->print_footer = true;
 	}
 
 	/**
@@ -419,6 +423,7 @@ class ClsPDF extends FPDF {
 	*/
 	function Header()
 	{
+		if ($this->print_header == false) return;
 		//Custom Header
 		global $xml;
 		$this->SetFont('Arial','I',8);
@@ -439,6 +444,7 @@ class ClsPDF extends FPDF {
 	*/
 	function Footer()
 	{
+		if ($this->print_footer == false) return;
 		//Custom Footer
 		global $xml;
 		$footer = @$xml->getObjById("footer");
