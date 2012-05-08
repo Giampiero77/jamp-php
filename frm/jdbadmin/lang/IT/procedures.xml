@@ -3,12 +3,12 @@
 <jamp>
 	<page id="page">
 		<tab1 label="PROCEDURE" />
-		<gridds1>
+		<gridds id="gridds1">
 			<coloumn>
-				<col itemlabel="Nome" />
-				<col itemlabel=" Utente: " />
-				<col itemlabel=" Host: " />
+				<text itemlabel="Nome" />
+				<text itemlabel=" Utente: " />
+				<text itemlabel=" Host: " />
 			</coloumn>
-		</gridds1>
+		</gridds>
 	</page>
 </jamp>

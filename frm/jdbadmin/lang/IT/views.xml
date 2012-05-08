@@ -2,13 +2,13 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
-		<tab1 label="VISTE" />
-		<gridds1>
+		<tab id="tab1" label="VISTE" />
+		<gridds id="gridds1">
 			<coloumn>
-				<col itemlabel="Nome" />
-				<col itemlabel="Utente" />
-				<col itemlabel="Host" />
+				<text itemlabel="Nome" />
+				<text itemlabel="Utente" />
+				<text itemlabel="Host" />
 			</coloumn>
-		</gridds1>
+		</gridds>
 	</page>
 </jamp>

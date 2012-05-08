@@ -8,7 +8,7 @@
 	define("COMPRESSXML", false);	// Compress data xml output
 	define("COMPRESSJS", false);	// Compress javascript output
 	define("NOCACHEPHP", true);	// true - No cache php, false - Browser/Proxy setting
-	define("NOCACHEJS", "17012012");	// time(): No cache javascript, <constant>(es. 0505023232), false: Browser/Proxy setting
+	define("NOCACHEJS", "08052012");	// time(): No cache javascript, <constant>(es. 0505023232), false: Browser/Proxy setting
 	define("NOCACHECSS", "17012012");	// time(): No chache CSS, <constant>(es. 0505023232), false: Browser/Proxy setting
 	define("NOUPLOAD", false);			// true - disable UPLOAD, false enable upload
 	define("GHOSTDATA", true);			// true - display action ghost message, false - no display action ghost message

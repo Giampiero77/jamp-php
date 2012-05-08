@@ -53,26 +53,27 @@ function html_load()
 
 		function tree1_click()
 		{
+			var timestamp = new Date().getTime();
 			var divTree = $('tree1');
 			var node = divTree.selectedNode;
-			if (node.nodetype=='base') $('iframe1').src = 'server.php';
+			if (node.nodetype=='base') $('iframe1').src = 'server.php?'+timestamp;
 			else if (node.nodetype=='database') 
 			{
-				var string = '?database='+encodeURIComponent(node.textNode.innerHTML);
+				var string = '?'+timestamp+'&database='+encodeURIComponent(node.textNode.innerHTML);
 				$('iframe1').src = node.nodetype+'.php'+string;
 				$('status').innerHTML = '<font color=\"#127397\">JdbAdmin ver.".$version."<\/font> - Database: '+node.textNode.innerHTML;
 			}
 			else if (node.nodetype=='tables' || node.nodetype=='views' || node.nodetype=='procedures'|| node.nodetype=='functions') 
 			{
 				var database = node.parentNode.parentNode.textNode.innerHTML;
-				var string = '?database='+encodeURIComponent(node.parentNode.parentNode.textNode.innerHTML);
+				var string = '?'+timestamp+'&database='+encodeURIComponent(node.parentNode.parentNode.textNode.innerHTML);
 				$('iframe1').src = node.nodetype+'.php'+string;
 				$('status').innerHTML = '<font color=\"#127397\">JdbAdmin ver.".$version."<\/font> - Database: '+node.parentNode.parentNode.textNode.innerHTML+' -> '+node.nodetype;
             }
             else if (node.nodetype=='table' || node.nodetype=='view' || node.nodetype=='procedure'|| node.nodetype=='function') 
             {
 				var database = node.parentNode.parentNode.parentNode.parentNode.textNode.innerHTML;
-				var string = '?database='+encodeURIComponent(node.parentNode.parentNode.parentNode.parentNode.textNode.innerHTML);
+				var string = '?'+timestamp+'&database='+encodeURIComponent(node.parentNode.parentNode.parentNode.parentNode.textNode.innerHTML);
 				string += '&node='+encodeURIComponent(node.textNode.innerHTML);
 				$('iframe1').src = node.nodetype+'.php'+string;
 				$('status').innerHTML = '<font color=\"#127397\">JdbAdmin ver.".$version."<\/font> - Database: '+database+' -> '+node.nodetype+': '+node.textNode.innerHTML;

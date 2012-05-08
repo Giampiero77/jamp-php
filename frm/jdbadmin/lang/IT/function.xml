@@ -2,8 +2,8 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page">
-		<tab1 label="FUNZIONI" />
-		<label1 label=" Database: " />
-		<text1 label=" - Utente: " />
+		<tab id="tab1" label="FUNZIONI" />
+		<label id="label1" label=" Database: " />
+		<text id="text1" label=" - Utente: " />
 	</page>
 </jamp>

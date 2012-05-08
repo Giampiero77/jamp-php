@@ -2,15 +2,15 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
-		<tab1 label="VISTA" />
-		<text1 label="Utente" />
-		<tab2 label="DATI" />
-		<dsnav2>
+		<tab id="tab1" label="VISTA" />
+		<text id="text1" label="Utente" />
+		<tab id="tab2" label="DATI" />
+		<dsnav id="dsnav2">
 			<button>
 				<bt title="Svuota Vista" />
 			</button>
-		</dsnav2>
-		<gridds id="gridds2" >
+		</dsnav>
+		<gridds id="gridds2">
 			<coloumn>
 				<label itemlabel="ID"/>
 				<label itemlabel="TIPO SELECT"/>

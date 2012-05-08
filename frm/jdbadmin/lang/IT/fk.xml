@@ -4,7 +4,7 @@
 	<page id="page">
 		<gridds1>
 			<coloumn>
-				<col itemlabel="Chiavi Esterne" />
+				<label itemlabel="Chiavi Esterne" />
 			</coloumn>
 		</gridds1>
 		<database label="Database referenze:\n" />
@@ -14,7 +14,7 @@
 		<button value="Applica" />
 		<gridds2>
 			<coloumn>
-				<col itemlabel="Chiavi referenze" colwidth="110px" />
+				<label itemlabel="Chiavi referenze" colwidth="110px" />
 			</coloumn>
 		</gridds2>
 	</page>

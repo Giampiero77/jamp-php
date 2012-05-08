@@ -2,64 +2,64 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page">
-		<tab1 label="STRUTTURA">
-			<dsnav1>
+		<tab id="tab1" label="STRUTTURA">
+			<dsnav id="dsnav1">
 				<button>
 					<bt title="Visualizza/Nascondi SQL" />
 				</button>
-			</dsnav1>
-		</tab1>
-		<tab21 label="INDICI" />
-		<dsnav2>
+			</dsnav>
+		</tab>
+		<tab id="tab21" label="INDICI" />
+		<dsnav	id="dsnav2">
 			<button>
 				<bt title="Primaria" />
 				<bt title="Univoca" />
 				<bt title="Indice" />
 				<bt title="Testo Completo" />
 			</button>
-		</dsnav2>
-		<tab22 label="CHIAVI ESTERNE" />
-		<dsnav23>
+		</dsnav>
+		<tab id="tab22" label="CHIAVI ESTERNE" />
+		<dsnav id="dsnav23">
 			<button>
 				<bt title="chiave esterna" />
 			</button>
-		</dsnav23>
-		<tab2 label="DATI" />
-		<dsnav3>
+		</dsnav>
+		<tab id="tab2" label="DATI" />
+		<dsnav id="dsnav3">
 			<button>
 				<bt title="Svuota la Tabella" />
 				<bt title="Visualizza/Nascondi SQL" />
 			</button>
-		</dsnav3>
-		<gridds1>
+		</dsnav>
+		<gridds id="gridds1">
 			<coloumn>
-				<col itemlabel="Campo" />
-				<col itemlabel="Tipo" />
-				<col itemlabel="Lunghezza/Set" />
-				<col itemlabel="Nullo" />
-				<col itemlabel="Extra" />
-				<col itemlabel="Predefinito" />
-				<col itemlabel="Commento" />
-				<col itemlabel="Collation" />
+				<text itemlabel="Campo" />
+				<dsselect itemlabel="Tipo" />
+				<text itemlabel="Lunghezza/Set" />
+				<dsselect itemlabel="Nullo" />
+				<dsselect itemlabel="Extra" />
+				<text itemlabel="Predefinito" />
+				<text itemlabel="Commento" />
+				<dsselect itemlabel="Collation" />
 			</coloumn>
-		</gridds1>
-		<gridds21>
+		</gridds>
+		<gridds id="gridds21">
 			<coloumn>
-				<col itemlabel="Nome Chiave" />
-				<col itemlabel="Non univoca" />
-				<col itemlabel="Colonna" />
+				<label itemlabel="Nome Chiave" />
+				<label itemlabel="Non univoca" />
+				<label itemlabel="Colonna" />
 			</coloumn>
-		</gridds21>
-		<gridds23>
+		</gridds>
+		<gridds id="gridds23">
 			<coloumn>
-				<col itemlabel="VINCOLO" colwidth="100px" />
-				<col itemlabel="CHIAVE ESTERNA" colwidth="150px" />
-				<col itemlabel="DB REFERENZE" colwidth="100px" />
-				<col itemlabel="TABELLA REFERENZE" colwidth="150px" />
-				<col itemlabel="CHIAVE REFERENZE" colwidth="150px" />
-				<col itemlabel="IN ELIMINAZIONE" colwidth="125px" />
-				<col itemlabel="IN MODIFICA" colwidth="125px" />
+				<label itemlabel="VINCOLO" colwidth="100px" />
+				<label itemlabel="CHIAVE ESTERNA" colwidth="150px" />
+				<label itemlabel="DB REFERENZE" colwidth="100px" />
+				<label itemlabel="TABELLA REFERENZE" colwidth="150px" />
+				<label itemlabel="CHIAVE REFERENZE" colwidth="150px" />
+				<label itemlabel="IN ELIMINAZIONE" colwidth="125px" />
+				<label itemlabel="IN MODIFICA" colwidth="125px" />
 			</coloumn>
-		</gridds23>
+		</gridds>
 	</page>
 </jamp>

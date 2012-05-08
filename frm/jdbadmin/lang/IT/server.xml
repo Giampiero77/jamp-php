@@ -2,13 +2,13 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page">
-		<importtxt label=" Importa :" />
-		<tab2 label="UTENTI" />
-		<dsnav2>
+		<text id="importtxt" label=" Importa :" />
+		<tab id="tab2" label="UTENTI" />
+		<dsnav id="dsnav">
 			<button>
 				<bt title="Ricarica i Privilegi" />
 			</button>
-		</dsnav2>
+		</dsnav>
 		<gridds id="gridds2" dsobj="ds2" width="autosize" height="autosize">
 			<header>
 				<head headlabel="Utenti" />
@@ -22,40 +22,40 @@
 				<head headlabel="Limitazioni" />
 			</header>
 			<coloumn>
-				<col itemlabel="Utente" />
-				<col itemlabel="Host" />
-				<col itemlabel="Password" />
-				<col itemlabel="Lettura" />
-				<col itemlabel="Inserimento" />
-				<col itemlabel="Modifica" />
-				<col itemlabel="Eliminazione" />
-				<col itemlabel="File" />
-				<col itemlabel="Creazione" />
-				<col itemlabel="Modifica" />
-				<col itemlabel="Indice" />
-				<col itemlabel="Svuota" />
-				<col itemlabel="Esegui" />
-				<col itemlabel="Tabelle Temp." />
-				<col itemlabel="Creazione" />
-				<col itemlabel="Visualizzazione" />
-				<col itemlabel="Creazione" />
-				<col itemlabel="Modifica" />
-				<col itemlabel="Grant" />
-				<col itemlabel="Super" />
-				<col itemlabel="Process" />
-				<col itemlabel="Reload" />
-				<col itemlabel="Shutdown" />
-				<col itemlabel="Show DB" />
-				<col itemlabel="Lock" />
-				<col itemlabel="References" />
-				<col itemlabel="Client" />
-				<col itemlabel="Server" />
-				<col itemlabel="Create" />
-				<col itemlabel="SSL" />
-				<col itemlabel="Richieste" />
-				<col itemlabel="Modifiche" />
-				<col itemlabel="Connessioni" />
-				<col itemlabel="Utenti Connessi" />
+				<text itemlabel="Utente" />
+				<text itemlabel="Host" />
+				<text itemlabel="Password" />
+				<checkbox itemlabel="Lettura" />
+				<checkbox itemlabel="Inserimento" />
+				<checkbox itemlabel="Modifica" />
+				<checkbox itemlabel="Eliminazione" />
+				<checkbox itemlabel="File" />
+				<checkbox itemlabel="Creazione" />
+				<checkbox itemlabel="Modifica" />
+				<checkbox itemlabel="Indice" />
+				<checkbox itemlabel="Svuota" />
+				<checkbox itemlabel="Esegui" />
+				<checkbox itemlabel="Tabelle Temp." />
+				<checkbox itemlabel="Creazione" />
+				<checkbox itemlabel="Visualizzazione" />
+				<checkbox itemlabel="Creazione" />
+				<checkbox itemlabel="Modifica" />
+				<checkbox itemlabel="Grant" />
+				<checkbox itemlabel="Super" />
+				<checkbox itemlabel="Process" />
+				<checkbox itemlabel="Reload" />
+				<checkbox itemlabel="Shutdown" />
+				<checkbox itemlabel="Show DB" />
+				<checkbox itemlabel="Lock" />
+				<checkbox itemlabel="References" />
+				<checkbox itemlabel="Client" />
+				<checkbox itemlabel="Server" />
+				<checkbox itemlabel="Create" />
+				<checkbox itemlabel="SSL" />
+				<text itemlabel="Richieste" />
+				<text itemlabel="Modifiche" />
+				<text itemlabel="Connessioni" />
+				<text itemlabel="Utenti Connessi" />
 			</coloumn>
 		</gridds>
 	</page>

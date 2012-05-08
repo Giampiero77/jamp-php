@@ -2,7 +2,7 @@
 <!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
 <jamp>
 	<page id="page">
-		<tab1 label="PROCEDURE" />
-		<text1 label=" - Utente: " />
+		<tab id="tab1" label="PROCEDURE" />
+		<text id="text1" label=" - Utente: " />
 	</page>
 </jamp>
