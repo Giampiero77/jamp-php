@@ -56,6 +56,7 @@ clsEditorPdf.prototype =
 		this.centerSheet(obj);
 		this.writeRuler(obj);
 		this.loadData(obj);
+		obj.init = true;
 	},
 
 	loadData : function(obj)
@@ -336,7 +337,7 @@ clsEditorPdf.prototype =
 	refreshObj : function(id)
 	{
 		var obj = $(id);
-		this.makepage(obj);
+		if (obj.init != true) this.makepage(obj);
 	}
 }
 
