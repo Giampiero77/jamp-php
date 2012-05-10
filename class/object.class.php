@@ -109,13 +109,16 @@ abstract class ClsObject
 						$value = str_replace($var, @date("H:m:s"), $value); 
 					break;
 					case '$$LOGIN-USER$$':
-						if (isset($_SESSION["auth"]["user"])) $value = str_replace($var, $_SESSION["auth"]["user"], $value); 
+						if(isset($_POST[$var])) $value = str_replace($var, $_POST[$var], $value);
+						else if (isset($_SESSION["auth"]["user"])) $value = str_replace($var, $_SESSION["auth"]["user"], $value);
 					break;
 					case '$$LOGIN-DATA$$':
-						if (isset($_SESSION["auth"]["data"])) $value = str_replace($var, $_SESSION["auth"]["data"], $value); 
+						if(isset($_POST[$var])) $value = str_replace($var, $_POST[$var], $value);
+						else if (isset($_SESSION["auth"]["data"])) $value = str_replace($var, $_SESSION["auth"]["data"], $value);
 					break;
 					case '$$LOGIN-CN$$':
-						if (isset($_SESSION["auth"]["cn"])) $value = str_replace($var, $_SESSION["auth"]["cn"], $value); 
+						if(isset($_POST[$var])) $value = str_replace($var, $_POST[$var], $value);
+						else if (isset($_SESSION["auth"]["cn"])) $value = str_replace($var, $_SESSION["auth"]["cn"], $value);
 					break;
 					default:
 						if(isset($_POST[$var])) $value = str_replace($var, $_POST[$var], $value);
