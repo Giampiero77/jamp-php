@@ -240,11 +240,6 @@ clsText.prototype =
 
 	lostFocus : function(e, obj)
 	{
-		if (!e) e = window.event;
-		var target = e.explicitOriginalTarget||document.activeElement;
-	 	var newObj = (target.nodeType == 3 ? target.parentNode : target);
-		while(newObj != null && newObj.tagName != "TABLE") newObj = newObj.parentNode;
-		if (newObj == null || (newObj.id != obj.id + "_result_table")) this.hideValues(obj);
 		if (obj.p.savesearch == true)
 		{
 			var dsObj = $(obj.p.dsObjList);
