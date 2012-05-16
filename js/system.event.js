@@ -104,7 +104,7 @@ clsSystemEvent.prototype =
 		SYSTEMEVENT.show(errortxt);
 	},
 
-	showHTML : function(title, html) 
+	showHTML : function(title, html, button) 
 	{
  		var div = '<h2 class="dialog_title"><span>'+title+'</span></h2>';
   		div += '<div id="pageMessageContent" class="dialog_content">';
@@ -115,6 +115,7 @@ clsSystemEvent.prototype =
  		div += '	</div>';
  		div += '</div>'; 
 		div += '<div class="dialog_buttons">';
+		div += button;
 	  	div += '	<input type="button" onclick="SYSTEMEVENT.Close();" value="Chiudi">';
 		div += '</div>';
 		SYSTEMEVENT.show(div);
