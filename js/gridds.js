@@ -317,7 +317,10 @@ clsGridds.prototype =
 		if (event.ctrlKey == false && event.shiftKey == false)
 		{
 			if (obj.DS.DSmultipos.length > 0) this.unselected(obj);
+			var pre = obj.p.autoscroll;
+			obj.p.autoscroll=false;
 			DS.moveRow(obj.p.dsObj, row);
+			obj.p.autoscroll=pre;
 		}
 		else this.selectedROW(obj, row, event.shiftKey, event.ctrlKey);
 	},
