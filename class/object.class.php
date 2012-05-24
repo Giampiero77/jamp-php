@@ -401,6 +401,10 @@ abstract class ClsObject
 				$this->codeTXT();
 			break;
 
+			case "php":
+				$this->codePHP();
+			break;
+					
 			case "pdf":
 				$xml_ds = new ClsXML($xml->filexml, $xml->typexml);
 				$xml_ds->getElementsByTagName('ds');
@@ -671,6 +675,14 @@ abstract class ClsObject
 	public abstract function codeTXT();
 
 	/**
+	 * SCRIPT generates code to create the object
+	 */
+	public function codePHP()
+	{
+		
+	}
+	
+	/**
 	* Generate the code to generate the pdf object
 	*/
 	public abstract function codePDF($pdf);
@@ -701,6 +713,7 @@ abstract class ClsObject
 	*/
 	public function addEventListener($id, $event, $function, $run = false, $param = null)
 	{
+		if (!isset($_SERVER["HTTP_USER_AGENT"])) return;
 		$out = "$(\"$id\")";
 
 		if($id == "window" || $id == "document") $out = $id;
