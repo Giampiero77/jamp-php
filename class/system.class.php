@@ -36,7 +36,7 @@ class ClsSystem
 		$this->dir_real_web  = str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF'])));
 		$this->dir_real_jamp = realpath(dirname(__FILE__).'/../');
 		$this->dir_web_jamp  = str_replace('\\','/', substr($this->dir_real_jamp, strlen($this->dir_real_web)))."/";
-		$this->version	= "2.2.0_beta";	
+		$this->version	= "3.0.0_beta";	
 		$this->dir_class	= "class/";	
 		$this->dir_conf	= "conf/";
 		$this->dir_develop = "develop/";
