@@ -150,6 +150,48 @@ class imapDs extends iDS
 		}
  	}
 
+ 	public function dsGetMSG($num)
+ 	{
+ 		return imap_body($this->property["conn"], $num); 
+ 	}
+ 	
+ 	public function dsGetAttachmentName($body)
+ 	{
+ 		preg_match("/\Content-Disposition: attachment; filename=\"([^]]*)\"/", $body, $match );
+ 		if (count($match)>0) unset($match[0]);
+ 		return $match;	
+ 	}
+
+ 	public function dsSaveAttachment($body, $path)
+ 	{
+ 		preg_match("/\Content-Disposition: attachment; filename=\"([^]]*)\"([^]]*)\n--/", $body, $files);
+ 		if (count($files)>0) unset($files[0]);
+ 		else return "";
+ 	 	if (!isset($files[2])) return "";
+ 		$files[2]=trim($files[2]);
+ 		if (!file_exists($path)) mkdir($path,0700,true);
+ 		$type = 0;
+ 		$name = "";
+ 		$filename = array();
+ 		foreach($files as $file)
+ 		{
+ 			if ($type==0)
+ 			{
+ 				$name = $file;
+ 				$type++;
+ 			} 
+ 			else 
+ 			{
+ 				$f = $path."/".rand().$name;
+ 				file_put_contents($f, imap_base64($file));
+ 				$filename[] = $f;
+ 				$name = "";
+ 				$type--;
+ 			}
+ 		}
+ 		return $f;
+ 	}
+ 	
 	/**
 	* Executes a select query
 	* @param string $qry Query SQL
