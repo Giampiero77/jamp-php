@@ -161,6 +161,16 @@ class imapDs extends iDS
  		if (count($match)>0) unset($match[0]);
  		return $match;	
  	}
+ 	
+ 	public function dsDeleteMSG($num)
+ 	{
+ 		return imap_delete($this->property["conn"], $num); 
+ 	}
+ 	
+ 	public function dsExpungeMSG()
+ 	{
+ 		return imap_expunge($this->property["conn"]);
+ 	} 
 
  	public function dsSaveAttachment($body, $path)
  	{
