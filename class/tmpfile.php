@@ -14,7 +14,7 @@ if (isset($_GET['filename']))
 {
 	require_once("system.class.php");
 	$system = new ClsSystem(true);	
-	$filename = $system->dir_real_jamp."/".$system->dir_tmp.str_replace("..", "", preg_replace('/[^a-zA-Z0-9\-_\.]/','', $_GET['filename']));
+	$filename = $system->dir_real_jamp."/".$system->dir_tmp.str_replace("..", "", preg_replace('/[^a-zA-Z0-9\-_\. ]/','', $_GET['filename']));
 	if (!file_exists($filename)) die("File not found.");
     $file_extension = strtolower(substr(strrchr($filename,"."),1));
     switch ($file_extension) 
