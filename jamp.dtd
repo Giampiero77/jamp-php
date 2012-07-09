@@ -990,6 +990,7 @@ dsobj CDATA #IMPLIED
 <!ATTLIST include
 id CDATA #REQUIRED
 src CDATA #IMPLIED
+render CDATA #IMPLIED
 >
 <!ELEMENT jmenu (#PCDATA)>
 <!ATTLIST jmenu

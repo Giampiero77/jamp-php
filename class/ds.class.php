@@ -173,5 +173,18 @@ abstract class iDS
 		if (is_array($this->property[$name])) return $this->property[$name][$index];
 		else if(isset($this->property[$name])) return $this->property[$name];
 	}
+
+	/**
+	* Reads the property
+	* @param string $name Name property
+	* @param integer $index The array index
+	* @return Array Property
+	*/
+	public function setProperty($name, $value)
+	{
+		$this->property[$name] = $value;
+	}
+
+
 }
 ?>

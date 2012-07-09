@@ -57,7 +57,7 @@ class ClsObj_head extends ClsObject {
 	* Generate the code html
 	* @param string $tab Tabs
 	*/
-	public function codeHEAD($page)
+	public function codeHEAD($page, $ajax)
 	{
 		global $system;
 		if (!isset($this->property["icon"]["value"])) $this->setProperty("icon", $page->getPropertyName("icon"));
@@ -66,12 +66,14 @@ class ClsObj_head extends ClsObject {
 
 		$code = "\n<head>";
 		$code .= "\n\t<title>".$this->property["title"]["value"]."</title>";
-		$code .= "\n\t<meta name=\"GENERATOR\" content=\"JAMP\" />";
-		$code .= "\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />";
-		$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">";
-		$code .= "\n\t\tfunction $(id) { return document.getElementById(id); }";
-		$code .= "\n\t</script>";
-		$code .= $system->getCSS($page->requireCSS());
+		if ($ajax) {
+			$code .= "\n\t<meta name=\"GENERATOR\" content=\"JAMP\" />";
+			$code .= "\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />";
+			$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">";
+			$code .= "\n\t\tfunction $(id) { return document.getElementById(id); }";
+			$code .= "\n\t</script>";
+			$code .= $system->getCSS($page->requireCSS());
+		}
 		if ($this->property["debug"]["value"]=="true") $code .= $system->getCSS(array("objcss/default/firebug.css"));
 		if (!empty($this->property["icon"]["value"])) $code .= "\n\t<link rel=\"shortcut icon\" href=\"".$this->property["icon"]["value"]."\">";
 		foreach ($this->child as $obj) $code .= $obj->codeHTML("\t");

@@ -40,24 +40,29 @@ class ClsObj_page extends ClsObject {
 		$this->property["topmargin"] 		= array("value" => null,	"inherit" => false, "html" => true);
 		$this->property["vlink"] 	 		= array("value" => null,	"inherit" => false, "html" => true);
 		$this->property["title"]			= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["keepalive"]		= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["keepaliveurl"]		= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["java"]				= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["forwardrequest"]= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["keepalive"]		= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["keepaliveurl"]		= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["java"]				= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["forwardrequest"]= array("value" => null,	"inherit" => false, "html" => false);
 		$this->property["cssfile"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["java"]["value"] = array("animate.js");
- 		$this->property["pageformat"]		= array("value" => "A4",	"inherit" => false, "html" => false);
+		$this->property["pageformat"]		= array("value" => "A4",	"inherit" => false, "html" => false);
 		$this->property["orientation"]	= array("value" => "L",	"inherit" => false, "html" => false);
 		$this->property["pdfname"] 		= array("value" => "", "inherit" => false, "html" => false);
 		$this->property["destination"] 	= array("value" => "", "inherit" => false, "html" => false);
- 		$this->property["compressjs"]		= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["hideloader"]		= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["hidehtmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["hidejserror"]	= array("value" => null,	"inherit" => false, "html" => false);
- 		$this->property["hidexmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["compressjs"]		= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["hideloader"]		= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["hidehtmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["hidejserror"]	= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["hidexmlerror"]	= array("value" => null,	"inherit" => false, "html" => false);
+		$this->property["ajax"]			= array("value" => "true",	"inherit" => false, "html" => false);
 
 		$this->addEventListener("window", "resize", "Resize");
 		$this->addEvent($id, "Resize", "//Autosize");
+	}
+
+	public function isJampEngineActivated() {
+		return $this->property["ajax"]["value"] == 'false' ? false : true;
 	}
 
 	/**
@@ -99,43 +104,48 @@ class ClsObj_page extends ClsObject {
 	public function codeHTML($tab = "")
 	{
 		global $system, $xml;
+
 		$head = !is_object($xml) ? null : $xml->getObjById("head");
 		if (!isset($head)) $head = $this->addChild("head", "head");
-		$code = $head->codeHEAD($this);
+		$code = $head->codeHEAD($this, $this->isJampEngineActivated());
 		$code .= "\n<body ".$this->getProperty("html", true, false).">";
-		if ($this->property["loaddata"]["value"] != "true")
-		{
-			$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">";
-			$code .= "\n\t\tfunction LoadComplete()";
-			$code .= "\n\t\t{";
-			$code .= "\n\t\t\t$(\"pageLoader\").style.display = \"none\";";
-			$code .= "\n\t\t\t$(\"pageLock\").style.display = \"none\";";
-			$code .= "\n\t\t\tAJAX.loadall = false;";
-			$code .= "\n\t\t\tResize();";
-			$code .= "\n\t\t}";
-			$code .= "\n\t\tif (window.attachEvent) window.attachEvent('onload',LoadComplete);";
-			$code .= "\n\t\telse window.addEventListener('DOMContentLoaded',LoadComplete,false);";
-			$code .= "\n\t</script>";
+		if ($this->isJampEngineActivated()) {
+			if ($this->property["loaddata"]["value"] != "true")
+			{
+				$code .= "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">";
+				$code .= "\n\t\tfunction LoadComplete()";
+				$code .= "\n\t\t{";
+				$code .= "\n\t\t\t$(\"pageLoader\").style.display = \"none\";";
+				$code .= "\n\t\t\t$(\"pageLock\").style.display = \"none\";";
+				$code .= "\n\t\t\tAJAX.loadall = false;";
+				$code .= "\n\t\t\tResize();";
+				$code .= "\n\t\t}";
+				$code .= "\n\t\tif (window.attachEvent) window.attachEvent('onload',LoadComplete);";
+				$code .= "\n\t\telse window.addEventListener('DOMContentLoaded',LoadComplete,false);";
+				$code .= "\n\t</script>";
+			}
+			$code .= "\n\t<iframe frameborder=\"0\" id=\"pageLock\" style=\"display:none;\"></iframe>";
+			$code .= "\n\t<div id=\"pageLoader\" style=\"display:none\"></div>";
+			$code .= "\n\t<div id=\"pageMessageBack\"></div>";
+			$code .= "\n\t<div id=\"pageMessage\"></div>";
+			$code .= "\n\t<div id=\"pageMessageGhost\"></div>";
 		}
-		$code .= "\n\t<iframe frameborder=\"0\" id=\"pageLock\" style=\"display:none;\"></iframe>";
-		$code .= "\n\t<div id=\"pageLoader\" style=\"display:none\"></div>";
-		$code .= "\n\t<div id=\"pageMessageBack\"></div>";
-		$code .= "\n\t<div id=\"pageMessage\"></div>";
-		$code .= "\n\t<div id=\"pageMessageGhost\"></div>";
 
 		//Code objects children
 		foreach ($this->child as $obj) $code .= $obj->codeHTML($tab."\t");
 
-		//Code Javascript
-		$code .= $system->getJs(array("lang/".LANG::$language.".js"));
-		$code .= $system->getJs(array("system.event.js"));
-		$code .= $system->getJs(array("system.browser.js"));
-		$code .= $system->getJs(array("ajax.js"));
-		if ($this->property["hideloader"]["value"] == "true") $code .= $system->setJs("AJAX.hideloader = true;");
-		$code .= $system->getJs($this->requireJavaScript());
-		$code .= $system->setEvent($this->getEvent());
-		$code .= $system->setJs($this->getValidate());
- 		if ($this->property["debug"]["value"]=="true") $code .= $system->setJs("\nvar firebugcss = '".$system->dir_web_jamp.$system->dir_template."objcss/default/firebug.css'");
+		if ($this->isJampEngineActivated()) {
+			//Code Javascript
+			$code .= $system->getJs(array("lang/".LANG::$language.".js"));
+			$code .= $system->getJs(array("system.event.js"));
+			$code .= $system->getJs(array("system.browser.js"));
+			$code .= $system->getJs(array("ajax.js"));
+			if ($this->property["hideloader"]["value"] == "true") $code .= $system->setJs("AJAX.hideloader = true;");
+			$code .= $system->getJs($this->requireJavaScript());
+			$code .= $system->setEvent($this->getEvent());
+			$code .= $system->setJs($this->getValidate());
+			if ($this->property["debug"]["value"]=="true") $code .= $system->setJs("\nvar firebugcss = '".$system->dir_web_jamp.$system->dir_template."objcss/default/firebug.css'");
+		}
 		return $code;
 	}
 
@@ -145,29 +155,33 @@ class ClsObj_page extends ClsObject {
 	public function BuildObj()
 	{
 		global $system;
+
 		$this->codejs = "";
- 		$this->setCSS();
-		$compressjs = $this->property["compressjs"]["value"];
-		if (!empty($compressjs)) $system->compressjs = ($compressjs == "true") ? true : false; 
-		if ($this->property["debug"]["value"] == "true") $this->property["onload"]["value"] = "AJAX.debugEnable(); ".$this->property["onload"]["value"];
-		if ($this->property["loaddata"]["value"] == "true") 
-		{
-			$param = null;
-			if ($this->property["forwardrequest"]["value"] == "true")
+		$this->setCSS();
+		if ($this->isJampEngineActivated()) {
+			$compressjs = $this->property["compressjs"]["value"];
+			if (!empty($compressjs)) $system->compressjs = ($compressjs == "true") ? true : false; 
+			if ($this->property["debug"]["value"] == "true") $this->property["onload"]["value"] = "AJAX.debugEnable(); ".$this->property["onload"]["value"];
+			if ($this->property["loaddata"]["value"] == "true") 
 			{
-				foreach($_REQUEST as $item => $value) $param .= "&".$item."=".$value;
+				$param = null;
+				if ($this->property["forwardrequest"]["value"] == "true")
+				{
+					foreach($_REQUEST as $item => $value) $param .= "&".$item."=".$value;
+				}
+				$this->property["onload"]["value"] = "AJAX.loadAll('".$_SERVER['PHP_SELF']."', '$param'); ".$this->property["onload"]["value"];
+			} else {
+				$this->property["onload"]["value"] = "Resize(); ".$this->property["onload"]["value"];
 			}
-			$this->property["onload"]["value"] = "AJAX.loadAll('".$_SERVER['PHP_SELF']."', '$param'); ".$this->property["onload"]["value"];
-		}
-		else $this->property["onload"]["value"] = "Resize(); ".$this->property["onload"]["value"];
-		if (!empty($this->property["keepalive"]["value"]))
-		{
-			$second = intVal($this->property["keepalive"]["value"]) * 1000;
-			$this->setCodeJs("\t\tsetTimeout(function(){AJAX.keepAlive($second,'".$this->property["keepaliveurl"]["value"]."');}, $second);");
-		}
-		if (!empty($this->property["onmousemove"]["value"]))
-		{
-			$this->setCodeJs("\t\tdocument.onmousemove=function(event){".$this->property["onmousemove"]["value"]."}");
+			if (!empty($this->property["keepalive"]["value"]))
+			{
+				$second = intVal($this->property["keepalive"]["value"]) * 1000;
+				$this->setCodeJs("\t\tsetTimeout(function(){AJAX.keepAlive($second,'".$this->property["keepaliveurl"]["value"]."');}, $second);");
+			}
+			if (!empty($this->property["onmousemove"]["value"]))
+			{
+				$this->setCodeJs("\t\tdocument.onmousemove=function(event){".$this->property["onmousemove"]["value"]."}");
+			}
 		}
 	}
 

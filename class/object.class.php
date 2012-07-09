@@ -435,9 +435,11 @@ abstract class ClsObject
 				$code  = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">";
 				$code .= "\n<html>";
 				$code .= $this->codeHTML();
-				if($this->property["debug"]["value"] == "true") $jsextra .= "\n".$system->sendDebug(); //DEBUG
-				$jsextra = $this->codeJavaScript().$jsextra;
-				if(!empty($jsextra)) $code .= $system->setJs($jsextra);
+				if ($xml->pageObj->isJampEngineActivated()) {
+					if($this->property["debug"]["value"] == "true") $jsextra .= "\n".$system->sendDebug(); //DEBUG
+					$jsextra = $this->codeJavaScript().$jsextra;
+					if(!empty($jsextra)) $code .= $system->setJs($jsextra);
+				}
 				$code .= "\n</body>";
 				$code .= "\n</html>";
 				if (COMPRESSHTML)

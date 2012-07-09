@@ -25,6 +25,7 @@ class ClsObj_include extends ClsObject {
 		unset($this->property);
 		$this->property["id"]		= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["src"]		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["render"]	= array("value" => "file", "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -65,10 +66,17 @@ class ClsObj_include extends ClsObject {
 	*/
 	public function codeHTML($tab = "")
 	{
-		global $system;
+		global $system, $event;
 
-		$code = file_get_contents($this->parseValue($this->property["src"]["value"]));
-		return $code;
+		$render = strtolower($this->parseValue($this->property["render"]["value"]));
+		switch($render) {
+			case 'file':
+				return file_get_contents($this->parseValue($this->property["src"]["value"]));
+				break;
+			default:
+				return $event->callEvent($render, $this->parseValue($this->property["src"]["value"]));
+				break;
+		}
 	}
 
 	/**
