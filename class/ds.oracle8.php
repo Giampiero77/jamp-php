@@ -12,12 +12,15 @@
 class oracle8Ds extends iDS
 {
 	private $_row_number = 'OCI8_ROWNUM';		// Simulazione LIMIT
+	private $_debug	= false;
 
 	/**
 	* Construct
 	*/
 	public function __construct()
 	{
+		if ($this->_debug) openlog("oracle8Ds", LOG_PID | LOG_PERROR, LOG_LOCAL0);
+
 		$this->property["dstable"]	= null;
 		$this->property["dsdefault"] 	= null;
 		$this->property["join"]   	= null;
@@ -46,7 +49,7 @@ class oracle8Ds extends iDS
 	{
 		if ($this->property["open"] == false)
 		{
-			function_exists('OCILogon') or ClsError::showError("DS00", "MYSQL");
+			function_exists('oci_connect') or ClsError::showError("DS00", "MYSQL");
 
 			$this->dsDBSelect($this->property["dsdefault"]);
 			$this->property["open"] = true;
@@ -63,7 +66,7 @@ class oracle8Ds extends iDS
 		if (!empty($dsname)) {
 			putenv("NLS_LANG=AMERICAN_AMERICA.AL32UTF8");
 			putenv("NLS_DATE_FORMAT=YYYY-MM-DD HH24:MI:SS");
-			$this->property["conn"] = OCILogon(
+			$this->property["conn"] = oci_connect(
 				$this->property["dsuser"],
 				stripcslashes($this->property["dspwd"]),
 				$dsname
@@ -270,21 +273,15 @@ class oracle8Ds extends iDS
 			$limit = "";
 			if ($table == "") return false;
 			$qry = "SELECT $alias FROM $table";
-//			if ($this->property["limit"] > 0) 
-//			{
-//				if (stripos($qry, 'SQL_CALC_FOUND_ROWS') === false) 
-//				{
-//				  $qry = "SELECT SQL_CALC_FOUND_ROWS $alias FROM $table";
-//				}
-//				else 
-//				{
-//					 $pos = stripos($qry.$where, 'FROM');
-//					 if ($pos !== false) $this->property["qrycount"] = "SELECT COUNT(*) ".substr($qry.$where,$pos);
-//				}
-//				$limit = " LIMIT ".$this->property["start"].", ".$this->property["limit"];
-//			}
-
 			if (is_array($this->property["where"])) $where = implode(" and ", $this->property["where"]);
+
+			if ($this->property["limit"] > 0) 
+			{
+				if (empty($where)) $where="1=1";
+				$pos = stripos($qry.$where, 'FROM');
+				if ($pos !== false) $this->property["qrycount"] = "SELECT COUNT(*) as tot ".substr($qry.' where '.$where,$pos);
+			}
+
 			if (isset($_POST["dsforeignkey"]) && isset($_POST["dsforeignkeyvalue"]))
 			{
 				if (isset($this->property["join"])) //JOIN
@@ -431,7 +428,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 			if (($this->property["inslast"] == 0) && ($this->property["dssavetype"] == "row")) ClsError::showError("DS007");
 		}
 		else $this->property["inslast"] = 0;
-		return TO_REIMPLEMENT_affected_rows();
+		return 0;
 	}
 
 	/**
@@ -463,20 +460,41 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 			$qry = "";
 			foreach($this->property["item"] as $k => $item)
 			{
+				if ($k == $this->_row_number) continue;
+				$date_parts=null;
+				preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/',$item,$date_parts);
+				$isDateTime = (is_array($date_parts) && Count($date_parts) == 7);
+				if ($isDateTime) {
+					// Presuppongo che sia un campo data, devo utilizzare la sintassi oracle8
+					$item = "to_date('$item', 'yyyy-mm-dd hh24:mi:ss')";
+				}
+
 				if (!empty($qry)) $qry .= ", ";
 				if ($item == null || $item == 'null') $qry .= "$k = null";
-				else $qry .= "$k = '".$item."'";
-			}   
+				else {
+					if ($isDateTime) $qry .= "$k = $item";
+								else $qry .= "$k = '".$this->oci_escape($item)."'";
+				}
+			}
 
 			$where = "";
 			if (is_array($this->property["where"])) $where = implode(" and ", $this->property["where"]);
 			if (is_null($this->property["joinsave"])) $table = $this->property["dstable"];
 			else $table = $this->property["joinsave"];
 			$qry="UPDATE ".$table." SET $qry  WHERE ".$where;
-		} 
-		$this->dsQuery($qry);
+		}
+		$result=$this->dsQuery($qry);
+
 		$this->property["inslast"] = 0;
-		return TO_REIMPLEMENT_affected_rows();
+		return;
+	}
+
+	function oci_escape($s) {
+		return str_replace(
+			array("\'",	"\\\\"	),
+			array("''",	"\\"	),
+			$s
+		);
 	}
 
 	/**
@@ -549,10 +567,12 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 		  else $table = $this->property["joinsave"];
 		  $qry = "INSERT INTO $table ($items) VALUES($values)";
 		}
-		$this->dsQuery($qry);
-		$this->property["inslast"] = TO_REIMPLEMENT_insert_id($this->property["conn"]);
+		$result=$this->dsQuery($qry);
+		if (empty($result)) $result=0;
+
+		$this->property["inslast"] = $result;
 		if (($this->property["inslast"] == 0) && ($this->property["dssavetype"] == "row")) ClsError::showError("DS007");
-		return TO_REIMPLEMENT_affected_rows();
+		return $result;
 	}
 
 	/**
@@ -564,21 +584,23 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	{
 		global $system;
 		if (!isset($errorsql)) $errorsql = $qry;
-		$this->property["result"] = OCIParse($this->property["conn"], $qry );
+		if ($this->_debug) syslog(LOG_WARNING, "dsQuery($qry, $errorsql)");
+
+		if (empty($qry)) return;
+
+		$this->property["result"] = oci_parse($this->property["conn"], $qry );
 //		die($qry);
-		OCIExecute($this->property["result"], OCI_DEFAULT) or $this->ErrorDS003($errorsql);
+		try {
+			$result=oci_execute($this->property["result"], OCI_COMMIT_ON_SUCCESS);
+		} catch (Exception $e) {
+			$this->ErrorDS003($errorsql." ".$e->getMessage());
+			$result=false;
+		}
 		$this->property["qrylast"] = $qry;
 		$this->property['tot'] = null;
 
-//		if (stripos($qry, 'SQL_CALC_FOUND_ROWS') !== false) $this->property["qrycount"] = "SELECT FOUND_ROWS();";
-//		if (!empty($this->property["qrycount"]))
-//		{
-//		    $res = TO_REIMPLEMENT_query($this->property["qrycount"], $this->property["conn"]) or $this->ErrorDS003($this->property["qrycount"]);
-//		    $row = TO_REIMPLEMENT_fetch_row($res);
-//		    $this->property['tot'] = $row[0];
-//		}
-//		$this->property["qrycount"] = "dSQL_CALC_FOUND_ROWS";
 		if ($this->property["debug"]=="true") $system->debug($this->property["id"], $qry);
+		return $result;
 	}
 
 	/**
@@ -613,14 +635,14 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	public function dsGetRow($row = -1)
 	{
 		if (!$this->property["result"]) return; 
-		if ($row >= 0) {die("toDOTO_REIMPLEMENT_data_seek"); TO_REIMPLEMENT_data_seek($this->property["result"], $row) or ClsError::showError("DS004"); }
+		if ($row >= 0) {die("REIMPLEMENT_data_seek"); TO_REIMPLEMENT_data_seek($this->property["result"], $row) or ClsError::showError("DS004"); }
 		switch($this->property["fetch"])
 		{
 			case "array":
 			case "row":
 			case "assoc":
 				$row = null;
-				OCIFetchInto($this->property["result"], $row, OCI_ASSOC+OCI_RETURN_NULLS);
+				ocifetchinto($this->property["result"], $row, OCI_ASSOC+OCI_RETURN_NULLS);
 				if (empty($row)) return;
 				$result = array();
 				foreach($row as $key => $value) {
@@ -654,7 +676,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/
 	public function setQryCount($qry)
 	{
-		$this->property["qrycount"] = "SELECT count(*) AS numrow FROM (".$this->property["querynolimit"].")";
+//		$this->property["qrycount"] = "SELECT count(*) AS numrow FROM (".$this->property["querynolimit"].")";
 	}
 
 	/**
@@ -665,11 +687,19 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	{
 		if (empty($this->property["qrycount"])) $this->setQryCount($this->property["qrylast"]);
 
-		$res = OCIParse($this->property["conn"], $this->property["qrycount"] );
-		OCIExecute($res, OCI_DEFAULT) or $this->ErrorDS003('err dsCountRow()');
+		if (empty($this->property["qrycount"])) return -1;
+
+		$res = oci_parse($this->property["conn"], $this->property["qrycount"] );
+//		echo $this->property["qrycount"];
+		try {
+			if ($this->_debug) syslog(LOG_WARNING, $this->property["qrycount"]);
+			oci_execute($res, OCI_DEFAULT);
+		} catch (Exception $e) {
+			$this->ErrorDS003("err dsCountRow() ".$e->getMessage());
+		}
 		$row = null;
-		OCIFetchInto($res, $row, OCI_ASSOC+OCI_RETURN_NULLS);
-		$this->property["tot"] = $row['NUMROW'];
+		ocifetchinto($res, $row, OCI_ASSOC+OCI_RETURN_NULLS);
+		$this->property["tot"] = is_array($row) && array_key_exists('TOT', $row) ? $row['TOT'] : -1;
 		return $this->property["tot"];
 	}
 
@@ -678,9 +708,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
     public function dsShowDatabases()
 	{
-		$this->dsQuery("SHOW DATABASES;");
- 		$this->dsGetRow(); // Salta la riga d'intestazione
-		$this->property['tot'] = TO_REIMPLEMENT_num_rows($this->property["result"])-1;
 	}
 
 	/**
@@ -689,10 +716,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowTables($database )
 	{
-		  $this->dsQuery("SELECT SUBSTR(VERSION(),1,1) AS ve ;");
-		  $row = TO_REIMPLEMENT_fetch_array($this->property["result"]);
-		  if ($row['ve']=='4') $this->dsQuery("SHOW TABLE STATUS FROM $database ");
-		  else $this->dsQuery("SHOW TABLE STATUS FROM $database WHERE (Engine IS NOT NULL);");
 	}
 
 	/**
@@ -701,7 +724,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowViews($database)
 	{
-		$this->dsQuery("SHOW TABLE STATUS FROM $database WHERE (Engine IS NULL);");
 	}
 
 	/**
@@ -710,9 +732,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowFunctions($database)
 	{
-		$qry = "SELECT * FROM mysql.proc WHERE type='FUNCTION'";
-		if ($database!=false) $qry .= " AND db='".$database."'";
-		$this->dsQuery($qry);
 	}
 
 	/**
@@ -721,9 +740,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowProcedures($database)
 	{
-		$qry = "SELECT * FROM mysql.proc WHERE type='PROCEDURE'";
-		if ($database!=false) $qry .= " AND db='".$database."'";
-		$this->dsQuery($qry);
 	}
 
 	/**
@@ -733,11 +749,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowTable($database, $table)
 	{
-		$this->dsQuery("SHOW CREATE TABLE $database.$table;");
-		$row = TO_REIMPLEMENT_fetch_array($this->property["result"]); 
-		$result["Name"] = $row["Table"];
-		$result["Code"] = $row["Create Table"];
- 		return $result;
 	}
 
 	/**
@@ -747,16 +758,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowView($database, $view)
 	{
-		$this->dsDBSelect($database);
-		$this->dsQuery("SHOW CREATE VIEW $view;");
-		$row = TO_REIMPLEMENT_fetch_array($this->property["result"]); 
-		$result["Name"] = $row["View"];
-		list($null, $result["User"], $null, $result["Host"]) = explode("", $row["Create View"]);
-		$result["Code"] = substr($row["Create View"],stripos($row["Create View"], "SELECT"));
-		$result["Code"] = preg_replace("/,/",",\n\t", $result["Code"]);
-		$result["Code"] = preg_replace("/( from | group by | order by | where | having | union )/","\n$0", $result["Code"]);
-		$result["Code"] = preg_replace("/( left join | right join | join | \(| or | and )/","\n\t$0", $result["Code"]);
- 		return $result;
 	}
 
 	/**
@@ -766,14 +767,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowProcedure($database, $procedure)
 	{
-		$this->dsDBSelect($database);
-		$this->dsQuery("SHOW CREATE PROCEDURE $procedure;");
-		$row = TO_REIMPLEMENT_fetch_array($this->property["result"]); 
-		$result["Name"] = $row["Procedure"];
-		$result["Code"] = $row["Create Procedure"];
-		list($null, $result["User"], $null, $result["Host"]) = explode("", $result["Code"]);
-		$result["Code"] = substr($result["Code"],strpos($result["Code"], "$procedure")+strlen($procedure)+2);
- 		return $result;	
 	}
 
 	/**
@@ -783,14 +776,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowFunction($database, $function)
 	{
-		$this->dsDBSelect($database);
-		$this->dsQuery("SHOW CREATE FUNCTION $function;");
-		$row = TO_REIMPLEMENT_fetch_array($this->property["result"]); 
-		$result["Name"] = $row["Function"];
-		$result["Code"] = $row["Create Function"];
-		list($null, $result["User"], $null, $result["Host"]) = explode("", $result["Code"]);
-		$result["Code"] = substr($result["Code"],strpos($result["Code"], "$function")+strlen($function)+2);
-		return $result;	
 	}
 
    /**
@@ -798,7 +783,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowCollation()
 	{
-		$this->dsQuery("SHOW COLLATION;");
 	}
 
 	/**
@@ -808,11 +792,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowUsers($database = false, $table = false)
 	{
-		$this->dsDBSelect('mysql');
-		if ($database != false && $table != false) $qry = "SELECT * FROM tables_priv WHERE db='".$database."' AND Table_name='".$table."'";
-		else if ($database!=false) $qry = "SELECT *, Host AS Host1 FROM db WHERE Db='".$database."'";
-		else $qry = "SELECT *, Password AS Pwd FROM user;";
-		$this->dsQuery($qry);
 	}
 
 	/**
@@ -821,8 +800,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function CreateDatabase($db)
 	{
-		$this->dsQuery("CREATE DATABASE $db");
-	}  
+	}
 
 	/**
 	* Create a table
@@ -833,13 +811,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function CreateTable($db, $table, $engine, $collation)
 	{
-		if (isset($engine) || ($engine=="")) $engine = "MYISAM";
-		if (isset($collation) || ($collation=="")) $collation = "utf8_general_ci";
-		list($coll) = explode("_", $collation);
-		$qry  = "CREATE TABLE $db.$table (key INT NOT NULL AUTO_INCREMENT PRIMARY KEY) ";
-		$qry .= "ENGINE = $engine ";
-		$qry .= "CHARACTER SET $coll COLLATE $collation;";
-		$this->dsQuery($qry);
 	} 
 
 
@@ -853,10 +824,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function CreateView($db, $view, $sql, $user = false, $host = false)
 	{
-		$this->dsDBSelect($db);
-		if ($user && $host) $qry = "CREATE DEFINER=$user@$host VIEW $view AS ".stripslashes($sql);
-		else $qry = "CREATE VIEW $view AS ".stripslashes($sql);
-		$this->dsQuery($qry);
 	}  
 
 	/**
@@ -869,10 +836,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function SaveView($db, $view, $sql, $user = null, $host = null)
 	{
-		$this->dsDBSelect($db);		
-		if (isset($user) && isset($host)) $qry = "CREATE OR REPLACE DEFINER=$user@$host VIEW $view AS ".stripslashes($sql);
-		else $qry = "CREATE OR REPLACE VIEW $view AS ".stripslashes($sql);
-		$this->dsQuery($qry);
 	}  
 
 	/**
@@ -885,9 +848,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function CreateFunction($db, $func, $sql, $user = null, $host = null)
 	{
-		if (isset($user) && isset($host)) $qry = "CREATE DEFINER=$user@$host FUNCTION $db.$func ".stripslashes($sql);
-		else $qry = "CREATE FUNCTION $func ".stripslashes($sql);
-		$this->dsQuery($qry);
 	}  
 
 	/**
@@ -900,8 +860,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function SaveFunction($db, $func, $sql, $user = null, $host = null)
 	{
-		$this->DropFunction($db, $func);
-		$this->CreateFunction($db, $func, $sql, $user, $host);
 	}
 
 	/**
@@ -914,9 +872,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function CreateProcedure($db, $proc, $sql, $user = null, $host = null)
 	{
-		if (isset($user) && isset($host)) $qry = "CREATE DEFINER=$user@$host PROCEDURE $db.$proc ".stripslashes($sql);
-		else $qry = "CREATE PROCEDURE $proc ".stripslashes($sql);
-		$this->dsQuery($qry);
 	}  
 
 	/**
@@ -929,8 +884,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function SaveProcedure($db, $proc, $sql, $user = null, $host = null)
 	{
-		$this->DropProcedure($db, $proc);
-		$this->CreateProcedure($db, $func, $sql, $user, $host);
     }
 
 	/**
@@ -942,7 +895,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function RenameTable($db1, $table1, $db2, $table2)
 	{
-		$this->dsQuery("RENAME TABLE $db1.$table1 TO $db2.$table2;");
 	}  
 
 	/**
@@ -954,9 +906,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function RenameView($db1, $view1, $db2, $view2)
 	{
-		$sql = $this->dsShowView($db1, $view1);
-		$this->CreateView($db2, $view2, $sql["Code"], $sql["User"], $sql["Host"]);
-		$this->DropView($db1, $view1);
 	} 
 
 	/**
@@ -968,9 +917,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function RenameFunction($db1, $func1, $db2, $func2)
 	{
-		$sql = $this->dsShowFunction($db1, $func1);
-		$this->CreateFunction($db2, $func2, $sql['Code'], $sql["User"], $sql["Host"]);
-		$this->DropFunction($db1, $func1);
 	} 
 
 	/**
@@ -982,9 +928,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function RenameProcedure($db1, $proc1, $db2, $proc2)
 	{
-		$sql = $this->dsShowProcedure($db1, $proc1);
-		$this->CreateProcedure($db2, $proc2, $sql['Code'], $sql["User"], $sql["Host"]);
-		$this->DropProcedure($db1, $proc1);
 	} 
 
 	/**
@@ -993,7 +936,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function DropDatabase($db)
 	{
-		$this->dsQuery("DROP DATABASE $db");
 	}  
 
 	/**
@@ -1003,7 +945,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function DropTable($db, $table)
 	{
-		$this->dsQuery("DROP TABLE $db.$table;");
     }  
 
 	/**
@@ -1013,7 +954,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function DropView($db, $view)
 	{
-		$this->dsQuery("DROP VIEW $db.$view;");
 	}  
 
 	/**
@@ -1023,7 +963,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function DropFunction($db, $func)
 	{
-		$this->dsQuery("DROP FUNCTION IF EXISTS $db.$func;");
 	} 
 
 	/**
@@ -1043,7 +982,6 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowColumns($db, $table)
 	{
-		$this->dsQuery("SHOW FULL COLUMNS FROM $table FROM $db;");
 	}  
 
     /**
@@ -1052,21 +990,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowColumnsResult($table = null)
 	{
-		global $system;
-		if (isset($table)) 
-		{
-			$table = trim($table);
-			if (preg_match("/^(CREATE|ALTER|DROP|SHOW|RENAME|INSERT|UPDATE) /i", $table)) return array();
-			if (preg_match("/^SELECT /i", $table)) $qry="SELECT * FROM ($table) AS struct LIMIT 0;";
-			else $qry="SELECT * FROM ($table) LIMIT 0;";
-			$this->dsQuery($qry, $table);
-		}
-		$out = array();
-		for($i = 0; $i < TO_REIMPLEMENT_num_fields($this->property["result"]); $i++)
-		{
-			$out[] = TO_REIMPLEMENT_fetch_field($this->property["result"], $i);
-		}
-		return $out;
+		die("TODO");
 	}
 
 	/**
@@ -1086,37 +1010,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsShowForeignKey($db, $table)
 	{
-		$regEx  = "/^CONSTRAINT ";
-		$regEx .= "((?:[^])+) ";                  			  // constraint name
-		$regEx .= "FOREIGN KEY +\(((?:(?:[^])+,?\s*)+)\) +";   // local columns
-		$regEx .= "REFERENCES\s*(?:((?:[^])+)\.)?";            // foreign db
-		$regEx .= "((?:[^])+) +";                              // foreign table
-		$regEx .= "\(((?:(?:[^])+,?\s*)+)\)";                  // foreign columns
-		$regEx .= "(?: ON DELETE((?: RESTRICT| CASCADE| SET NULL| NO ACTION)))?";
-		$regEx .= "(?: ON UPDATE((?: RESTRICT| CASCADE| SET NULL| NO ACTION)))?/";
-		$this->dsQuery("SHOW CREATE TABLE $db.$table;");
-		$result = array();
-		while ($row = TO_REIMPLEMENT_fetch_array($this->property["result"]))
-		{
-			$rows = explode("\n", $row["Create Table"]);
-			foreach ($rows as $i => $row) 
-			{
-				$split = array();
-				$row = trim($row);
-				if (preg_match($regEx,$row,$split))
-				{
-					$result[$i+1]["constraint"] = $split[1];
-					$result[$i+1]["foreignkey"] = str_replace("", "", $split[2]);
-					$result[$i+1]["referencedb"] = ($split[3]=="") ? $db : $split[3];
-
-					$result[$i+1]["referencetable"] = $split[4];
-					$result[$i+1]["referencekey"] = str_replace("", "", $split[5]);
-					$result[$i+1]["ondelete"] = (isset($split[6])) ? trim($split[6]) : "";
-					$result[$i+1]["onupdate"] = (isset($split[7])) ? trim($split[7]) : "";;
-				}		
-			}		
-		}		
-		return $result;
+		die("TODO");
 	}  
 
 	/**
@@ -1236,33 +1130,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportData($db, $table, $start, $maxrows)
 	{
-		$sql = "";
-		$this->dsShowColumns($db, $table);
-		while($row = TO_REIMPLEMENT_fetch_array($this->property["result"])) 
-		{
-			$fields['Field1'][$row["Field"]] = "".$row["Field"]."";
-			$fields['Field2'][$row["Field"]] = $row["Field"];
-			$fields['Null'][$row["Field"]] = $row["Null"];
-			$fields['Type'][$row["Field"]] = (preg_match("/^(TINYBLOB|BLOB|MEDIUMBLOB|LONGBLOB)/i", $row["Type"])) ? "BLOB" : strtoupper($row["Type"]);
-		}
-		$this->dsQuery("SELECT * FROM $db.$table LIMIT $start,$maxrows");
-		if ($this->dsCountRow()>0)
-		{
-			$sql .= "\r\n\r\nINSERT INTO $table (".implode(",", $fields['Field1']).") VALUES \r\n";
-			while($row = TO_REIMPLEMENT_fetch_array($this->property["result"])) 
-			{
-				$values = array();
-				foreach ($fields['Field2'] as $key => $field) 
-				{
-					if (empty($row[$field]) && ($fields['Null'][$field]=="YES")) $values[] = "NULL";
-					else if ($fields['Type'][$field]=="BLOB") $values[]  = '0x'.bin2hex($row[$field]);
-					else $values[] = "'".str_replace("'", "''", $row[$field])."'";
-				}
-				$sql .= "(".implode(",", $values)."),\r\n";
-			}
-			$sql = substr($sql, 0, -3).";\r\n";
-		}
-		return $sql;
+		die("TODO");
 	}
 
 	/**
@@ -1271,9 +1139,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportDatabase($db)
 	{
-		$sql = "CREATE DATABASE $db;\r\n";
-		$sql .= "USE $db;";
-		return $sql;
+		die("TODO");
 	}
 
 	/**
@@ -1287,16 +1153,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportTable($db, $table, $structure = false, $data = false, $start = 0, $maxrows = 60000)
 	{
-		$fields = array();
-		$sql = "";
-		if ($structure) 
-		{
-			$tmp = $this->dsShowTable($db, $table);
-			$sql = $tmp['Code'];
-			if (strpos($sql, "\r\n") === false) $sql = str_replace("\n", "\r\n", $sql).";";
-		}
-		if ($data) $sql .= $this->exportData($db, $table, $start, $maxrows);
-		return $sql;
+		die("TODO");
 	}
 
 	/**
@@ -1310,16 +1167,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportView($db, $view, $structure = false, $data = false, $start = 0, $maxrows = 60000)
 	{
-		$fields = array();
-		$sql = "";
-		if ($structure) 
-		{
-			$tmp = $this->dsShowView($db, $view);
-			$sql = "CREATE OR REPLACE VIEW ".$db.".$view AS \r\n".$tmp["Code"].";";
-			if (strpos($sql, "\r\n") === false) $sql = str_replace("\n", "\r\n", $sql).";";
-		}
-		if ($data) $sql .= $this->exportData($db, $view, $start, $maxrows);
-		return $sql;
+		die("TODO");
 	} 
 
 	/**
@@ -1329,10 +1177,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportFunction($db, $function)
 	{
-    	$tmp = $this->dsShowFunction($db, $function);
-		$sql = "CREATE FUNCTION $function ".$tmp["Code"].";";
-		if (strpos($sql, "\r\n") === false) $sql = str_replace("\n", "\r\n", $sql).";";
-    	return $sql;
+		die("TODO");
 	} 
 
 	/**
@@ -1342,10 +1187,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function exportProcedure($db, $procedure)
 	{
-		$tmp = $this->dsShowFunction($db, $procedure);
-		$sql = "CREATE PROCEDURE $procedure ".$tmp["Code"].";";
-		if (strpos($sql, "\r\n") === false) $sql = str_replace("\n", "\r\n", $sql).";";
-		return $sql;
+		die("TODO");
 	}
 
 	/**
@@ -1353,8 +1195,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function reloadPrivileges()
 	{
-
-		$this->dsQuery("FLUSH PRIVILEGES;");
+		die("TODO");
 	}
 
 	/**
@@ -1363,47 +1204,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsModUser($value)
 	{
- 		$qry  = "UPDATE mysql.user SET ";
- 		$qry .= "Host = '".$value['Host']."', ";
-		$qry .= "User = '".$value['User']."', ";
-	 	if ($value['Password']=='') $qry .= "Password = '', ";
-		$qry .= "Select_priv = '".$value['Select_priv']."', ";
-		$qry .= "Insert_priv = '".$value['Insert_priv']."', ";
-		$qry .= "Update_priv = '".$value['Update_priv']."', ";
-		$qry .= "Delete_priv = '".$value['Delete_priv']."', ";
-		$qry .= "Create_priv = '".$value['Create_priv']."', ";
-		$qry .= "Drop_priv = '".$value['Drop_priv']."', ";
-		$qry .= "Reload_priv = '".$value['Reload_priv']."', ";
-		$qry .= "Shutdown_priv = '".$value['Shutdown_priv']."', ";
-		$qry .= "Process_priv = '".$value['Process_priv']."', ";
-		$qry .= "File_priv = '".$value['File_priv']."', ";
-		$qry .= "Grant_priv = '".$value['Grant_priv']."', ";
-		$qry .= "References_priv = '".$value['References_priv']."', ";
-		$qry .= "Index_priv = '".$value['Index_priv']."', ";
-		$qry .= "Alter_priv = '".$value['Alter_priv']."', ";
-		$qry .= "Show_db_priv = '".$value['Show_db_priv']."', ";
-		$qry .= "Super_priv = '".$value['Super_priv']."', ";
-		$qry .= "Create_tmp_table_priv = '".$value['Create_tmp_table_priv']."', ";
-		$qry .= "Lock_tables_priv = '".$value['Lock_tables_priv']."', ";
-		$qry .= "Execute_priv = '".$value['Execute_priv']."', ";
-		$qry .= "Repl_slave_priv = '".$value['Repl_slave_priv']."', "; 
-		$qry .= "Repl_client_priv = '".$value['Repl_client_priv']."', "; 
-		$qry .= "Create_view_priv = '".$value['Create_view_priv']."', "; 
-		$qry .= "Show_view_priv = '".$value['Show_view_priv']."', "; 
-		$qry .= "Create_routine_priv = '".$value['Create_routine_priv']."', "; 
-		$qry .= "Alter_routine_priv = '".$value['Alter_routine_priv']."', "; 
-		$qry .= "Create_user_priv = '".$value['Create_user_priv']."', "; 
-		$qry .= "ssl_type = '".$value['ssl_type']."', "; 
-		$qry .= "max_questions = '".$value['max_questions']."', ";
-		$qry .= "max_updates = '".$value['max_updates']."', ";
-		$qry .= "max_connections = '".$value['max_connections']."', "; 
-		$qry .= "max_user_connections = '".$value['max_user_connections']."' "; 
-		$qry .= "WHERE User = '".$value['keynamevalue']."' LIMIT 1;";
-		$this->dsQuery($query);
-		if ($value['Password']!=$value['Pwd']) 
- 		{
-			$this->dsQuery("SET PASSWORD FOR '".$value['User']."'@'".$value['Host']."' = PASSWORD('".$value['Password']."');");
-		}
+		die("TODO");
     }  
 
 	/**
@@ -1412,28 +1213,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsModDbGrant($value)
 	{
- 		$qry  = "UPDATE mysql.db SET ";
- 		$qry .= "User = '".$value['User']."', ";
- 		$qry .= "Host = '".$value['Host']."', ";
-		$qry .= "Select_priv = '".$value['Select_priv']."', ";
-		$qry .= "Insert_priv = '".$value['Insert_priv']."', ";
-		$qry .= "Update_priv = '".$value['Update_priv']."', ";
-		$qry .= "Delete_priv = '".$value['Delete_priv']."', ";
-		$qry .= "Create_priv = '".$value['Create_priv']."', ";
-		$qry .= "Drop_priv = '".$value['Drop_priv']."', ";
-		$qry .= "Grant_priv = '".$value['Grant_priv']."', ";
-		$qry .= "References_priv = '".$value['References_priv']."', ";
-		$qry .= "Index_priv = '".$value['Index_priv']."', ";
-		$qry .= "Alter_priv = '".$value['Alter_priv']."', ";
-		$qry .= "Create_tmp_table_priv = '".$value['Create_tmp_table_priv']."', ";
-		$qry .= "Lock_tables_priv = '".$value['Lock_tables_priv']."', ";
-		$qry .= "Execute_priv = '".$value['Execute_priv']."', ";
-		$qry .= "Create_view_priv = '".$value['Create_view_priv']."', "; 
-		$qry .= "Show_view_priv = '".$value['Show_view_priv']."', "; 
-		$qry .= "Create_routine_priv = '".$value['Create_routine_priv']."', "; 
-		$qry .= "Alter_routine_priv = '".$value['Alter_routine_priv']."' "; 
-		$qry .= "WHERE User='".$value['keynamevalue']."' AND Host='".$value['Host1']."' AND Db='".$value['Db']."' LIMIT 1;";
-		$this->dsQuery($qry);
+		die("TODO");
     }  
 
 	/**
@@ -1442,34 +1222,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function dsAddDbGrant($value)
 	{
-		if (!isset($value['Select_priv'])) $value['Select_priv'] = "N";
-		if (!isset($value['Insert_priv'])) $value['Insert_priv'] = "N";
-		if (!isset($value['Update_priv'])) $value['Update_priv'] = "N";
-		if (!isset($value['Delete_priv'])) $value['Delete_priv'] = "N";
-		if (!isset($value['Create_priv'])) $value['Create_priv'] = "N";
-		if (!isset($value['Drop_priv'])) $value['Drop_priv'] = "N";
-		if (!isset($value['Grant_priv'])) $value['Grant_priv'] = "N";
-		if (!isset($value['References_priv'])) $value['References_priv'] = "N";
-		if (!isset($value['Index_priv'])) $value['Index_priv'] = "N";
-		if (!isset($value['Alter_priv'])) $value['Alter_priv'] = "N";
-		if (!isset($value['Create_tmp_table_priv'])) $value['Create_tmp_table_priv'] = "N";
-		if (!isset($value['Lock_tables_priv'])) $value['Lock_tables_priv'] = "N";
-		if (!isset($value['Create_view_priv'])) $value['Create_view_priv'] = "N";
-		if (!isset($value['Show_view_priv'])) $value['Show_view_priv'] = "N";
-		if (!isset($value['Create_routine_priv'])) $value['Create_routine_priv'] = "N"; 
-		if (!isset($value['Alter_routine_priv'])) $value['Alter_routine_priv'] = "N";
-		if (!isset($value['Execute_priv'])) $value['Execute_priv'] = "N";
- 		$qry  = "INSERT INTO mysql.db ";
-		$qry .= "(Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv,";
-		$qry .= "Grant_priv,References_priv,Index_priv,Alter_priv,Create_tmp_table_priv,Lock_tables_priv,";
-		$qry .= "Create_view_priv,Show_view_priv,Create_routine_priv,Alter_routine_priv,Execute_priv) ";
-		$qry .= "VALUES ('".$value['Host']."','".$value['Db']."','".$value['User']."','".$value['Select_priv']."','".$value['Insert_priv']."',";
-		$qry .= "'".$value['Update_priv']."','".$value['Delete_priv']."','".$value['Create_priv']."','".$value['Drop_priv']."',";
-		$qry .= "'".$value['Grant_priv']."','".$value['References_priv']."','".$value['Index_priv']."','".$value['Alter_priv']."',";
-		$qry .="'".$value['Create_tmp_table_priv']."','".$value['Lock_tables_priv']."','".$value['Create_view_priv']."',";
-		$qry .="'".$value['Show_view_priv']."','".$value['Create_routine_priv']."',"; 
-		$qry .= "'".$value['Alter_routine_priv']."','".$value['Execute_priv']."');"; 
-		$this->dsQuery($qry);
+		die("TODO");
 	}  
 
 	/**
@@ -1480,7 +1233,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/  
 	public function DropGrantDb($db, $user, $host)
 	{
-		$this->dsQuery("DELETE FROM mysql.db WHERE Host='".$host."' AND Db= '".$db."' AND User='".$user."' LIMIT 1");
+		die("TODO");
 	}  
 
 	/**
@@ -1490,33 +1243,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 	*/
 	public function dsImport($result, $method)
 	{
-		global $system;
-		$table = $this->property["dstable"];
-		$conn =  $this->property["conn"];
-		foreach ($result as $row) 
-		{
-			$items = array();
-			$values = array();
-			foreach ($row as $item => $value)	
-			{
-				$items[] = $item;
-				$values[] = str_replace("'", "''", $value);
-			}
-			$items_str = implode(",", $items);
-			$values_str = implode("','", $values);
-			$qry = "INSERT INTO $table ($items_str) VALUES('$values_str')";
-			if ($method=="update")
-			{ 
-				$qry .= " ON DUPLICATE KEY UPDATE ";
-				for ($i=0; $i<count($items); $i++) $qry .= "".$items[$i]."='".str_replace("'", "''", $values[$i])."',";
-				$qry = substr($qry, 0, -1);
-			}
-			if ($method!="error") TO_REIMPLEMENT_query($qry, $conn);
-			else TO_REIMPLEMENT_query($qry, $conn) or $this->ErrorDS003($qry);
-			$this->property["inslast"] = TO_REIMPLEMENT_insert_id($conn);
-			if (($this->property["inslast"] == 0) && ($this->property["dssavetype"] == "row")) ClsError::showError("DS007");
-	 		if ($this->property["debug"]=="true") $system->debug($this->property["id"], $qry);
-		}
+		die("TODO");
   	}
 
 	/**
