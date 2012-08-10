@@ -277,6 +277,44 @@ display CDATA #IMPLIED
 drag CDATA #IMPLIED
 java CDATA #IMPLIED
 >
+<!ELEMENT divlabel (#PCDATA)>
+<!ATTLIST divlabel
+debug (true|false) #IMPLIED
+onclick CDATA #IMPLIED
+ondblclick CDATA #IMPLIED
+onmousedown CDATA #IMPLIED
+onmouseup CDATA #IMPLIED
+onmouseover CDATA #IMPLIED
+onmousemove CDATA #IMPLIED
+onmouseout CDATA #IMPLIED
+onkeypress CDATA #IMPLIED
+onkeydown CDATA #IMPLIED
+onkeyup CDATA #IMPLIED
+class CDATA #IMPLIED
+style CDATA #IMPLIED
+lang CDATA #IMPLIED
+dir CDATA #IMPLIED
+template CDATA #IMPLIED
+title CDATA #IMPLIED
+id CDATA #REQUIRED
+limit CDATA #IMPLIED
+size CDATA #IMPLIED
+value CDATA #IMPLIED
+align (left|center|right) #IMPLIED
+defaultvalue CDATA #IMPLIED
+label CDATA #IMPLIED
+labelalign (left|right) #IMPLIED
+labelwidth CDATA #IMPLIED
+labelstyle CDATA #IMPLIED
+wrap CDATA #IMPLIED
+format CDATA #IMPLIED
+java CDATA #IMPLIED
+dsobj CDATA #IMPLIED
+dsitem CDATA #IMPLIED
+dsobjlist CDATA #IMPLIED
+dsitemlist CDATA #IMPLIED
+dsitemkeylist CDATA #IMPLIED
+>
 <!ELEMENT dock (#PCDATA)>
 <!ATTLIST dock
 debug (true|false) #IMPLIED
@@ -313,10 +351,13 @@ id CDATA #REQUIRED
 debug (true|false) #IMPLIED
 out (json|xml.) #IMPLIED
 focusnew CDATA #IMPLIED
+focustabnew CDATA #IMPLIED
 dshost CDATA #IMPLIED
 dsport CDATA #IMPLIED
 dsuser CDATA #IMPLIED
 dspwd CDATA #IMPLIED
+dsfaillogin CDATA #IMPLIED
+faillogin CDATA #IMPLIED
 conn CDATA #IMPLIED
 store CDATA #IMPLIED
 event (none|null) #IMPLIED
@@ -327,6 +368,7 @@ loadall (true|false) #IMPLIED
 load (true|false) #IMPLIED
 readonly (true|false) #IMPLIED
 confirm (true|false) #IMPLIED
+objtype CDATA #IMPLIED
 selecteditems CDATA #IMPLIED
 dsdefault CDATA #IMPLIED
 dstable CDATA #IMPLIED
@@ -338,6 +380,7 @@ join CDATA #IMPLIED
 joinsave CDATA #IMPLIED
 jointype CDATA #IMPLIED
 joinrule CDATA #IMPLIED
+dslock CDATA #IMPLIED
 dsrefresh CDATA #IMPLIED
 dsreferences CDATA #IMPLIED
 referencestable CDATA #IMPLIED
@@ -470,10 +513,12 @@ label CDATA #IMPLIED
 maxlength CDATA #IMPLIED
 size CDATA #IMPLIED
 dssearch CDATA #IMPLIED
+dsfullsearch CDATA #IMPLIED
 dsobj CDATA #IMPLIED
 java CDATA #IMPLIED
 cssfile CDATA #IMPLIED
 dsitem CDATA #IMPLIED
+objtype CDATA #IMPLIED
 searchonkeyup (true|false) #IMPLIED
 >
 <!ELEMENT dsselect (#PCDATA)>
@@ -528,10 +573,12 @@ width CDATA #IMPLIED
 height CDATA #IMPLIED
 java CDATA #IMPLIED
 dsobj CDATA #IMPLIED
+objtype CDATA #IMPLIED
 dsitem CDATA #IMPLIED
 disabled (true|false) #IMPLIED
 format CDATA #IMPLIED
 indexselected CDATA #IMPLIED
+dsitemselected CDATA #IMPLIED
 >
 <!ELEMENT dsselecturl (#PCDATA)>
 <!ATTLIST dsselecturl
@@ -593,6 +640,43 @@ value CDATA #IMPLIED
 align CDATA #IMPLIED
 defaultvalue CDATA #IMPLIED
 label CDATA #IMPLIED
+>
+<!ELEMENT editorpdf ANY>
+<!ATTLIST editorpdf
+debug (true|false) #IMPLIED
+onclick CDATA #IMPLIED
+ondblclick CDATA #IMPLIED
+onmousedown CDATA #IMPLIED
+onmouseup CDATA #IMPLIED
+onmouseover CDATA #IMPLIED
+onmousemove CDATA #IMPLIED
+onmouseout CDATA #IMPLIED
+onkeypress CDATA #IMPLIED
+onkeydown CDATA #IMPLIED
+onkeyup CDATA #IMPLIED
+class CDATA #IMPLIED
+style CDATA #IMPLIED
+lang CDATA #IMPLIED
+dir CDATA #IMPLIED
+template CDATA #IMPLIED
+title CDATA #IMPLIED
+id CDATA #REQUIRED
+dsobj CDATA #IMPLIED
+cssfile CDATA #IMPLIED
+java CDATA #IMPLIED
+pageformat (A4) #IMPLIED
+orientation (P|L) #IMPLIED
+dsitemkey CDATA #IMPLIED
+dsitemobject CDATA #IMPLIED
+dsitemx CDATA #IMPLIED
+dsitemy CDATA #IMPLIED
+dsitemwidth CDATA #IMPLIED
+dsitemheight CDATA #IMPLIED
+dsitemtext CDATA #IMPLIED
+dsitemborder CDATA #IMPLIED
+dsitemalign CDATA #IMPLIED
+dsitemfont CDATA #IMPLIED
+dsitemfontsize CDATA #IMPLIED
 >
 <!ELEMENT fieldset ANY>
 <!ATTLIST fieldset
@@ -933,6 +1017,7 @@ size CDATA #IMPLIED
 dimension CDATA #IMPLIED
 forcename CDATA #IMPLIED
 createdir CDATA #IMPLIED
+backgroundcolor CDATA #IMPLIED
 >
 <!ELEMENT img (#PCDATA)>
 <!ATTLIST img
@@ -990,7 +1075,7 @@ dsobj CDATA #IMPLIED
 <!ATTLIST include
 id CDATA #REQUIRED
 src CDATA #IMPLIED
-render CDATA #IMPLIED
+render (file) #IMPLIED
 >
 <!ELEMENT jmenu (#PCDATA)>
 <!ATTLIST jmenu
@@ -1369,6 +1454,7 @@ hideloader (true|false) #IMPLIED
 hidehtmlerror (true|false) #IMPLIED
 hidejserror (true|false) #IMPLIED
 hidexmlerror (true|false) #IMPLIED
+ajax CDATA #IMPLIED
 >
 <!ELEMENT pagination ANY>
 <!ATTLIST pagination
@@ -1805,6 +1891,7 @@ savesearch CDATA #IMPLIED
 forcename CDATA #IMPLIED
 dimension CDATA #IMPLIED
 createdir CDATA #IMPLIED
+backgroundcolor CDATA #IMPLIED
 width CDATA #IMPLIED
 height CDATA #IMPLIED
 autocomplete CDATA #IMPLIED
@@ -2065,6 +2152,7 @@ cssfile CDATA #IMPLIED
 dsobj CDATA #IMPLIED
 dsitem CDATA #IMPLIED
 nav (true|false) #IMPLIED
+objtype CDATA #IMPLIED
 >
 <!ELEMENT txtresize (#PCDATA)>
 <!ATTLIST txtresize

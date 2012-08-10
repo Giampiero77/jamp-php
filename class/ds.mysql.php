@@ -101,7 +101,14 @@ class mysqlDs extends iDS
 		} 
 		
 		$this->property["row"] = mysql_fetch_array($this->property["result"]);
-		if (($this->property["row"][$itemuser] == $user) && ($this->property["row"][$itempwd] == $pwd))
+		$fail = 0;
+		$failstop = 0;
+		if (!empty($this->property["dsfaillogin"]))
+		{
+			$fail = $this->property["row"][$this->property["dsfaillogin"]];
+			$failstop = intval($this->property["faillogin"]);
+		}
+		if ((($this->property["row"][$itemuser] == $user) && ($this->property["row"][$itempwd] == $pwd)) && $fail <= $failstop)
 		{
 			unset($_SESSION["auth"]);
 			$_SESSION["auth"]["data"] = @date("d/m/Y H:i:s");
@@ -109,7 +116,10 @@ class mysqlDs extends iDS
 			if (isset($this->property["row"]["cn"])) $_SESSION["auth"]["cn"] = $this->property["row"]["cn"];
 			$_SESSION["auth"]["info"] = $this->property["row"];
 			$this->property["row"] = "";
-		} else unset($_SESSION["auth"]);
+		} else {
+			if ($fail <= $failstop) $this->dsQuery("UPDATE `".$this->property["dstable"]."` SET `".$this->property["dsfaillogin"]."`=`".$this->property["dsfaillogin"]."`+1 WHERE `$itemuser`='$user' LIMIT 1");
+			unset($_SESSION["auth"]);
+		}
 		$this->property["where"] = $where;
 	}
 

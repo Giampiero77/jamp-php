@@ -33,6 +33,8 @@ class ClsObj_ds extends ClsObject {
 		$this->property["dsport"]				= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["dsuser"]				= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["dspwd"]				= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["dsfaillogin"]			= array("value" => null, 	"inherit" => false, "html" => false);
+		$this->property["faillogin"]			= array("value" => "0", 	"inherit" => false, "html" => false);
 		$this->property["conn"]					= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["store"]				= array("value" => null, 	"inherit" => false, "html" => false);
 		$this->property["event"]				= array("value" => null, 	"inherit" => false, "html" => false);

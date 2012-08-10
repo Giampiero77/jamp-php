@@ -31,6 +31,8 @@ abstract class iDS
 		"dsport"		=> null, 	//Server port
 		"dsuser"	  	=> null, 	//Username
 		"dspwd"	  		=> null, 	//Password
+		"dsfaillogin"	=> null,	//Iten Block User Login	
+		"faillogin"		=> 0,		//Fail log	
 		"start"	  		=> 0,		//Start - Limit
 		"end"		  	=> 0,		//End - Limit
 		"tot"		  	=> null,	//Total Result
