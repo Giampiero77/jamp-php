@@ -731,11 +731,11 @@ class mysqlDs extends iDS
 	public function dsShowView($database, $view)
 	{
 		$this->dsDBSelect($database);
-		$this->dsQuery("SHOW CREATE VIEW `$view`;");
+		$this->dsQuery("SELECT * FROM information_schema.VIEWS WHERE TABLE_NAME = '$view' AND TABLE_SCHEMA = '$database'");
 		$row = mysql_fetch_array($this->property["result"]); 
-		$result["Name"] = $row["View"];
-		list($null, $result["User"], $null, $result["Host"]) = explode("`", $row["Create View"]);
-		$result["Code"] = substr($row["Create View"],stripos($row["Create View"], "SELECT"));
+		$result["Name"] = $row["TABLE_NAME"];
+		list($result["User"], $result["Host"]) = explode("@", $row["DEFINER"]);
+		$result["Code"] = substr($row["VIEW_DEFINITION"],stripos($row["VIEW_DEFINITION"], "SELECT"));
 		$result["Code"] = preg_replace("/`,/","`,\n\t", $result["Code"]);
 		$result["Code"] = preg_replace("/( from | group by | order by | where | having | union )/","\n$0", $result["Code"]);
 		$result["Code"] = preg_replace("/( left join | right join | join | \(| or | and )/","\n\t$0", $result["Code"]);
