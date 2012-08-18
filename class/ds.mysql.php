@@ -117,7 +117,7 @@ class mysqlDs extends iDS
 			$_SESSION["auth"]["info"] = $this->property["row"];
 			$this->property["row"] = "";
 		} else {
-			if ($fail <= $failstop) $this->dsQuery("UPDATE `".$this->property["dstable"]."` SET `".$this->property["dsfaillogin"]."`=`".$this->property["dsfaillogin"]."`+1 WHERE `$itemuser`='$user' LIMIT 1");
+			if ($fail <= $failstop && ! empty($this->property["dsfaillogin"])) $this->dsQuery("UPDATE `".$this->property["dstable"]."` SET `".$this->property["dsfaillogin"]."`=`".$this->property["dsfaillogin"]."`+1 WHERE `$itemuser`='$user' LIMIT 1");
 			unset($_SESSION["auth"]);
 		}
 		$this->property["where"] = $where;
