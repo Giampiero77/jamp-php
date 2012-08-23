@@ -73,7 +73,13 @@ clsLabel.prototype =
 		  {
 				var row = (labelObj.row == undefined) ? dsObj.DSpos : labelObj.row;
 				if (dsObj.DSresult[row] == undefined) return;
-				valueDs = (dsObj.DSresult[row][labelObj.p.dsItem] == undefined) ? "" : LABEL.getVal(labelObj, dsObj.DSresult[row][labelObj.p.dsItem]);
+
+				valueDs = new Array();
+				var item = labelObj.p.dsItem.split(",");
+				var itemlength = item.length;
+				for (var i = 0; i < itemlength; i++) valueDs[i] = dsObj.DSresult[row][item[i]];
+				valueDs = valueDs.join(" - ");
+				
 				if (labelObj.p.format == null) labelObj.innerHTML = valueDs;
 				else FORMAT.format(labelObj, valueDs);
 				LABEL.limitAlt(labelObj);
