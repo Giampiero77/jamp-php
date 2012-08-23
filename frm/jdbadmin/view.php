@@ -104,6 +104,7 @@ function data_select_before($ds)
 			else $item[]= "`".$row->name."`";
 		}
 		$qry = "SELECT SQL_CALC_FOUND_ROWS ".implode(", ", $item)." FROM `".$_SESSION["jdbadmin"]["view"]."`";
+		if (isset($_REQUEST["dsGridwhere"])) $qry .= " WHERE ".stripslashes($_REQUEST["dsGridwhere"]);
 		if (isset($_REQUEST["dsorder"]))
 		{
 			$pos = stripos($qry, " ORDER BY ");

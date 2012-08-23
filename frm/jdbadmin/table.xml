@@ -71,7 +71,7 @@
 				</div>
 			</tab>
 			<tab id="tab2" label="DATA">
-				<dsnav id="dsnav3" dsobj="dsGrid" objprint="gridds2">
+				<dsnav id="dsnav3" dsobj="dsGrid" objprint="gridds2" dsfullsearch="`$$ITEM$$` LIKE '$$VALUE$$'">
 					<button>
 						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate Table" />
 						<bt id="btSQL2" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />

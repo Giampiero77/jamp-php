@@ -15,7 +15,7 @@
 				<textarea id="textSQL" label="\n" width="autosize" height="autosize" dsobj="ds1" dsitem="Code" editor-lang="sql" />
 			</tab>
 			<tab id="tab2" label="DATA">
-				<dsnav id="dsnav2" dsobj="dsGrid" objprint="gridds1">
+				<dsnav id="dsnav2" dsobj="dsGrid" objprint="gridds1" dsfullsearch="`$$ITEM$$` LIKE '$$VALUE$$'">
 					<button>
 						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate View" />
 					</button>
