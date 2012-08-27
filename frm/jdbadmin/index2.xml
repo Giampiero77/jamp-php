@@ -4,7 +4,7 @@
 	<page id="page" title="jdbadmin" loaddata="true" icon="../../favicon.ico">
 		<ds id="ds1" conn="custom" />
 		<div id="divTop" width="autosize" height="autosize">
-			<div id="divSX" width="240px" height="autosize" style="float:left;">
+			<div id="divSX" width="240px" height="autosize" style="float:left;background-color:white;">
 				<img id="img" src="images/logo.png" />
 				<tree id="tree1" dsobj="ds1" refresh="always" width="autosize" height="autosize" dragable="true" oncontextmenu="true">
 				    <contextmenu>
