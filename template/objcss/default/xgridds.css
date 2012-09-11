@@ -7,25 +7,25 @@ div.xgridds_default {
 }
 
 div.xgridds_default_row {
-/* 	border : 1px solid #AAAAAA; */
-	padding: 3px;
+	border-bottom:1px solid #DDDDDD; 
 	background-color: #F9F9F9;
+	padding: 3px;
 	overflow: hidden;
 	cursor: pointer;
 }
 
 div.xgridds_default_row_event {
-/* 	border : 1px solid #AAAAAA; */
+	border-bottom:1px solid #DDDDDD; 
+	background-color: #FFFFFF;
 	padding: 3px;
-	background-color: #F9F9F9;
 	overflow: hidden;
 	cursor: pointer;
 }
 
 div.xgridds_default_row_pos {
-/* 	border : 1px solid #AAAAAA; */
+	background-color:#FFF077 !important;
+	border-bottom:1px solid #DDDDDD;
 	padding: 3px;
-	background-color: #F9F9F9;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -33,11 +33,7 @@ div.xgridds_default_row_pos {
 div.xgridds_default_row_event:hover,
 div.xgridds_default_row_pos:hover,
 div.xgridds_default_row:hover {
-	border : 1px solid #319ACF;
-	padding: 2px;
- 	background-color: #F3F6FB;
-	overflow: hidden;
-	cursor: pointer;
+	background-color: #EFEDDE;
 }
 
 div.xgridds_default_row_error {

@@ -164,6 +164,14 @@ clsImage.prototype =
 	refreshObj : function(id)
 	{
 		this.getDsValue(id);
+		var obj = $(id+"_file");
+		if (obj!=undefined)
+		{
+			obj.onchange=function(){IMAGE.setDsValue(id, this);}
+			obj.onmouseout=function(){IMAGE.hideAdd(id);}
+			obj.onmouseover=function(){IMAGE.showAdd(id);}
+			obj.oncontextmenu=function(){IMAGE.cancel(id, event);}
+		}
 	},
 
 	showAdd : function(id)

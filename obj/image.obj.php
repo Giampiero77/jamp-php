@@ -124,8 +124,9 @@ class ClsObj_image extends ClsObject {
 			$size = str_ireplace("[[:alpha:]]", "", $this->property["width"]["value"]);
 			$size = intval($size / 10);
  			$size = ($size < 10) ? 5 : $size;
- 			$code .= "$tab\t<input id=\"".$id."_file\" class=\"".$this->property["class"]["value"]."\" type=\"file\" name=\"uploadfile\"  onchange=\"IMAGE.setDsValue('$id', this)\" onmouseout=\"IMAGE.hideAdd('$id');\" onmouseover=\"IMAGE.showAdd('$id');\" oncontextmenu=\"IMAGE.cancel('$id', event);\" size=\"".$size."\">\n";
-			$code .= "$tab\t<div id=\"".$id."_add\"><div></div></div>";
+ 			//$code .= "$tab\t<input id=\"".$id."_file\" class=\"".$this->property["class"]["value"]."\" type=\"file\" name=\"uploadfile\"  onchange=\"IMAGE.setDsValue('$id', this)\" onmouseout=\"IMAGE.hideAdd('$id');\" onmouseover=\"IMAGE.showAdd('$id');\" oncontextmenu=\"IMAGE.cancel('$id', event);\" size=\"".$size."\">\n";
+ 			$code .= "$tab\t<input id=\"".$id."_file\" class=\"".$this->property["class"]["value"]."\" type=\"file\" name=\"uploadfile\"  size=\"".$size."\">\n";
+ 			$code .= "$tab\t<div id=\"".$id."_add\"><div></div></div>";
 			$code .= "\n\t$tab<img ".$this->getProperty("html", true, false)." onmouseup=\"IMAGE.moveRow(this);\">\n";
   		}	
 		else $code .= "\n\t$tab<img ".$this->getProperty("html", true, false)." onmouseup=\"IMAGE.moveRow(this);\">\n";
