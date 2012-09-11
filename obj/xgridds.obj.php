@@ -92,7 +92,7 @@ class ClsObj_xgridds extends ClsObject {
 				      $ObjItem->setProperty("dsobj", $dsobj);
 				      $ObjItem->setProperty("dsitem", $dsitem);
 				      $ObjItem->setProperty("value", "&nbsp;");
-				      $ObjItem->setProperty("class", null);
+				     //$ObjItem->setProperty("class", null);
 			      }
 			      foreach ($ObjItem->enumProperty(true) as $name)
 			      {
