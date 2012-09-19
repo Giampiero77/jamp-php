@@ -138,6 +138,7 @@ clsImage.prototype =
 	displayObj : function(id)
 	{
  		var objImage = $(id);
+ 		if(objImage.p.fixed==true) return;
 		objImage.parentNode.style.width = (objImage.clientWidth + parseInt(objImage.border) * 2) + "px";
 		objImage.parentNode.style.height = (objImage.clientHeight + parseInt(objImage.border) * 2) + "px";
 	},

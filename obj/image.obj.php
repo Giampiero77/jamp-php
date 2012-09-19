@@ -55,6 +55,7 @@ class ClsObj_image extends ClsObject {
 		$this->property["display"]   	= array("value" => null, "inherit" => true, "html" => false);
 		$this->property["size"]			= array("value" => null, "inherit" => false, "html" => false);
 
+		$this->property["fixed"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dimension"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["forcename"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["createdir"]	= array("value" => null, "inherit" => false, "html" => false);
@@ -75,6 +76,7 @@ class ClsObj_image extends ClsObject {
  			$this->addEvent($id, $dsobj."Refresh", "IMAGE.refreshObj(\"$id\");");
 		}
 		if (!empty($this->property["display"]["value"])) $this->addEventBefore($id, $this->property["display"]["value"]."Display", "IMAGE.displayObj(\"$id\");");
+		if ($this->property["fixed"]["value"]=="true")	$this->propertyJS["fixed"] = true;
 	}
 
 	/**
@@ -118,13 +120,14 @@ class ClsObj_image extends ClsObject {
 		$this->propertyJS["directory"] = $this->property["directory"]["value"];
 		$this->propertyJS["extension"] = $this->property["extension"]["value"];
 		$this->propertyJS["empty"] = $system->dir_web_jamp.$system->dir_template."objcss/default/image/none.gif";
- 		$code = "\n$tab<div class=\"".$this->property["class"]["value"]."\" style=\"width:0px; height:0px\">";
+		if ($this->property["fixed"]["value"]=="true") $style="width:".$this->property["width"]["value"]."px; height:".$this->property["height"]["value"]."px;";
+		else $style = "width:0px; height:0px;";
+ 		$code = "\n$tab<div class=\"".$this->property["class"]["value"]."\" style=\"$style\">";
  		if ($this->property["readonly"]["value"]!="true") 
  		{
 			$size = str_ireplace("[[:alpha:]]", "", $this->property["width"]["value"]);
 			$size = intval($size / 10);
  			$size = ($size < 10) ? 5 : $size;
- 			//$code .= "$tab\t<input id=\"".$id."_file\" class=\"".$this->property["class"]["value"]."\" type=\"file\" name=\"uploadfile\"  onchange=\"IMAGE.setDsValue('$id', this)\" onmouseout=\"IMAGE.hideAdd('$id');\" onmouseover=\"IMAGE.showAdd('$id');\" oncontextmenu=\"IMAGE.cancel('$id', event);\" size=\"".$size."\">\n";
  			$code .= "$tab\t<input id=\"".$id."_file\" class=\"".$this->property["class"]["value"]."\" type=\"file\" name=\"uploadfile\"  size=\"".$size."\">\n";
  			$code .= "$tab\t<div id=\"".$id."_add\"><div></div></div>";
 			$code .= "\n\t$tab<img ".$this->getProperty("html", true, false)." onmouseup=\"IMAGE.moveRow(this);\">\n";
