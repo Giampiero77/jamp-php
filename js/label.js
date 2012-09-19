@@ -87,8 +87,8 @@ clsLabel.prototype =
 		  else if (valueDs != null)
 		  {
 				valueDs = LABEL.getVal(labelObj, valueDs);
-				LABEL.setDsValue(labelObj, valueDs);
 				if (labelObj.p.format != null) labelObj.innerHTML = FORMAT.Format(valueDs, labelObj.p.format);
+				else  labelObj.innerHTML = valueDs;
 				LABEL.limitAlt(labelObj);
 		  }
 	 },
