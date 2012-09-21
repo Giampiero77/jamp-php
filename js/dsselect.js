@@ -102,7 +102,11 @@ clsDsSelect.prototype =
 			var label = dsselectObj.nextSibling;
  			label.innerHTML = ((dsselectObj.selectedIndex + 1) > 0) ? dsselectObj.options[dsselectObj.selectedIndex].text : "";
 		}
-		if (dsselectObj.p.dsObjList!=undefined && dsselectObj.p.dsNav) DSSELECT.setPosDSList(dsselectObj);
+		if (dsselectObj.p.dsObjList!=undefined && dsselectObj.p.dsNav)
+		{
+			if (dsselectObj.p.dsObj==undefined) dsselectObj.selectedIndex=$(dsselectObj.p.dsObjList).DSpos-1;
+			else DSSELECT.setPosDSList(dsselectObj);
+		}
 	},
 
 	refreshObj : function(id)
