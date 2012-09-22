@@ -248,6 +248,7 @@ class ClsObj_gridds extends ClsObject {
 			foreach ($this->child_property["headlabel"] as $k => $text)
 			{
 				if (empty($this->child_property["headcol"][$k])) $this->child_property["headcol"][$k] = "1";
+				$text = $this->parseValue($text);
 				$code .= "\n\t\t\t".$tab."<div class=\"".$class."_head\" style=\"width:".$this->child_property["headcol"][$k]."px\">$text</div>";
 			}
 			$code .= "\n\t\t".$tab."</div>";
@@ -264,6 +265,7 @@ class ClsObj_gridds extends ClsObject {
 				$colwidth = (isset($this->child_property["colwidth"][$k])) ? "width:".$this->child_property["colwidth"][$k].";" : "width:100px;";
 				$order = (isset($this->child_property["order"][$k])) ? $this->child_property["order"][$k] : $this->property["order"]["value"];
 				$order = ($order == "true") ? "DOWN" : "";
+				$text = $this->parseValue($text);
 				$code .= "\n\t\t\t".$tab."<div class=\"".$class."_col$order\" style=\"$colalign$colwidth\" onmousemove=\"GRIDDS.colMouseMove(this, event); \" onmousedown=\"GRIDDS.colMouseDown(this,	event);\">$text";
 				$code .= "</div>";
 			}
@@ -298,7 +300,7 @@ class ClsObj_gridds extends ClsObject {
 					$this->addEvent($id, "Resize", "GRIDDS.autoHeight('$id');");
 				}
 			break;
-
+								
 			case "width":
 				if ($this->property["width"]["value"] == "autosize")
 				{
