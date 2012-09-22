@@ -120,7 +120,7 @@ class ClsObj_image extends ClsObject {
 		$this->propertyJS["directory"] = $this->property["directory"]["value"];
 		$this->propertyJS["extension"] = $this->property["extension"]["value"];
 		$this->propertyJS["empty"] = $system->dir_web_jamp.$system->dir_template."objcss/default/image/none.gif";
-		if ($this->property["fixed"]["value"]=="true") $style="width:".$this->property["width"]["value"]."px; height:".$this->property["height"]["value"]."px;";
+		if ($this->property["fixed"]["value"]=="true") $style="width:".$this->property["width"]["value"]."; height:".$this->property["height"]["value"].";";
 		else $style = "width:0px; height:0px;";
  		$code = "\n$tab<div class=\"".$this->property["class"]["value"]."\" style=\"$style\">";
  		if ($this->property["readonly"]["value"]!="true") 
