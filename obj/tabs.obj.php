@@ -58,15 +58,18 @@ class ClsObj_tabs extends ClsObject {
 
 		foreach ($this->child as $k => $tabs)
 		{
-		    $code_title .= "\n$tab\t\t<div class=\"$class2\" style=\"float: $align\" onclick=\"javascript:TABS.setFocus('".$this->property["id"]["value"]."', '$k');\">";   
-			$code_title .= "\n$tab\t\t\t\t<table id=\"".$k."_tab\" class=\"unselected\" $tabswidth cellspacing=\"0\" cellpadding=\"0\">";
-			$code_title .= "\n$tab\t\t\t\t\t<tr>";
-			$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_left\"></td>";
-			$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_text\">".$tabs->getPropertyName("label")."</td>";
-			$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_right\"></td>";
-			$code_title .= "\n$tab\t\t\t\t\t</tr>";
-			$code_title .= "\n$tab\t\t\t\t</table>";   
-    		$code_title .= "\n$tab\t\t</div>\n";
+			if ($tabs->getPropertyName("show")=="true")
+			{
+				$code_title .= "\n$tab\t\t<div class=\"$class2\" style=\"float: $align\" onclick=\"javascript:TABS.setFocus('".$this->property["id"]["value"]."', '$k');\">";   
+				$code_title .= "\n$tab\t\t\t\t<table id=\"".$k."_tab\" class=\"unselected\" $tabswidth cellspacing=\"0\" cellpadding=\"0\">";
+				$code_title .= "\n$tab\t\t\t\t\t<tr>";
+				$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_left\"></td>";
+				$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_text\">".$tabs->getPropertyName("label")."</td>";
+				$code_title .= "\n$tab\t\t\t\t\t\t<td class=\"tab_right\"></td>";
+				$code_title .= "\n$tab\t\t\t\t\t</tr>";
+				$code_title .= "\n$tab\t\t\t\t</table>";   
+	    		$code_title .= "\n$tab\t\t</div>\n";
+			}
 		}
 		$code_title .= "\n$tab\t\t<div class=\"".$class."_bottom\"></div>";       
 		$code_title .= "\n$tab\t</div>";

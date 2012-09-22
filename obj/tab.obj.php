@@ -32,7 +32,8 @@ class ClsObj_tab extends ClsObject {
 		$this->property["label"]   = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["display"] = array("value" => $id,  "inherit" => false, "html" => false);	
 		$this->property["tabs"]	  	= array("value" => $id,  "inherit" => true, "html" => false);
-
+		$this->property["show"] 	= array("value" => "true", "inherit" => false, "html" => false);
+		
 		$this->property["style"]["value"] = "display: none;";
 		$this->property["class"]["value"] = "tab";
 	}
