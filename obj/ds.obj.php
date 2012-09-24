@@ -576,7 +576,8 @@ class ClsObj_ds extends ClsObject {
 						{
 							$dshost = explode("@", $setting[2]);
 							$this->setProperty("dsengine", $setting[1]);
-							$this->setProperty("dshost", $dshost[0]);
+							$h = $this->parseValue($dshost[0]);
+							$this->setProperty("dshost", $h);
 							$this->setProperty("dsuser", $setting[3]);
 							$this->setProperty("dspwd", $setting[4]);
 							$this->setProperty("dsport", $setting[5]);
