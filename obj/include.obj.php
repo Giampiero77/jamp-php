@@ -71,7 +71,7 @@ class ClsObj_include extends ClsObject {
 		$render = strtolower($this->parseValue($this->property["render"]["value"]));
 		switch($render) {
 			case 'file':
-				return file_get_contents($this->parseValue($this->property["src"]["value"]));
+				return $this->parseValue(file_get_contents($this->parseValue($this->property["src"]["value"])));
 				break;
 			default:
 				return $event->callEvent($render, $this->parseValue($this->property["src"]["value"]));
