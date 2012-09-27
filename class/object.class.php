@@ -531,7 +531,11 @@ abstract class ClsObject
 		{
 			$code .= "<script>\n";
 			$code .= "<![CDATA[";
-			$code .= $codejs;
+			if (COMPRESSJS) {
+				$code .= $system->packJS($codejs);
+			} else {
+				$code .= $codejs;
+			}
 			$code .= "]]>\n";
 			$code .= "</script>\n";
 		}

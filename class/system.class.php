@@ -178,7 +178,7 @@ class ClsSystem
 	public function setJs($code)
 	{
 		if (empty($code)) return;
-		$code = $this->_pack($code);
+		$code = $this->packJS($code);
 		return "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">$code</script>";
 	}
 
@@ -290,7 +290,7 @@ class ClsSystem
 			}
 			$out .= "\n\n\t";
 		}
-		$out = $this->_pack($out);
+		$out = $this->packJS($out);
 		return "\n\t<script type=\"text/javascript\" language=\"JavaScript1.5\">$out</script>";
 	}
 
@@ -317,7 +317,7 @@ class ClsSystem
 		return($col);
 	}
 
-	private function _pack($code) 
+	public function packJS($code) 
 	{
 		if (!$this->compressjs) return $code;
 		$packer = new JavaScriptPacker($code, 'Normal', true, false);
