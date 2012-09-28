@@ -208,13 +208,9 @@ class ClsObj_ds extends ClsObject {
 		if ($this->property["printxml"]["value"] != "true") return;
 		if (($this->property["load"]["value"] == "false" || $this->property["loadall"]["value"] == "false") && $_REQUEST["data"] == "loadall")
 		{
-		  $code .= "<script>\n";
-		  $code .= "<![CDATA[";
 		  $code .= "$('".$this->property["id"]["value"]."').DSresult = new Array();";
 		  $code .= "AJAX.setDsJSON('".$this->property["id"]["value"]."',0,0,0,0);";
-		  $code .= "\n]]>\n";
-		  $code .= "</script>\n";
-		  return $code;
+		  return $this->_complete($code);
 		}
 		if ($this->property["load"]["value"] == "false") return $code;
 		if (!empty($this->property["xml"]["value"])) return $this->property["xml"]["value"];
@@ -250,12 +246,8 @@ class ClsObj_ds extends ClsObject {
 			if ($this->ds->property["inslast"] > -1)
 			{
 				$id = $this->property["id"]["value"];
-				$code .= "<script>\n";
-				$code .= "<![CDATA[";
-				if ($this->ds->property["inslast"] == 0) $code .= "\nDS.dsUpdate(\"$id\", \"$this->locktime\");"; //Update
-				else $code .= "\nDS.dsInsert(\"$id\", \"".$this->ds->property["inslast"]."\");"; // Insert
-				$code .= "\n]]>\n";
-				$code .= "</script>\n";
+				if ($this->ds->property["inslast"] == 0) $code .= $this->_complete("\nDS.dsUpdate(\"$id\", \"$this->locktime\");"); //Update
+				else $code .= $this->_complete("\nDS.dsInsert(\"$id\", \"".$this->ds->property["inslast"]."\");"); // Insert
 			}
 			else //Return XML
 			{
@@ -265,14 +257,11 @@ class ClsObj_ds extends ClsObject {
 				{
 					if ($this->property["out"]["value"] == "json")
 					{
-						$code .= "<script>\n";
-						$code .= "<![CDATA[";
-						$code .= "\n$('$id').DSresult = [";
-						$code .= $this->property["xml"]["value"];
-						$code .= "];";
-						$code .= "\nAJAX.setDsJSON('".$id."',".$this->ds->property['start'].",".$this->ds->property['end'].",".$this->ds->property['tot'].",".$this->ds->property['limit'].");";
-						$code .= "\n]]>";
-						$code .= "\n</script>\n";
+						$tmp = "\n$('$id').DSresult = [";
+						$tmp .= $this->property["xml"]["value"];
+						$tmp .= "];";
+						$tmp .= "\nAJAX.setDsJSON('".$id."',".$this->ds->property['start'].",".$this->ds->property['end'].",".$this->ds->property['tot'].",".$this->ds->property['limit'].");";
+						$code .= $this->_complete($tmp);
 					}
 					else
 					{
@@ -285,9 +274,7 @@ class ClsObj_ds extends ClsObject {
  					global $system;
 					require_once($system->dir_real_jamp."/".$system->dir_class."/json.php");
 					$json = new Services_JSON();
-					$code .= "<script>\n";
-					$code .= "<![CDATA[";
-					$code .= "\n$('$id').DSresult = [";
+					$tmp = "\n$('$id').DSresult = [";
 					$i = 1;
 					$pre = ($this->property["fetch"]["value"] == "row") ? "col_" : "";
 					while($row = $this->ds->dsGetRow())
@@ -299,14 +286,13 @@ class ClsObj_ds extends ClsObject {
 							if (!preg_match("/^[A-Za-z0-9_\-àéèìùò]+$/", $tag)) ClsError::showError("OBJ009", "", $tag);
 							$arrRow[] = $json->encode($tag).":".$json->encode($item);
 						}
-						$code .= "\n{".implode(",", $arrRow)."},";
+						$tmp .= "\n{".implode(",", $arrRow)."},";
 						$i++;
 					}
-					if ($i>1) $code = substr($code, 0, -1);
-					$code .= "];";
-					$code .= "\nAJAX.setDsJSON('".$id."',".$this->ds->property['start'].",".$this->ds->property['end'].",".$this->ds->property['tot'].",".$this->ds->property['limit'].");";
-					$code .= "\n]]>";
-					$code .= "\n</script>\n";
+					if ($i>1) $tmp = substr($tmp, 0, -1);
+					$tmp .= "];";
+					$tmp .= "\nAJAX.setDsJSON('".$id."',".$this->ds->property['start'].",".$this->ds->property['end'].",".$this->ds->property['tot'].",".$this->ds->property['limit'].");";
+					$code .= $this->_complete($tmp);
 				}
 				else //OUT XML
 				{
@@ -697,6 +683,15 @@ class ClsObj_ds extends ClsObject {
 				$this->ds->property[$name] = $this->property[$name]["value"];
 			break;
 		}
+	}
+
+	private function _complete($string) {
+		global $system;
+
+		if (COMPRESSJS) {
+			$string = $system->packJS($string);
+		}
+		return "<script><![CDATA[$string]]></script>\n";
 	}
 }
 ?>
