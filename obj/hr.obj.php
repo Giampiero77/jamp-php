@@ -50,6 +50,7 @@ class ClsObj_hr extends ClsObject {
 	{
 		$w=$pdf->w-$pdf->rMargin;
 		$pdf->Line($pdf->GetX(), $pdf->GetY(), $w, $pdf->GetY());
+		$pdf->SetY($pdf->GetY()+1);
 	}
 
 	/**
