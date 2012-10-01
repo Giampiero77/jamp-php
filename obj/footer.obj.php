@@ -34,6 +34,7 @@ class ClsObj_footer extends ClsObject {
 	*/
 	public function codePDF($pdf)
 	{
+		foreach ($this->child as $obj) $obj->codePDF($pdf);
 	}
 
 	/**

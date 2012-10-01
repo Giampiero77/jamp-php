@@ -33,6 +33,7 @@ class ClsObj_header extends ClsObject {
 	*/
 	public function codePDF($pdf)
 	{
+		foreach ($this->child as $obj) $obj->codePDF($pdf);
 	}
 
 	/**
