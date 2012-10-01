@@ -48,7 +48,8 @@ class ClsObj_hr extends ClsObject {
 	*/
 	public function codePDF($pdf)
 	{
-		$pdf->CellObj($this);
+		$w=$pdf->w-$pdf->rMargin;
+		$pdf->Line($pdf->GetX(), $pdf->GetY(), $w, $pdf->GetY());
 	}
 
 	/**
