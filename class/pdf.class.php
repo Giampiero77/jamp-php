@@ -33,7 +33,7 @@ class ClsPDF extends FPDF {
 		$this->maxsize = 0;
 		$this->headrow["data"] = null;
 		$this->headrow["row"] = 0;
-		$this->print_footer = true;
+		$this->print_header = true;
 		$this->print_footer = true;
 	}
 
