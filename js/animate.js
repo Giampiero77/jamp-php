@@ -95,7 +95,7 @@ clsAnimate.prototype =
 		}
 		else if (prop[1].match(/[0-9]{1}/)) //Number
 		{
-			text = val.replace(/[0-9.]/g,"");
+			text = (val) ? val.replace(/[0-9.]/g,"") : 0;
 			val = parseFloat(val);
 			prop[1] = parseFloat(prop[1]);
 		}
