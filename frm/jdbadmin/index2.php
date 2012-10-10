@@ -105,10 +105,10 @@ function html_load()
 			}
 		}
 
-		function Ins1(obj) Ins(obj, '', ',');
-		function Ins2(obj) Ins(obj, '\\t', ',\\n');
-		function Ins3(obj) Ins(obj, '', '');
-		function Ins4(obj) Ins(obj, '\\t', '\\n');
+		function Ins1(obj) { Ins(obj, '', ','); }
+		function Ins2(obj) { Ins(obj, '\\t', ',\\n'); }
+		function Ins3(obj) { Ins(obj, '', ''); }
+		function Ins4(obj) { Ins(obj, '\\t', '\\n'); }
 	";
 	$event->setCodeJs($code);
 }
