@@ -12,6 +12,11 @@
 
 class ClsObj_import extends ClsObject {
 	/**
+	* @var $child_property Properties of child objects
+	*/
+	private $child_property;
+		
+	/**
 	* Construct
 	* @param string $id ID object
 	*/
@@ -22,11 +27,9 @@ class ClsObj_import extends ClsObject {
 		$this->property["debug"] 		= array("value" => "false", "inherit" => true, "html" => false);
 		$this->property["from"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["to"] 			= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["fieldFrom"]	= array("value" => false, "inherit" => false, "html" => false);
-		$this->property["fieldTo"] 		= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["format"] 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["method"] 		= array("value" => "bypass", "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->multiObj = true;
 	}
 
 	/**
@@ -45,12 +48,23 @@ class ClsObj_import extends ClsObject {
 	}
 
 	/**
+	* Set the properties of the object
+	* @param string $name Name property
+	* @param string $value 	Value of Property
+	*/
+	public function setProperty($name, $value)
+	{
+		if (is_array($value)) $this->child_property[$name] = $value;
+		else parent::setProperty($name, $value);
+	}
+		
+	/**
 	* Generate the code html
 	* @param string $tab Tabs
 	*/
 	public function codeHTML($tab = "")
 	{
-		global $xml;
+		global $xml, $system;
  		$ds = $xml->getObjByType("ds");	
 
 		$dsFrom = $ds[$this->property["from"]["value"]];
@@ -69,23 +83,22 @@ class ClsObj_import extends ClsObject {
 		}
 		else $input = $output = $dsFrom->ds->property["result"];
 
-		// Mapping and format
-		if ($this->property["fieldFrom"]["value"]) 
-		{
-			global $system;
+		// Mapping and format			
+		if ($this->child_property["fieldFrom"]) 
+		{		
 			require_once($system->dir_real_jamp."/class/format.class.php");
 			$format = new ClsFormat();
 			$output=array();
-			$i=0;
+			$i=0;			
 			foreach ($input as $row) 
 			{
-				$index=0;
-				foreach ($this->property["fieldFrom"]["value"] as $fieldFrom)
+				$index=0;				
+				foreach ($this->child_property["fieldFrom"] as $fieldFrom)
 				{
-					$fieldTo = $this->property["fieldTo"]["value"][$index];
+					$fieldTo = $this->child_property["fieldTo"][$index];
 					$output[$i][$fieldTo] = $row[$fieldFrom];
-					if (isset($this->property["format"]["value"][$index]))
-						$output[$i][$fieldTo] = $format->Format($output[$i][$fieldTo], $this->property["format"]["value"][$index]);
+					if (isset($this->child_property["format"][$index]))
+						$output[$i][$fieldTo] = $format->Format($output[$i][$fieldTo], $this->child_property["format"][$index]);
 					$index++;
 				}
 				$i++;
@@ -94,6 +107,9 @@ class ClsObj_import extends ClsObject {
 		$dsTo->ds->dsConnect();
 		$dsTo->ds->dsImport($output, $this->property["method"]["value"]);
 		$dsTo->callEvent("data_import_after", $dsTo);
+		
+		$code = "\n$tab<div ".$this->getProperty("html", true, false)." ></div>";
+		return $code;		
 	}
 
 	/**
