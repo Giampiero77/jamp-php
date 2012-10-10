@@ -60,6 +60,7 @@ class ClsObj_image extends ClsObject {
 		$this->property["forcename"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["createdir"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["backgroundcolor"] = array("value" => null, "inherit" => false, "html" => false);		
+		$this->realpath = false;
 	}
 
 	/**
@@ -96,7 +97,9 @@ class ClsObj_image extends ClsObject {
 		if (!empty($this->property["value"]["value"])) 
 			$this->property["src"]["value"] = $this->property["directory"]["value"].$this->property["value"]["value"];
 		else $this->property["src"]["value"] = $system->dir_real_jamp."/".$system->dir_template."objcss/default/image/none.gif";
+		
 		$this->property["value"]["value"] = "";
+		if ($this->realpath==true) $this->property["src"]["value"] = getenv("DOCUMENT_ROOT").$this->property["src"]["value"];
 		$pdf->CellObj($this);
 	}
 
@@ -151,6 +154,7 @@ class ClsObj_image extends ClsObject {
 			case "directory":
 				if (substr($this->property["directory"]["value"],0,2) == "./")
 				{
+					$this->realpath = true;
 					$this->property["directory"]["value"] = substr($this->property["directory"]["value"],2);
 					$this->property["directory"]["value"] = dirname($_SERVER['PHP_SELF'])."/".$this->property["directory"]["value"];
 				}
