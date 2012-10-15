@@ -137,12 +137,13 @@ class ClsObj_text extends ClsObject {
 		$type = ($this->property["password"]["value"] == "true") ? "password" : "text";
 		if ($this->property["fileupload"]["value"] == "true")
 		{
+			$filestore = defined("FILESTORE") ? FILESTORE : $system->dir_web_jamp.$system->dir_class."filestore.php";
 			if (empty($this->property["target"]["value"]))
 			{
-				$code .= "\n$tab<form action=\"".$system->dir_web_jamp.$system->dir_class."filestore.php"."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$id."_target\">";
+				$code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$id."_target\">";
 				$code .= "\n$tab\t<iframe style=\"display:none\" name=\"".$id."_target\"></iframe>";
 			}
-			else $code .= "\n$tab<form action=\"".$system->dir_web_jamp.$system->dir_class."filestore.php"."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$this->property["target"]["value"]."\">";
+			else $code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$this->property["target"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"directory\" value=\"".$this->property["directory"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"classname\" value=\"TEXT\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"forcename\" value=\"".$this->property["forcename"]["value"]."\">";

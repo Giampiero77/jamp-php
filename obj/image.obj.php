@@ -118,7 +118,8 @@ class ClsObj_image extends ClsObject {
 	{
 		global $system;
 		$id = $this->property["id"]["value"];
-		$phpstore = $system->dir_web_jamp.$system->dir_class."filestore.php";
+		$phpstore = defined("FILESTORE") ? FILESTORE : $system->dir_web_jamp.$system->dir_class."filestore.php";
+
 		$this->propertyJS["action"] = $phpstore;
 		$this->propertyJS["directory"] = $this->property["directory"]["value"];
 		$this->propertyJS["extension"] = $this->property["extension"]["value"];
