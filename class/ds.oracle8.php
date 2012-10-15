@@ -641,6 +641,7 @@ where {$this->_row_number} between ".$this->property["start"]." and ".($this->pr
 			case "array":
 			case "row":
 			case "assoc":
+			case "object":
 				$row = null;
 				ocifetchinto($this->property["result"], $row, OCI_ASSOC+OCI_RETURN_NULLS);
 				if (empty($row)) return;
