@@ -116,6 +116,7 @@ clsxGridds.prototype =
 		var length = dsObj.DSresult.length; 
 		for (var i = 1; i < length; i++) this.addRow(i, id, bodies);
 		this.moveRow(id, bodies);
+		griddsObj.scrollTop=0;
 	}
 }
 
