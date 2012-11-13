@@ -57,7 +57,7 @@ clsText.prototype =
 		else var valueDs = textObj.value;
 		if (textObj.p.format == undefined) textObj.value = valueDs;
 		else FORMAT.format(textObj, valueDs);
-		textObj.oldValue = valueDs;
+		textObj.oldValue = textObj.value;
 	},
 
 	refreshObj : function(id)
