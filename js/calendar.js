@@ -172,7 +172,7 @@ clsCalendar.prototype =
 		this.div.style.left = (offLeft - scrollLeft) + "px";
 		this.div.style.top = offTop + obj.offsetHeight - scrollTop + "px";
 // 		this.div.style.minWidth = obj.clientWidth + "px";
-		if (parseInt(this.div.style.top) + 155  >=  SYSTEMBROWSER.winHeight()) this.div.style.top = parseInt(this.div.style.top) - 155  + "px";
+		if (parseInt(this.div.style.top) + 210  >=  SYSTEMBROWSER.winHeight()) this.div.style.top = parseInt(this.div.style.top) - 210  + "px";
 		this.show();
 
 		this.obj.parentNode.insertBefore(this.div, obj);
