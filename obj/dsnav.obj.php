@@ -135,10 +135,10 @@ class ClsObj_dsnav extends ClsObject {
 			for($i = 0; $i < count($this->child_property["image"]); $i++)
 			{
 				$idchild = "";
-				if (isset($this->child_property["id"][$i])) $idchild = " id=\"".$this->child_property["id"][$i]."\"";
-				$code .= "\n$tab\t<div$idchild class=\"".$class."_bt_custom\" onclick=\"".$this->child_property["onclick"][$i]."\"";
-				if (isset($this->child_property["image"][$i])) $code .= " style=\"background-image : url('".$this->child_property["image"][$i]."');  background-repeat:no-repeat; background-position:center;\"";
-				if ($this->child_property["title"][$i]) $code .= " title=\"".$this->child_property["title"][$i]."\" ";
+				if (isset($this->child_property["id"][$i])) $idchild = " id=\"".$this->parseValue($this->child_property["id"][$i])."\"";
+				$code .= "\n$tab\t<div$idchild class=\"".$class."_bt_custom\" onclick=\"".$this->parseValue($this->child_property["onclick"][$i])."\"";
+				if (isset($this->child_property["image"][$i])) $code .= " style=\"background-image : url('".$this->parseValue($this->child_property["image"][$i])."');  background-repeat:no-repeat; background-position:center;\"";
+				if ($this->child_property["title"][$i]) $code .= " title=\"".$this->parseValue($this->child_property["title"][$i])."\" ";
 				$code .= ">&nbsp;</div>";
 			}
 		}
