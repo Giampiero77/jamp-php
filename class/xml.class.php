@@ -209,7 +209,7 @@ class ClsXML {
 			if ($type=="xmlpage") 
 			{
 				$src = userEvent::call("xmlpage_event", (string)$node->attributes()->src);
-				if ($src!=1) $linkpage = new ClsXML($src);
+				if (!is_bool($src)) $linkpage = new ClsXML($src);
 				else $linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->ReadAllNodes($linkpage->LoadXMLFromFile(), $parent);
@@ -254,7 +254,7 @@ class ClsXML {
 			if ($type=="xmlpage") 
 			{
 				$src = userEvent::call("xmlpage_event", (string)$node->attributes()->src);
-				if ($src!=1) $linkpage = new ClsXML($src);
+				if (!is_bool($src)) $linkpage = new ClsXML($src);
 				else $linkpage = new ClsXML((string)$node->attributes()->src);				
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->ReadTagNameNodes($linkpage->LoadXMLFromFile(), $typeobj);	
@@ -296,7 +296,7 @@ class ClsXML {
 			if ($type=="xmlpage") 
 			{
 				$src = userEvent::call("xmlpage_event", (string)$node->attributes()->src);
-				if ($src!=1) $linkpage = new ClsXML($src);
+				if (!is_bool($src)) $linkpage = new ClsXML($src);
 				else $linkpage = new ClsXML((string)$node->attributes()->src);
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->ReadTagIdNodes($linkpage->LoadXMLFromFile(), $idobj);
@@ -340,7 +340,7 @@ class ClsXML {
 			if ($type=="xmlpage") 
 			{
 				$src = userEvent::call("xmlpage_event", (string)$node->attributes()->src);
-				if ($src!=1) $linkpage = new ClsXML($src);
+				if (!is_bool($src)) $linkpage = new ClsXML($src);
 				else $linkpage = new ClsXML((string)$node->attributes()->src);				
 				$this->setAttributes($linkpage->xmlpage->page, $this->pageObj);
 				$this->overrideNodes($linkpage->LoadXMLFromFile());

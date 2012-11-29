@@ -134,5 +134,7 @@ abstract class jampBase implements jampInterface {
 	public function after_plot($graph) {}
 	public function start_graph($xml_graph) {}
 	public function end_graph($graphs) {}
-	public function xmlpage_event($code) {}
+	public function xmlpage_event($code) {
+		return true;
+	}
 }
