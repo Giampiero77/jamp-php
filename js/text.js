@@ -93,7 +93,7 @@ clsText.prototype =
 			 if (posSlash==0) posSlash = filename.lastIndexOf('\\')+1;   	// client Unix/Linux  
 			 filename = filename.substr(posSlash);
 			 filename = filename.substr(0, filename.lastIndexOf('.'));
-			 formObj.forcename.value = FORMAT.Format(filename, TEXT.objposted.p.format);
+			 if (TEXT.objposted.p.format) formObj.forcename.value = FORMAT.Format(filename, TEXT.objposted.p.format);
 		}
 		TEXT.setSelect(id, TEXT.dimension, TEXT.objposted.p.dimension);
 		formObj.submit();
