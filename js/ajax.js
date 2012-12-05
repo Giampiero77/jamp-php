@@ -343,6 +343,9 @@ clsAJAX.prototype =
 				window.consoleAJAX.log(logtime + " - <b>[REQUEST]<\/b> METHOD: <font color=\"blue\">" + method + "<\/font> URL: <font color=\"green\">" + url + "<\/font> SYNC: <font color=\"green\">" + sync + "<\/font> EXPECTED RETURNXML: <font color=\"green\">" + returnxml + "<font>");
 				window.consoleAJAX.log(logtime + " - <b>[DATA]<\/b>"+data);
 			}
+			if (typeof(AJAX_EXTERNAL_ENCODE) !== 'undefined') {
+				data=window[AJAX_EXTERNAL_ENCODE](data);
+			}
 			conn.send(data); 
 			if (sync) AJAX.handleResponse(conn, returnxml, func); //Bug Firefox
 			if (!returnxml) this.loader(false);
@@ -513,6 +516,7 @@ clsAJAX.prototype =
 			}
 		}
 		if (resize == true) Resize();
-	}
+	},
+
 }
 var AJAX = new clsAJAX();
