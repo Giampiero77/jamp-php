@@ -62,22 +62,26 @@ clsEditorPdf.prototype =
 	loadData : function(obj)
 	{
 		var dsObj = $(obj.p.dsObj);
-		for (var i in dsObj.DSresult) if (dsObj.DSresult.hasOwnProperty(i)) this.addObj(obj, dsObj.DSresult[i]);
+		for (var i in dsObj.DSresult) if (dsObj.DSresult.hasOwnProperty(i)) this.addObj(obj, dsObj.DSresult[i], i);
 	},
 	
-	addObj : function(obj, data)
+	addObj : function(obj, data, i)
 	{
 		var typeObj = "";
-/*		switch(parseInt(data['dsitemobject']))
+		var objnew = document.createElement("div");
+		switch(parseInt(data[obj.p.dsitemobject]))
 		{
-			case 1: //Cella
-				typeObj = "div";
+			case 0: //Cell
+				objnew.setAttribute("class", "cell");
+				if (data[obj.p.dsitemheight]==0) data[obj.p.dsitemheight] = "";
+				objnew.style.height = data[obj.p.dsitemheight]+"mm";
+			break;
+			case 1: //MultiCell
+				objnew.setAttribute("class", "multicell");
+				objnew.style.lineHeight = data[obj.p.dsitemline]+"mm";
+				objnew.style.height = data[obj.p.dsitemheight]+"mm";
 			break;
 		}
-		*/
-		
-		var objnew = document.createElement("div");
-		objnew.setAttribute("class", "multicell");
 		if(data[obj.p.dsitemborder]=="1") objnew.style.border="0.2mm solid black";
 		objnew.innerHTML = data[obj.p.dsitemtext];
 		objnew.style.left = (data[obj.p.dsitemx]-5)+"mm";
@@ -86,14 +90,16 @@ clsEditorPdf.prototype =
 		objnew.style.paddingRight = "1mm";
 		objnew.style.width = data[obj.p.dsitemwidth]-2+"mm";
 		var align = "";
-		if (data[obj.p.dsitemalign]=="1") align="left";
+		if (data[obj.p.dsitemalign]=="l") align="left";
+		else if (data[obj.p.dsitemalign]=="c") align="center";
+		else if (data[obj.p.dsitemalign]=="r") align="right";
+		else if (data[obj.p.dsitemalign]=="j") align="justify";
 		objnew.style.textAlign = align;
 		objnew.style.fontFamily = data[obj.p.dsitemfont];
 		objnew.style.fontSize = data[obj.p.dsitemfontsize]+"pt";
-		var height = (data[obj.p.dsitemheight]==0) ? data[obj.p.dsitemfontsize]+"pt" : data[obj.p.dsitemheight]+"mm";
-		objnew.style.minHeight = height;
 		objnew.key = data[obj.p.dsitemkey];
 		objnew.setAttribute("onclick","EDITORPDF.setting(this,'',event);");
+		objnew.row = parseInt(i);
 		obj.sheet.margin.appendChild(objnew);
 	},
 	
@@ -136,11 +142,18 @@ clsEditorPdf.prototype =
 	
 	setting : function(obj,objE, event)
 	{
+		if (!event) event = window.event;
+		if (event.ctrlKey==true)
+		{
+			console.debug(event);
+			return;
+		}
+		
 		if (obj == '')
 		{
 			var editor = $(objE);
 			var code = "<h1>OGGETTO?</h1>";
-			code += "<select onchange=\"EDITORPDF.createOBJ('"+objE+"', this, "+event.clientX+","+event.clientY+");\"><option checked=\"true\"></option><option value=\"1\">Multi Cell</select>";
+			code += "<select onchange=\"EDITORPDF.createOBJ('"+objE+"', this, "+event.clientX+","+event.clientY+");\"><option checked=\"true\"></option><option value=\"0\">Cell</option><option value=\"1\">Multi Cell</select>";
 			editor.setting.innerHTML = code;
 			editor.setting.style.display = "block";
 		} 
@@ -158,16 +171,21 @@ clsEditorPdf.prototype =
 			code += "<tr><td>W:</td><td width=\"223px\" align=\"right\"><button onclick=\"EDITORPDF.settingWIDTH(this,'-');\">-</button><input type=\"text\" size=\"3\" maxlength=\"3\" id=\"setting-width\" onchange=\"EDITORPDF.settingWIDTH(this,'');\" value=\""+w+"\">mm<button onclick=\"EDITORPDF.settingWIDTH(this,'+');\">+</button></td></tr>";
 			code += "<tr><td>H:</td><td align=\"right\"><button onclick=\"EDITORPDF.settingHEIGHT(this,'-');\">-</button><input type=\"text\" size=\"3\" maxlength=\"3\" id=\"setting-height\" onchange=\"EDITORPDF.settingHEIGHT(this,'');\" value=\""+h+"\">mm<button onclick=\"EDITORPDF.settingHEIGHT(this,'+');\">+</button></td></tr>";
 			code += "<tr><td>Font:</td><td align=\"right\"><select style=\"width:147px\" id=\"setting-font\" onchange=\"EDITORPDF.settingFONT(this);\"style=\"width:162px;\"><option>Arial</option><option>Courier</option><option>Times</option><option>Symbol</option><option>ZapfDingbats</option></select></td></tr>";
-			code += "<tr><td>Pt:</td><td align=\"right\"><button onclick=\"EDITORPDF.settingSIZE(this,'-');\">-</button><input type=\"text\" size=\"3\" maxlength=\"3\" id=\"setting-size\" onchange=\"EDITORPDF.settingSIZE(this,'');\" value=\""+parseFloat(obj.style.fontSize)+"\">mm<button onclick=\"EDITORPDF.settingSIZE(this,'+');\">+</button></td></tr>";
+			code += "<tr><td>Pt:</td><td align=\"right\"><button onclick=\"EDITORPDF.settingSIZE(this);\">-</button><input type=\"text\" size=\"3\" maxlength=\"3\" id=\"setting-size\" onchange=\"EDITORPDF.settingSIZE(this,'');\" value=\""+parseFloat(obj.style.fontSize)+"\">mm<button onclick=\"EDITORPDF.settingSIZE(this,'+');\">+</button></td></tr>";
+			if (obj.className=="multicell") code += "<tr><td>Linea:</td><td width=\"223px\" align=\"right\"><button onclick=\"EDITORPDF.settingLINE(this,'-');\">-</button><input type=\"text\" size=\"3\" maxlength=\"3\" id=\"setting-line\" onchange=\"EDITORPDF.settingLINE(this,'');\" value=\""+parseFloat(obj.style.lineHeight)+"\">mm<button onclick=\"EDITORPDF.settingLINE(this,'+');\">+</button></td></tr>";
+			code += "<tr><td>Allinea:</td><td align=\"right\"><select style=\"width:147px\" id=\"setting-align\" onchange=\"EDITORPDF.settingALIGN(this);\"style=\"width:162px;\"><option>left</option><option>center</option><option>right</option><option value=\"J\">justify</option></select></td></tr>";
 			code += "<tr><td>Testo:</td><td align=\"right\"><textarea style=\"width:138px;\" onkeyup=\"EDITORPDF.settingTEXT(this);\">"+obj.innerHTML+"</textarea></td></tr>";
 			code += "<tr><td>Bordo:</td><td align=\"right\"><input type=\"checkbox\" maxlength=\"3\" id=\"setting-border\" onchange=\"EDITORPDF.settingBORDER(this);\"></td></tr>";
 			code += "<tr><td></td><td align=\"right\"><input type=\"button\" maxlength=\"3\" onclick=\"EDITORPDF.settingDELETE(this);\" value=\"Elimina!\"></td></tr>";
 			code += "</table>";
 			setting.innerHTML = code;
 			$('setting-font').value = obj.style.fontFamily;
+			$('setting-align').value = obj.style.textAlign;
 			if(obj.style.border != '') $('setting-border').checked = true;
 			setting.style.display = "block";
 			setting.obj = obj;
+			var dsObj = $(setting.parentElement.p.dsObj);
+			dsObj.DSpos = obj.row;
 		}
 		if (!event) event = window.event;
 		SYSTEMEVENT.stopPropagation(event);
@@ -218,9 +236,25 @@ clsEditorPdf.prototype =
 			if ((val+20) > sheet.w) val = sheet.w-20; 
 			setting.obj.style.height = val+"mm";
 		}
+		if($val==0) setting.obj.style.height = "";
 		$('setting-height').value = val; 
 		var objE = sheet.parentNode;
 		this.setDsValue(objE, objE.p.dsitemheight, val);
+	},
+
+	settingLINE : function(obj, oper)
+	{
+		var setting = obj.parentElement.parentElement.parentElement.parentElement.parentElement;
+		var sheet = setting.parentElement.sheet;
+		var val = parseFloat(setting.obj.style.lineHeight);
+		if (oper=="-") val--;
+		else if (oper=="+") val++;
+		else val = parseFloat(obj.value);
+		if (val <0 ) val = 0;
+		setting.obj.style.lineHeight = val+"mm";
+		$('setting-line').value = val; 
+		var objE = sheet.parentNode;
+		this.setDsValue(objE, objE.p.dsitemline, val);
 	},
 
 	settingTOP : function(obj, oper)
@@ -284,7 +318,16 @@ clsEditorPdf.prototype =
 		var sheet = setting.parentElement.sheet;
 		setting.obj.style.fontFamily = obj.value;
 		var objE = sheet.parentNode;
-		this.setDsValue(objE, objE.p.dsitemfont, val);
+		this.setDsValue(objE, objE.p.dsitemfont, obj.value);
+	},
+
+	settingALIGN : function(obj)
+	{
+		var setting = obj.parentElement.parentElement.parentElement.parentElement.parentElement;
+		var sheet = setting.parentElement.sheet;
+		setting.obj.style.textAlign = obj.value;
+		var objE = sheet.parentNode;
+		this.setDsValue(objE, objE.p.dsitemalign, obj.value.substr(0,1));
 	},
 
 	settingBORDER : function(obj)
@@ -316,8 +359,8 @@ clsEditorPdf.prototype =
 		{
 			obj.rulerX.style.display="block";
 			obj.rulerY.style.display="block";
-			obj.rulerX.style.top = (event.clientY) - 1 + "px";
-			obj.rulerY.style.left = (event.clientX) - 1 + "px";
+			obj.rulerX.style.top = (event.clientY) - 2 + "px";
+			obj.rulerY.style.left = (event.clientX) - 2 + "px";
 		} 
 		else
 		{

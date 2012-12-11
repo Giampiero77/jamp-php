@@ -42,6 +42,8 @@ class ClsObj_editorpdf extends ClsObject {
 		$this->property["dsitemalign"] 		= array("value" => "align", "inherit" => false, "html" => false);
 		$this->property["dsitemfont"] 		= array("value" => "font", "inherit" => false, "html" => false);
 		$this->property["dsitemfontsize"] 	= array("value" => "fontsize", "inherit" => false, "html" => false);
+		$this->property["dsitemalign"] 		= array("value" => "align", "inherit" => false, "html" => false);
+		$this->property["dsitemline"] 		= array("value" => "line", "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -57,27 +59,35 @@ class ClsObj_editorpdf extends ClsObject {
 			$pdf->print_footer=false;
 			$dsObj = $xml->getObjById($this->property["dsobj"]["value"]);
 			$dsObj->ds->dsMoveRow(0);
-			$pdf->SetMargins(10,10,10,10);
+			$pdf->SetMargins(0,0,0,0);
 			$pdf->SetAutoPageBreak(false);
-			$align = $this->property["dsitemalign"]["value"];
-			$object = $this->property["dsitemobject"]["value"];
-			$font = $this->property["dsitemfont"]["value"];
-			$fontsize = $this->property["dsitemfontsize"]["value"];
-			$x = $this->property["dsitemx"]["value"];
-			$y = $this->property["dsitemy"]["value"];
-			$width = $this->property["dsitemwidth"]["value"];
-			$height = $this->property["dsitemheight"]["value"];
-			$text = $this->property["dsitemtext"]["value"];
-			$border = $this->property["dsitemborder"]["value"];
 			while($row = $dsObj->ds->dsGetRow())
 			{
-				if ($row->$align=="1") $align = "L";
+				$align = $this->property["dsitemalign"]["value"];
+				$object = $this->property["dsitemobject"]["value"];
+				$font = $this->property["dsitemfont"]["value"];
+				$fontsize = $this->property["dsitemfontsize"]["value"];
+				$x = $this->property["dsitemx"]["value"];
+				$y = $this->property["dsitemy"]["value"];
+				$width = $this->property["dsitemwidth"]["value"];
+				$height = $this->property["dsitemheight"]["value"];
+				$text = $this->property["dsitemtext"]["value"];
+				$border = $this->property["dsitemborder"]["value"];
+				$line = $this->property["dsitemline"]["value"];
+				$pdf->SetFont($row->$font, "" , $row->fontsize);
 				switch($row->$object)
 				{
+					case 0:
+						$pdf->setXY($row->$x-5,$row->$y-10);
+						$pdf->Cell($row->$width,$row->$height,$row->$text,$row->$border,$row->$align);
+					break;
 					case 1:
-						$pdf->SetFont($row->$font, "" , $row->fontsize);
-						$pdf->setXY($row->$x,$row->$y);
-						$pdf->MultiCell($row->$width,$row->$height,$row->$text,$row->$border,$align);
+						if ($row->$border>0) 
+						{
+							$pdf->Rect($row->$x-5,$row->$y-10, $row->$width, $row->$height);
+							$pdf->setXY($row->$x-5,$row->$y-9);
+						} else $pdf->setXY($row->$x-5,$row->$y-10);
+						$pdf->MultiCell($row->$width,$row->$line,$row->$text,0,$row->$align);
 					break;
 				}
 			}
@@ -128,6 +138,8 @@ class ClsObj_editorpdf extends ClsObject {
 			$this->propertyJS["dsitemalign"] = $this->property["dsitemalign"]["value"];
 			$this->propertyJS["dsitemfont"] = $this->property["dsitemfont"]["value"];
 			$this->propertyJS["dsitemfontsize"] = $this->property["dsitemfontsize"]["value"];
+			$this->propertyJS["dsitemalign"] = $this->property["dsitemalign"]["value"];
+			$this->propertyJS["dsitemline"] = $this->property["dsitemline"]["value"];
 		}
 	}
 	

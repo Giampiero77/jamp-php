@@ -46,6 +46,7 @@ div.editorpdf div.sheet div.margin
 	border: 1px dotted blue;
 }
 
+div.editorpdf div.sheet div.margin div.cell,
 div.editorpdf div.sheet div.margin div.multicell
 {
 	position: absolute;
