@@ -398,6 +398,13 @@ clsFormat.prototype =
   		text = this.number_format(text, decimal, this.intSetting[format[3]]['decimal'], outsepthousands);
    		outthousands = text.replace(/[,.]/g,"").length - decimal; 
    		for (var y=outthousands; y<thousands; y++) text = "0"+text;
+   		
+   		if(pos = format[4].match(/#/g))
+   		{
+   			var r = this.intSetting[format[3]]['decimal'];
+   			for (var i=0; i<pos.length; i++) r+="0";
+   			text = text.replace(r, "");
+   		}
  		return text;
  	},
 
