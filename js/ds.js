@@ -148,10 +148,18 @@ clsDs.prototype =
 	{
  		var dsObj = $(dsObjName);
  		this.dssave(dsObjName, true, false);
-		if (dsObj.p.DSreferences == undefined) AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObjName + "&start=" + dsObj.DSstart, undefined, dsObj.handleResponse);
-		else AJAX.dslink(dsObjName);
+		AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObjName + "&start=" + dsObj.DSstart, undefined, dsObj.handleResponse);
 	},
 
+	refreshDS : function(dsObjName)
+	{
+ 		var dsObj = $(dsObjName);
+		var dspos = dsObj.DSpos;
+		var dspre = dsObj.DSpre; 		
+ 		this.dssave(dsObjName, true, false);
+		AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObjName + "&start=" + dsObj.DSstart, undefined, "DS.moveRow('"+dsObjName+"','"+dspos+"');");
+	},
+	
 	dropObj : function(dsObj)
 	{
 		dsObj.DSresult = Array();
