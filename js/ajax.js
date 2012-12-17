@@ -161,8 +161,10 @@ clsAJAX.prototype =
 		this.request("POST", dsObj.p.DSaction, post, true, true);
 	},
 
-	dslink : function (dsObjName)
+	dslink : function (dsObjName, sync, func)
 	{
+		var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
+		var sync = (forceSync == undefined) ? sync : forceSync;		
 		var dsObj = $(dsObjName);
 		var post = "data=load&dsobjname=" + dsObjName;
 		if (dsObj.p.DSreferences == undefined)
@@ -210,7 +212,7 @@ clsAJAX.prototype =
 		if (dsObj.DSsearch != "" && dsObj.DSsearch != undefined) post += "&" + dsObj.id + "where=" + encodeURIComponent(dsObj.DSsearch);
 		if (dsObj.p.DSorder != "" && dsObj.p.DSorder != undefined) post += "&dsorder=" + dsObj.p.DSorder;
 		post += "&start=" + dsObj.DSstart;
-		this.request("POST", dsObj.p.DSaction, post, true, true);
+		this.request("POST", dsObj.p.DSaction, post, sync, true, func);
 	},
 
 	dsmore : function(dsObj, post, forceSync, func)
@@ -218,11 +220,12 @@ clsAJAX.prototype =
 		if (dsObj.p.DSreferences == undefined)
 		{
 			var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
-			var sync = (forceSync == undefined) ? sync : forceSync;
+			var sync = (forceSync == undefined) ? sync : forceSync;					
 			if (dsObj.DSsearch != "") post += "&" + dsObj.id + "where=" + encodeURIComponent(dsObj.DSsearch);
 			if (dsObj.p.DSorder != "" && dsObj.p.DSorder != undefined) post += "&dsorder=" + dsObj.p.DSorder;
 			this.request("POST", dsObj.p.DSaction, post, sync, true, func);
-		} else this.dslink(dsObj.id);
+		} 
+		else this.dslink(dsObj.id, forceSync, func);
 	},
 
 	dsdelete : function(dsObjName, returnxml)
