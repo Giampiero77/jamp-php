@@ -163,9 +163,9 @@ clsAJAX.prototype =
 
 	dslink : function (dsObjName, sync, func)
 	{
-		var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
-		var sync = (forceSync == undefined) ? sync : forceSync;		
 		var dsObj = $(dsObjName);
+		var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
+//		var sync = (forceSync == undefined) ? sync : forceSync;		
 		var post = "data=load&dsobjname=" + dsObjName;
 		if (dsObj.p.DSreferences == undefined)
 		{
