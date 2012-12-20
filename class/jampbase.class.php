@@ -55,6 +55,7 @@ abstract class jampBase implements jampInterface {
 	}
 
 	public function setPropertyXML($ds, $data) {
+		$ds->ds->property["tot"] = Count($data);					// force count
 		$ds->setProperty("xml", $this->getXml()->dataJSON($data));	// output XML
 	}
 
