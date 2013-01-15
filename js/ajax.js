@@ -519,7 +519,6 @@ clsAJAX.prototype =
 			}
 		}
 		if (resize == true) Resize();
-	},
-
+	}
 }
 var AJAX = new clsAJAX();
