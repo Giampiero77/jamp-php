@@ -283,7 +283,7 @@ clsAnimate.prototype =
 			{
 				for (var i = 0; i < 3; i++) 
 				{
-					var delta = - ((prop[p][0][i]-prop[p][1][i])/this.timeline[id]["step"])
+					var delta = - ((prop[p][0][i]-prop[p][1][i])/this.timeline[id]["step"]);
 					prop[p][0][i] = prop[p][0][i] + delta*(Math.sin(delta));
 				}
 				this.timeline[id]["obj"].style[p]  = this.rgb2html(prop[p][0][0], prop[p][0][1], prop[p][0][2]) + prop[p][2];
@@ -310,7 +310,7 @@ clsAnimate.prototype =
 			{
 				for (var i = 0; i < 3; i++) 
 				{
-					var delta = - ((prop[p][0][i]-prop[p][1][i])/this.timeline[id]["step"])
+					var delta = - ((prop[p][0][i]-prop[p][1][i])/this.timeline[id]["step"]);
 					prop[p][0][i] = prop[p][0][i] + delta*0.5+(Math.cos(delta));
 				}
 				this.timeline[id]["obj"].style[p]  = this.rgb2html(prop[p][0][0], prop[p][0][1], prop[p][0][2]) + prop[p][2];
@@ -326,7 +326,6 @@ clsAnimate.prototype =
 			}
 		}
 	}
-
-}
+};
 
 var ANIMATE = new clsAnimate();

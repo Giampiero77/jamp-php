@@ -437,7 +437,7 @@ var firebug = {
 						d.css.index=d.css.index<0?i:d.css.index;
 						el.button.css.selectbox.child.add(
 							new pi.element("OPTION").attribute.set("value",i).update(uri)
-						)
+						);
 					};
 					d.css.open(d.css.index);
 				}
@@ -655,7 +655,9 @@ var firebug = {
 				}
 			},
 			inspect:function(_element){
-				var el = _element, map = [], parent = _element;
+				el = _element;
+				var map = []; 
+				var parent = _element;
 				while(parent){
 					map.push(parent);
 					if(parent==document.body)break;
@@ -675,7 +677,7 @@ var firebug = {
 							
 							d.html.current = [_element,link];
 							
-							return;t
+							return;
 						}
 						parentLayer = d.html.openHtmlTree(map[t],parentLayer,map[t+1]);
 						t++;
@@ -879,7 +881,7 @@ var firebug = {
 			open:function(_str){
 				with(firebug){
 					d.navigate("str");
-					el.left.str.container.update(_str.replace(/\n/g,"<br />"))
+					el.left.str.container.update(_str.replace(/\n/g,"<br />"));
 				}
 			}
 		},
@@ -929,7 +931,7 @@ var firebug = {
 						var response = item[1].responseText;
 						if(Boolean(item[1])==false)continue;
 						el.left.xhr.nameContent.child.add(new pi.element("span").update(item[0]));
-						try { 
+						try {
 							el.left.xhr.statusContent.child.add(new pi.element("span").update(item[1].status));
 						} catch(e){ el.left.xhr.statusContent.child.add(new pi.element("span").update("&nbsp;")); }
 						el.left.xhr.readystateContent.child.add(new pi.element("span").update(item[1].readyState));

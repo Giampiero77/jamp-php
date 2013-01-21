@@ -24,7 +24,7 @@ clsToolbar.prototype =
 		var tr = document.createElement('tr');
 		var classtoolbar = bar.className;
 		bar.appendChild(tBody);
-		for(i=1; i<length; i++)
+		for(var i=1; i<length; i++)
 		{		
 			var td = document.createElement('td');
 			var img = '<img src="'+data[i]['img']+'"';
@@ -52,6 +52,6 @@ clsToolbar.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var TOOLBAR = new clsToolbar();

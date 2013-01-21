@@ -123,7 +123,7 @@ clsTextArea.prototype =
 			}
 			var row = (textareaObj.row == undefined) ? dsObj.DSpos : textareaObj.row;
 			if (row < 0 && textareaObj.p.defaultvalue != null) TEXTAREA.setDsValue(textareaObj, textareaObj.p.defaultvalue);
-			var valueDs = (dsObj.DSresult[row][textareaObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][textareaObj.p.dsItem];
+			valueDs = (dsObj.DSresult[row][textareaObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][textareaObj.p.dsItem];
 		}
 		if (valueDs == "" && textareaObj.p.defaultvalue != null) valueDs = textareaObj.p.defaultvalue;
 		if (textareaObj.p.format == null) textareaObj.value = valueDs;
@@ -142,6 +142,6 @@ clsTextArea.prototype =
 		textareaObj.oldValue = "";
 		this.getDsValue(id);
 	}
-}
+};
 
 var TEXTAREA = new clsTextArea();

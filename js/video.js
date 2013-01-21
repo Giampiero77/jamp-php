@@ -82,7 +82,7 @@ clsVideo.prototype =
 		code += '<PARAM name="AUTOPLAY" VALUE="' + videoObj.p.autostart + '">';
 		code += '<PARAM name="CONTROLLER" VALUE="' + videoObj.p.controls + '">';
 		code += '<PARAM name="KIOSKMODE" VALUE="true">';
-		code += '<EMBED SRC="' + videoObj.p.src + '" '
+		code += '<EMBED SRC="' + videoObj.p.src + '" ';
 		code += 'WIDTH="' + videoObj.p.width + '" ';
 		code += 'HEIGHT="' + videoObj.p.height + '" ';
 		code += 'AUTOPLAY="' + videoObj.p.autostart + '" ';
@@ -172,6 +172,6 @@ clsVideo.prototype =
 		videoObj.innerHTML = code;
 		videoObj.init = "youtube";
 	}
-}
+};
 
 var VIDEO = new clsVideo();

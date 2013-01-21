@@ -52,8 +52,8 @@ clsMenu.prototype =
   		var menu = $(id);
 		var dsObj = $(menu.p.dsObj);
 		var data = dsObj.DSresult;
-		var value = new Array();
 		var parent = new Array();
+		var par;
 		menu.innerHTML = "";
 		var length = data.length;
 
@@ -83,15 +83,15 @@ clsMenu.prototype =
 			if (dsObj.p.DSparentkey == null)
 			{
 			  parent[data[i]['level']] = li.container;
-			  var par = (parent[data[i]['level']-1]!=null) ? parent[data[i]['level']-1] : menu;
+			  par = (parent[data[i]['level']-1]!=null) ? parent[data[i]['level']-1] : menu;
 			}
 			else
 			{
-			  var par = ($(id+'_'+data[i][dsObj.p.DSparentkey]) != null) ? $(id+'_'+data[i][dsObj.p.DSparentkey]).container : menu;
+			  par = ($(id+'_'+data[i][dsObj.p.DSparentkey]) != null) ? $(id+'_'+data[i][dsObj.p.DSparentkey]).container : menu;
 			}
 			par.appendChild(li);	
 		}	
-		var nested = null
+		var nested = null;
 		var elements = menu.getElementsByTagName('li');
 		var length = elements.length;
 		for (var i=0; i<length; i++)
@@ -111,13 +111,13 @@ clsMenu.prototype =
 				}
 				var offsetWidth  = 0;
 				var nlength = nested.childNodes.length;
-				for (k=0; k < nlength; k++) 
+				for (var k=0; k < nlength; k++) 
 				{
 					var node  = nested.childNodes[k];
 					if (node.nodeName == "LI")
 						offsetWidth = (offsetWidth >= node.offsetWidth) ? offsetWidth : node.offsetWidth;
 				}
-				for (l=0; l < nlength; l++) 
+				for (var l=0; l < nlength; l++) 
 				{
 					var node = nested.childNodes[l];
 					if (node.nodeName == "LI" && offsetWidth>0) node.style.width = offsetWidth+'px';
@@ -131,7 +131,7 @@ clsMenu.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var JMENU = new clsMenu();
 

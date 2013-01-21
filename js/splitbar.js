@@ -187,12 +187,13 @@ clsSplitbar.prototype =
 
 	initHeight : function (objname)
 	{
+		var delta = 0;
 		SPLITBAR.obj = $(objname);
 		SPLITBAR.getAroundObj();
 		SPLITBAR.afterObj.style.marginLeft = "11px";
 		SPLITBAR.obj.style.height = (SPLITBAR.beforeObj.clientHeight > SPLITBAR.afterObj.clientHeight) ? SPLITBAR.beforeObj.clientHeight + "px" : SPLITBAR.afterObj.clientHeight + "px";
-		if ((SYSTEMBROWSER.isIE() && SYSTEMBROWSER.getVersion() < 8) || SYSTEMBROWSER.isFirefox()) var delta = 8;
-		else var delta = 10;
+		if ((SYSTEMBROWSER.isIE() && SYSTEMBROWSER.getVersion() < 8) || SYSTEMBROWSER.isFirefox()) delta = 8;
+		else delta = 10;
   		SPLITBAR.obj.style.left = (SPLITBAR.afterObj.offsetLeft - delta) + "px";
 		SPLITBAR.obj.style.display = "block";
 		SPLITBAR.obj.style.paddingTop = (SPLITBAR.obj.parentNode.clientHeight / 2) + "px";
@@ -200,15 +201,16 @@ clsSplitbar.prototype =
 
 	initWidth : function (objname)
 	{
+		var delta = 0;
 		SPLITBAR.obj = $(objname);
 		SPLITBAR.getAroundObj();
 		SPLITBAR.afterObj.style.marginTop = "11px";
 		SPLITBAR.obj.style.width = (SPLITBAR.beforeObj.clientWidth > SPLITBAR.afterObj.clientWidth) ? SPLITBAR.beforeObj.clientWidth + "px" : SPLITBAR.afterObj.clientWidth + "px";
-		if ((SYSTEMBROWSER.isIE() && SYSTEMBROWSER.getVersion() < 8) || SYSTEMBROWSER.isFirefox()) var delta = 8;
-		else var delta = 10;
+		if ((SYSTEMBROWSER.isIE() && SYSTEMBROWSER.getVersion() < 8) || SYSTEMBROWSER.isFirefox()) delta = 8;
+		else delta = 10;
   		SPLITBAR.obj.style.top = (SPLITBAR.afterObj.offsetTop - delta) + "px";
 		SPLITBAR.obj.style.display = "block";
 	}
-}
+};
 
 var SPLITBAR = new clsSplitbar();

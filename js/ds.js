@@ -241,7 +241,8 @@ clsDs.prototype =
 	{
 		var dsObj = $(dsObjName);
 		if (dsObj.DSpos == -1) return;
-		if (confirm(LANG.translate("JDS000")))
+		var c = confirm(LANG.translate("JDS000"));
+		if (c == true)
 		{
 			AJAX.loader(true);
 			dsObj.DSchange = false;
@@ -267,9 +268,11 @@ clsDs.prototype =
 		var dsObj = $(dsObjName);
 		if (dsObj.DSpos == -1) return;
 		if (dsObj.p.DSdeleteall != true) return;
-		if (confirm(LANG.translate("JDS001")))
+		var c = confirm(LANG.translate("JDS001"));
+		if (c == true)
 		{
-			if (confirm(LANG.translate("JDS002")))
+			confirm(LANG.translate("JDS002"));
+			if (c == true)
 			{
 				AJAX.loader(true);
 				dsObj.DSchange = false;
@@ -325,8 +328,9 @@ clsDs.prototype =
 			 }
 			 else 
 			 {
-				if (dsObj.DSpos >0) var msg = LANG.translate("JDS003");
-				else var msg = LANG.translate("JDS004");
+				var msg;
+				if (dsObj.DSpos >0) msg = LANG.translate("JDS003");
+				else msg = LANG.translate("JDS004");
 				var save = (dsObj.p.DSconfirm == true || conf) ? confirm(msg) : true;
 				dsObj.DSchange = false;
 				if (save == true)
@@ -394,6 +398,6 @@ clsDs.prototype =
 			for (var i = 0; i < dsreflen; i++) this.dssave(dsref[i], conf);
 		}
 	}
-}
+};
 
 var DS = new clsDs();

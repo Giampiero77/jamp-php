@@ -32,7 +32,7 @@ function clsLANG()
 		"IMAGE001"	: "Error while uploading image",
 		"TEXT001"	: "Error while uploading file",
 		"DOTPAD"	: "."
-	}
+	};
 }
 
 clsLANG.prototype =
@@ -42,5 +42,5 @@ clsLANG.prototype =
 		if (this.package[code] == undefined) SYSTEMEVENT.errorJAVASCRIPT("Error Code: <b>"+ code + "</b> undefined!", "EN.js", "");
 		else return this.package[code];
 	}
-}
+};
 var LANG = new clsLANG();

@@ -113,12 +113,10 @@ clsDsSelect.prototype =
 	{
 		var dsselectObj = $(id);
 		var row = (dsselectObj.row==undefined) ? 0 : dsselectObj.row;
-// 		if (dsselectObj.p.disabled == undefined) dsselectObj.p.disabled = dsselectObj.disabled;
 		if (dsselectObj.p.dsObjList != undefined && dsselectObj.p.customvalue == null && row<2)
 		{
 			dsselectObj.lock = false;
 			var dsObj = $(dsselectObj.p.dsObjList);
-			if (dsselectObj.p.dsObj != undefined ) var dsObjRow = $(dsselectObj.p.dsObj);
 			var dsitem = dsselectObj.p.dsItemList;
 			var dsitemkey = (dsselectObj.p.dsItemKeyList == undefined) ? dsselectObj.p.dsItemList : dsselectObj.p.dsItemKeyList;
 			dsselectObj.options.length = 0;
@@ -163,7 +161,6 @@ clsDsSelect.prototype =
 						}
 					}
  					dsselectObj.options[dsselectObj.options.length] = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);
-					var option = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);
 				}
 			}
 		}
@@ -199,6 +196,6 @@ clsDsSelect.prototype =
 		if (obj.p.dsNav == true) this.setPosDSList(obj);
 		this.setDsValue(obj);
 	}
-}
+};
 
 var DSSELECT = new clsDsSelect();

@@ -102,8 +102,8 @@ clsDrag.prototype =
 		nx = x + ((ex - o.lastMouseX) * (o.hmode ? 1 : -1));
 		ny = y + ((ey - o.lastMouseY) * (o.vmode ? 1 : -1));
 
-		if (o.xMapper)		nx = o.xMapper(y)
-		else if (o.yMapper)	ny = o.yMapper(x)
+		if (o.xMapper)		nx = o.xMapper(y);
+		else if (o.yMapper)	ny = o.yMapper(x);
 
 		DRAG.obj.root.style[o.hmode ? "left" : "right"] = nx + "px";
 		DRAG.obj.root.style[o.vmode ? "top" : "bottom"] = ny + "px";
@@ -130,6 +130,6 @@ clsDrag.prototype =
 		if (typeof e.layerY == 'undefined') e.layerY = e.offsetY;
 		return e;
 	}
-}
+};
 
 var DRAG = new clsDrag();

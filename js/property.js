@@ -105,7 +105,6 @@ clsProperty.prototype =
 			}
 		}
 	}
-	
-}
+};
 
 var PROPERTY = new clsProperty();

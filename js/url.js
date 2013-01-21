@@ -17,15 +17,16 @@ clsUrl.prototype =
 	getDsValue : function(id)
 	{
 		var ulrObj = $(id);
+		var valueDs;
 		ulrObj.innerHTML = "&nbsp;";
 		var dsObj = $(ulrObj.p.dsObj);
 		if (dsObj != undefined)
 		{
 		  if (dsObj.DSresult.length == 0) return;
 		  var row = (ulrObj.row == undefined) ? dsObj.DSpos :  ulrObj.row;
-		  var valueDs =  (dsObj.DSresult[row][ulrObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][ulrObj.p.dsItem];
+		  valueDs =  (dsObj.DSresult[row][ulrObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][ulrObj.p.dsItem];
 		}
-		else var valueDs = ulrObj.p.value;
+		else valueDs = ulrObj.p.value;
 		if (valueDs == "" && ulrObj.p.defaultvalue != null) valueDs = ulrObj.p.defaultvalue;
 
 		var strTarget = ulrObj.p.target;
@@ -66,6 +67,6 @@ clsUrl.prototype =
 	{
 	    this.getDsValue(id);
 	}
-}
+};
 
 var URL = new clsUrl();

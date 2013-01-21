@@ -29,6 +29,7 @@ clsDsnav.prototype =
 	setPage : function(dsObj, dsObjName)
 	{
 		var pageObj = $(dsObjName + "_page");
+		var i = 0;
 		if (pageObj == undefined) return;
 		pageObj.disabled = (dsObj.DSpos < 0) ? true : false;
 		if (pageObj.limit != dsObj.DSlimit || pageObj.tot != dsObj.DSrow)
@@ -37,7 +38,7 @@ clsDsnav.prototype =
 			pageObj.tot = dsObj.DSrow;
 			pageObj.options.length = 0;
 			var page = (pageObj.limit > 0) ? Math.ceil(pageObj.tot / pageObj.limit) : 0;
-			for (var i = 0; i < page; i++) pageObj.options[i] = new Option(i + 1, i * pageObj.limit);
+			for (i = 0; i < page; i++) pageObj.options[i] = new Option(i + 1, i * pageObj.limit);
 		}
 		if (dsObj.DSlimit == 0) pageObj.options[i] = new Option(1, 0);
 		else pageObj.selectedIndex = parseInt(dsObj.DSstart / dsObj.DSlimit);
@@ -59,7 +60,7 @@ clsDsnav.prototype =
 		this.setButton(dsObjName, "save", dsObj.DSchange);
 		if (dsObj.p.DSsavetype == "live")
 		{
-			this.setButton(dsObjName, "new", 	false)
+			this.setButton(dsObjName, "new", 	false);
 			this.setButton(dsObjName, "cancel", false);
 		} else this.setButton(dsObjName, "cancel", dsObj.DSchange);
 	},
@@ -217,6 +218,6 @@ clsDsnav.prototype =
 		}
 		if (dsObj.DSsearch.length>0) this.setButton(dsObjName, "cancel", true);
 	}
-}
+};
 
 var DSNAV = new clsDsnav();

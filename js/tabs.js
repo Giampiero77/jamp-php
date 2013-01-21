@@ -18,7 +18,7 @@ clsTabs.prototype =
 	{
 		var tabsObj = $(id);
 		var tabObj = $(box + "_tab");
-		if (box2 == undefined) var box2 = box;
+		if (box2 == undefined) box2 = box;
 		var boxObj = $(box2);
 		if(typeof tabsObj.SelectedTab == "undefined")
 		{
@@ -39,7 +39,7 @@ clsTabs.prototype =
 		Resize();
 		if (AJAX.function_exists(box2+"Display"))
 		{
-			try { eval(box2+"Display();") }
+			try { eval(box2+"Display();"); }
 			catch (e) {}
 		}
 	},
@@ -95,6 +95,6 @@ clsTabs.prototype =
 	refreshObj : function(id)
 	{
 	}
-}
+};
 
 var TABS = new clsTabs();

@@ -11,10 +11,10 @@
 function clsSystemEvent()
 {
 	this.messagebox			= $("pageMessage");
-	this.messagebox_back		= $("pageMessageBack");
+	this.messagebox_back	= $("pageMessageBack");
 	this.messagebox_ghost 	= $("pageMessageGhost");
 	this.loaderbox 			= $("pageLoader");
-	this.pagelock 		 		= $("pageLock");
+	this.pagelock 		 	= $("pageLock");
 }
 
 clsSystemEvent.prototype =
@@ -124,7 +124,7 @@ clsSystemEvent.prototype =
 	sizeMessage : function()
 	{
 		var obj = $('pageMessageContent');
-		obj.style.height = (obj.offsetParent.offsetHeight - 64)+ 'px'
+		obj.style.height = (obj.offsetParent.offsetHeight - 64)+ 'px';
 	},
 
 	Close : function() 
@@ -185,7 +185,7 @@ clsSystemEvent.prototype =
 	{
 		setTimeout(function(){try {obj.focus();} catch (e) {}},0);
 	}
-}
+};
 
 var SYSTEMEVENT = new clsSystemEvent();
 window.onerror = SYSTEMEVENT.errorJAVASCRIPT;

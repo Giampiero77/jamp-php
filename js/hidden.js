@@ -33,6 +33,6 @@ clsHidden.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var HIDDEN = new clsHidden();

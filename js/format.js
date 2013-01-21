@@ -43,7 +43,7 @@ function clsFormat()
 
 clsFormat.prototype =
 {
-	LZ : function(x) {return(x<0||x>9?"":"0")+x},
+	LZ : function(x) {return(x<0||x>9?"":"0")+x;},
 
 	unformatReg : function(Obj)
 	{
@@ -82,14 +82,14 @@ clsFormat.prototype =
 		else return this.formatString(text, reg);
 	},
 
-	setDate : function(s, input, addYear, addMonth, addDay, addHours, addMinutes, addSeconds)
+	setDate : function(v, input, addYear, addMonth, addDay, addHours, addMinutes, addSeconds)
 	{
-		var y = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|yyyy'),10);
-		var m = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|m'),10);
-		var d = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|d'),10);
-		var h = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|H'),10);
-		var i = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|i'),10);
-		var s = parseInt(FORMAT.Format(s, 'date|'+input+'|EN|s'),10);
+		var y = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|yyyy'),10);
+		var m = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|m'),10);
+		var d = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|d'),10);
+		var h = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|H'),10);
+		var i = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|i'),10);
+		var s = parseInt(FORMAT.Format(v, 'date|'+input+'|EN|s'),10);
 		var dt = new Date();
 		dt.setFullYear(y+parseInt(addYear,10));
 		dt.setMonth(m+parseInt(addMonth,10));
@@ -126,6 +126,7 @@ clsFormat.prototype =
 		var result = "";
 		var c = "";
 		var token = "";
+		var value = [];
 		var timestamp = this.getDateFromFormat(date, reg);
 		if (!fixed && timestamp==0) 
 		{
@@ -168,8 +169,6 @@ clsFormat.prototype =
 			var H=date.getHours();
 			var i=date.getMinutes();
 			var s=date.getSeconds();
-			var yyyy,yy,mmmm,mm,dd,hh,h,ii,ss,ampm,HH,H,KK,K,kk,k;
-			var value=new Object();
 			if (y.length < 4) {y=""+(y-0+1900);}
 			value["yyyy"]=+y;
 			value["yy"]=y.substring(2,4);
@@ -199,6 +198,7 @@ clsFormat.prototype =
 			value["s"]=s;
 			value["ss"]=this.LZ(s);
 		}
+		
 		while (i_format < format.length) 
 		{
 			c=format.charAt(i_format);
@@ -251,9 +251,9 @@ clsFormat.prototype =
 		var i_format=0;
 		var c="";
 		var token="";
-		var token2="";
 		var ampm="";
-		var x,y;
+		var x=0;
+		var y=0;
 		var day=1;
 		var now=new Date();
 		var year=now.getYear();
@@ -425,5 +425,5 @@ clsFormat.prototype =
 		if (length==0) length = text.length;
 		return text.pad(length, " ", (format[1].indexOf('!')>-1) ? this.STR_PAD_LEFT : this.STR_PAD_RIGHT);;
 	}
-}
+};
 var FORMAT = new clsFormat();

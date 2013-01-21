@@ -67,7 +67,6 @@ clsEditorPdf.prototype =
 	
 	addObj : function(obj, data, i)
 	{
-		var typeObj = "";
 		var objnew = document.createElement("div");
 		switch(parseInt(data[obj.p.dsitemobject]))
 		{
@@ -382,6 +381,6 @@ clsEditorPdf.prototype =
 		var obj = $(id);
 		if (obj.init != true) this.makepage(obj);
 	}
-}
+};
 
 var EDITORPDF = new clsEditorPdf();

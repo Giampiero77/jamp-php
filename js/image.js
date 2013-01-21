@@ -168,17 +168,16 @@ clsImage.prototype =
 		var obj = $(id+"_file");
 		if (obj!=undefined)
 		{
-			obj.onchange=function(){IMAGE.setDsValue(id, this);}
-			obj.onmouseout=function(){IMAGE.hideAdd(id);}
-			obj.onmouseover=function(){IMAGE.showAdd(id);}
-			obj.oncontextmenu=function(){IMAGE.cancel(id, event);}
+			obj.onchange=function(){IMAGE.setDsValue(id, this);};
+			obj.onmouseout=function(){IMAGE.hideAdd(id);};
+			obj.onmouseover=function(){IMAGE.showAdd(id);};
+			obj.oncontextmenu=function(){IMAGE.cancel(id, event);};
 		}
 	},
 
 	showAdd : function(id)
 	{
 		var obj = $(id + "_add");
-		var img = $(id);
 		obj.style.display = "block";
 	},
 
@@ -212,6 +211,6 @@ clsImage.prototype =
 	{
 		if (event.button == 0) obj.click();
 	} 
-}
+};
 
 var IMAGE = new clsImage();

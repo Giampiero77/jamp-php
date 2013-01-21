@@ -222,7 +222,6 @@ clsGridds.prototype =
 	{
 		var col = 0;
 		var newRow = obj.bodyObj.appendChild(obj.rowZero.cloneNode(true));
-		var refreshCode = "";
 		newRow.className = newRow.className.replace("_row0", "_row");
 		newRow.id = obj.id + "_row" + row;
 		newRow.row = row;
@@ -441,7 +440,7 @@ clsGridds.prototype =
 	{
 		var regexp = new RegExp("_" + document.activeElement.row + "$");
 		var newid = document.activeElement.id.replace(regexp, "_" + row);
- 		var newid = $(newid);
+ 		newid = $(newid);
 		SYSTEMEVENT.setFocus(newid); 
 		if (newid.select) newid.select();
 	},
@@ -665,7 +664,7 @@ clsGridds.prototype =
 	doResize : function(obj)
 	{
 		this.setWidthHead(obj);
-		this.doResizeROWZero(obj)
+		this.doResizeROWZero(obj);
 		if (obj.bodyObj.rows == undefined) return;
 		if (GRIDDS.colObjNext != undefined)
 		{
@@ -724,6 +723,6 @@ clsGridds.prototype =
 		}
 		eval(obj.bodyObj.rows[pos].refreshROW);
 	}
-}
+};
 
 var GRIDDS = new clsGridds();

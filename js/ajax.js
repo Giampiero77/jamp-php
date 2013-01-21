@@ -12,7 +12,7 @@ function clsAJAX()
 {
 	this.loadall = true;
 	this.debug	= false;
-	this.hideloader = false
+	this.hideloader = false;
 }
 
 clsAJAX.prototype =
@@ -32,7 +32,7 @@ clsAJAX.prototype =
 
 	keepAlive : function(second, url)
 	{
-		var url = (url==undefined || url=='') ? document.location.href : url;
+		if (url==undefined || url=='') url = document.location.href;
 		AJAX.hideloader = true;
 		AJAX.request("POST", url, "data=keepalive", false, false);
 		AJAX.hideloader = false;
@@ -85,7 +85,7 @@ clsAJAX.prototype =
 				if (ref.hasOwnProperty(k))
 				{
 					var dsObjLink = $(ref[k]);
-					if (dsObjLink.DSpos == dsObjLink.DSresult.length) keyval[k] =  ""
+					if (dsObjLink.DSpos == dsObjLink.DSresult.length) keyval[k] =  "";
 					else keyval[k] = dsObjLink.DSresult[dsObjLink.DSpos][refkey[k]];
 				}
 			}
@@ -122,7 +122,7 @@ clsAJAX.prototype =
 						if (ref.hasOwnProperty(k))
 						{
 							var dsObjLink = $(ref[k]);
-							if (dsObjLink.DSpos == dsObjLink.DSresult.length) keyval[k] =  ""
+							if (dsObjLink.DSpos == dsObjLink.DSresult.length) keyval[k] =  "";
 							else keyval[k] = dsObjLink.DSresult[dsObjLink.DSpos][refkey[k]];
 						}
 					}
@@ -192,7 +192,7 @@ clsAJAX.prototype =
 		}
 		else
 		{
-			var allkey = ""
+			var allkey = "";
 			for (var itm in dsObjLink.DSresult)
 			{
 				if (dsObjLink.DSresult.hasOwnProperty(itm)) //Bug Fix
@@ -220,7 +220,7 @@ clsAJAX.prototype =
 		if (dsObj.p.DSreferences == undefined)
 		{
 			var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
-			var sync = (forceSync == undefined) ? sync : forceSync;					
+			sync = (forceSync == undefined) ? sync : forceSync;					
 			if (dsObj.DSsearch != "") post += "&" + dsObj.id + "where=" + encodeURIComponent(dsObj.DSsearch);
 			if (dsObj.p.DSorder != "" && dsObj.p.DSorder != undefined) post += "&dsorder=" + dsObj.p.DSorder;
 			this.request("POST", dsObj.p.DSaction, post, sync, true, func);
@@ -298,7 +298,7 @@ clsAJAX.prototype =
 
 	rewriteObj : function (idObj, page)
 	{
-		if (document.body.id == idObj) window.location = page + "?objname=" + idObj
+		if (document.body.id == idObj) window.location = page + "?objname=" + idObj;
 		else this.request("POST", page, "objname=" + idObj, true, true);
 	},
 
@@ -316,14 +316,13 @@ clsAJAX.prototype =
 		}
 		data = (returnxml == false) ? data+"&returnxml=false" : data;
 
+		var conn=null;
 		if (window.XMLHttpRequest)
 		{
-			var conn = new XMLHttpRequest();  
+			conn = new XMLHttpRequest();  
 			if (conn.overrideMimeType) conn.overrideMimeType("text/xml");
-		}
-		if (window.ActiveXObject)
-		{
-			var conn = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.ActiveXObject) {
+			conn = new ActiveXObject("Microsoft.XMLHTTP");
 			if (!conn) conn = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 
@@ -336,7 +335,7 @@ clsAJAX.prototype =
               		conn.onreadystatechange = null;
     			} catch (e) {} 
 			}
-			else conn.onreadystatechange = function(){ AJAX.handleResponse(conn, returnxml, func) };
+			else conn.onreadystatechange = function(){ AJAX.handleResponse(conn, returnxml, func); };
 			conn.open(method,url,!sync);
 			conn.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 			if (this.debug == true)
@@ -356,7 +355,7 @@ clsAJAX.prototype =
 		else
 		{
 			this.loader(false);
-			SYSTEMEVENT.showMessage(LANG.translate("JAJAX001"), 'Errore AJAX', self.location.href, 0, 80) 
+			SYSTEMEVENT.showMessage(LANG.translate("JAJAX001"), 'Errore AJAX', self.location.href, 0, 80);
 		}
 	},
 
@@ -520,5 +519,5 @@ clsAJAX.prototype =
 		}
 		if (resize == true) Resize();
 	}
-}
+};
 var AJAX = new clsAJAX();

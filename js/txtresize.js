@@ -27,5 +27,5 @@ clsTxtResize.prototype =
     		for (var j=0; j<length; j++) tg[j].style.fontSize = (this.size+1)+'px';
     	}
     }
-}
+};
 var TXTRESIZE = new clsTxtResize();

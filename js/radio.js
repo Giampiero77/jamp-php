@@ -101,6 +101,6 @@ clsRadio.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var RADIO = new clsRadio();

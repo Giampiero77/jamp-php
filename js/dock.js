@@ -58,7 +58,7 @@ clsDock.prototype =
 				span.style.left = 45+(50*(i-1))+'px';
 				span.style.top = (dockDiv.p.valign == "bottom") ? '-70px' : '100px'; 
 				dockDiv.appendChild(link);
-				SYSTEMEVENT.addEventListener(document, 'mousemove', function(event) {ANIMATE.collision(img, 'opacity:1;height:100;top:55px', '80', event)});
+				SYSTEMEVENT.addEventListener(document, 'mousemove', function(event) {ANIMATE.collision(img, 'opacity:1;height:100;top:55px', '80', event);});
 			}
 		}
 		if (dockDiv.p.align == "left")
@@ -82,9 +82,8 @@ clsDock.prototype =
 
 	refreshObj : function(id)
 	{
-		var dockDiv = $(id);
 		this.getDsValue(id);
 	}
-}
+};
 
 var DOCK = new clsDock();

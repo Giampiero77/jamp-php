@@ -42,9 +42,10 @@ clsxGridds.prototype =
 
 	addRow : function(i, id, bodies)
 	{
+		var row;
 		if (bodies.divRow == undefined) bodies.divRow = $(id+'_row0');
-		if (i==-1 && $(id+'_row1')) var row = bodies.insertBefore(bodies.divRow.cloneNode(true), $(id+'_row1'));
-		else var row = bodies.appendChild(bodies.divRow.cloneNode(true));
+		if (i==-1 && $(id+'_row1')) row = bodies.insertBefore(bodies.divRow.cloneNode(true), $(id+'_row1'));
+		else row = bodies.appendChild(bodies.divRow.cloneNode(true));
 		var col = 1;
 		var refreshCode = "";
 		row.id = id + "_row" + i;
@@ -118,6 +119,6 @@ clsxGridds.prototype =
 		this.moveRow(id, bodies);
 		griddsObj.scrollTop=0;
 	}
-}
+};
 
 var XGRIDDS = new clsxGridds();

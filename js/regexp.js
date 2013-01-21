@@ -133,17 +133,15 @@ clsRegExp.prototype =
 
 	nextFocus : function(e, id, specialkey) 
 	{
-		var oTarget = (e.target) ? e.target : e.srcElement;
 		var keynum = (window.event) ? e.keyCode : e.which;
 		if (keynum == specialkey) $(id).focus();
 	},
 
 	actionClick : function(e, id, specialkey) 
 	{
-		var oTarget = (e.target) ? e.target : e.srcElement;
 		var keynum = (window.event) ? e.keyCode : e.which;
 		if (keynum == specialkey) $(id).click();
 	}
-}
+};
 
 var REGEXP = new clsRegExp();

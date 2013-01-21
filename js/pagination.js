@@ -42,7 +42,7 @@ clsPagination.prototype =
 				  var prev = document.createElement('button');
 				  prev.className = 'prevpostslink';
 				  prev.innerHTML = '«';
-				  prev.onclick = function() {PAGINATION.page(obj, start_page - 1);}
+				  prev.onclick = function() {PAGINATION.page(obj, start_page - 1);};
 				  obj.appendChild(prev);
 			 }
 			 for (var i = start_page; i < end_page; i++)
@@ -58,7 +58,7 @@ clsPagination.prototype =
 				  {
 						var page = document.createElement('button');
 						page.className = 'page';
-						page.onclick = function() {PAGINATION.page(obj, this.innerHTML);}
+						page.onclick = function() {PAGINATION.page(obj, this.innerHTML);};
 						page.innerHTML = i;
 						obj.appendChild(page);
 				  }
@@ -74,7 +74,7 @@ clsPagination.prototype =
 				  var last = document.createElement('button');
 				  last.className = 'page';
 				  last.innerHTML = tot_pages;
-				  last.onclick = function() {PAGINATION.page(obj, tot_pages);}
+				  last.onclick = function() {PAGINATION.page(obj, tot_pages);};
 				  obj.appendChild(last);
 			 }
 			 if (tot_pages > end_page) 
@@ -82,11 +82,11 @@ clsPagination.prototype =
 				  var next = document.createElement('button');
 				  next.className = 'nextpostslink';
 				  next.innerHTML = '»';
-				  next.onclick = function() {PAGINATION.page(obj, end_page);}
+				  next.onclick = function() {PAGINATION.page(obj, end_page);};
 				  obj.appendChild(next);
 			 }
 		}
 	}
-}
+};
 
 var PAGINATION = new clsPagination();

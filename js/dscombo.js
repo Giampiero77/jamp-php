@@ -26,6 +26,7 @@ clsDscombo.prototype =
 	getDsValueDB : function(dscomboObj)
 	{
 		var dsObjRow = $(dscomboObj.p.dsObj);
+		var valueDs;
 		if (this.lastds[dscomboObj.p.dsObj] == undefined) this.lastds[dscomboObj.p.dsObj] = Array();
 		if (this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] == undefined) this.lastds[dscomboObj.p.dsObj][dscomboObj.p.dsItem] = Array("", "");
 
@@ -36,7 +37,7 @@ clsDscombo.prototype =
 			return;
 		}
 		var row = (dscomboObj.row == undefined) ? dsObjRow.DSpos : dscomboObj.row;
- 		var valueDs = (dsObjRow.DSresult[row][dscomboObj.p.dsItem] == undefined) ? "" : dsObjRow.DSresult[row][dscomboObj.p.dsItem];
+ 		valueDs = (dsObjRow.DSresult[row][dscomboObj.p.dsItem] == undefined) ? "" : dsObjRow.DSresult[row][dscomboObj.p.dsItem];
 		if (row < 0) dscomboObj.value = "";
  		var change = (dscomboObj.valuekey == valueDs) ? false : true;
 		if (change == false) 
@@ -60,10 +61,10 @@ clsDscombo.prototype =
 			var loadall = AJAX.loadall;
 			AJAX.request("POST", dsObj.p.DSaction, post, true, true);
 			AJAX.loadall = loadall;
-			if (dsObj.DSresult.length == 0) var valueDs = "";
+			if (dsObj.DSresult.length == 0) valueDs = "";
 			else 
 			{
-				var valueDs = new Array();
+				valueDs = new Array();
 				var item = dscomboObj.p.dsItemList.split(",");
 				var itemlength = item.length;
 				for (var i = 0; i < itemlength; i++) valueDs[i] = dsObj.DSresult[1][item[i]];
@@ -166,7 +167,7 @@ clsDscombo.prototype =
 		{
 			var old = obj.DSsearch;
 			dsObj.DSsearch = dssearch;
-			AJAX.dslink(dsObj.id)
+			AJAX.dslink(dsObj.id);
 			obj.DSsearch = old;
 		}
 
@@ -271,12 +272,12 @@ clsDscombo.prototype =
 		resultObj.style.left = offLeft + "px";
 		scrollTop = isNaN(scrollTop) ? 0 : scrollTop;
 		resultObj.style.top = offTop + obj.offsetHeight - scrollTop + "px";
-		resultObj.style.height = "200px" 
+		resultObj.style.height = "200px";
 		if (parseInt(resultObj.style.top) + 200  >=  window.innerHeight) resultObj.style.top = parseInt(resultObj.style.top) - 200 - obj.clientHeight + "px";
 		resultObj.style.width = obj.clientWidth + "px";
 		resultObj.style.display = "";
 		obj.expanded = true;
 	}
-}
+};
 
 var DSCOMBO = new clsDscombo();

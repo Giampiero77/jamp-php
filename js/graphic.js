@@ -33,6 +33,6 @@ clsGraphic.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var GRAPHIC = new clsGraphic();

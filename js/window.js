@@ -64,10 +64,10 @@ clsWindow.prototype =
 		if (AJAX.function_exists(objWindow.id+"Display"))
 		{
 			Resize();
-			try { eval(objWindow.id+"Display();") }
+			try { eval(objWindow.id+"Display();"); }
 			catch (e) {}
 		}
 	}
-}
+};
 
 var WIN = new clsWindow();

@@ -102,11 +102,10 @@ clsTree.prototype =
 	drawChildNode : function(divTree, data)
 	{
 		var value = new Array();
-		var lastid;
+		var lastid = "";
 		var id;
 		var parent = null;
 		var divTreeId = divTree.getAttribute('id');
-		var root = 0;
 		var length = data.length; 
 		for(var i=1; i<length; i++)
 		{		
@@ -223,7 +222,7 @@ clsTree.prototype =
 		var divTree = $(TREE.foundTree(node));
 		var parent = node.container;
 		var dsObj = $(divTree.p.dsObj);
-		var value = dsObj.DSresult[dsObj.DSpos];
+		value = dsObj.DSresult[dsObj.DSpos];
 		value[divTree.p.dsicon] = (value[divTree.p.dsicon]!=undefined) ? "tree_"+value[divTree.p.dsicon] : "tree_icon"; 
 		TREE.addNode(divTree, value, parent);
 	},
@@ -334,13 +333,15 @@ clsTree.prototype =
 	checkParentState : function(divTree, node) 
    	{
 		var semichecked=0;
+		var checked = 0;
+		var subNodes = null;
 		while (node!=divTree) 
 		{
 			var checkbox = node.parentNode.getElementsByTagName('li')[0];
 			if (semichecked==0) 
 			{
-				var checked = 0;
-				var subNodes = node.childNodes;
+				checked = 0;
+				subNodes = node.childNodes;
 				if (subNodes.length==0) checked=-1;
 				var length = subNodes.length;
 				for(var i=0; i<length; i++) 
@@ -553,5 +554,5 @@ clsTree.prototype =
 		if (divTree.p.refresh == "tree") divTree.innerHTML = "";
 		this.getDsValue(id);
 	}
-}
+};
 var TREE = new clsTree();

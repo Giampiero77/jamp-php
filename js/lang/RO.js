@@ -32,7 +32,7 @@ function clsLANG()
 		"IMAGE001"	: "Eroare în timp ce încărcaţi imagini",
 		"TEXT001"	: "Eroare la încărcarea fişierului",
 		"DOTPAD"	: ","
-	}
+	};
 }
 
 clsLANG.prototype =
@@ -42,5 +42,5 @@ clsLANG.prototype =
 		if (this.package[code] == undefined) SYSTEMEVENT.errorJAVASCRIPT("Codice Errore: <b>"+ code + "</b> non definito!", "IT.js", "");
 		else return this.package[code];
 	}
-}
+};
 var LANG = new clsLANG();

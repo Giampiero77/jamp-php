@@ -34,6 +34,6 @@ clsProgessBar.prototype =
     {
 	this.getDsValue(id);
     }
-}
+};
 
 var PROGESSBAR = new clsProgessBar();

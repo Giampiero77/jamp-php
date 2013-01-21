@@ -50,10 +50,10 @@ clsLabel.prototype =
 				var post = "data=load&dsobjname=" + dsObjList.id + "&dsforeignkey=" + encodeURIComponent(labelObj.p.dsItemKeyList);
 				post += "&dsforeignkeyvalue=" + encodeURIComponent(valueDs);
 				AJAX.request("POST", dsObj.p.DSaction, post, true, true);
-				if (dsObjList.DSresult.length == 0) var valueDs = "";
+				if (dsObjList.DSresult.length == 0) valueDs = "";
 				else 
 				{
-					 var valueDs = new Array();
+					 valueDs = new Array();
 					 var item = labelObj.p.dsItemList.split(",");
 					 var itemlength = item.length;
 					 for (var i = 0; i < itemlength; i++) valueDs[i] = dsObjList.DSresult[1][item[i]];
@@ -97,6 +97,6 @@ clsLabel.prototype =
 	 {
 		this.getDsValue(id);
 	 }
-}
+};
 
 var LABEL = new clsLabel();

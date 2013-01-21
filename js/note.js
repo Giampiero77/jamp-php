@@ -21,7 +21,6 @@ clsNote.prototype =
 	{
 		var noteObj = $(id);
 		var noteContainer = $(id + "_container");
-		var noteImg = $(id + "_img");
 		var widthOBJ = noteObj.clientWidth;
 		var heightOBJ = noteObj.clientHeight;
 		noteContainer.style.display = "none";
@@ -58,6 +57,6 @@ clsNote.prototype =
 		SYSTEMEVENT.removeEventListener(document, "mouseup", NOTE.MoveUP);
 		SYSTEMEVENT.stopPropagation(event);
 	}
-}
+};
 
 var NOTE = new clsNote();

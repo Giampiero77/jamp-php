@@ -39,6 +39,7 @@ clsText.prototype =
 
 	getDsValue : function(id)
 	{
+		var valueDs;
 		var textObj = $(id);
 		var dsObj = $(textObj.p.dsObj);
 		if (textObj.p.InitreadOnly == undefined) textObj.p.InitreadOnly = textObj.readOnly;
@@ -52,9 +53,9 @@ clsText.prototype =
 			}
 			var row = (textObj.row == undefined) ? dsObj.DSpos : textObj.row;
 			if (row < 0 && textObj.p.defaultvalue != null) TEXT.setDsValue(textObj, textObj.p.defaultvalue);
-			var valueDs = (dsObj.DSresult[row][textObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][textObj.p.dsItem];
+			valueDs = (dsObj.DSresult[row][textObj.p.dsItem] == undefined) ? "" : dsObj.DSresult[row][textObj.p.dsItem];
 		}
-		else var valueDs = textObj.value;
+		else valueDs = textObj.value;
 		if (textObj.p.format == undefined) textObj.value = valueDs;
 		else FORMAT.format(textObj, valueDs);
 		textObj.oldValue = textObj.value;
@@ -313,7 +314,7 @@ clsText.prototype =
 		resultObj.style.left = offLeft + "px";
 		scrollTop = isNaN(scrollTop) ? 0 : scrollTop;
 		resultObj.style.top = offTop + obj.offsetHeight - scrollTop + "px";
-		resultObj.style.height = "200px" 
+		resultObj.style.height = "200px";
 		if (parseInt(resultObj.style.top) + 200  >=  window.innerHeight) resultObj.style.top = parseInt(resultObj.style.top) - 200 - obj.clientHeight + "px";
 		resultObj.style.width = obj.clientWidth + "px";
 		resultObj.style.display = "";
@@ -333,6 +334,6 @@ clsText.prototype =
 		}
 		TEXT.hideValues(obj);
 	}
-}
+};
 
 var TEXT = new clsText();

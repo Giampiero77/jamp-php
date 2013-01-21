@@ -116,7 +116,6 @@ clsDsSelectUrl.prototype =
 		{
 			dsselectObj.lock = false;
 			var dsObj = $(dsselectObj.p.dsObjList);
-			if (dsselectObj.p.dsObj != undefined ) var dsObjRow = $(dsselectObj.p.dsObj);
 			var dsitem = dsselectObj.p.dsItemList;
 			var dsitemkey = (dsselectObj.p.dsItemKeyList == undefined) ? dsselectObj.p.dsItemList : dsselectObj.p.dsItemKeyList;
 			dsselectObj.options.length = 0;
@@ -160,7 +159,6 @@ clsDsSelectUrl.prototype =
 						}
 					}
  					dsselectObj.options[dsselectObj.options.length] = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);
-					var option = new Option(itemvalue.join(" - "),dsObj.DSresult[i][dsitemkey]);
 				}
 			}
 		}
@@ -192,6 +190,6 @@ clsDsSelectUrl.prototype =
 		if (obj.p.dsNav == true) this.setPosDSList(obj);
 		this.setDsValue(obj);
 	}
-}
+};
 
 var DSSELECTURL = new clsDsSelectUrl();

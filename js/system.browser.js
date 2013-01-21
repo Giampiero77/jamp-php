@@ -80,7 +80,7 @@ clsSystemBrowser.prototype =
  		var afterObj = (obj.nextSibling.nodeType == 1) ? obj.nextSibling : obj.nextSibling.nextSibling;
 		if (afterObj.p != undefined && afterObj.p.typeObj == "splitbar")
 		{
-			var afterObj = (afterObj.nextSibling.nodeType == 1) ? afterObj.nextSibling : afterObj.nextSibling.nextSibling;
+			afterObj = (afterObj.nextSibling.nodeType == 1) ? afterObj.nextSibling : afterObj.nextSibling.nextSibling;
 			delta = 11;
 		}
 		if (afterObj.parentNode == obj.parentNode)
@@ -104,7 +104,7 @@ clsSystemBrowser.prototype =
 		heightVal = (borderBottom.indexOf("px") == -1) ? heightVal : heightVal + parseFloat(borderBottom);
 		heightVal = (paddingBottom == undefined) ? heightVal : heightVal + parseFloat(paddingBottom);
 		if(!isParent) heightVal = (paddingTop == undefined) ? heightVal : heightVal + parseFloat(paddingTop);
-		return heightVal;
+		return parseFloat(heightVal);
 	},
 
 	autoHeight : function(objname)
@@ -134,7 +134,7 @@ clsSystemBrowser.prototype =
 		widthVal = (borderRight.indexOf("px") == -1) ? widthVal : widthVal + parseFloat(borderRight);
  		widthVal = (paddingLeft == undefined) ? widthVal : widthVal + parseFloat(paddingLeft);
 		if(!isParent) widthVal = (paddingRight == undefined) ? widthVal : widthVal + parseFloat(paddingRight);
-		return widthVal;
+		return parseFloat(widthVal);
 	},
 
 	autoWidth : function(objname)
@@ -243,7 +243,7 @@ clsSystemBrowser.prototype =
 		var length = div.length;
  		for (var i=0; i<div.length; i++) div[i].style.backgroundColor = 'transparent';
  		var span = newwin.document.body.getElementsByTagName('span');
-		var length = span.length;
+		length = span.length;
  		for (var i=0; i<length; i++) span[i].style.backgroundColor = 'transparent';
 		newwin.document.close();
 	},
@@ -420,15 +420,15 @@ clsSystemBrowser.prototype =
 			return null;
 		}
 	}
-}
+};
 var SYSTEMBROWSER = new clsSystemBrowser();
 
-Array.prototype.removeDuplicates = function () { for (var i = 1; i < this.length; i++) { if (this[i][0] == this[i-1][0]) this.splice(i,1); }}
-Array.prototype.empty = function () { for (var i = 0; i <= this.length; i++) this.shift(); }
-String.prototype.trim = function () { return this.replace(/^\s+|\s+$/g, ''); }
+Array.prototype.removeDuplicates = function () { for (var i = 1; i < this.length; i++) { if (this[i][0] == this[i-1][0]) this.splice(i,1); }};
+Array.prototype.empty = function () { for (var i = 0; i <= this.length; i++) this.shift(); };
+String.prototype.trim = function () { return this.replace(/^\s+|\s+$/g, ''); };
 String.prototype.pad = function(l, s, t) 
 {
 	var result = (t==0) ? ((l>this.length) ? this.substr(0, l) + (s = new Array(Math.ceil((l-s.length)/s.length) + 1).join(s)) : this.substr(0, l)) : ((l>this.length) ? (s = new Array(Math.ceil((l-s.length)/s.length) + 1).join(s)) + this.substr(0, l) : this.substr(0, l));
 	return s || (s=" "), result;
 };
-String.prototype.replaceAll=function(s1, s2) {return this.split(s1).join(s2)}
+String.prototype.replaceAll=function(s1, s2) {return this.split(s1).join(s2);};

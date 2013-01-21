@@ -48,7 +48,7 @@ clsCarosel.prototype =
 	{
 		var length = carosel.p.elm.length;
 		var size = 0;
-		for (i = 1; i < length; i++) size += carosel.p.elm[i].offsetWidth;
+		for (var i = 1; i < length; i++) size += carosel.p.elm[i].offsetWidth;
 		carosel.container.style.width = size + 3 + "px";
 		carosel.p.width = size - (length * 2);
 		carosel.init = true;
@@ -59,15 +59,13 @@ clsCarosel.prototype =
   		var carosel = $(id);
 		var dsObj = $(carosel.p.dsObj);
 		var data = dsObj.DSresult;
-		var value = new Array();
-		var parent = new Array();
 		var length = data.length;
 		carosel.container = document.createElement('ul');
 		carosel.container.style.left = "0px";
 		carosel.innerHTML = '<input type="button" class="next" onmouseover="javascript:CAROSEL.start(\''+id+'\', \'next\');" onmouseout="javascript:CAROSEL.stop();" />';
 		carosel.innerHTML += '<input type="button" class="prev" onmouseover="javascript:CAROSEL.start(\''+id+'\', \'prev\');" onmouseout="javascript:CAROSEL.stop();" />';
 		carosel.appendChild(carosel.container);
-		var parent = carosel.parentNode;
+		parent = carosel.parentNode;
 		carosel.p.elm = Array();
 		lightbox = (parent.p != undefined && parent.p.typeObj == 'lightbox') ? true : false;
 		for(var i=1; i<length; i++)
@@ -90,6 +88,6 @@ clsCarosel.prototype =
 	{
 		this.getDsValue(id);
 	}
-}
+};
 
 var CAROSEL = new clsCarosel();

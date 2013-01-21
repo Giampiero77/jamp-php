@@ -198,11 +198,11 @@ clsLightBox.prototype =
  			if (anchor.getAttribute('href')) 
 			{
  				if (relAttribute.toLowerCase().match('lightbox')) {
- 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, false, false); return false; }
+ 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, false, false); return false; };
  				} else if (relAttribute.toLowerCase().match('lightshow')) {
- 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, true, false); return false; }
+ 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, true, false); return false; };
  				} else if (relAttribute.toLowerCase().match('lightframe')) {
- 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, false, true); return false; }
+ 					anchor.onclick = function () { LIGHTBOX.start(objLIGHTBOX, this, false, true); return false; };
  				}
  			}
  		}
@@ -251,7 +251,6 @@ clsLightBox.prototype =
 		this.isLightframe = (doFrame ? true : false);
 		var pageSize	= this.getPageSize();
 		var objOverlay	= this.doc.getElementById('lbOverlay');
-		var objBody		= this.doc.getElementsByTagName("body").item(0);
 		objOverlay.style.height = pageSize[1] + "px";
 		objOverlay.style.display = '';
 		this.appear('lbOverlay', (this.doAnimations ? 0 : this.maxOpacity));
@@ -339,10 +338,9 @@ clsLightBox.prototype =
 			this.doc.getElementById('lbOuterContainer').style.borderBottom = '';
 			this.doc.getElementById('lbOuterContainer').className = 'lbOuterContainer_'+this.theme;
 		}
-		this.doc.getElementById('lbOverlay').onclick = function() { if(LIGHTBOX.modal==false)LIGHTBOX.end(); return false; }
+		this.doc.getElementById('lbOverlay').onclick = function() { if(LIGHTBOX.modal==false)LIGHTBOX.end(); return false; };
 		this.doc.getElementById('lbMain').onclick = function(e) 
 		{
-			var e = e;
 			if (!e) 
 			{
 				if (window.parent.frames[window.name] && (parent.document.getElementsByTagName('frameset').length <= 0)) 
@@ -353,10 +351,10 @@ clsLightBox.prototype =
 			}
 			var id = (e.target ? e.target.id : e.srcElement.id);
 			if (id == 'lbMain') { if(LIGHTBOX.modal==false) LIGHTBOX.end(); return false; }
-		}
-		this.doc.getElementById('lbClose').onclick = function() { LIGHTBOX.end(); return false; }
-		this.doc.getElementById('lbPause').onclick = function() { LIGHTBOX.togglePlayPause("lbPause", "lbPlay"); return false; }
-		this.doc.getElementById('lbPlay').onclick = function() { LIGHTBOX.togglePlayPause("lbPlay", "lbPause"); return false; }	
+		};
+		this.doc.getElementById('lbClose').onclick = function() { LIGHTBOX.end(); return false; };
+		this.doc.getElementById('lbPause').onclick = function() { LIGHTBOX.togglePlayPause("lbPause", "lbPlay"); return false; };
+		this.doc.getElementById('lbPlay').onclick = function() { LIGHTBOX.togglePlayPause("lbPlay", "lbPause"); return false; };
 		this.isSlideshow = doSlide;
 		this.isPaused = (this.slideNum != 0 ? true : false);
 		if (this.isSlideshow && this.showPlayPause && this.isPaused) 
@@ -450,13 +448,13 @@ clsLightBox.prototype =
 						}
 					}
 				}
-				var lbImage = LIGHTBOX.doc.getElementById('lbImage')
+				var lbImage = LIGHTBOX.doc.getElementById('lbImage');
 				lbImage.src = (LIGHTBOX.isSlideshow ? LIGHTBOX.slideArray[LIGHTBOX.activeSlide][0] : LIGHTBOX.imageArray[LIGHTBOX.activeImage][0]);
 				lbImage.width = imageWidth;
 				lbImage.height = imageHeight;
 				LIGHTBOX.resizeContainer(imageWidth, imageHeight);
 				imgPreloader.onload = function() {};
-			}
+			};
 			imgPreloader.src = (this.isSlideshow ? this.slideArray[this.activeSlide][0] : this.imageArray[this.activeImage][0]);
 		}
 	},
@@ -548,9 +546,10 @@ clsLightBox.prototype =
 
 	updateDetails : function() 
 	{
+		var sTitle = "";
 		var object = this.doc.getElementById('lbCaption');
 		try {
-		  var sTitle = (this.isSlideshow ? this.slideArray[this.activeSlide][1] : (this.isLightframe ? this.frameArray[this.activeFrame][1] : this.imageArray[this.activeImage][1]));
+		  sTitle = (this.isSlideshow ? this.slideArray[this.activeSlide][1] : (this.isLightframe ? this.frameArray[this.activeFrame][1] : this.imageArray[this.activeImage][1]));
 		}
 		catch (e) {}
 		object.style.display = '';
@@ -585,7 +584,7 @@ clsLightBox.prototype =
 					object.onclick = function() {
 						if (LIGHTBOX.pauseOnPrevClick) { LIGHTBOX.togglePlayPause("lbPause", "lbPlay"); }
 						LIGHTBOX.changeContent(LIGHTBOX.activeSlide - 1); return false;
-					}
+					};
 			} else {
 				if (this.navType == 2) { this.doc.getElementById('lbPrev2_Off').style.display = ''; }
 			}
@@ -595,7 +594,7 @@ clsLightBox.prototype =
 					object.onclick = function() {
 						if (LIGHTBOX.pauseOnNextClick) { LIGHTBOX.togglePlayPause("lbPause", "lbPlay"); }
 						LIGHTBOX.changeContent(LIGHTBOX.activeSlide + 1); return false;
-					}
+					};
 			} else {
 				if (this.navType == 2) { this.doc.getElementById('lbNext2_Off').style.display = ''; }
 			}
@@ -605,7 +604,7 @@ clsLightBox.prototype =
 					object.style.display = '';
 					object.onclick = function() {
 						LIGHTBOX.changeContent(LIGHTBOX.activeFrame - 1); return false;
-					}
+					};
 			} else {
 				this.doc.getElementById('lbPrev2_Off').style.display = '';
 			}
@@ -614,7 +613,7 @@ clsLightBox.prototype =
 					object.style.display = '';
 					object.onclick = function() {
 						LIGHTBOX.changeContent(LIGHTBOX.activeFrame + 1); return false;
-					}
+					};
 			} else {
 				this.doc.getElementById('lbNext2_Off').style.display = '';
 			}		
@@ -622,14 +621,14 @@ clsLightBox.prototype =
 			if(this.activeImage != 0) {
 				var object = (this.navType == 2 ? this.doc.getElementById('lbPrev2') : this.doc.getElementById('lbPrev'));
 					object.style.display = '';
-					object.onclick = function() {LIGHTBOX.changeContent(LIGHTBOX.activeImage - 1); return false;}
+					object.onclick = function() {LIGHTBOX.changeContent(LIGHTBOX.activeImage - 1); return false;};
 			} else {
 				if (this.navType == 2) { this.doc.getElementById('lbPrev2_Off').style.display = ''; }
 			}
 			if(this.activeImage != (this.imageArray.length - 1)) {
 				var object = (this.navType == 2 ? this.doc.getElementById('lbNext2') : this.doc.getElementById('lbNext'));
 					object.style.display = '';
-					object.onclick = function() {LIGHTBOX.changeContent(LIGHTBOX.activeImage + 1); return false;}
+					object.onclick = function() {LIGHTBOX.changeContent(LIGHTBOX.activeImage + 1); return false;};
 			} else {
 				if (this.navType == 2) { this.doc.getElementById('lbNext2_Off').style.display = ''; }
 			}
@@ -863,7 +862,10 @@ clsLightBox.prototype =
 
 	getPageSize : function() 
 	{	
-		var xScroll, yScroll, windowWidth, windowHeight;
+		var xScroll = 0; 
+		var yScroll = 0;
+		var windowWidth = 0; 
+		var windowHeight = 0;
 		if (window.innerHeight && window.scrollMaxY) 
 		{
 			xScroll = this.doc.scrollWidth;
@@ -909,7 +911,7 @@ clsLightBox.prototype =
 		for (var i = 0; i < length; i++) embeds[i].style.visibility = (state == "hide") ? 'hidden' : 'visible';
 		if (this.isFrame) 
 		{
-			var length = parent.frames.length
+			var length = parent.frames.length;
 			for (var i = 0; i < length; i++) 
 			{
 				try 
@@ -965,6 +967,6 @@ clsLightBox.prototype =
 		  AOBJ.setAttribute('rev', 'width: '+parseInt(width)+'px;height: '+parseInt(heigth)+'px');
 		  LIGHTBOX.start($(id), AOBJ, false, true);
 	 }
-}
+};
 
 var LIGHTBOX = new clsLightBox();

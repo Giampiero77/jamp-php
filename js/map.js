@@ -188,7 +188,8 @@ clsMap.prototype =
         }
 		  if (userPoints.length > 0)
 		  {
-			 if (JMAP.jmapObj.p.route!=undefined) var directionsPanel = $(JMAP.jmapObj.p.route);
+			 var directionsPanel = null;
+			 if (JMAP.jmapObj.p.route!=undefined) directionsPanel = $(JMAP.jmapObj.p.route);
 				var mode = (JMAP.jmapObj.p.travelmode==undefined) ? google.maps.DirectionsTravelMode.DRIVING : JMAP.jmapObj.p.travelmode.toUpperCase();;
 				var directionsService = new google.maps.DirectionsService();
 				JMAP.directionsDisplay = new google.maps.DirectionsRenderer();
@@ -233,7 +234,7 @@ clsMap.prototype =
 		JMAP.geocoder = new google.maps.Geocoder();
 		var myOptions = {
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
-		}
+		};
 		if (JMAP.Map==undefined) JMAP.Map = new google.maps.Map($(id), myOptions);
 		JMAP.createGraph();
 	},
@@ -247,6 +248,6 @@ clsMap.prototype =
 	{
 		JMAP.getDsValue(id);
 	}
-}
+};
 
 var JMAP = new clsMap();

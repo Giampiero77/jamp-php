@@ -91,7 +91,7 @@ clsCalendar.prototype =
 	  for (var i=0; i<max; i++) 
 	  {                         
 	      var si = (i<10) ? '0'+i : i;
-	      if (sel==i) html += '<option value="'+si+'" selected>'+si+'</option>'
+	      if (sel==i) html += '<option value="'+si+'" selected>'+si+'</option>';
 	      else html += '<option value="'+si+'">'+si+'</option>';           
 	  }
 	  html += '</select>';
@@ -105,7 +105,6 @@ clsCalendar.prototype =
 		end.setDate(31);
 
 		var month = start.getMonth();
-		var time = start.getTime();
 		start.setDate(1);
 		start.setDate(1 + this.weekstart - start.getDay());
 		if (start.getMonth() == month && start.getDate()>1) start.setDate(-5);
@@ -281,8 +280,6 @@ clsCalendar.prototype =
 		if (this.obj.p.dsObj != undefined) TEXT.setDsValue(this.obj, FORMAT.formatDate(value, reg, false));
 		this.hide();
 	}
-}
-
-Date.prototype.getWeek = function() { var onejan = new Date(this.getFullYear(),0,1); return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);} 
-
+};
+Date.prototype.getWeek = function() { var onejan = new Date(this.getFullYear(),0,1); return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);};
 var CALENDAR = new clsCalendar();
