@@ -1,7 +1,6 @@
 span.checkbox_default_check {
 	cursor:pointer;
 	background : url('checkbox/check.gif') no-repeat center;
-	overflow: auto;
 	height: 16px;
 	width: 16px;
 	padding-left: 11px;
@@ -10,7 +9,6 @@ span.checkbox_default_check {
 span.checkbox_default_uncheck {
 	cursor:pointer;
 	background : url('checkbox/uncheck.gif') no-repeat center;
-	overflow: auto;
 	height: 16px;
 	width: 16px;
 	padding-left: 11px;
@@ -20,7 +18,6 @@ span.checkbox_default,
 span.checkbox_default_undefined {
 	cursor:pointer;
 	background : url('checkbox/undefined.gif') no-repeat center;
-	overflow: auto;
 	height: 16px;
 	width: 16px;
 	padding-left: 11px;
