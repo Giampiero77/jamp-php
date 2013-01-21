@@ -155,7 +155,6 @@ clsDs.prototype =
 	{
  		var dsObj = $(dsObjName);
 		var dspos = dsObj.DSpos;
-		var dspre = dsObj.DSpre; 		
  		this.dssave(dsObjName, true, false);
 		AJAX.dsmore(dsObj, "data=load&dsobjname=" + dsObjName + "&start=" + dsObj.DSstart, undefined, "DS.moveRow('"+dsObjName+"','"+dspos+"');");
 	},
