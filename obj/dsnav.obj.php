@@ -78,15 +78,15 @@ class ClsObj_dsnav extends ClsObject {
 		$obj = $this->property["dsobj"]["value"];
 		if ($this->property["btNew"]["value"] == "true") 
 		{
-			$code .= "\n$tab\t<div class=\"".$class."_new\" id=\"".$id."_new\" title=\"".LANG::translate("DSNAV001")."\" onclick=\"if (this.className == '".$class."_new') DS.dsnew('$obj');\">&nbsp;</div>";
+			$code .= "\n$tab\t<div accessKey=\"n\" class=\"".$class."_new\" id=\"".$id."_new\" title=\"".LANG::translate("DSNAV001")." CTRL+ALT+N\" onclick=\"if (this.className == '".$class."_new') DS.dsnew('$obj');\">&nbsp;</div>";
 		}
 		if ($this->property["btSave"]["value"] == "true") 
 		{
-			$code .= "\n$tab\t<div class=\"".$class."_save\" id=\"".$id."_save\" title=\"".LANG::translate("DSNAV002")."\" onclick=\"if (this.className == '".$class."_save') DS.dssave('$obj');\">&nbsp;</div>";
+			$code .= "\n$tab\t<div accessKey=\"s\" class=\"".$class."_save\" id=\"".$id."_save\" title=\"".LANG::translate("DSNAV002")." CTRL+ALT+S\" onclick=\"if (this.className == '".$class."_save') DS.dssave('$obj');\">&nbsp;</div>";
 		}	
 		if ($this->property["btDelete"]["value"] == "true") 
 		{
-			$code .= "\n$tab\t<div class=\"".$class."_delete\" id=\"".$id."_delete\" title=\"".LANG::translate("DSNAV003")."\" onclick=\"if (this.className == '".$class."_delete') DSNAV.dsdelete('$obj', event);\">&nbsp;</div>";
+			$code .= "\n$tab\t<div accessKey=\"d\" class=\"".$class."_delete\" id=\"".$id."_delete\" title=\"".LANG::translate("DSNAV003")." CTRL+ALT+D\" onclick=\"if (this.className == '".$class."_delete') DSNAV.dsdelete('$obj', event);\">&nbsp;</div>";
 		}
 		if (!is_null($this->property["dsfullsearch"]["value"])) 
 		{
@@ -94,7 +94,7 @@ class ClsObj_dsnav extends ClsObject {
 		}
 		if ($this->property["btCancel"]["value"] == "true") 
 		{
-			$code .= "\n$tab\t<div class=\"".$class."_cancel\" id=\"".$id."_cancel\" title=\"".LANG::translate("DSNAV004")."\" onclick=\"if (this.className == '".$class."_cancel') DSNAV.cancel('$id','$obj');\">&nbsp;</div>";
+			$code .= "\n$tab\t<div accessKey=\"c\" class=\"".$class."_cancel\" id=\"".$id."_cancel\" title=\"".LANG::translate("DSNAV004")." CTRL+ALT+C\" onclick=\"if (this.className == '".$class."_cancel') DSNAV.cancel('$id','$obj');\">&nbsp;</div>";
 		}
 		if ($this->property["btNav"]["value"] == "true") 
 		{
@@ -107,7 +107,7 @@ class ClsObj_dsnav extends ClsObject {
 			$code .= "\n$tab\t<div class=\"".$class."_next\" id=\"".$id."_next\" title=\"".LANG::translate("DSNAV007")."\" onclick=\"if (this.className == '".$class."_next') ".$obj."MoveNext();\">&nbsp;</div>";
 			$code .= "\n$tab\t<div class=\"".$class."_last\" id=\"".$id."_last\" title=\"".LANG::translate("DSNAV008")."\" onclick=\"if (this.className == '".$class."_last') ".$obj."MoveLast();\">&nbsp;</div>";
 		}
-		if ($this->property["btReload"]["value"] == "true") $code .= "\n$tab\t<div class=\"".$class."_reload\" id=\"".$id."_reload\" title=\"".LANG::translate("DSNAV011")."\" onclick=\"DS.reload('$obj');\">&nbsp;</div>";
+		if ($this->property["btReload"]["value"] == "true") $code .= "\n$tab\t<div accessKey=\"r\" class=\"".$class."_reload\" id=\"".$id."_reload\" title=\"".LANG::translate("DSNAV011")."CTRL+ALT+R\" onclick=\"DS.reload('$obj');\">&nbsp;</div>";
 		if ($this->property["btPrint"]["value"] == "true")
 		{
 			$fnz = $this->property["fnzprint"]["value"];
