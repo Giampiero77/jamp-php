@@ -46,7 +46,8 @@ class ClsObj_ds extends ClsObject {
 		$this->property["readonly"]				= array("value" => null,	"inherit" => false, "html" => false);
 		$this->property["confirm"]				= array("value" => "false",	"inherit" => false, "html" => false);
  		$this->property["objtype"]  			= array("value" => null, "inherit" => false, "html" => false);
-		
+ 		$this->property["unsetpost"]  			= array("value" => null, "inherit" => false, "html" => false);
+ 			
 		$this->property["selecteditems"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsdefault"]			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dstable"]				= array("value" => null, "inherit" => false, "html" => false);
@@ -353,6 +354,7 @@ class ClsObj_ds extends ClsObject {
 		unset($post["keyname"]);
 		unset($post["keynamevalue"]);
 		unset($post["start"]);
+		$post = $this->unsetPost($post);
 		$this->ds->dsQueryFilter(null, $keyname, $key);
 		if(!empty($this->property["dslock"]["value"]))
 		{
@@ -425,6 +427,7 @@ class ClsObj_ds extends ClsObject {
 		unset($post["keynamevalue"]);
 		unset($post["keyname"]);
 		unset($post["start"]);
+		$post = $this->unsetPost($post);
 		$this->ds->property["item"] = $post;
 		$this->ds->dsConnect();
 		if ($update) 
@@ -692,6 +695,19 @@ class ClsObj_ds extends ClsObject {
 			$string = $system->packJS($string);
 		}
 		return "<script><![CDATA[$string]]></script>\n";
+	}
+	
+	private function unsetPost($post)
+	{
+		if(!empty($this->property["unsetpost"]["value"]))
+		{
+			$items = explode(",",$this->property["unsetpost"]["value"]);
+			foreach ($items as $item)
+			{
+				unset($post[trim($item)]);
+			}
+		} 
+		return $post;
 	}
 }
 ?>

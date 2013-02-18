@@ -350,6 +350,7 @@ dsrev CDATA #IMPLIED
 id CDATA #REQUIRED
 debug (true|false) #IMPLIED
 out (json|xml.) #IMPLIED
+unsetpost CDATA #IMPLIED
 focusnew CDATA #IMPLIED
 focustabnew CDATA #IMPLIED
 dshost CDATA #IMPLIED
