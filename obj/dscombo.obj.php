@@ -51,6 +51,7 @@ class ClsObj_dscombo extends ClsObject {
  		$this->property["java"]  			= array("value" => array("dscombo.js", "format.js"), "inherit" => false, "html" => false);
  		$this->property["cssfile"]  		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["format"] 			= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["refreshall"]     	= array("value" => "false", "inherit" => false, "html" => false);
 		$this->property["title"]["value"] 	= LANG::translate("DSCOMB001");
 	}
 
@@ -160,6 +161,9 @@ class ClsObj_dscombo extends ClsObject {
 				if ($this->property["outlabel"]["value"] == "true") $this->propertyJS["outlabel"] = true;
 			break;	
 
+			case "refreshall":
+				if ($this->property["refreshall"]["value"] == "true") $this->propertyJS["refreshall"] = true;
+			break;
 			case "dsitemkeylist":
 				$this->propertyJS["dsItemKeyList"] = $this->property["dsitemkeylist"]["value"];
 			break;

@@ -456,6 +456,7 @@ maxlength CDATA #IMPLIED
 alt CDATA #IMPLIED
 src CDATA #IMPLIED
 readonly (true|false) #IMPLIED
+refreshall (true|false) #IMPLIED
 align (left|center|right) #IMPLIED
 accesskey CDATA #IMPLIED
 onfocus CDATA #IMPLIED

@@ -148,7 +148,7 @@ clsDscombo.prototype =
 
 	searchDsValue : function(obj)
 	{
-		if (obj.searchchange == false) return;
+		if (obj.searchchange == false && obj.p.refreshall==undefined) return;
 		obj.searchchange = false;
 		var dsObj = $(obj.p.dsObjList);
 		var post = "data=load&dsobjname=" + obj.p.dsObjList;
