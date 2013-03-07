@@ -277,8 +277,12 @@ clsGridds.prototype =
 	getDSpos : function(obj)
 	{
 		if (obj.DS == undefined) return;
- 		if (obj.DS.DSpre > 0) obj.bodyObj.rows[obj.DS.DSpre].className = (obj.bodyObj.rows[obj.DS.DSpre].row % 2 == 0) ? obj.className + "_row_even" : obj.className + "_row";
- 		if (obj.DS.DSpos > 0 && obj.bodyObj.rows[obj.DS.DSpos]!=undefined)
+		if (obj.bodyObj == undefined) return;
+		if (obj.bodyObj.rows == undefined) return;
+		if (obj.DS.DSpre > 0 && obj.DS.DSpre < obj.bodyObj.rows.length) {
+			obj.bodyObj.rows[obj.DS.DSpre].className = (obj.bodyObj.rows[obj.DS.DSpre].row % 2 == 0) ? obj.className + "_row_even" : obj.className + "_row";
+		}
+		if (obj.DS.DSpos > 0 && obj.bodyObj.rows[obj.DS.DSpos]!=undefined)
 		{
 			obj.bodyObj.rows[obj.DS.DSpos].className = obj.className + "_row_pos";
 			this.AutoScroll(obj);
