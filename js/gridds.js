@@ -317,7 +317,7 @@ clsGridds.prototype =
 	clickROW : function(obj, row, event)
 	{
 		if (!event) event = window.event;
-		if (event.ctrlKey == false && event.shiftKey == false)
+		if (event.ctrlKey == false && event.metaKey==false && event.shiftKey == false)
 		{
 			if (obj.DS.DSmultipos.length > 0) this.unselected(obj);
 			var pre = obj.p.autoscroll;
@@ -325,7 +325,7 @@ clsGridds.prototype =
 			DS.moveRow(obj.p.dsObj, row);
 			obj.p.autoscroll=pre;
 		}
-		else this.selectedROW(obj, row, event.shiftKey, event.ctrlKey);
+		else this.selectedROW(obj, row, event.shiftKey, event.ctrlKey || event.metaKey);
 	},
 
 	selectedROW : function(obj, row, shiftKey, ctrlKey)
@@ -529,7 +529,7 @@ clsGridds.prototype =
 						obj.UpROW = dsObj.DSpos;
 					}
 					if (obj.UpROW > 1) obj.UpROW--;
-					this.selectedROW(obj, obj.UpROW , event.shiftKey, event.ctrlKey);
+					this.selectedROW(obj, obj.UpROW , event.shiftKey, event.ctrlKey || event.metaKey);
 				}
 				else
 				{
@@ -550,7 +550,7 @@ clsGridds.prototype =
 						  obj.DownROW = dsObj.DSpos;
 					}
 					if (obj.DownROW < dsObj.DSresult.length -1) obj.DownROW++;
-					this.selectedROW(obj, obj.DownROW , event.shiftKey, event.ctrlKey);
+					this.selectedROW(obj, obj.DownROW , event.shiftKey, event.ctrlKey || event.metaKey);
 				}
 				else
 				{
