@@ -216,7 +216,7 @@ clsDsnav.prototype =
 				this.setButton(dsObjName,"next",true);
 			}
 		}
-		if (dsObj.DSsearch.length>0) this.setButton(dsObjName, "cancel", true);
+		if (dsObj.DSsearch != undefined && dsObj.DSsearch.length>0) this.setButton(dsObjName, "cancel", true);
 	}
 };
 
