@@ -45,6 +45,8 @@ class ClsObj_dsnav extends ClsObject {
 		$this->property["maxlength"]	 = array("value" => 255, "inherit" => false, "html" => false);
 		$this->property["size"] 		 = array("value" => 30, "inherit" => false, "html" => false);
 		$this->property["dssearch"] 	 = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dssearchrange"] = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dsautosearch"]  = array("value" => "false", "inherit" => false, "html" => false);
 		$this->property["dsfullsearch"]	 = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsobj"] 	 	 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["java"]  	 	 = array("value" => "dsnav.js", "inherit" => false, "html" => false);
@@ -118,16 +120,51 @@ class ClsObj_dsnav extends ClsObject {
 
 		if (!is_null($this->property["dssearch"]["value"])) 
 		{
- 			$code .= "\n$tab<div class=\"".$class."_find\"><LABEL style=\"margin-top:3px;\">".$this->property["label"]["value"]."</label>";
-			$maxlength = $this->property["maxlength"]["value"];
-			$size = $this->property["size"]["value"];
-			if ($this->property["searchonkeyup"]["value"] == "false")
+			if ($this->property["dsautosearch"]["value"]=="true")
 			{
-				$code .= "\n$tab<input class=\"".$class."_find\" type=\"text\" id=\"".$id."_search\" onkeyup=\"DSNAV.dskeyfind('$id', event)\" size=\"$size\" maxlength=\"$maxlength\"></div>";
-				$code .= "\n$tab\t<div class=\"".$class."_findicon\" id=\"".$id."_find\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"DSNAV.dsfind('$id');\">&nbsp;</div>";
+	 			$code .= "\n$tab<div class=\"".$class."_find\"><LABEL style=\"margin-top:3px;\">".$this->property["label"]["value"]."</label>";
+				$maxlength = $this->property["maxlength"]["value"];
+				$size = $this->property["size"]["value"];
+				$code .= "<select class=\"".$class."_find\" onchange=\"DSNAV.searchAuto(this,'".$id."',".$this->property["searchonkeyup"]["value"].");\"><option selected></option>";	
+				global $xml;
+				$ds = $xml->getObjById($obj, "ds");
+				$ds->ds->dsConnect();
+				$ds->ds->dsDescribe($ds->ds->property["dstable"]);
+				$field = array();
+				if (empty($ds->ds->property["join"]))
+				{
+					while($row = $ds->ds->dsGetRow()) if(!empty($row->Comment)) $field["$row->Field|$row->Type"] = $row->Comment;
+				}
+				else 
+				{
+					while($row = $ds->ds->dsGetRow()) if(!empty($row->Comment)) $field[$ds->ds->property["dstable"].".$row->Field|$row->Type"] = $row->Comment;
+					$ds->ds->dsDescribe($ds->ds->property["join"]);
+					while($row = $ds->ds->dsGetRow()) if(!empty($row->Comment)) $field[$ds->ds->property["dstable"].".$row->Field|$row->Type"] = $row->Comment;
+				}
+				asort($field);
+				$jscode = "";
+				foreach ($field as $value => $comment)
+				{
+					$comment = explode("@",$comment);
+					if (isset($comment[1])) $value .= "@".$comment[1];
+					$code .= "<option value=\"$value\">$comment[0]</option>";
+				}
+				
+				$code .= "</select><div id=\"".$id."_field\" style=\"display:inline\"></div></div>";
+				$code .= "\n$tab\t<div class=\"".$class."_findicon\" id=\"".$id."_find\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"DSNAV.dsfindAuto('$id');\">&nbsp;</div>";
+				$code .="<!--[if IE]><style type=\"text/css\">input.".$class."_find { padding:0px } </style> <![endif]--> ";				
+			} else {
+	 			$code .= "\n$tab<div class=\"".$class."_find\"><LABEL style=\"margin-top:3px;\">".$this->property["label"]["value"]."</label>";
+				$maxlength = $this->property["maxlength"]["value"];
+				$size = $this->property["size"]["value"];
+				if ($this->property["searchonkeyup"]["value"] == "false")
+				{
+					$code .= "\n$tab<input class=\"".$class."_find\" type=\"text\" id=\"".$id."_search\" onkeyup=\"DSNAV.dskeyfind('$id', event)\" size=\"$size\" maxlength=\"$maxlength\"></div>";
+					$code .= "\n$tab\t<div class=\"".$class."_findicon\" id=\"".$id."_find\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"DSNAV.dsfind('$id');\">&nbsp;</div>";
+				}
+				else $code .= "\n$tab<input class=\"".$class."_find\" type=\"text\" id=\"".$id."_search\" onkeyup=\"DSNAV.dsfind('$id');\" size=\"$size\" maxlength=\"$maxlength\"></div>";
+				$code .="<!--[if IE]><style type=\"text/css\">input.".$class."_find { padding:0px } </style> <![endif]--> ";
 			}
-			else $code .= "\n$tab<input class=\"".$class."_find\" type=\"text\" id=\"".$id."_search\" onkeyup=\"DSNAV.dsfind('$id');\" size=\"$size\" maxlength=\"$maxlength\"></div>";
-			$code .="<!--[if IE]><style type=\"text/css\">input.".$class."_find { padding:0px } </style> <![endif]--> ";
 		}
 
 		if (isset($this->child_property["image"]))
@@ -155,6 +192,13 @@ class ClsObj_dsnav extends ClsObject {
 		$id = $this->property["id"]["value"];
 		$dsobj = $this->property["dsobj"]["value"];
 		$this->propertyJS["DSsearch"] = $this->property["dssearch"]["value"];
+		if (!empty($this->property["dssearchrange"]["value"]))
+		{
+			$this->propertyJS["DSsearchRange"] = $this->property["dssearchrange"]["value"];
+			$this->property["java"]["value"] = array($this->property["java"]["value"],"calendar.js");
+			$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];
+			$this->property["cssfile"]["value"] = array($this->property["cssfile"]["value"], "objcss/$template/calendar.css");
+		}
 		$this->propertyJS["DSfullsearch"] = $this->property["dsfullsearch"]["value"];
 		$this->addEvent($id, $dsobj."Move", "DSNAV.refreshObj(\"$id\");");
 		$this->addEvent($id, $dsobj."Refresh", "DSNAV.refreshObj(\"$id\");");

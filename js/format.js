@@ -66,6 +66,16 @@ clsFormat.prototype =
 		dsObj.DSresult[pos][Obj.p.dsItem] = valueDs;
 	},
 
+	UnFormat : function(Obj)
+	{
+		var format = this.unformatReg(Obj);
+		var value = Obj.value;
+		if (format[0]=="date") value = this.formatDate(value, format);
+		else if (format[0]=="number") value = this.formatNumber(value, format);
+		else value = this.formatString(value, format);
+		return value;
+	},
+	
 	format : function(Obj, valueDs)
 	{
 		valueDs = this.Format(valueDs, Obj.p.format);

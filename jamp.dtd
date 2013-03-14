@@ -515,6 +515,8 @@ label CDATA #IMPLIED
 maxlength CDATA #IMPLIED
 size CDATA #IMPLIED
 dssearch CDATA #IMPLIED
+dssearchrange CDATA #IMPLIED
+dsautosearch (true|false) #IMPLIED
 dsfullsearch CDATA #IMPLIED
 dsobj CDATA #IMPLIED
 java CDATA #IMPLIED

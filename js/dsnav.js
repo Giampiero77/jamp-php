@@ -44,6 +44,42 @@ clsDsnav.prototype =
 		else pageObj.selectedIndex = parseInt(dsObj.DSstart / dsObj.DSlimit);
 	},
 	
+	searchAuto : function(obj, id, keyup)
+	{
+		var fieldObj = $(id+"_field");
+		var field = obj.value.split('@');
+		var mask = (field[1] != undefined) ? field[1] :  undefined;
+		field = field[0].split('|');
+		if (obj.value == "")
+		{
+			fieldObj.innerHTML = "";
+			return;
+		}
+		var type = field[1].split("(");
+		var codice = "";
+		if (keyup == true) keyup = "DSNAV.dsfindAuto('"+id+"')";
+		else keyup = "DSNAV.dskeyfindAuto('"+id+"', event)";
+		if (type[0] == "varchar") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"" + type[1].replace(')','') + "\" maxlength=\"" + type[1].replace(')','') + "\" onkeyup=\""+ keyup +"\">";
+		else if (type[0] == "int") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"" + type[1].replace(')','') + "\" maxlength=\"" + type[1].replace(')','') + "\" onkeyup=\""+ keyup +"\" onkeypress=\"return REGEXP.checkDigit(event,'number'); \">";
+		else if (type[0] == "decimal") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"20\" maxlength=\"20\" onkeyup=\""+ keyup +"\" onkeypress=\"return REGEXP.checkDigit(event,'decimal'); \">";
+		else if (type[0] == "text" || type[0] == "longtext") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"30\"  onkeyup=\""+ keyup +"\">";
+		else if (type[0] == "date")
+		{
+			codice = ">= <input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"10\"  onkeyup=\""+ keyup +"\" onclick=\"CALENDAR.show_picker(this);\">";
+			codice+= "<= <input class=\""+obj.className+"\" id=\""+id+"_search2\" name=\""+field[0]+"\" type=\"text\" size=\"10\"  onkeyup=\""+ keyup +"\" onclick=\"CALENDAR.show_picker(this);\">";
+		}
+		fieldObj.innerHTML = codice;
+		SYSTEMEVENT.setFocus($(id+"_search"));
+		if (mask != undefined)
+		{
+			if (type[0] == "date")
+			{
+				$(id+"_search").p = {"format":mask, "classcalendar":"calendar_default", "typeObj":"text"};
+				$(id+"_search2").p = {"format":mask, "classcalendar":"calendar_default", "typeObj":"text"};
+			} else $(id+"_search").p = {"format":mask, "typeObj":"text"};
+		}
+	},
+	
 	page : function(dsObjName, pageObj) 
 	{
 		var dsObj = $(dsObjName);
@@ -75,10 +111,48 @@ clsDsnav.prototype =
 		AJAX.dsmore(dsObj, 'data=load&dsobjname=' + dsObj.id + '&start=' + dsObj.DSstart );
 	},
 
+	dsfindAuto : function(dsObjName)
+	{
+		var obj = $(dsObjName);
+		var searchObj = $(dsObjName + "_search");
+		var searchObj2 = $(dsObjName + "_search2");
+		var dsObj = $(obj.p.dsObj);
+		var searchmask = obj.p.DSsearch;
+		var val = searchObj.value;
+		if (searchObj.p != undefined && searchObj.p.format != undefined) val = FORMAT.UnFormat(searchObj);
+		if (searchObj2 != undefined)
+		{
+			var val2 = searchObj.value;
+			if (searchObj2.p != undefined && searchObj2.p.format != undefined) val2 = FORMAT.UnFormat(searchObj2);
+			if (val2=="")
+			{
+				val2 = val;
+				searchObj2.value = searchObj.value;
+			} 
+			searchmask = (obj.p.DSsearchRange == undefined) ? "" : obj.p.DSsearchRange;
+			searchmask = searchmask.replaceAll('$$VALUE1$$', val.replace(/'/g,"\\'"));
+			searchmask = searchmask.replaceAll('$$VALUE2$$', val2.replace(/'/g,"\\'"));
+			dsObj.DSsearch = (val == "" && val2 == "") ? '' : searchmask.replaceAll('$$ITEM$$', searchObj.name.replace(/'/g,"\\'"));		
+		} 
+		else 
+		{
+			searchmask = searchmask.replaceAll('$$VALUE$$', val.replace(/'/g,"\\'"));
+			dsObj.DSsearch = (searchObj==undefined || searchObj.value=='') ? '' : searchmask.replaceAll('$$ITEM$$', searchObj.name.replace(/'/g,"\\'"));		
+		}
+		dsObj.DSstart = 0;
+		AJAX.dsmore(dsObj, 'data=load&dsobjname=' + dsObj.id + '&start=' + dsObj.DSstart );
+	},
+
 	dskeyfind : function(id, e)
 	{
 		var keynum = (window.event) ? e.keyCode : e.which;
 		if (keynum == 13) this.dsfind(id);
+	},
+
+	dskeyfindAuto : function(id, e)
+	{
+		var keynum = (window.event) ? e.keyCode : e.which;
+		if (keynum == 13) this.dsfindAuto(id);
 	},
 	
 	fullsearch : function(id, dsObjName)
@@ -133,6 +207,8 @@ clsDsnav.prototype =
 		{
 			dsObj.DSsearch = "";
 			var txtSearch = $(id + "_search");
+			if (txtSearch != undefined) txtSearch.value = "";
+			txtSearch = $(id + "_search2");
 			if (txtSearch != undefined) txtSearch.value = "";
 			AJAX.dsmore(dsObj, 'data=load&dsobjname=' + dsObj.id + '&start=' + dsObj.DSstart );
 		} 

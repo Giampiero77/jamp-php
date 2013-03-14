@@ -710,6 +710,16 @@ class mysqlDs extends iDS
 	}
 
 	/**
+	 * Returns all items 
+	 * @param string $database name of the database
+	 */
+	public function dsDescribe($table)
+	{
+		$qry = "SHOW FULL COLUMNS FROM  $table";
+		$this->dsQuery($qry);
+	}
+	
+	/**
 	* Returns the contents of a table
 	* @param string $database name of the database
 	* @param string $table name of the table
