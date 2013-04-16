@@ -161,11 +161,11 @@ clsAJAX.prototype =
 		this.request("POST", dsObj.p.DSaction, post, true, true);
 	},
 
-	dslink : function (dsObjName, sync, func)
+	dslink : function (dsObjName, forceSync, func)
 	{
 		var dsObj = $(dsObjName);
 		var sync = (dsObj.p.DSrefresh == undefined) ? false : true;
-//		var sync = (forceSync == undefined) ? sync : forceSync;		
+		sync = (forceSync == undefined) ? sync : forceSync;		
 		var post = "data=load&dsobjname=" + dsObjName;
 		if (dsObj.p.DSreferences == undefined)
 		{
