@@ -322,7 +322,11 @@ clsGridds.prototype =
 			if (obj.DS.DSmultipos.length > 0) this.unselected(obj);
 			var pre = obj.p.autoscroll;
 			obj.p.autoscroll=false;
-			DS.moveRow(obj.p.dsObj, row);
+			if (DS.moveRow(obj.p.dsObj, row) == false) 
+			{
+				var dsObj = $(obj.p.dsObj);
+				if (row != dsObj.DSpos) DS.setFocusNew(dsObj);
+			}
 			obj.p.autoscroll=pre;
 		}
 		else this.selectedROW(obj, row, event.shiftKey, event.ctrlKey || event.metaKey);
@@ -448,6 +452,55 @@ clsGridds.prototype =
 		SYSTEMEVENT.setFocus(newid); 
 		if (newid.select) newid.select();
 	},
+	
+	tab : function(id, char, event)
+	{
+		if (!event) event = window.event;
+		var keynum = (window.event) ? event.keyCode : event.which;
+		var objTarget = (event.srcElement == undefined) ? event.target : event.srcElement;
+		if (keynum == char)
+		{
+			var newid = $(id+"_"+(objTarget.col+1)+"_"+objTarget.row);
+			var stop = false;
+			var col = objTarget.col;
+			var row = objTarget.row;
+			col++;
+			while (stop==false)
+			{
+				newid = $(id+"_"+col+"_"+row);
+				if (newid != undefined)
+				{
+					SYSTEMEVENT.setFocus(newid); 
+					if (newid.select) 
+					{ 
+						newid.select();
+						stop = true;
+					}
+					else col++;
+				} else {
+					var newrow = (row<0) ? -1 : 1;
+					if ($(id+"_row"+(row+newrow)) != undefined) 
+					{ 
+						col = 1;
+						row = row + newrow;
+						var obj = $(id);
+						DS.moveRow(obj.p.dsObj, row);
+					} 
+					else
+					{
+						var obj = $(id);
+						if (obj.p.insertNew == true)
+						{
+							var dsObj = $(obj.p.dsObj);
+							if (dsObj.DSpos < 0 && dsObj.p.DSsavetype == "row") DS.dssave(obj.p.dsObj); 
+							DS.dsnew(obj.p.dsObj);
+						}
+						stop = true;
+					}
+				}
+			}
+		}
+	},
 
 	scrollBody : function(id)
 	{
@@ -467,7 +520,7 @@ clsGridds.prototype =
 		switch (keynum) 
 		{
 			case 9:
-				objTarget = (event.srcElement == undefined) ? event.target : event.srcElement;
+				var objTarget = (event.srcElement == undefined) ? event.target : event.srcElement;
 				if (objTarget == undefined) return;
 				var pos = (objTarget.row == undefined) ? dsObj.DSpos : objTarget.row;
 

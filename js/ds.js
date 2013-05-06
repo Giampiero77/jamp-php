@@ -134,7 +134,7 @@ clsDs.prototype =
 	moveRow : function(dsObjName, row)
 	{
 		var dsObj = $(dsObjName);
-		if (dsObj.DSpos == row || dsObj.DSpos < 0) return;
+		if (dsObj.DSpos == row || dsObj.DSpos < 0) return false;
 		if (dsObj.p.DSsavetype == "row") this.dssaveall(dsObj);
 		if (row < dsObj.DSresult.length)
 		{
@@ -142,6 +142,7 @@ clsDs.prototype =
 			dsObj.DSpos = row;
 			eval(dsObjName + 'Move();');
 		}
+		return true;
 	},
 
 	reload : function(dsObjName)

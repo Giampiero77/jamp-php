@@ -41,6 +41,7 @@ class ClsObj_gridds extends ClsObject {
 		$this->property["pdffont"]	  	= array("value" => "Arial", "inherit" => false, "html" => false);
 		$this->property["pdffontsize"]	= array("value" => "8", "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["tabchar"]  	= array("value" => "9", "inherit" => false, "html" => false);
  		$this->property["autoscroll"]	= array("value" => "true", "inherit" => false, "html" => false);
 		$this->multiObj = true;
 	}
@@ -83,7 +84,9 @@ class ClsObj_gridds extends ClsObject {
   		$this->addEventListener($id."_body", "keydown", "function(event) { GRIDDS.keyDown('$id', event); } ");
   		$this->addEventListener($id."_body", "keyup", "function(event) { GRIDDS.keyUp('$id', event); } ");
   		$this->addEventListener($id."_body", "click", "function() { GRIDDS.setFocus('$id'); } ");
-
+  		
+  		if(($this->property["tabchar"]["value"] != "9") && !empty($this->property["tabchar"]["value"])) $this->addEventListener($id."_body", "keyup", "function(event) { GRIDDS.tab('$id', ".$this->property["tabchar"]["value"].", event); } ");
+ 
 		//COLS
 		$ObjROW = $this->addChild($id."_row0", "div");
 		$ObjROW->setProperty("class", $class."_row0");
