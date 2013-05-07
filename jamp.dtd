@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT jamp (page)>
 <!ELEMENT page ANY>
+<!ELEMENT gridds (heading?,coloumn?)>
+<!ELEMENT heading (heads+)>
+<!ELEMENT heads (#PCDATA)>
+<!ATTLIST heads
+headlabel CDATA #REQUIRED
+headcol CDATA #IMPLIED
+>
+<!ATTLIST gridds
+debug (true|false) #IMPLIED
+onclick CDATA #IMPLIED
+ondblclick CDATA #IMPLIED
+onmousedown CDATA #IMPLIED
+onmouseup CDATA #IMPLIED
+onmouseover CDATA #IMPLIED
+onmousemove CDATA #IMPLIED
+onmouseout CDATA #IMPLIED
+onkeypress CDATA #IMPLIED
+onkeydown CDATA #IMPLIED
+onkeyup CDATA #IMPLIED
+class CDATA #IMPLIED
+style CDATA #IMPLIED
+lang CDATA #IMPLIED
+dir CDATA #IMPLIED
+tabchar CDATA #IMPLIED
+template CDATA #IMPLIED
+title CDATA #IMPLIED
+id CDATA #REQUIRED
+label CDATA #IMPLIED
+order (true|false) #IMPLIED
+readonly (true|false) #IMPLIED
+insertnew (true|false) #IMPLIED
+width CDATA #IMPLIED
+height CDATA #IMPLIED
+cssfile CDATA #IMPLIED
+display CDATA #IMPLIED
+java CDATA #IMPLIED
+pdffont CDATA #IMPLIED
+pdffontsize CDATA #IMPLIED
+dsobj CDATA #IMPLIED
+autoscroll (true|false) #IMPLIED
+>
+<!ELEMENT coloumn ANY>
+<!ATTLIST text
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+>
+<!ATTLIST dscombo
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+>
+<!ATTLIST label
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+>
+<!ATTLIST dsselect
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+>
 <!ELEMENT a ANY>
 <!ATTLIST a
 debug (true|false) #IMPLIED
@@ -797,41 +863,6 @@ name CDATA #IMPLIED
 usemap CDATA #IMPLIED
 value CDATA #IMPLIED
 java CDATA #IMPLIED
->
-<!ELEMENT gridds ANY>
-<!ATTLIST gridds
-debug (true|false) #IMPLIED
-onclick CDATA #IMPLIED
-ondblclick CDATA #IMPLIED
-onmousedown CDATA #IMPLIED
-onmouseup CDATA #IMPLIED
-onmouseover CDATA #IMPLIED
-onmousemove CDATA #IMPLIED
-onmouseout CDATA #IMPLIED
-onkeypress CDATA #IMPLIED
-onkeydown CDATA #IMPLIED
-onkeyup CDATA #IMPLIED
-class CDATA #IMPLIED
-style CDATA #IMPLIED
-lang CDATA #IMPLIED
-dir CDATA #IMPLIED
-tabchar CDATA #IMPLIED
-template CDATA #IMPLIED
-title CDATA #IMPLIED
-id CDATA #REQUIRED
-label CDATA #IMPLIED
-order (true|false) #IMPLIED
-readonly (true|false) #IMPLIED
-insertnew (true|false) #IMPLIED
-width CDATA #IMPLIED
-height CDATA #IMPLIED
-cssfile CDATA #IMPLIED
-display CDATA #IMPLIED
-java CDATA #IMPLIED
-pdffont CDATA #IMPLIED
-pdffontsize CDATA #IMPLIED
-dsobj CDATA #IMPLIED
-autoscroll (true|false) #IMPLIED
 >
 <!ELEMENT head ANY>
 <!ATTLIST head
