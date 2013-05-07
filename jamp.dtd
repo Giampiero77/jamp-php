@@ -622,8 +622,8 @@ searchonkeyup (true|false) #IMPLIED
 <!ELEMENT option (opt+)>
 <!ELEMENT opt (#PCDATA)> 
 <!ATTLIST opt
-optiontext CDATA #REQUIRED
-optionvalue CDATA #IMPLIED
+optiontext CDATA #IMPLIED
+optionvalue CDATA #REQUIRED
 >
 <!ATTLIST dsselect
 debug (true|false) #IMPLIED
