@@ -48,24 +48,49 @@ id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
 colalign CDATA #IMPLIED
 colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
 >
 <!ATTLIST dscombo
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
 colalign CDATA #IMPLIED
 colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
+>
+<!ATTLIST radio
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
 >
 <!ATTLIST label
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
 colalign CDATA #IMPLIED
 colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
 >
 <!ATTLIST dsselect
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
 colalign CDATA #IMPLIED
 colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
+>
+<!ATTLIST button
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
+>
+<!ATTLIST checkbox
+id CDATA #IMPLIED
+itemlabel CDATA #IMPLIED
+colalign CDATA #IMPLIED
+colwidth CDATA #IMPLIED
+order (true|false) #IMPLIED
 >
 <!ELEMENT a ANY>
 <!ATTLIST a
@@ -192,6 +217,7 @@ label CDATA #IMPLIED
 labelalign (left|right) #IMPLIED
 labelwidth CDATA #IMPLIED
 labelstyle CDATA #IMPLIED
+image CDATA #IMPLIED
 >
 <!ELEMENT buttonimg (#PCDATA)>
 <!ATTLIST buttonimg
@@ -546,7 +572,8 @@ java CDATA #IMPLIED
 cssfile CDATA #IMPLIED
 format CDATA #IMPLIED
 >
-<!ELEMENT dsnav ANY>
+<!ELEMENT dsnav (buttons?)>
+<!ELEMENT buttons (button+)>
 <!ATTLIST dsnav
 debug (true|false) #IMPLIED
 onclick CDATA #IMPLIED
@@ -591,7 +618,13 @@ dsitem CDATA #IMPLIED
 objtype CDATA #IMPLIED
 searchonkeyup (true|false) #IMPLIED
 >
-<!ELEMENT dsselect (#PCDATA)>
+<!ELEMENT dsselect (option?)>
+<!ELEMENT option (opt+)>
+<!ELEMENT opt (#PCDATA)> 
+<!ATTLIST opt
+optiontext CDATA #REQUIRED
+optionvalue CDATA #IMPLIED
+>
 <!ATTLIST dsselect
 debug (true|false) #IMPLIED
 onclick CDATA #IMPLIED
@@ -629,7 +662,7 @@ dsitemlist CDATA #IMPLIED
 dsobjlist CDATA #IMPLIED
 directory CDATA #IMPLIED
 allselect CDATA #IMPLIED
-valuezero (true|false) #IMPLIED
+valuezero CDATA #IMPLIED
 label CDATA #IMPLIED
 labelalign (left|right) #IMPLIED
 labelwidth CDATA #IMPLIED
@@ -1151,8 +1184,11 @@ onmouseout CDATA #IMPLIED
 onkeypress CDATA #IMPLIED
 onkeydown CDATA #IMPLIED
 onkeyup CDATA #IMPLIED
+onchange CDATA #IMPLIED
+keypress CDATA #IMPLIED
 class CDATA #IMPLIED
 style CDATA #IMPLIED
+blur CDATA #IMPLIED
 lang CDATA #IMPLIED
 dir CDATA #IMPLIED
 template CDATA #IMPLIED
@@ -1256,7 +1292,7 @@ charset CDATA #IMPLIED
 href CDATA #IMPLIED
 hreflang CDATA #IMPLIED
 media (media|screen|tty|tv|projection|handheld|print|braille|aural|all) #IMPLIED
-rel (alternate|appendix|bookmark|chapter|contents|copyright|glossary|help|home|index|next|prev|section|start|stylesheet|subsection) #IMPLIED
+rel (alternate|appendix|bookmark|chapter|contents|copyright|glossary|help|home|index|next|prev|section|start|stylesheet|subsection|apple-touch-icon) #IMPLIED
 rev (alternate|appendix|bookmark|chapter|contents|copyright|glossary|help|home|index|next|prev|section|start|stylesheet|subsection) #IMPLIED
 target CDATA #IMPLIED
 type CDATA #IMPLIED
@@ -1463,7 +1499,7 @@ title CDATA #IMPLIED
 id CDATA #REQUIRED
 onload CDATA #IMPLIED
 loaddata (true|false) #IMPLIED
-out (html|pdf|text) #IMPLIED
+out (html|pdf|text|php) #IMPLIED
 icon CDATA #IMPLIED
 alink CDATA #IMPLIED
 background CDATA #IMPLIED
@@ -1946,6 +1982,7 @@ pattern CDATA #IMPLIED
 placeholder CDATA #IMPLIED
 required CDATA #IMPLIED
 step CDATA #IMPLIED
+keypressed CDATA #IMPLIED
 >
 <!ELEMENT textarea (#PCDATA)>
 <!ATTLIST textarea
