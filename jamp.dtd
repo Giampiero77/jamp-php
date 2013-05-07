@@ -339,6 +339,8 @@ size CDATA #IMPLIED
 checkimage CDATA #IMPLIED
 uncheckimage CDATA #IMPLIED
 tristateimage CDATA #IMPLIED
+true CDATA #IMPLIED 
+false CDATA #IMPLIED 
 >
 <!ELEMENT div ANY>
 <!ATTLIST div
@@ -618,12 +620,13 @@ dsitem CDATA #IMPLIED
 objtype CDATA #IMPLIED
 searchonkeyup (true|false) #IMPLIED
 >
-<!ELEMENT dsselect (option?)>
-<!ELEMENT option (opt+)>
+<!ELEMENT dsselect (options?)>
+<!ELEMENT options (opt+)>
 <!ELEMENT opt (#PCDATA)> 
 <!ATTLIST opt
 optiontext CDATA #IMPLIED
 optionvalue CDATA #REQUIRED
+optionselected (true|false) #IMPLIED
 >
 <!ATTLIST dsselect
 debug (true|false) #IMPLIED
@@ -657,7 +660,7 @@ id CDATA #REQUIRED
 dsitemkeylist CDATA #IMPLIED
 nav (true|false) #IMPLIED
 memory (true|false) #IMPLIED
-multiple (true|false) #IMPLIED
+multiple (multiple) #IMPLIED
 dsitemlist CDATA #IMPLIED
 dsobjlist CDATA #IMPLIED
 directory CDATA #IMPLIED
@@ -2181,7 +2184,14 @@ bgcolor CDATA #IMPLIED
 char CDATA #IMPLIED
 charoff CDATA #IMPLIED
 >
-<!ELEMENT tree (#PCDATA)>
+<!ELEMENT tree (contextmenu)>
+<!ELEMENT contextmenu (menu+)>
+<!ELEMENT menu (#PCDATA)>
+<!ATTLIST menu 
+menuname CDATA #IMPLIED
+menufunction CDATA #IMPLIED
+menufilter CDATA #IMPLIED
+>
 <!ATTLIST tree
 debug (true|false) #IMPLIED
 onclick CDATA #IMPLIED

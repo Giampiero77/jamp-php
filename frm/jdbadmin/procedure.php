@@ -31,7 +31,7 @@ function data_select_before($ds)
 	if ($ds->getPropertyName("id")=="ds1") 
 	{
 		$result[1] = $ds->ds->dsShowProcedure($_SESSION["jdbadmin"]['database'], $_SESSION["jdbadmin"]['procedure']);
-		$result[1]["Code"] = $result[1]["Code"]
+		$result[1]["Code"] = $result[1]["Code"];
 		$ds->ds->property['tot'] = "1";
 		if (count($result)>0) 
 		{

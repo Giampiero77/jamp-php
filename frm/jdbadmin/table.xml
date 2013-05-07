@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
 		<script id="script1" src="./../../js/animate.js" />
@@ -11,9 +11,9 @@
 		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
 			<tab id="tab1" label="STRUCTURE">
 				<dsnav id="dsnav1" dsobj="ds1" objprint="gridds1" btPage="false">
-					<button>
-						<bt id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
-					</button>
+					<buttons>
+						<button id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
+					</buttons>
 				</dsnav>
 				<div id="divTop" width="autosize" height="autosize">
 					<gridds id="gridds1" dsobj="ds1" width="autosize" height="autosize">
@@ -34,12 +34,12 @@
 					<tabs id="tabs2" width="autosize" height="autosize" selected="tab21" align="left">
 						<tab id="tab21" label="INDICES">
 							<dsnav id="dsnav2" dsobj="ds21" objprint="gridds21" btNew="false" btSave="false" btCancel="false" btReload="false" btPage="false" btNav="false" btTotal="false">
-								<button>
-									<bt onclick="CreateIndex('primary');" image="images/primary.png" title="Primary" />
-									<bt onclick="CreateIndex('unique');" image="images/unique.png" title="Unique" />
-									<bt onclick="CreateIndex('index');" image="images/index.png" title="Index" />
-									<bt onclick="CreateIndex('fulltext');" image="images/text.png" title="Full Text" />
-								</button>
+								<buttons>
+									<button onclick="CreateIndex('primary');" image="images/primary.png" title="Primary" />
+									<button onclick="CreateIndex('unique');" image="images/unique.png" title="Unique" />
+									<button onclick="CreateIndex('index');" image="images/index.png" title="Index" />
+									<button onclick="CreateIndex('fulltext');" image="images/text.png" title="Full Text" />
+								</buttons>
 							</dsnav>
 							<gridds id="gridds21" dsobj="ds21" width="autosize" height="autosize">
 								<coloumn>
@@ -51,9 +51,9 @@
 						</tab>
 						<tab id="tab22" label="FOREIGN KEYS">
 							<dsnav id="dsnav23" dsobj="dsFK" objprint="gridds23" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false">
-								<button>
-									<bt onclick="CreateFK();" image="images/primary.png" title="foreign key" />
-								</button>
+								<buttons>
+									<button onclick="CreateFK();" image="images/primary.png" title="foreign key" />
+								</buttons>
 							</dsnav>
 							<gridds id="gridds23" dsobj="dsFK" width="autosize" height="autosize">
 								<coloumn>
@@ -72,10 +72,10 @@
 			</tab>
 			<tab id="tab2" label="DATA">
 				<dsnav id="dsnav3" dsobj="dsGrid" objprint="gridds2" dsfullsearch="`$$ITEM$$` LIKE '$$VALUE$$'">
-					<button>
-						<bt onclick="Truncate();" image="images/delete_table.png" title="Truncate Table" />
-						<bt id="btSQL2" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
-					</button>
+					<buttons>
+						<button onclick="Truncate();" image="images/delete_table.png" title="Truncate Table" />
+						<button id="btSQL2" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
+					</buttons>
 				</dsnav>
 				<div id="divTop1" width="autosize" height="autosize">
 					<gridds id="gridds2" dsobj="dsGrid" width="autosize" height="autosize" order="true" />

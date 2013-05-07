@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
 		<ds id="ds0" conn="custom" dskey="User" />
@@ -74,11 +74,11 @@
 			<tab id="tab3" label="EXPORT">
 				<div id="divexptype" style="width:100%; overflow:auto">
 					<dsnav id="dsnav3" dsobj="dsExport" objprint="textSQLExport_code" btNew="false" btSave="false" btCancel="false" btPage="false" btNav="false" btTotal="false" btDelete="false" btReload="false" btPrint="false" style="width: 77px; float: left;">
-						<button>
-							<bt title="export" onclick="javascript: exportdatabase(false);" image="images/text.png" />
-							<bt title="Print" onclick="SYSTEMBROWSER.printContent('textSQLExport_code');" image="images/print.png" />
-							<bt title="export to file" onclick="javascript: exportdatabase(true);" image="images/fileexport.png" />
-						</button>
+						<buttons>
+							<button title="export" onclick="javascript: exportdatabase(false);" image="images/text.png" />
+							<button title="Print" onclick="SYSTEMBROWSER.printContent('textSQLExport_code');" image="images/print.png" />
+							<button title="export to file" onclick="javascript: exportdatabase(true);" image="images/fileexport.png" />
+						</buttons>
 					</dsnav>
 					<div id="divExp" style="overflow:auto; margin-top:4px">
 						<radio id="expnone" label="none" name="exptype" value="none" align="left" checked="true" />

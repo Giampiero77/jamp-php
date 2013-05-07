@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../../../jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
 		<tab id="tab1" label="VISTA" />
 		<text id="text1" label="Utente" />
 		<tab id="tab2" label="DATI" />
 		<dsnav id="dsnav2">
-			<button>
-				<bt title="Svuota Vista" />
-			</button>
+			<buttons>
+				<button title="Svuota Vista" />
+			</buttons>
 		</dsnav>
 		<gridds id="gridds2">
 			<coloumn>

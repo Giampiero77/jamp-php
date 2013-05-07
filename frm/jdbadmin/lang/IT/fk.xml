@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../../../jamp.dtd">
 <jamp>
 	<page id="page">
-		<gridds1>
+		<gridds id="gridds1">
 			<coloumn>
 				<label itemlabel="Chiavi Esterne" />
 			</coloumn>
-		</gridds1>
-		<database label="Database referenze:\n" />
-		<table label="\nTabella Referenze:\n" />
-		<ondelete label="\n\nIn Eliminazione:\n" />
-		<onupdate label="\nIn Modifica:\n" />
-		<button value="Applica" />
-		<gridds2>
+		</gridds>
+		<dsselect id="database" label="Database referenze:\n" />
+		<dsselect id="table" label="\nTabella Referenze:\n" />
+		<dsselect id="ondelete" label="\n\nIn Eliminazione:\n" />
+		<dsselect id="onupdate" label="\nIn Modifica:\n" />
+		<button id="button" value="Applica" />
+		<gridds id="gridds2">
 			<coloumn>
 				<label itemlabel="Chiavi referenze" colwidth="110px" />
 			</coloumn>
-		</gridds2>
+		</gridds>
 	</page>
 </jamp>

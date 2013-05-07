@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../../../jamp.dtd">
 <jamp>
 	<page id="page">
-		<engine label="Motore:\n" />
-		<connection label="\nConnessione:\n" />
-		<port label="Porta:" size="4" />
-		<user label="\nUtente:\n" />
-		<label2 value="Accedi" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:85px;" />
+		<dsselect id="engine" label="Motore:\n" />
+		<dsselect id="connection" label="\nConnessione:\n" />
+		<text id="port" label="Porta:" size="4" />
+		<text id="user" label="\nUtente:\n" />
+		<button id="button1" value="Accedi" style="font-weight: bold; font-size: 1.2em; cursor: pointer; position:relative; left:85px;" />
 	</page>
 </jamp>

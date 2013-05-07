@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../../../jamp.dtd">
 <jamp>
 	<page id="page">
 		<tab1 label="DATABASE" />
@@ -32,11 +32,11 @@
 		<button1 value="esegui" />
 		<tab3 label="ESPORTAZIONE" />
 		<dsnav3>
-			<button>
-				<bt title="esporta" />
-				<bt title="Stampa" />
-				<bt title="Esporta su file" />
-			</button>
+			<buttons>
+				<button title="esporta" />
+				<button title="Stampa" />
+				<button title="Esporta su file" />
+			</buttons>
 		</dsnav3>
 		<expnone label="nessuno" />
 		<fil1 legend="Tabelle" />

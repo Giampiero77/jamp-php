@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE jamp PUBLIC "jamp" "http://jamp.alyx.it/jamp.dtd">
+<!DOCTYPE jamp PUBLIC "jamp" "./../../jamp.dtd">
 <jamp>
 	<page id="page" title="jdbadmin" loaddata="true">
 		<ds id="ds1" conn="custom" dskey="Database" focusnew="gridds1_1_$" />
@@ -17,22 +17,22 @@
 			</tab>
 			<tab id="tab2" label="USERS">
 				<dsnav id="dsnav2" dsobj="ds2" objprint="gridds2" btPage="false">
-					<button>
-						<bt onclick="ReloadPrivileges();" image="images/index.png" title="Reload Privileges" />
-					</button>
+					<buttons>
+						<button onclick="ReloadPrivileges();" image="images/index.png" title="Reload Privileges" />
+					</buttons>
 				</dsnav>
 				<gridds id="gridds2" dsobj="ds2" width="autosize" height="autosize">
-					<header>
-						<head headlabel="User" headcol="3" />
-						<head headlabel="Data" headcol="6" />
-						<head headlabel="Structure" headcol="6" />
-						<head headlabel="View" headcol="2" />
-						<head headlabel="Routine" headcol="2" />
-						<head headlabel="General" headcol="7" />
-						<head headlabel="Replicator" headcol="2" />
-						<head headlabel="User" headcol="2" />
-						<head headlabel="Mazimium" headcol="4" />
-					</header>
+					<heading>
+						<heads headlabel="User" headcol="3" />
+						<heads headlabel="Data" headcol="6" />
+						<heads headlabel="Structure" headcol="6" />
+						<heads headlabel="View" headcol="2" />
+						<heads headlabel="Routine" headcol="2" />
+						<heads headlabel="General" headcol="7" />
+						<heads headlabel="Replicator" headcol="2" />
+						<heads headlabel="User" headcol="2" />
+						<heads headlabel="Mazimium" headcol="4" />
+					</heading>
 					<coloumn>
 						<text itemlabel="User" dsitem="User" colwidth="100px" />
 						<text itemlabel="Host" dsitem="Host" colwidth="100px" />
