@@ -264,11 +264,24 @@ class ClsObj_gridds extends ClsObject {
 			foreach ($this->child_property["objtype"] as $k => $type)
 			{
 				$text = (isset($this->child_property["itemlabel"][$k])) ? $this->child_property["itemlabel"][$k] : "";
+				$itemobj = (isset($this->child_property["itemobj"][$k])) ? $this->child_property["itemobj"][$k] : "";
 				$colalign = (isset($this->child_property["colalign"][$k])) ? "text-align:".$this->child_property["colalign"][$k]."; " : "";
 				$colwidth = (isset($this->child_property["colwidth"][$k])) ? "width:".$this->child_property["colwidth"][$k].";" : "width:100px;";
 				$order = (isset($this->child_property["order"][$k])) ? $this->child_property["order"][$k] : $this->property["order"]["value"];
 				$order = ($order == "true") ? "DOWN" : "";
 				$text = $this->parseValue($text);
+				if ($itemobj == "checkbox")
+				{
+					$text = "<span id=\"".$id."_col_checkbox\" class=\"checkbox_default_undefined\"";
+					if (isset($this->child_property["itemonclick"][$k])) $text .= " onclick=\"".$this->child_property["itemonclick"][$k]."\" ";
+					$text .= "style=\"width: 28px;\">&nbsp;</span>";
+					$this->setCodeJs('$("'.$id.'_col_checkbox").p = {classcheckbox:"checkbox_default",typeObj:"checkbox"};');
+				} else {
+					if (isset($this->child_property["itemonclick"][$k]))
+					{
+						$text = "<span onclick=\"".$this->child_property["itemonclick"][$k]."\" style=\"cursor: pointer;\">".$text."</span>";
+					}
+				}
 				$code .= "\n\t\t\t".$tab."<div class=\"".$class."_col$order\" style=\"$colalign$colwidth\" onmousemove=\"GRIDDS.colMouseMove(this, event); \" onmousedown=\"GRIDDS.colMouseDown(this,	event);\">$text";
 				$code .= "</div>";
 			}

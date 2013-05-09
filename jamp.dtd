@@ -46,49 +46,63 @@ autoscroll (true|false) #IMPLIED
 <!ATTLIST text
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST dscombo
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST radio
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST label
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST dsselect
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST button
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
 <!ATTLIST checkbox
 id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
-colalign CDATA #IMPLIED
+itemobj CDATA #IMPLIED
+itemonclick CDATA #IMPLIED
+colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
 >
