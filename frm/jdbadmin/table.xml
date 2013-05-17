@@ -4,7 +4,7 @@
 	<page id="page" title="jdbadmin" loaddata="true">
 		<script id="script1" src="./../../js/animate.js" />
 		<ds id="ds0" conn="custom" dskey="Charset" />
-		<ds id="ds1" conn="custom" dskey="Field" dssavetype="table" focusnew="gridds1_1_$" />
+		<ds id="ds1" conn="custom" dskey="Field" dssavetype="row" focusnew="gridds1_1_$" />
 		<ds id="ds21" conn="custom" dskey="Key_name" />
 		<ds id="dsFK" conn="custom" dssavetype="row" dskey="constraint" />
 		<ds id="dsGrid" conn="custom" dssavetype="table" dslimit="20" loadall="false" />
