@@ -123,6 +123,7 @@ clsDsnav.prototype =
 	{
 		var obj = $(dsObjName);
 		var searchObj = $(dsObjName + "_search");
+		if (searchObj==undefined) return;
 		var searchObj2 = $(dsObjName + "_search2");
 		var dsObj = $(obj.p.dsObj);
 		var searchmask = obj.p.DSsearch;
