@@ -63,6 +63,14 @@ clsDsnav.prototype =
 		else if (type[0] == "int") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"" + type[1].replace(')','') + "\" maxlength=\"" + type[1].replace(')','') + "\" onkeyup=\""+ keyup +"\" onkeypress=\"return REGEXP.checkDigit(event,'number'); \">";
 		else if (type[0] == "decimal") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"20\" maxlength=\"20\" onkeyup=\""+ keyup +"\" onkeypress=\"return REGEXP.checkDigit(event,'decimal'); \">";
 		else if (type[0] == "text" || type[0] == "longtext") codice = "<input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"30\"  onkeyup=\""+ keyup +"\">";
+		else if (type[0] == "enum" || type[0] == "enum")
+		{
+			var elm = type[1];
+			elm = elm.replace(/'/g,"");
+			elm = elm.replace(")","");
+			elm = elm.split(',');
+			codice = "<select class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" onchange=\""+ keyup +"\"><option>"+elm.join("</option><option>")+"</option>";
+		}
 		else if (type[0] == "date")
 		{
 			codice = ">= <input class=\""+obj.className+"\" id=\""+id+"_search\" name=\""+field[0]+"\" type=\"text\" size=\"10\"  onkeyup=\""+ keyup +"\" onclick=\"CALENDAR.show_picker(this);\">";
