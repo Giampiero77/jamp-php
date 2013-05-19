@@ -238,6 +238,7 @@ function data_update($ds)
 	if ($ds->getPropertyName("id")=="ds1") 
 	{		
 		$ds->ds->dsConnect();
+		if(isset($_POST["Lenght"])) $_POST["Lenght"] = stripslashes($_POST["Lenght"]);
 		$ds->ds->AlterTable($_SESSION["jdbadmin"]['database'], $_SESSION["jdbadmin"]['table'], $_POST, "CHANGE");
 		data_after_new($ds);
 		return false;
