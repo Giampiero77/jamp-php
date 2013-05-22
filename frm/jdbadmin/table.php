@@ -294,7 +294,8 @@ function data_delete($ds)
 function data_after_new($ds) 
 {
 	global $event;
-	$sql = str_replace("'", "\'", $ds->ds->property['qrylast']); 
+	//$sql = str_replace("'", "\'", $ds->ds->property['qrylast']); 
+	$sql = addslashes($ds->ds->property['qrylast']); 
 	if ($ds->getPropertyName("id")=="dsGrid") 
 	{		
 		$code = "$('textSQL_code').setCode($('textSQL_code').getCode()+'".$sql."\\n');
