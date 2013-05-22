@@ -272,7 +272,7 @@ clsDs.prototype =
 		var c = confirm(LANG.translate("JDS001"));
 		if (c == true)
 		{
-			confirm(LANG.translate("JDS002"));
+			c = confirm(LANG.translate("JDS002"));
 			if (c == true)
 			{
 				AJAX.loader(true);
