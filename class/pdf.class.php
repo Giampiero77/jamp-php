@@ -114,7 +114,7 @@ class ClsPDF extends FPDF {
 		$text = explode('\n', $text);
 		foreach($text as $k => $outtext)
 		{
-			$outtext = utf8_decode($outtext);
+			$outtext = iconv('UTF-8', 'CP1252', $outtext);
  			if ($k>0) $this->Ln();
 			if (isset($outtext) && $outtext!="")
 			{
@@ -269,8 +269,8 @@ class ClsPDF extends FPDF {
 			$this->property["border-width"] = 1;
 			$this->property["top"] = 0;
 			$this->StyleToArray($this->property["style"]);
-			if (empty($this->property["font-size"])) $this->property["font-size"] = 10;
-			$this->property["text"] = utf8_decode($this->property["label"].$this->property["text"]);
+			if (empty($this->property["font-size"])) $this->property["font-size"] = 10;				
+			$this->property["text"] = iconv('UTF-8', 'CP1252',$this->property["label"].$this->property["text"]);
 	 		$width = $obj->getPropertyName("size", false);
 			$this->property["colwidth"] = (!empty($width)) ? intval($width) : 30;
 			$this->SetFont($this->property["font-family"], $this->property["font-weight"], $this->property["font-size"]);
