@@ -43,6 +43,7 @@ class ClsObj_gridds extends ClsObject {
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
  		$this->property["tabchar"]  	= array("value" => "9", "inherit" => false, "html" => false);
  		$this->property["autoscroll"]	= array("value" => "true", "inherit" => false, "html" => false);
+ 		$this->property["pdfimplode"]	= array("value" => " ",  "inherit" => false, "html" => false);
 		$this->multiObj = true;
 	}
 
@@ -203,7 +204,15 @@ class ClsObj_gridds extends ClsObject {
 				if (!empty($this->child_property["dsitem"][$i-1])) 
 				{
 					$col = $this->child_property["dsitem"][$i-1];
-					$ObjItem->setProperty("value", array_key_exists($col, $row) ? $row[$col] : null);
+					$value = null;
+					if (array_key_exists($col, $row)) $value = $row[$col];
+					else 
+					{
+						$cols = explode(",", $col);
+						foreach ($cols as $col) if (array_key_exists($col, $row)) $value[] = $row[$col];
+						if (is_array($value)) $value = implode($this->property["pdfimplode"]["value"], $value);
+					}
+					$ObjItem->setProperty("value", $value);
 				}
 				foreach ($ObjItem->enumProperty(true) as $name)
 				{

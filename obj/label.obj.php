@@ -23,8 +23,8 @@ class ClsObj_label extends ClsObject {
 		$this->property["size"] 			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["value"] 	 		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["align"] 	 		= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["defaultvalue"]	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["label"]   	  	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["defaultvalue"]		= array("value" => null, "inherit" => false, "html" => false);
+		$this->property["label"]   	  		= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["labelalign"]		= array("value" => "left",  "inherit" => false, "html" => false);
 		$this->property["labelwidth"]		= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["labelstyle"]		= array("value" => null, "inherit" => false, "html" => false);
@@ -32,10 +32,11 @@ class ClsObj_label extends ClsObject {
  		$this->property["format"]			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["java"] 			= array("value" => array("label.js", "format.js"), "inherit" => false, "html" => false);
  		$this->property["dsobj"]  			= array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["dsitem"]  		= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["dsitem"]  			= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsobjlist"] 		= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["dsitemlist"]   	= array("value" => null,  "inherit" => false, "html" => false);
 		$this->property["dsitemkeylist"]	= array("value" => null,  "inherit" => false, "html" => false);
+		$this->property["pdfimplode"]		= array("value" => " - ",  "inherit" => false, "html" => false);
 	}
 
 	/**
@@ -49,8 +50,10 @@ class ClsObj_label extends ClsObject {
 			global $xml;
 			$dsObj = $xml->getObjById($this->property["dsobj"]["value"]);
 			$row = $dsObj->ds->dsGetRow(0);
-			$item = $this->property["dsitem"]["value"];
-			$this->property["value"]["value"] = $row->$item;
+			$items = explode(",",$this->property["dsitem"]["value"]);
+			$values = "";
+			foreach ($items as $item) $values[] = $row->$item;
+			$this->property["value"]["value"] = implode($this->property["pdfimplode"]["value"], $values);
 		}
 		$pdf->CellObj($this);
 	}
