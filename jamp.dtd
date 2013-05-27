@@ -39,6 +39,7 @@ display CDATA #IMPLIED
 java CDATA #IMPLIED
 pdffont CDATA #IMPLIED
 pdffontsize CDATA #IMPLIED
+pdfimplode CDATA #IMPLIED
 dsobj CDATA #IMPLIED
 autoscroll (true|false) #IMPLIED
 >
@@ -75,6 +76,7 @@ id CDATA #IMPLIED
 itemlabel CDATA #IMPLIED
 itemobj CDATA #IMPLIED
 itemonclick CDATA #IMPLIED
+pdfimplode CDATA #IMPLIED
 colalign (left|center|right) #IMPLIED
 colwidth CDATA #IMPLIED
 order (true|false) #IMPLIED
