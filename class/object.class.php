@@ -396,9 +396,30 @@ abstract class ClsObject
 				$this->codeTXT();
 			break;
 
-			case "excel":
-				header('Content-Disposition: attachment; filename="export.txt"');
-				$this->codeTXT();
+			case "xls":
+				$xml_ds = new ClsXML($xml->filexml, $xml->typexml);
+				$xml_ds->getElementsByTagName('ds');
+				$filename = $xml_ds->pageObj->getPropertyName("title");
+				$filename = (empty($filename)) ? "export.xls" : $filename.".xls";
+				header('Content-Disposition: attachment; filename="export.xls"');
+				$ds_obj = $xml_ds->pageObj->child;
+				foreach ($ds_obj as $dsobjname => $dsobj)
+				{
+					$dsobj->ds->dsConnect();
+					$qry = $dsobj->getPropertyName("dsquery_select");
+					$return = $dsobj->callEvent("data_select_before", $dsobj);
+					if(is_null($return) || ($return == true))
+					{
+						if (empty($qry)) $dsobj->ds->dsQuerySelect();
+						else $dsobj->ds->dsQuerySelect($qry);
+					}
+					$dsobj->callEvent("data_select_after", $dsobj);
+				}
+				$this->printGraph();
+				$code = "<table><tr>";
+				$code .= $this->codeXLS();
+				$code .= "</tr></table>";
+				print $code;
 			break;
 
 			case "php":
@@ -693,6 +714,17 @@ abstract class ClsObject
 	*/
 	public abstract function codePDF($pdf);
 
+	/**
+	 * Generate the code to generate the xls object
+	 */
+	public function codeXLS()
+	{
+		$code = "";
+		if (isset($this->child)) foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		else $code = $this->codeTXT();
+		return $code;	
+	}
+	
 	/**
 	* Generates the code of the xml
 	*/
