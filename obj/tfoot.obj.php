@@ -60,6 +60,16 @@ class ClsObj_tfoot extends ClsObject {
 	}
 
 	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		$code = "";
+		foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		return $code;
+	}
+	
+	/**
 	* The function is called after each setting of a property
 	* @param string $name Name property
 	*/

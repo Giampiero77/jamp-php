@@ -52,6 +52,17 @@ class ClsObj_tr extends ClsObject {
 	}
 
 	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		$code = "<tr>";
+		foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		$code .="</tr>";
+		return $code;
+	}
+
+	/**
 	* Generate the code html
 	* @param string $tab Tabs
 	*/

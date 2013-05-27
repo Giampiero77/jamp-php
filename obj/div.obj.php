@@ -50,6 +50,17 @@ class ClsObj_div extends ClsObject {
 	{
 		foreach ($this->child as $obj) $obj->codeTXT();
 	}
+	
+	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		$code = "";
+		if (!is_null($this->property["value"]["value"])) $code .= $this->property["value"]["value"];
+		else foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		return $code;
+	}
 
 	/**
 	* Generate the code html

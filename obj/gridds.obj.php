@@ -228,6 +228,105 @@ class ClsObj_gridds extends ClsObject {
 	}
 
 	/**
+	* Generate the code xls
+	*/
+	public function codeXLS()
+	{
+		$code = "<tr><td></td></tr>";
+		global $xml;
+		$id = $this->property["id"]["value"];
+		$dsObj = $xml->getObjById($this->property["dsobj"]["value"]);
+		$this->child = "";
+		$tableOBJ = $this->addChild($id."_table","table");
+
+		//Header
+		$headObj = $tableOBJ->addChild($id."_thead", "thead", true);
+		if (isset($this->child_property["headlabel"]))
+		{
+			$ObjTR = $headObj->addChild($id."_head", "tr", true);
+			$i = 0;
+			$istart = 1;
+			foreach ($this->child_property["headlabel"] as $col)
+			{
+				$colspan = $this->child_property["headcol"][$i];
+				$i++;
+				$ObjTH = $ObjTR->addChild($id."_head$i", "th", true);
+				$ObjTH->setProperty("nowrap", "nowrap");
+				$ObjTH->setProperty("colspan", $colspan);
+				if ($colspan==1) $ObjTH->setProperty("class", "gridds_headnone");
+	
+				$ObjDIV = $ObjTH->addChild($id."_head$i"."_label", "div", true);
+				$ObjDIV->setProperty("value", $col);
+				$size = 0;
+				for($z = $istart; $z < $istart + $colspan; $z++)
+				{
+					if (!empty($this->child_property["size"][$z-1])) $size = $size + $this->child_property["size"][$z-1];
+				}
+				if ($size > 0) $ObjDIV->setProperty("size", $size);
+				$istart = $istart + $colspan;
+			}
+			$pdf->headrow["row"] = 2;
+		}
+		//Header columns
+		$ObjTR = $headObj->addChild($id."_caption", "tr", true);
+		$i = 0;
+		foreach ($this->child_property["objtype"] as $type)
+		{
+			$i++;
+			$ObjTH = $ObjTR->addChild($id."_col$i", "th", true);
+			$ObjTH->setProperty("nowrap","nowrap");
+			if (isset($this->child_property["colwidth"][$i-1])) $ObjTH->setProperty("width", $this->child_property["colwidth"][$i-1]);
+			$ObjDIV = $ObjTH->addChild($id."_".$i."_order", "div", true);
+			if (isset($this->child_property["dsitem"][$i-1])) $label = $this->child_property["dsitem"][$i-1];
+			if (isset($this->child_property["itemlabel"][$i-1])) $label = $this->child_property["itemlabel"][$i-1];
+			$ObjDIV->setProperty("value", $label);
+			if (isset($this->child_property["align"][$i-1])) $ObjDIV->setProperty("align", $this->child_property["align"][$i-1]);
+			if (!empty($this->child_property["size"][$i-1])) $ObjDIV->setProperty("size", $this->child_property["size"][$i-1]);
+			if (!empty($this->child_property["labelstyle"][$i-1])) $ObjDIV->setProperty("style", $this->child_property["labelstyle"][$i-1]);
+		}
+
+		$bodyObj = $tableOBJ->addChild($id."_tbody", "tbody", true);
+		$n = 0;
+		$dsObj->ds->dsMoveRow(0);
+		$fetch = $dsObj->ds->property["fetch"];
+		$dsObj->ds->property["fetch"] = "array";
+		while($row = $dsObj->ds->dsGetRow())
+		{
+			$n++;
+			$ObjTR = $bodyObj->addChild($id."_row$n","tr", true);
+			$i = 0;
+			foreach ($this->child_property["objtype"] as $type)
+			{
+				$i++;
+				$ObjTD = $ObjTR->addChild($id."_row$n"."_col$i","td", true);
+				$ObjItem = $ObjTD->addChild($id."_".$i."_1",$type, true);
+				if (!empty($this->child_property["dsitem"][$i-1])) 
+				{
+					$col = $this->child_property["dsitem"][$i-1];
+					$value = null;
+					if (array_key_exists($col, $row)) $value = $row[$col];
+					else 
+					{
+						$cols = explode(",", $col);
+						foreach ($cols as $col) if (array_key_exists($col, $row)) $value[] = $row[$col];
+						if (is_array($value)) $value = implode($this->property["pdfimplode"]["value"], $value);
+					}
+					$ObjItem->setProperty("value", $value);
+				}
+				foreach ($ObjItem->enumProperty(true) as $name)
+				{
+					if ($name=="dsobj" || $name=="dsitem") continue;
+					if (isset($this->child_property[$name][$i-1]) && is_array($this->child_property[$name]))
+						$ObjItem->setProperty($name, $this->child_property[$name][$i-1]);
+				}
+			}
+		}
+		$dsObj->ds->property["fetch"] = $fetch;
+		foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		return $code;
+	}
+	
+	/**
 	* Generate the code text
 	*/
 	public function codeTXT()

@@ -56,7 +56,7 @@ class ClsObj_a extends ClsObject {
 	public function codeTXT()
 	{
 	}
-
+	
 	/**
 	* Generate the code html
 	* @param string $tab Tabs

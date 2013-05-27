@@ -44,6 +44,14 @@ class ClsObj_br extends ClsObject {
 	}
 
 	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		return "<tr><td></td></tr>";
+	}
+	
+	/**
 	* Generate the code html
 	* @param string $tab Tabs
 	*/

@@ -56,6 +56,17 @@ class ClsObj_th extends ClsObject {
 	{
 		foreach ($this->child as $obj) $obj->codeTXT();
 	}
+	
+	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		$code = "<td>";
+		foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		$code .="</td>";
+		return $code;
+	}
 
 	/**
 	* Generate the code html

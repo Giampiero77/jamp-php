@@ -90,6 +90,21 @@ class ClsObj_page extends ClsObject {
 	}
 
 	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		global $xml, $system;
+		$allDs = $xml->getObjByType("ds");
+		$code = "";
+		foreach ($allDs as $ds) $ds->manualConnect();
+		userEvent::call("xls_before_code");
+		foreach ($this->child as $obj) $code .= $obj->codeXLS();
+		userEvent::call("xls_after_code");
+		return $code;
+	}
+	
+	/**
 	* Generate the code text
 	*/
 	public function codeTXT()

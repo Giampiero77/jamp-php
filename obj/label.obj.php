@@ -67,13 +67,26 @@ class ClsObj_label extends ClsObject {
 		{
 			global $xml;
 			$dsObj = $xml->getObjById($this->property["dsobj"]["value"]);
-			$row = $dsObj->ds->dsGetRow(0);
-			$item = $this->property["dsitem"]["value"];
-			$this->property["value"]["value"] = $row->$item;
+			if ($row = $dsObj->ds->dsGetRow(0))
+			$items = explode(",",$this->property["dsitem"]["value"]);
+			$values = array();
+			foreach ($items as $item) if(isset($row->$item)) $values[] = $row->$item;
+			$this->property["value"]["value"] =implode(" ", $values);
 		}
 		return $this->property["value"]["value"];
 	}
 
+	/**
+	 * Generate the code xls
+	 */
+	public function codeXLS()
+	{
+		$code = "";
+		if($this->isChildObj) $code .= $this->codeTXT();
+		else $code .= "<td>".$this->codeTXT()."</td>";
+		return $code;
+	}
+	
 	/**
 	* Builds the object
 	*/
