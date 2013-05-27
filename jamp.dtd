@@ -1518,7 +1518,7 @@ title CDATA #IMPLIED
 id CDATA #REQUIRED
 onload CDATA #IMPLIED
 loaddata (true|false) #IMPLIED
-out (html|pdf|text|php) #IMPLIED
+out (html|pdf|text|php|xls) #IMPLIED
 icon CDATA #IMPLIED
 alink CDATA #IMPLIED
 background CDATA #IMPLIED
