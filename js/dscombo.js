@@ -136,13 +136,13 @@ clsDscombo.prototype =
 			var row = (dscomboObj.row == undefined) ? dsObjRow.DSpos : dscomboObj.row;
 			dsObjRow.DSresult[row][dscomboObj.p.dsItem] = dscomboObj.valuekey;
 			dsObj.DSposalter = row;
-			DS.dschange(dsObjRow);
 			if (dscomboObj.p.dsItemLabel != undefined)
 			{
 				var itemlabel = dscomboObj.p.dsItemLabel.split(",");
 				var itemlength = itemlabel.length;
 				for (var i = 0; i < itemlength; i++) dsObjRow.DSresult[row][itemlabel[i]] = (itemvalue[i] == undefined) ? "" : itemvalue[i];
 			}
+			DS.dschange(dsObjRow);
 		}
 	},
 
