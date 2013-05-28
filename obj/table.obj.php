@@ -60,7 +60,7 @@ class ClsObj_table extends ClsObject {
 	 */
 	public function codeXLS()
 	{
-		$code = "<tr><td><table>";
+		$code = "<tr><td><table border=\"1\">";
 		foreach ($this->child as $obj) $code .= $obj->codeXLS();
 		$code .="</td></tr></table>";
 		return $code;
