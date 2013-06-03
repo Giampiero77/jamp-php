@@ -37,7 +37,7 @@ abstract class ClsObject
 			"dir" 			=> array("value" => null, "inherit" => true,  "html" => true),
 			"template"		=> array("value" => null, "inherit" => true, "html" => false),
 			"title" 		=> array("value" => null, "inherit" => false, "html" => true)
-		);
+	);
 
 	/**
 	* Property Javascript
@@ -145,25 +145,37 @@ abstract class ClsObject
 	*/
 	public function setProperty($name, $value)
 	{
-		if(!isset($this->property[$name])) ClsError::showError("OBJ001", $this->property["id"]["value"]." - \"".$name."\"");
-		if($name == "width" || $name == "height" || $name == "colwidth")
-		{
-			switch(substr($value, -2))
-			{	
-				case "er":
-				case "to":
-				case "ze":
-				case "px":
-				case "em":
-				case "ex":
-				case "in":
-				case "cm":
-				case "mm":
-				case "pt":
-				case "pc":
-				break;
-				default:
-					if(substr($value, -1) != "%") $value .= "px";
+		// jQuery/jQuery Mobile
+		if (substr($name, 0,5) == 'data-') {
+			// Ok
+			if (! array_key_exists($name, $this->property)) {
+				$this->property[$name] = array(
+						"value" => null,
+						"inherit" => false,
+						"html" => true
+				);
+			}
+		} else {
+			if(!isset($this->property[$name])) ClsError::showError("OBJ001", $this->property["id"]["value"]." - \"".$name."\"");
+			if($name == "width" || $name == "height" || $name == "colwidth")
+			{
+				switch(substr($value, -2))
+				{	
+					case "er":
+					case "to":
+					case "ze":
+					case "px":
+					case "em":
+					case "ex":
+					case "in":
+					case "cm":
+					case "mm":
+					case "pt":
+					case "pc":
+					break;
+					default:
+						if(substr($value, -1) != "%") $value .= "px";
+				}
 			}
 		}
 		$this->property[$name]["value"] = $this->parseValue($value);

@@ -88,6 +88,8 @@ class ClsObj_text extends ClsObject {
 		$this->property["placeholder"]	= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["required"]	= array("value" => null, "inherit" => false, "html" => true);
 		$this->property["step"]	= array("value" => null, "inherit" => false, "html" => true);
+
+		$this->property["type"]	= array("value" => null, "inherit" => false, "html" => true);
 	}
 
 	/**
@@ -134,7 +136,10 @@ class ClsObj_text extends ClsObject {
 		$id = $this->property["id"]["value"];
 		$readonly = ($this->property["readonly"]["value"] == "true") ? " readonly" : "";
 		$disabled = ($this->property["disabled"]["value"] == "true") ? " disabled" : "";
-		$type = ($this->property["password"]["value"] == "true") ? "password" : "text";
+		$forcetype = null;
+		if (empty($this->property["type"]["value"])) {
+			$forcetype= $this->property["password"]["value"] == "true" ? "password" : "text";
+		}
 		if ($this->property["fileupload"]["value"] == "true")
 		{
 			$filestore = defined("FILESTORE") ? FILESTORE : $system->dir_web_jamp.$system->dir_class."filestore.php";
@@ -157,7 +162,7 @@ class ClsObj_text extends ClsObject {
 			$code .= "\n$tab\t<select id=\"".$id."_dimension\" name=\"dimension[]\" multiple=\"true\" style=\"display: none\"></select>";
 			$code .= "\n$tab</form>";
 		} 
-		else $code .= "\n$tab<input type=\"$type\" ".$this->getProperty("html", true, false).$readonly.$disabled.">";
+		else $code .= "\n$tab<input ".($forcetype ? "type=$forcetype " : '').$this->getProperty("html", true, false).$readonly.$disabled.">";
 		if (!empty($this->property["dsobjlist"]["value"])) $code .= "\n$tab<div class=\"autocomplete\" style=\"overflow:auto;display:none;z-index: 99999\"></div>";
 
 		$code = $this->getCodeLabelAlign($code, $tab);
