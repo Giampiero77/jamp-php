@@ -95,6 +95,7 @@ LANG::$package = array(
 "DSNAV010"	=> "Search",
 "DSNAV011"	=> "Reload",
 "DSNAV012"	=> "Print",
+"DSNAV013"	=> "Xls",
 "DSCOMB001"	=> "Press enter to search.",
 "IMAP000" 	=> "\nIMAP package not installed.",
 "IMAP001" 	=> "\nImpossibile Connect to Server.",
@@ -107,6 +108,9 @@ LANG::$package = array(
 "MSG2HOST"	=> "Insert successfully!",
 "MSG2HOSTD"	=> "The new user-created data have been entered correctly.",
 "MSG3HOST"	=> "Delete successfully!",
-"MSG3HOSTD"	=> "The data selected by the user was successfully deleted."
+"MSG3HOSTD"	=> "The data selected by the user was successfully deleted.",
+"PAGE001"	=> "Type out->request but has not been sent any request xxx.php?out=typeout",
+"PAGE002"	=> "Type out invalid"
+
 );
 ?>

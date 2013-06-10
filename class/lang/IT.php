@@ -96,6 +96,7 @@ LANG::$package = array(
 "DSNAV010"	=> "Cerca",
 "DSNAV011"	=> "Ricarica",
 "DSNAV012"	=> "Stampa",
+"DSNAV013"	=> "Xls",
 "DSCOMB001"	=> "Premi invio per la ricerca.",
 "IMAP000" 	=> "\nPacchetto IMAP non istallato.",
 "IMAP001" 	=> "\nImpossibile connettersi al server.",
@@ -108,6 +109,8 @@ LANG::$package = array(
 "MSG2HOST"	=> "Inserimento effettuato!",
 "MSG2HOSTD"	=> "I nuovi dati creati dall\'utente sono stati inseriti correttamente.",
 "MSG3HOST"	=> "Eliminazione effettuata!",
-"MSG3HOSTD"	=> "I dati selezionati dall\'utente sono stati correttamente eliminati."
+"MSG3HOSTD"	=> "I dati selezionati dall\'utente sono stati correttamente eliminati.",
+"PAGE001"	=> "Tipo out->request ma non &#232; stata inviata nessuna richiesta xxx.php?out=tipoout",
+"PAGE002"	=> "Tipo out non valido"
 );
 ?>

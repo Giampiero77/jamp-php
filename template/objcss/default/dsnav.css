@@ -122,7 +122,34 @@ div.dsnav_default_print:hover {
 
 div.dsnav_default_print_gray {
 	cursor: text;
-	background : url('dsnav/print.png') no-repeat center;
+	background : url('dsnav/xls.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_xls {
+	cursor:pointer;
+	background : url('dsnav/xls.png') no-repeat center;
+	background-color : #FFF;
+	height : 20px;
+	width : 20px;
+	float: left;
+	border: 1px #FFFFFF solid;
+	margin: 1px;
+}
+
+div.dsnav_default_xls:hover {
+	border: 1px transparent solid;
+	background-color: transparent;
+}
+
+div.dsnav_default_xls_gray {
+	cursor: text;
+	background : url('dsnav/xls.png') no-repeat center;
 	background-color : #FFF;
 	height : 20px;
 	width : 20px;

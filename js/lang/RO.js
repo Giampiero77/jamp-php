@@ -29,6 +29,8 @@ function clsLANG()
 		"EVENT006"	: "Mesaj:",
 		"DSNAV001"	: "NOU",
 		"DSNAV002"	: "CAUTA",
+		"DSNAV003"	: "Vrei imprimare?",
+		"DSNAV004"	: "Vrei export?",
 		"IMAGE001"	: "Eroare în timp ce încărcaţi imagini",
 		"TEXT001"	: "Eroare la încărcarea fişierului",
 		"DOTPAD"	: ","

@@ -39,8 +39,11 @@ class ClsObj_dsnav extends ClsObject {
 		$this->property["btPage"] 		 = array("value" => "true", "inherit" => false, "html" => false);
 		$this->property["btReload"] 	 = array("value" => "true", "inherit" => false, "html" => false);
 		$this->property["btPrint"]  	 = array("value" => "true", "inherit" => false, "html" => false);
+		$this->property["btXls"]	  	 = array("value" => "false", "inherit" => false, "html" => false);
 		$this->property["objprint"] 	 = array("value" => null, "inherit" => false, "html" => false);
-		$this->property["fnzprint"] 	 = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["fnzprint"] 	 = array("value" => "window.print('pdf');", "inherit" => false, "html" => false);
+		$this->property["pageprint"] 	 = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["fnzxls"] 	 	 = array("value" => "window.print('xls');", "inherit" => false, "html" => false);
 		$this->property["label"] 		 = array("value" => "", "inherit" => false, "html" => false);
 		$this->property["maxlength"]	 = array("value" => 255, "inherit" => false, "html" => false);
 		$this->property["size"] 		 = array("value" => 30, "inherit" => false, "html" => false);
@@ -53,7 +56,7 @@ class ClsObj_dsnav extends ClsObject {
  		$this->property["cssfile"]   	 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["dsitem"]  		 = array("value" => null, "inherit" => false, "html" => false);
- 		$this->property["objtype"]  	= array("value" => null, "inherit" => false, "html" => false);
+ 		$this->property["objtype"]  	 = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["searchonkeyup"] = array("value" => "false", "inherit" => false, "html" => false);
 	}
 
@@ -115,6 +118,11 @@ class ClsObj_dsnav extends ClsObject {
 			$fnz = $this->property["fnzprint"]["value"];
 			if ($fnz == null) $fnz = "SYSTEMBROWSER.printContent('".$this->property["objprint"]["value"]."');";
 			$code .= "\n$tab\t<div class=\"".$class."_print\" id=\"".$id."_print\" title=\"".LANG::translate("DSNAV012")."\" onclick=\"$fnz\">&nbsp;</div>";
+		}
+		if ($this->property["btXls"]["value"] == "true")
+		{
+			$fnz = $this->property["fnzxls"]["value"];
+			$code .= "\n$tab\t<div class=\"".$class."_xls\" id=\"".$id."_xls\" title=\"".LANG::translate("DSNAV013")."\" onclick=\"$fnz\">&nbsp;</div>";
 		}
 		if ($this->property["btPage"]["value"] == "true") $code .= "\n$tab\t<div class=\"".$class."_totalpage\"><div style=\"float:left\">".LANG::translate("DSNAV009")."</div><select class=\"".$class."_totalpage\" id=\"".$id."_page\" onchange=\"DSNAV.page('$obj', this);\"><option></option></select></div><!--[if IE]><style type=\"text/css\"> select.".$class."_totalpage { font-size: 8px; padding:0px; } </style> <![endif]--> ";
 
@@ -192,6 +200,11 @@ class ClsObj_dsnav extends ClsObject {
 		$id = $this->property["id"]["value"];
 		$dsobj = $this->property["dsobj"]["value"];
 		$this->propertyJS["DSsearch"] = $this->property["dssearch"]["value"];
+		if (!empty($this->property["pageprint"]["value"]))
+		{
+			$this->property["fnzprint"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', false);";
+			$this->property["fnzxls"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', true);";
+		}
 		if (!empty($this->property["dssearchrange"]["value"]))
 		{
 			$this->propertyJS["DSsearchRange"] = $this->property["dssearchrange"]["value"];

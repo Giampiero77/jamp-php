@@ -14,6 +14,22 @@ function clsDsnav()
 
 clsDsnav.prototype = 
 {
+	print : function (dsObjName, urlpage, xls)
+	{
+		var obj = $(dsObjName);
+		var dsObj = $(obj.p.dsObj);
+		if (dsObj.DSpos==0) return;
+		var msg = LANG.translate((xls==true)? "DSNAV004" : "DSNAV003");
+		var c = confirm(msg);
+		if (c == true)
+		{
+			var where = encodeURIComponent(dsObj.DSsearch);
+			var order = dsObj.p.DSorder;
+			var out = (xls==true) ? "xls" : "pdf";
+			window.open(urlpage+'?out='+out+'&dswhere=' + where + '&dsorder='+order+'&'+ Math.random(),'','');
+		}
+	},
+
 	dsdelete : function(dsObjName, evt)
 	{
 		if (evt.ctrlKey) DS.dsdeleteall(dsObjName);

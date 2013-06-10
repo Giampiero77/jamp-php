@@ -620,8 +620,11 @@ btCancel (true|false) #IMPLIED
 btPage (true|false) #IMPLIED
 btReload (true|false) #IMPLIED
 btPrint (true|false) #IMPLIED
+btXls (true|false) #IMPLIED
 objprint CDATA #IMPLIED
 fnzprint CDATA #IMPLIED
+fnzxls CDATA #IMPLIED
+pageprint CDATA #IMPLIED
 label CDATA #IMPLIED
 maxlength CDATA #IMPLIED
 size CDATA #IMPLIED
@@ -1518,7 +1521,7 @@ title CDATA #IMPLIED
 id CDATA #REQUIRED
 onload CDATA #IMPLIED
 loaddata (true|false) #IMPLIED
-out (html|pdf|text|php|xls) #IMPLIED
+out (html|pdf|text|php|xls|request) #IMPLIED
 icon CDATA #IMPLIED
 alink CDATA #IMPLIED
 background CDATA #IMPLIED

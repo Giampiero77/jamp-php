@@ -81,10 +81,11 @@ class ClsObj_label extends ClsObject {
 	 */
 	public function codeXLS()
 	{
-		$code = "";
-		if($this->isChildObj) $code .= $this->codeTXT();
-		else $code .= "<td>".$this->codeTXT()."</td>";
-		return $code;
+		global $format;
+		$value = $this->codeTXT();
+		if (!empty($this->property["format"]["value"]))$value = $format->Format($value, $this->property["format"]["value"]);
+		if(!$this->isChildObj) $value = "<td>$value</td>"; 
+		return $value;				
 	}
 	
 	/**

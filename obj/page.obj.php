@@ -94,7 +94,11 @@ class ClsObj_page extends ClsObject {
 	 */
 	public function codeXLS()
 	{
-		global $xml, $system;
+		global $xml, $system, $format;
+		
+		require_once($system->dir_real_jamp."/class/format.class.php");
+		$format = new ClsFormat();
+		
 		$allDs = $xml->getObjByType("ds");
 		$code = "";
 		foreach ($allDs as $ds) $ds->manualConnect();
@@ -173,6 +177,25 @@ class ClsObj_page extends ClsObject {
 
 		$this->codejs = "";
 		$this->setCSS();
+		if ($this->property["out"]["value"] == "request")
+		{
+			if (isset($_REQUEST["out"]))
+			{
+				switch ($_REQUEST["out"])
+				{
+					case "xls":
+					case "pdf":
+					case "html":
+					case "text":
+					case "php":
+						$this->property["out"]["value"] = $_REQUEST["out"];
+					break;
+					default: 
+						ClsError::showError("PAGE002", "", $_REQUEST["out"]);
+				}
+				
+			} else ClsError::showError("PAGE001");
+		}
 		if ($this->isJampEngineActivated()) {
 			$compressjs = $this->property["compressjs"]["value"];
 			if (!empty($compressjs)) $system->compressjs = ($compressjs == "true") ? true : false; 

@@ -29,6 +29,8 @@ function clsLANG()
 		"EVENT006"	: "Message:",
 		"DSNAV001"	: "NEW",
 		"DSNAV002"	: "SEARCH",
+		"DSNAV003"	: "Do you want print?",
+		"DSNAV004"	: "Do you want export?",
 		"IMAGE001"	: "Error while uploading image",
 		"TEXT001"	: "Error while uploading file",
 		"DOTPAD"	: "."

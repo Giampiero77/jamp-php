@@ -96,6 +96,7 @@ LANG::$package = array(
 "DSNAV010"	=> "Căutare",
 "DSNAV011"	=> "Reîncărcare",
 "DSNAV012"	=> "Imprimare",
+"DSNAV013"	=> "Xls",
 "DSCOMB001"	=> "Apăsaţi pe Enter pentru a căuta.",
 "IMAP000" 	=> "\nIMAP Pachet instalat.",
 "IMAP001" 	=> "\nImposibil de conectat la server.",
@@ -108,6 +109,8 @@ LANG::$package = array(
 "MSG2HOST"	=> "Introducerea făcut!",
 "MSG2HOSTD"	=> "Noile date create de utilizator au fost introduse corect.",
 "MSG3HOST"	=> "Sterge-l!",
-"MSG3HOSTD"	=> "Datele selectate de utilizator au fost şterse în mod corespunzător."
+"MSG3HOSTD"	=> "Datele selectate de utilizator au fost şterse în mod corespunzător.",
+"PAGE001"	=> "Tip out-> cerere, dar nu a fost trimisă nici o cerere xxx.php?out=tipout",
+"PAGE002"	=> "Tip de invalid"
 );
 ?>
