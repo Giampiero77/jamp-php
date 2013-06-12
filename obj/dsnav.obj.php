@@ -133,7 +133,9 @@ class ClsObj_dsnav extends ClsObject {
 	 			$code .= "\n$tab<div class=\"".$class."_find\"><LABEL style=\"margin-top:3px;\">".$this->property["label"]["value"]."</label>";
 				$maxlength = $this->property["maxlength"]["value"];
 				$size = $this->property["size"]["value"];
-				$code .= "<select class=\"".$class."_find\" onchange=\"DSNAV.searchAuto(this,'".$id."',".$this->property["searchonkeyup"]["value"].");\"><option selected></option>";	
+				$this->addEventListener("window", "load", "pageLoad");
+				$this->addEvent("page", "pageLoad", "$('".$id."_autosearch').selectedIndex=-1;");
+				$code .= "<select id=\"".$id."_autosearch\" class=\"".$class."_find\" onchange=\"DSNAV.searchAuto(this,'".$id."',".$this->property["searchonkeyup"]["value"].");\"><option selected></option>";	
 				global $xml;
 				$ds = $xml->getObjById($obj, "ds");
 				$ds->ds->dsConnect();
