@@ -26,7 +26,7 @@ clsDsnav.prototype =
 			var where = encodeURIComponent(dsObj.DSsearch);
 			var order = dsObj.p.DSorder;
 			var out = (xls==true) ? "xls" : "pdf";
-			window.open(urlpage+'?out='+out+'&dswhere=' + where + '&dsorder='+order+'&'+ Math.random(),'','');
+			window.open(urlpage+'?out='+out+'&'+obj.p.dsObj+'where=' + where + '&dsorder='+order+'&'+ Math.random(),'','');
 		}
 	},
 
