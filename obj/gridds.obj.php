@@ -39,7 +39,7 @@ class ClsObj_gridds extends ClsObject {
 		$this->property["display"]   	= array("value" => null, "inherit" => true, "html" => false);
  		$this->property["java"]  	  	= array("value" => "gridds.js", "inherit" => false, "html" => false);
 		$this->property["pdffont"]	  	= array("value" => "Arial", "inherit" => false, "html" => false);
-		$this->property["pdffontsize"]	= array("value" => "8", "inherit" => false, "html" => false);
+		$this->property["pdffontsize"]	= array("value" => "10", "inherit" => false, "html" => false);
  		$this->property["dsobj"]  		= array("value" => null, "inherit" => false, "html" => false);
  		$this->property["tabchar"]  	= array("value" => "9", "inherit" => false, "html" => false);
  		$this->property["autoscroll"]	= array("value" => "true", "inherit" => false, "html" => false);
@@ -184,6 +184,7 @@ class ClsObj_gridds extends ClsObject {
 			if (isset($this->child_property["align"][$i-1])) $ObjDIV->setProperty("align", $this->child_property["align"][$i-1]);
 			if (!empty($this->child_property["size"][$i-1])) $ObjDIV->setProperty("size", $this->child_property["size"][$i-1]);
 			if (!empty($this->child_property["labelstyle"][$i-1])) $ObjDIV->setProperty("style", $this->child_property["labelstyle"][$i-1]);
+			else $ObjDIV->setProperty("style","font-family:".$this->property["pdffont"]["value"].";font-size:".$this->property["pdffontsize"]["value"]);				
 		}
 
 		$bodyObj = $tableOBJ->addChild($id."_tbody", "tbody", true);
@@ -213,6 +214,8 @@ class ClsObj_gridds extends ClsObject {
 						if (is_array($value)) $value = implode($this->property["pdfimplode"]["value"], $value);
 					}
 					$ObjItem->setProperty("value", $value);
+					$ObjItem->setProperty("style","font-family:".$this->property["pdffont"]["value"].";font-size:".$this->property["pdffontsize"]["value"]);
+						
 				}
 				foreach ($ObjItem->enumProperty(true) as $name)
 				{
@@ -223,7 +226,6 @@ class ClsObj_gridds extends ClsObject {
 			}
 		}
 		$dsObj->ds->property["fetch"] = $fetch;
-		$pdf->SetFont($this->property["pdffont"]["value"],'',$this->property["pdffontsize"]["value"]);
 		foreach ($this->child as $obj) $obj->codePDF($pdf);
 	}
 
