@@ -26,7 +26,24 @@ clsDsnav.prototype =
 			var where = encodeURIComponent(dsObj.DSsearch);
 			var order = dsObj.p.DSorder;
 			var out = (xls==true) ? "xls" : "pdf";
-			window.open(urlpage+'?out='+out+'&'+obj.p.dsObj+'where=' + where + '&dsorder='+order+'&'+ Math.random(),'','');
+			urlpage+='?out='+out;
+			if (where.length>0) urlpage += '&'+obj.p.dsObj+'where=' + where;
+			else if (dsObj.p.DSrefresh.length>0) urlpage += "&"+obj.p.dsObj+'where=' +encodeURIComponent("`"+dsObj.p.DSkey+"`='"+dsObj.DSresult[dsObj.DSpos][dsObj.p.DSkey]+"'");
+			if (order.length>0) urlpage += '&'+obj.p.dsObj+'order=' + order;
+
+			var ref = dsObj.p.DSrefresh.split(',');
+			for (key in ref)
+			{
+				if(ref.hasOwnProperty(key))
+				{
+					var dsRef = $(ref[key]);
+					where = encodeURIComponent(dsRef.DSsearch);
+					order = dsRef.p.DSorder;
+					if (where.length>0) urlpage += '&'+dsRef.id+'where=' + where;
+					if (order.length>0) urlpage += '&'+dsRef.id+'order=' + order;
+				}
+			}
+			window.open(urlpage+'&'+ Math.random(),'','');
 		}
 	},
 
