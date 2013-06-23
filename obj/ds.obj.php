@@ -159,6 +159,8 @@ class ClsObj_ds extends ClsObject {
 	{	
 		$this->ds->dsConnect();
 		if (isset($_REQUEST["dsorder"])) $this->setProperty("dsorder", $_REQUEST["dsorder"]);
+		$idorder=$this->property["id"]["value"]."order";
+		if (isset($_REQUEST[$idorder])) $this->setProperty("dsorder", $_REQUEST[$idorder]);
 		if (isset($_REQUEST["dswhere"]))
 		{
 			$text = stripslashes($_REQUEST["dswhere"]);
@@ -219,6 +221,8 @@ class ClsObj_ds extends ClsObject {
 		$this->ds->dsConnect();
 
 		if (isset($_REQUEST["dsorder"])) $this->setProperty("dsorder", $_REQUEST["dsorder"]);
+		$idorder=$this->property["id"]["value"]."order";
+		if (isset($_REQUEST[$idorder])) $this->setProperty("dsorder", $_REQUEST[$idorder]);
 		if (isset($_REQUEST["dswhere"]))
 		{
 			if (is_array($_REQUEST["dswhere"])) $text = stripslashes($_POST["dswhere"]);
