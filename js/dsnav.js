@@ -31,16 +31,19 @@ clsDsnav.prototype =
 			else if (dsObj.p.DSrefresh.length>0) urlpage += "&"+obj.p.dsObj+'where=' +encodeURIComponent("`"+dsObj.p.DSkey+"`='"+dsObj.DSresult[dsObj.DSpos][dsObj.p.DSkey]+"'");
 			if (order.length>0) urlpage += '&'+obj.p.dsObj+'order=' + order;
 
-			var ref = dsObj.p.DSrefresh.split(',');
-			for (key in ref)
+			if (dsObj.p.DSrefresh != undefined)
 			{
-				if(ref.hasOwnProperty(key))
+				var ref = dsObj.p.DSrefresh.split(',');
+				for (key in ref)
 				{
-					var dsRef = $(ref[key]);
-					where = encodeURIComponent(dsRef.DSsearch);
-					order = dsRef.p.DSorder;
-					if (where.length>0) urlpage += '&'+dsRef.id+'where=' + where;
-					if (order.length>0) urlpage += '&'+dsRef.id+'order=' + order;
+					if(ref.hasOwnProperty(key))
+					{
+						var dsRef = $(ref[key]);
+						where = encodeURIComponent(dsRef.DSsearch);
+						order = dsRef.p.DSorder;
+						if (where.length>0) urlpage += '&'+dsRef.id+'where=' + where;
+						if (order.length>0) urlpage += '&'+dsRef.id+'order=' + order;
+					}
 				}
 			}
 			window.open(urlpage+'&'+ Math.random(),'','');
