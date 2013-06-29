@@ -43,24 +43,21 @@ clsLabel.prototype =
 
    getVal : function(labelObj, valueDs)
    {
-		  if (labelObj.p.dsObjList && valueDs)
-		  {
-				var dsObjList = $(labelObj.p.dsObjList);
-				var dsObj = $(labelObj.p.dsObj);
-				var post = "data=load&dsobjname=" + dsObjList.id + "&dsforeignkey=" + encodeURIComponent(labelObj.p.dsItemKeyList);
-				post += "&dsforeignkeyvalue=" + encodeURIComponent(valueDs);
-				AJAX.request("POST", dsObj.p.DSaction, post, true, true);
-				if (dsObjList.DSresult.length == 0) valueDs = "";
-				else 
-				{
-					 valueDs = new Array();
-					 var item = labelObj.p.dsItemList.split(",");
-					 var itemlength = item.length;
-					 for (var i = 0; i < itemlength; i++) valueDs[i] = dsObjList.DSresult[1][item[i]];
-					 valueDs = valueDs.join(" - ");
-				}
-		  }
-		  return valueDs;   
+		var dsObjList = $(labelObj.p.dsObjList);
+		var dsObj = $(labelObj.p.dsObj);
+		var post = "data=load&dsobjname=" + dsObjList.id + "&dsforeignkey=" + encodeURIComponent(labelObj.p.dsItemKeyList);
+		post += "&dsforeignkeyvalue=" + encodeURIComponent(valueDs);
+		AJAX.request("POST", dsObj.p.DSaction, post, true, true);
+		if (dsObjList.DSresult.length == 0) valueDs = "";
+		else 
+		{
+			 valueDs = new Array();
+			 var item = labelObj.p.dsItemList.split(",");
+			 var itemlength = item.length;
+			 for (var i = 0; i < itemlength; i++) valueDs[i] = dsObjList.DSresult[1][item[i]];
+			 valueDs = valueDs.join(" - ");
+		}
+		return valueDs;   
    },
     
 	 getDsValue : function(id)
@@ -84,7 +81,7 @@ clsLabel.prototype =
 				else FORMAT.format(labelObj, valueDs);
 				LABEL.limitAlt(labelObj);
 		  }
-		  else if (valueDs != null)
+		  if (labelObj.p.dsObjList && valueDs)
 		  {
 				valueDs = LABEL.getVal(labelObj, valueDs);
 				if (labelObj.p.format != null) labelObj.innerHTML = FORMAT.Format(valueDs, labelObj.p.format);
