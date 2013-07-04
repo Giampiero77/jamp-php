@@ -41,24 +41,35 @@ clsLabel.prototype =
 		  }
 	 },
 
-   getVal : function(labelObj, valueDs)
-   {
+	 getVal : function(labelObj, valueDs)
+	 {			  
+		var dsObj = $(labelObj.p.dsObj);	   
 		var dsObjList = $(labelObj.p.dsObjList);
-		var dsObj = $(labelObj.p.dsObj);
+		for (var k=1; k<dsObjList.DSresult.length; k++)
+		{
+			 if (dsObjList.DSresult[k][labelObj.p.dsItemKeyList] == valueDs) 
+			 {
+				  valueDs = new Array();
+				  var item = labelObj.p.dsItemList.split(",");
+				  var itemlength = item.length;
+				  for (var i=0; i<itemlength; i++) valueDs[i] = dsObjList.DSresult[k][item[i]];
+				  return valueDs.join(" - ");
+			 }
+		}
 		var post = "data=load&dsobjname=" + dsObjList.id + "&dsforeignkey=" + encodeURIComponent(labelObj.p.dsItemKeyList);
 		post += "&dsforeignkeyvalue=" + encodeURIComponent(valueDs);
-		AJAX.request("POST", dsObj.p.DSaction, post, true, true);
+		AJAX.request("POST", dsObjList.p.DSaction, post, true, true);
 		if (dsObjList.DSresult.length == 0) valueDs = "";
 		else 
 		{
 			 valueDs = new Array();
 			 var item = labelObj.p.dsItemList.split(",");
 			 var itemlength = item.length;
-			 for (var i = 0; i < itemlength; i++) valueDs[i] = dsObjList.DSresult[1][item[i]];
+			 for (var i=0; i<itemlength; i++) valueDs[i] = dsObjList.DSresult[1][item[i]];
 			 valueDs = valueDs.join(" - ");
 		}
 		return valueDs;   
-   },
+	 },
     
 	 getDsValue : function(id)
 	 {
