@@ -39,11 +39,12 @@ function data_select_before($ds)
 	{
 		$i=1;
 		$ds->ds->dsShowViews($dabatase);
-		while ($ds->ds->dsGetRow()) $views[] = $ds->ds->property["row"]->Name;
+		while ($ds->ds->dsGetRow()) $views[] = Array($ds->ds->property["row"]->Name, $ds->ds->property["row"]->Comment);
 		foreach ($views as $view) 
 		{
-			$result[$i] = $ds->ds->dsShowView($_SESSION["jdbadmin"]['database'], $view);
+			$result[$i] = $ds->ds->dsShowView($_SESSION["jdbadmin"]['database'], $view[0]);
 			$result[$i]["Code"] = $result[$i]["Code"];
+			$result[$i]["Comment"] = ($view[1]=="VIEW") ? "OK" : $view[1];
 			$i++;
 		}
 		if (count($result)>0) 

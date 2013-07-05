@@ -12,6 +12,7 @@
 							<text itemlabel="Name" dsitem="Name" colwidth="200px" minlength="1" />
 							<text dsitem="User" itemlabel="User" minlength="1" size="15" />
 							<text dsitem="Host" itemlabel="Host" minlength="1" size="15" />
+							<label dsitem="Comment" itemlabel="Status" colwidth="400px"/>
 						</coloumn>
 					</gridds>
 				</div>

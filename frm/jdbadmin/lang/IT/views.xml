@@ -8,6 +8,7 @@
 				<text itemlabel="Nome" />
 				<text itemlabel="Utente" />
 				<text itemlabel="Host" />
+				<label itemlabel="Stato"/>
 			</coloumn>
 		</gridds>
 	</page>
