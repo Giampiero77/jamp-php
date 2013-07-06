@@ -28,7 +28,7 @@ clsDsnav.prototype =
 			var out = (xls==true) ? "xls" : "pdf";
 			urlpage+='?out='+out;
 			if (where.length>0) urlpage += '&'+obj.p.dsObj+'where=' + where;
-			else if (dsObj.p.DSrefresh.length>0) urlpage += "&"+obj.p.dsObj+'where=' +encodeURIComponent("`"+dsObj.p.DSkey+"`='"+dsObj.DSresult[dsObj.DSpos][dsObj.p.DSkey]+"'");
+			else if (dsObj.p.DSrefresh != undefined && dsObj.p.DSrefresh.length>0) urlpage += "&"+obj.p.dsObj+'where=' +encodeURIComponent("`"+dsObj.p.DSkey+"`='"+dsObj.DSresult[dsObj.DSpos][dsObj.p.DSkey]+"'");
 			if (order.length>0) urlpage += '&'+obj.p.dsObj+'order=' + order;
 
 			if (dsObj.p.DSrefresh != undefined)
