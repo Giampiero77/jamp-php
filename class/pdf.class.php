@@ -315,6 +315,7 @@ class ClsPDF extends FPDF {
 			foreach($this->headrow["data"] as $row)
 			{
 				foreach($row["cell"] as $cell) $y = $this->Print_Store_Cell($cell, $row["height"]);
+				$this->Ln();
 			}
 			$this->setY($y + $row["height"]);
 		}
