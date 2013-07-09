@@ -255,9 +255,9 @@ clsCalendar.prototype =
 
 	setTime : function()
 	{
-	    this.time = ($('calendar_hours')!=undefined) ? $('calendar_hours').value : '12';
-	    this.time += ($('calendar_minutes')!=undefined) ? ':'+$('calendar_minutes').value : ':00';
-	    this.time += ($('calendar_seconds')!=undefined) ? ':'+$('calendar_seconds').value : ':00';
+		this.time = ($('calendar_hours')!=undefined) ? $('calendar_hours').value : '12';
+		this.time += ':' + (($('calendar_minutes') != undefined) ? $('calendar_minutes').value : '00');
+		this.times += ':' + (($('calendar_seconds') != undefined) ? $('calendar_seconds').value : '00');
 	},
 
 	confirmDate : function()
@@ -272,8 +272,9 @@ clsCalendar.prototype =
 		if (new RegExp(CALENDAR.testdatatime).exec(reg[2])!=null)
 		{
 			reg[2] = "yyyy-mm-dd HH:ii:ss";
-			value += ' '+$('calendar_hours').value+':'+$('calendar_minutes').value+':';
-			value += ($('calendar_seconds') != undefined) ? $('calendar_seconds').value : '00';
+			value += ' ' + (($('calendar_hours') != undefined) ? $('calendar_hours').value : '12');
+			value += ':' + (($('calendar_minutes') != undefined) ? $('calendar_minutes').value : '00');
+			value += ':' + (($('calendar_seconds') != undefined) ? $('calendar_seconds').value : '00');
 		}
 		else reg[2]="yyyy-mm-dd";
 		this.obj.value = FORMAT.formatDate(value, reg, false);
