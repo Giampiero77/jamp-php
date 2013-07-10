@@ -62,7 +62,7 @@ class ClsObj_td extends ClsObject {
 	 */
 	public function codeXLS()
 	{
-		$code = "<td>";
+		$code = "<td colspan=\"".$this->property["colspan"]["value"]."\">";
 		foreach ($this->child as $obj) $code .= $obj->codeXLS();
 		$code .="</td>";
 		return $code;

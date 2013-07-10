@@ -37,6 +37,8 @@ class ClsObj_tr extends ClsObject {
 	public function codePDF($pdf)
 	{
 		$pdf->storerow_enable = true;
+		$pdf->headrow["data"] = null;
+		$pdf->headrow["row"] = 0;
 		foreach ($this->child as $obj) $obj->codePDF($pdf);
 		$pdf->Print_Store_Row();
 		$pdf->storerow_enable = false;
