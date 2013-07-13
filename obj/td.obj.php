@@ -62,7 +62,9 @@ class ClsObj_td extends ClsObject {
 	 */
 	public function codeXLS()
 	{
-		$code = "<td colspan=\"".$this->property["colspan"]["value"]."\">";
+		$code = "<td ";
+		if ($this->property["nowrap"]["value"] == "true") $code .= " nowrap ";
+		$code .= $this->getProperty("html", true, false).">";
 		foreach ($this->child as $obj) $code .= $obj->codeXLS();
 		$code .="</td>";
 		return $code;
