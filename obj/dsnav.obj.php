@@ -204,8 +204,8 @@ class ClsObj_dsnav extends ClsObject {
 		$this->propertyJS["DSsearch"] = $this->property["dssearch"]["value"];
 		if (!empty($this->property["pageprint"]["value"]))
 		{
-			$this->property["fnzprint"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', false);";
-			$this->property["fnzxls"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', true);";
+			if ($this->property["fnzprint"]["value"] == "window.print('pdf');") $this->property["fnzprint"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', false);";
+			if ($this->property["fnzxls"]["value"] == "window.print('xls');") $this->property["fnzxls"]["value"] = "DSNAV.print('$id', '".$this->property["pageprint"]["value"]."', true);";
 		}
 		if (!empty($this->property["dssearchrange"]["value"]))
 		{
