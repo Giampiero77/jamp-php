@@ -48,8 +48,10 @@ class ClsObj_dsnav extends ClsObject {
 		$this->property["maxlength"]	 = array("value" => 255, "inherit" => false, "html" => false);
 		$this->property["size"] 		 = array("value" => 30, "inherit" => false, "html" => false);
 		$this->property["dssearch"] 	 = array("value" => null, "inherit" => false, "html" => false);
+		$this->property["dssearchtext"]  = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dssearchrange"] = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsautosearch"]  = array("value" => "false", "inherit" => false, "html" => false);
+		$this->property["dsautosearchfield"] = array("value" => 1, "inherit" => false, "html" => false);
 		$this->property["dsfullsearch"]	 = array("value" => null, "inherit" => false, "html" => false);
 		$this->property["dsobj"] 	 	 = array("value" => null, "inherit" => false, "html" => false);
  		$this->property["java"]  	 	 = array("value" => "dsnav.js", "inherit" => false, "html" => false);
@@ -134,8 +136,6 @@ class ClsObj_dsnav extends ClsObject {
 				$maxlength = $this->property["maxlength"]["value"];
 				$size = $this->property["size"]["value"];
 				$this->addEventListener("window", "load", "pageLoad");
-				$this->addEvent("page", "pageLoad", "$('".$id."_autosearch').selectedIndex=-1;");
-				$code .= "<select id=\"".$id."_autosearch\" class=\"".$class."_find\" onchange=\"DSNAV.searchAuto(this,'".$id."',".$this->property["searchonkeyup"]["value"].");\"><option selected></option>";	
 				global $xml;
 				$ds = $xml->getObjById($obj, "ds");
 				$ds->ds->dsConnect();
@@ -152,16 +152,25 @@ class ClsObj_dsnav extends ClsObject {
 					while($row = $ds->ds->dsGetRow()) if(!empty($row->Comment)) $field[$ds->ds->property["dstable"].".$row->Field|$row->Type"] = $row->Comment;
 				}
 				asort($field);
-				$jscode = "";
+				$opt = "";
+				$code_sel = "";
 				foreach ($field as $value => $comment)
 				{
 					$comment = explode("@",$comment);
 					if (isset($comment[1])) $value .= "@".$comment[1];
-					$code .= "<option value=\"$value\">$comment[0]</option>";
+					$opt .= "<option value=\"$value\">$comment[0]</option>";
 				}
-				
-				$code .= "</select><div id=\"".$id."_field\" style=\"display:inline\"></div></div>";
-				$code .= "\n$tab\t<div class=\"".$class."_findicon\" id=\"".$id."_find\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"DSNAV.dsfindAuto('$id');\">&nbsp;</div>";
+				$tot = intval($this->property["dsautosearchfield"]["value"]);
+				$this->propertyJS["dsautosearchfield"] = $tot;
+				for ($i = 0; $i<$tot; $i++)
+				{
+					$this->addEvent("page", "pageLoad", "$('".$id."_autosearch_$i').selectedIndex=-1;");
+					$code .= "<select id=\"".$id."_autosearch_$i\" class=\"".$class."_find\" onchange=\"DSNAV.searchAuto(this,'".$id."',".$this->property["searchonkeyup"]["value"].",$i);\"><option selected></option>";
+					$code .= $opt;
+					$code .= "</select><div id=\"".$id."_field_$i\" style=\"display:inline\"></div>";
+					if ($i<$tot-1) $code .=" + ";
+				}
+				$code .= "</div>\n$tab\t<div class=\"".$class."_findicon\" id=\"".$id."_find\" title=\"".LANG::translate("DSNAV010")."\" onclick=\"DSNAV.dsfindAuto('$id');\">&nbsp;</div>";
 				$code .="<!--[if IE]><style type=\"text/css\">input.".$class."_find { padding:0px } </style> <![endif]--> ";				
 			} else {
 	 			$code .= "\n$tab<div class=\"".$class."_find\"><LABEL style=\"margin-top:3px;\">".$this->property["label"]["value"]."</label>";
@@ -214,6 +223,7 @@ class ClsObj_dsnav extends ClsObject {
 			$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];
 			$this->property["cssfile"]["value"] = array($this->property["cssfile"]["value"], "objcss/$template/calendar.css");
 		}
+		$this->propertyJS["DSsearchText"] = $this->property["dssearchtext"]["value"];
 		$this->propertyJS["DSfullsearch"] = $this->property["dsfullsearch"]["value"];
 		$this->addEvent($id, $dsobj."Move", "DSNAV.refreshObj(\"$id\");");
 		$this->addEvent($id, $dsobj."Refresh", "DSNAV.refreshObj(\"$id\");");
