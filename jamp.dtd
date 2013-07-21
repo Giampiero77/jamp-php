@@ -632,11 +632,13 @@ dssearch CDATA #IMPLIED
 dssearchrange CDATA #IMPLIED
 dsautosearch (true|false) #IMPLIED
 dsfullsearch CDATA #IMPLIED
+dssearchtext CDATA #IMPLIED
 dsobj CDATA #IMPLIED
 java CDATA #IMPLIED
 cssfile CDATA #IMPLIED
 dsitem CDATA #IMPLIED
 objtype CDATA #IMPLIED
+dsautosearchfield CDATA #IMPLIED
 searchonkeyup (true|false) #IMPLIED
 >
 <!ELEMENT dsselect (options?)>
