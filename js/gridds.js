@@ -654,19 +654,10 @@ clsGridds.prototype =
 		if (GRIDDS.colObjPrev == undefined) return;
 		GRIDDS.delta = 0;
 		GRIDDS.widthPrev = parseInt(GRIDDS.colObjPrev.style.width);
-		if (GRIDDS.colObjNext != undefined) 
-		{
-			GRIDDS.widthNext = parseInt(GRIDDS.colObjNext.style.width);
-			SYSTEMEVENT.addEventListener(document, "mousemove", GRIDDS.colResize);
-			SYSTEMEVENT.addEventListener(document, "mouseup", GRIDDS.colMouseUp);
-		}
-		else //Last Col
-		{
-			GRIDDS.colObjNext = GRIDDS.colObjPrev.parentNode.parentNode.parentNode;
-			GRIDDS.widthNext = parseInt(GRIDDS.colObjNext.colObj.width);
-			SYSTEMEVENT.addEventListener(document, "mousemove", GRIDDS.lastColResize);
-			SYSTEMEVENT.addEventListener(document, "mouseup", GRIDDS.lastColMouseUp);
-		}
+		GRIDDS.colObjNext = GRIDDS.colObjPrev.parentNode.parentNode.parentNode;
+		GRIDDS.widthNext = parseInt(GRIDDS.colObjNext.colObj.width);
+		SYSTEMEVENT.addEventListener(document, "mousemove", GRIDDS.lastColResize);
+		SYSTEMEVENT.addEventListener(document, "mouseup", GRIDDS.lastColMouseUp);
 		SYSTEMEVENT.stopPropagation(event);
 		SYSTEMEVENT.preventDefault(event);
 	},
