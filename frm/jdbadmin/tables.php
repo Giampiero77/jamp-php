@@ -40,17 +40,14 @@ function data_select_before($ds)
 function data_update($ds) 
 {
 	global $event, $refresh;
-	$msg = "You can change only the table name!";
-	if($_SESSION["jdbadmin"]['lang'] == "IT") $msg = "Puoi cambiare il nome a una sola tabella";
-
-    if ($_POST['keynamevalue']==$_POST['Name']) $event->setCodeJs("alert('$msg');");
-    else if ($ds->getPropertyName("id")=="ds1") 
-	{		
-	    $dabatase = $_SESSION["jdbadmin"]['database'];
- 		$ds->ds->dsConnect();
- 		$ds->ds->RenameTable($dabatase, $_POST['keynamevalue'], $dabatase, $_POST['Name']);
-    	$event->setCodeJs($refresh);
-	}
+	$dabatase = $_SESSION["jdbadmin"]['database'];
+	$ds->ds->dsConnect();
+	$ds->ds->dsDBSelect($dabatase);
+	
+	$ds->ds->dsQuery("ALTER TABLE `".$_POST['keynamevalue']."` ENGINE = ".$_POST['Engine']." DEFAULT COLLATE ".$_POST['Collation']);
+	
+    if ($_POST['keynamevalue']!=$_POST['Name']) $ds->ds->RenameTable($dabatase, $_POST['keynamevalue'], $dabatase, $_POST['Name']);
+    $event->setCodeJs($refresh);
 	return false;
 }
 

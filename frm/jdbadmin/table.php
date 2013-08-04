@@ -60,10 +60,15 @@ function html_load()
 		{
 			if (confirm("'.MESSAGE::translate("MSG009").'")) 
 			{
-				AJAX.request("POST", "table.php", "data=delete&dsobjname=dsGrid&truncate=yes", true, true);
+				AJAX.request("POST", "table.php", "data=delete&dsobjname=dsGrid", true, true);
 			}
 		}
 
+		function setConvert(value)
+		{
+			AJAX.request("POST", "table.php", "data=convert&collation="+value, true, true);
+		}
+					
 		function ShowSQL()
 		{
 			var code = $("textSQL_code");
@@ -159,6 +164,21 @@ function data_select_before($ds)
 		$ds->setProperty("xml", $xml->dataJSON($result));
  		return false;
 	}
+}
+
+function convert()
+{
+	global $system, $event, $conn, $DS_CONN;
+	$DS_CONN["dsGrid"] = $conn;
+	$ds = $system->newObj("dsGrid", "ds");
+	$ds->setProperty("conn", "custom");
+	$ds->ds->dsConnect();
+	$ds->ds->dsDBSelect($_SESSION["jdbadmin"]['database']);
+	$collation = $_POST["collation"];
+	$char = explode("_", $_POST["collation"]);
+	$char = $char[0];
+	$ds->ds->dsQuery("ALTER TABLE `".$_SESSION["jdbadmin"]['table']."` CONVERT TO CHARACTER SET $char COLLATE $collation");
+	$event->returnRequest("", "DS.reload('ds1');");
 }
 
 function html_rewrite($gridds)

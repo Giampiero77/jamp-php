@@ -10,11 +10,15 @@
 		<ds id="dsGrid" conn="custom" dssavetype="table" dslimit="20" loadall="false" />
 		<tabs id="tabs1" width="autosize" height="autosize" selected="tab1" align="left">
 			<tab id="tab1" label="STRUCTURE">
-				<dsnav id="dsnav1" dsobj="ds1" objprint="gridds1" btPage="false">
-					<buttons>
-						<button id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
-					</buttons>
-				</dsnav>
+				<div id="divnav" width="auto" height="26px">
+					<dsnav id="dsnav1" dsobj="ds1" objprint="gridds1" btPage="false" style="width:350px;float:left;">
+						<buttons>
+							<button id="btSQL1" onclick="ShowSQL();" image="images/sql.png" title="Show/Hide SQL" />
+						</buttons>
+					</dsnav>
+					<dsselect id="convert" label="CONVERT" dsitem="Collation" dsobjlist="ds0" dsitemlist="Collation" dsitemkeylist="Collation" value="utf8_general_ci" style="padding-top:2px"/>
+					<button id="setConvert" value="OK" onclick="setConvert($('convert').value);"/>
+				</div>
 				<div id="divTop" width="autosize" height="autosize">
 					<gridds id="gridds1" dsobj="ds1" width="autosize" height="autosize">
 						<coloumn>
