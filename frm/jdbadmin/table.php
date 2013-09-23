@@ -60,7 +60,7 @@ function html_load()
 		{
 			if (confirm("'.MESSAGE::translate("MSG009").'")) 
 			{
-				AJAX.request("POST", "table.php", "data=delete&dsobjname=dsGrid", true, true);
+				AJAX.request("POST", "table.php", "data=delete&dsobjname=dsGrid&truncate=yes", true, true);
 			}
 		}
 
