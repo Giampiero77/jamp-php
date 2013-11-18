@@ -69,7 +69,7 @@ class ClsPDF extends FPDF {
  			if(isset($this->property["float"])) 
  			{
  				if ($this->property["float"]=="none") $this->property["ln"] = 1;
- 				if ($this->property["overflow"]=="auto") $this->property["multi"] = true;
+ 				if (array_key_exists("overflow", $this->property) && $this->property["overflow"]=="auto") $this->property["multi"] = true;
  			}
  			if(empty($this->property["color"])) $this->SetTextColor(0, 0, 0);
  			else 
