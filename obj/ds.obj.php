@@ -82,6 +82,9 @@ class ClsObj_ds extends ClsObject {
 		$this->property["fetch"]				= array("value" => "object", "inherit" => false, "html" => false);
 		$this->property["ghostdata"]			= array("value" => null, "inherit" => false, "html" => false);
 
+		/**************************** NATURAL SORT FOR MYSQL DATABASE *******************************/
+		$this->property["naturalsort"]			= array("value" => null,"inherit" => false, "html" => false);
+
 		/**************************** SPECIFICATIONS FOR POSTGRESQL DATABASE *******************************/
 		$this->property["sslmode"]	= array("value" => null, "inherit" => false, "html" => false);
 		/***************************************************************************************************/
