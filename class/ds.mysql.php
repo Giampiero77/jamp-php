@@ -363,9 +363,21 @@ class mysqlDs extends iDS
 				$order = explode(",", $order);
 				for($i = 0; $i < count($order); $i++) $order[$i] = str_replace("`", "", trim($order[$i]));
 			}
+			// Natural Sort
+			$naturalsort = array_key_exists("naturalsort", $this->property) ? $this->property["naturalsort"] : null;
+			if (! empty($naturalsort)) {
+				$order[] = "($naturalsort = '-') DESC";
+				$order[] = "($naturalsort = '0') DESC";
+				$order[] = "($naturalsort+0 > 0) ASC";
+				$order[] = "($naturalsort+0) ASC";
+				$order[] = "($naturalsort) ASC";
+			}
+
 			$order = "`".implode("`, `", $order)."`";
 			$order = str_replace(" ASC`","` ASC", $order);
 			$order = str_replace(" DESC`","` DESC", $order);
+			$order = str_replace("`(","(", $order);
+			$order = str_replace(")`",")", $order);
 			$order = str_replace(".","`.`", $order);
 		   if ($order == "``") $order = "";
 			
