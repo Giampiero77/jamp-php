@@ -1,0 +1,85 @@
+.cssmenu_default {
+	margin-top: 0px;
+	display: block;
+	clear: all;
+}
+
+.cssmenu_default a {
+	text-decoration: none;
+	color: #111;
+}
+
+.cssmenu_default a:hover {
+	text-decoration: none;
+	color: #222;
+}
+
+.cssmenu_default ul{
+	font-family:Arial,Liberation Sans,DejaVu Sans,sans-serif;
+	margin: 0;
+	padding:0;
+	list-style:none;
+}
+
+.cssmenu_default ul li{
+	margin:0;
+	padding: 8px 10px;
+	position:relative;
+	height:18px;
+	background-color:#eee;
+	color: #111;
+	z-index: +10;
+}
+.cssmenu_default > ul > li {
+	float: left;
+	height:14px;
+	line-height:14px;
+	background-color:#eee;
+	-moz-border-radius: 8px 8px 0px 0px;
+	border-radius: 8px 8px 0px 0px;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+}
+
+.cssmenu_default li > ul {
+	visibility:hidden;
+	width: 200px;
+	position: absolute;
+	top:0px;
+	left:200px;
+	border-left:1px solid #aaa;
+
+	box-shadow: 8px 8px 8px #333;
+	-moz-box-shadow: 8px 8px 8px #333;
+	-webkit-box-shadow: 8px 8px 8px #333;
+}
+
+.cssmenu_default > ul > li > ul{
+	top:31px;
+	left:0;
+}
+.cssmenu_default > ul > li:hover {
+	background-color:#777;
+	color:#fff;
+}
+
+.cssmenu_default > ul li:hover li {
+	color:#000;
+}
+
+.cssmenu_default li:hover {
+	background-color:#aaa;
+	color:#ffffc0;
+	cursor: pointer;
+}
+
+.cssmenu_default li:hover > ul{
+	visibility:visible;
+}
+
+
+.cssmenu_default li img {
+	border: 0;
+	vertical-align: middle;
+	margin-right: 5px;
+}
