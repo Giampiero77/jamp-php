@@ -28,7 +28,7 @@
 	height:18px;
 	background-color:#eee;
 	color: #111;
-	z-index: +10;
+	z-index: +1000;
 }
 .cssmenu_default > ul > li {
 	float: left;
