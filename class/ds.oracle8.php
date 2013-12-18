@@ -57,6 +57,15 @@ class oracle8Ds extends iDS
 	}
 
 	/**
+	 * Close connects
+	 */
+	public function dsClose()
+	{
+		if ($this->property["conn"]) oci_close($this->property["conn"]);
+		parent::dsClose();
+	}
+
+	/**
 	* Select the database
 	* @param string $dsname Name of the database
 	*/
@@ -317,6 +326,8 @@ class oracle8Ds extends iDS
 					if ($dsobj->ds->dsCountRow() > 0)
 					{
 						$dsobj->ds->dsGetRow(0);
+						oci_free_statement($this->property["result"]);
+						$this->property["result"] = null;
 						switch($dsobj->ds->property["fetch"])
 						{
 							case "object":
