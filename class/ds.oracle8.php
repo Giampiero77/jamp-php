@@ -49,7 +49,7 @@ class oracle8Ds extends iDS
 	{
 		if ($this->property["open"] == false)
 		{
-			function_exists('oci_connect') or ClsError::showError("DS00", "MYSQL");
+			function_exists('oci_new_connect') or ClsError::showError("DS00", "MYSQL");
 
 			$this->dsDBSelect($this->property["dsdefault"]);
 			$this->property["open"] = true;
@@ -75,7 +75,7 @@ class oracle8Ds extends iDS
 		if (!empty($dsname)) {
 			putenv("NLS_LANG=AMERICAN_AMERICA.AL32UTF8");
 			putenv("NLS_DATE_FORMAT=YYYY-MM-DD HH24:MI:SS");
-			$this->property["conn"] = oci_connect(
+			$this->property["conn"] = oci_new_connect(
 				$this->property["dsuser"],
 				stripcslashes($this->property["dspwd"]),
 				$dsname
