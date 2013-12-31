@@ -145,22 +145,22 @@ class ClsObj_text extends ClsObject {
 			$filestore = defined("FILESTORE") ? FILESTORE : $system->dir_web_jamp.$system->dir_class."filestore.php";
 			if (empty($this->property["target"]["value"]))
 			{
-				$code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$id."_target\" style=\"display:none\">";
+				$code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$id."_target\">";
 				$code .= "\n$tab\t<iframe style=\"display:none\" name=\"".$id."_target\"></iframe>";
 			}
-			else $code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$this->property["target"]["value"]."\" style=\"display:none;\">";
+			else $code .= "\n$tab<form action=\"".$filestore."\" method=\"post\" enctype=\"multipart/form-data\" target=\"".$this->property["target"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"directory\" value=\"".$this->property["directory"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"classname\" value=\"TEXT\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"forcename\" value=\"".$this->property["forcename"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"rewrite\" value=\"".$this->property["rewrite"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"createdir\" value=\"".$this->property["createdir"]["value"]."\">";
 			$code .= "\n$tab\t<input type=\"hidden\" name=\"backgroundcolor\" value=\"".$this->property["backgroundcolor"]["value"]."\">";
-			$code .= "\n$tab\t<input style=\"width: 50px;position: relative;filter:alpha(opacity: 0);opacity: 0;z-index: 10\" type=\"file\" id=\"".$id."_file\" name=\"$id\""." size=\"1\" onchange=\"TEXT.postObj('$id');\" $disabled>";
 			$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];
 			$code .= "\n$tab\t<select id=\"".$id."_dimension\" name=\"dimension[]\" multiple=\"true\" style=\"display: none\"></select>";
-			$code .= "\n$tab</form>";
 			$code .= "\n$tab\t<input type=\"text\" ".$this->getProperty("html", true, false)."$disabled>";			
-			$code .= "\n$tab\t<image style=\"position: relative;top: 5px; left: 0px\" src=\"".$system->dir_web_jamp.$system->dir_template."objcss/$template/page/search.gif\">";			
+			$code .= "\n$tab\t<input style=\"width: 50px;position: relative;filter:alpha(opacity: 0);opacity: 0;z-index: 10\" type=\"file\" id=\"".$id."_file\" name=\"$id\""." size=\"1\" onchange=\"TEXT.postObj('$id');\" $disabled>";				
+			$code .= "\n$tab\t<image style=\"position: relative;top: 5px; left: -50px\" src=\"".$system->dir_web_jamp.$system->dir_template."objcss/$template/page/search.gif\">";	
+			$code .= "\n$tab</form>";
 		} 
 		else $code .= "\n$tab<input ".($forcetype ? "type=$forcetype " : '').$this->getProperty("html", true, false).$readonly.$disabled.">";
 		if (!empty($this->property["dsobjlist"]["value"])) $code .= "\n$tab<div class=\"autocomplete\" style=\"overflow:auto;display:none;z-index: 99999\"></div>";
