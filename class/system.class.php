@@ -209,6 +209,19 @@ class ClsSystem
 	}
 
 	/**
+	* Create a new datasource
+	* @param string $id Object Name
+	* @param string $conn Connection Name	
+	*/
+	public function newConnect($id, $conn)
+	{
+		$ds = $this->newObj($id, "ds");
+		$ds->setProperty("conn", $conn);
+		$ds->ds->dsConnect();
+		return $ds;
+	}
+		
+	/**
 	* Enable the use of plugins
 	* @param name
 	*/
