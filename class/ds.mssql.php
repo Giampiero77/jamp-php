@@ -47,7 +47,9 @@ class mssqlDs extends iDS
 		if ($this->property["open"] == false)
 		{
 			function_exists('mssql_connect') or ClsError::showError("DS00", "MSSQL");
-			$this->property["conn"] = mssql_connect($this->property["dshost"].",".$this->property["dsport"], $this->property["dsuser"], $this->property["dspwd"]) or ClsError::showError("DS001");
+			$host = $this->property["dshost"];
+			if (!empty($this->property["dsport"])) $host .=",".$this->property["dsport"];
+			$this->property["conn"] = mssql_connect($host, $this->property["dsuser"], $this->property["dspwd"]) or ClsError::showError("DS001");
 //			mssql_query("SET NAMES 'utf8'", $this->property["conn"]);
 //			mssql_query("SET CHARACTER SET 'utf8'", $this->property["conn"]);
 //			mssql_query("SET character_set_connection = 'utf8';", $this->property["conn"]);
