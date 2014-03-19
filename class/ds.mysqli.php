@@ -44,7 +44,7 @@ class mysqliDs extends iDS
 	{
 		if ($this->property["open"] == false)
 		{
-//			function_exists('mysqli') or ClsError::showError("DS00", "MYSQL");
+			function_exists('mysqli_connect') or ClsError::showError("DS00", "MYSQLI");
 			$this->property["conn"] = new mysqli($this->property["dshost"], $this->property["dsuser"], stripcslashes($this->property["dspwd"]), $this->property["dsdefault"], (int)$this->property["dsport"]);
 			if (mysqli_connect_errno()) ClsError::showError("DS001");
 			mysqli_set_charset($this->property["conn"], "utf8");
