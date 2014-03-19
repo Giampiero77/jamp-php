@@ -19,6 +19,6 @@ conn14|csv|../resource/import2.txt|none|none|r
 #conn17|sms|none|demoalyx|demoalyx|none
 conn18|csv|../resource/file1.csv|none|none|r
 conn19|csv|../resource/file2.csv|none|none|r
-conn20|mysql|localhost@jamp|root|myadmin|3306
+conn20|mysqli|localhost@jamp|root|myadmin|3306
 jdevelopfrm|filesystem|localhost|none|none|none
 project|xml|./source.xml|none|none|none
