@@ -164,6 +164,9 @@ class ClsObj_text extends ClsObject {
 		} 
 		else $code .= "\n$tab<input ".($forcetype ? "type=$forcetype " : '').$this->getProperty("html", true, false).$readonly.$disabled.">";
 		if (!empty($this->property["dsobjlist"]["value"])) $code .= "\n$tab<div class=\"autocomplete\" style=\"overflow:auto;display:none;z-index: 99999\"></div>";
+		if (defined('JAMP_ALTERNATIVE_CALENDAR')) {
+			$code .= call_user_func(JAMP_ALTERNATIVE_CALENDAR, 'codeHTML', $id, $this);
+		}
 
 		$code = $this->getCodeLabelAlign($code, $tab);
 		return $code;
@@ -198,11 +201,15 @@ class ClsObj_text extends ClsObject {
 		{
 			if (substr($this->property["format"]["value"],0,4)=="date" && $this->property["calendar"]["value"] != "false")
 			{
-				$this->property["java"]["value"][] = "calendar.js";
-				$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];
-				$this->propertyJS["classcalendar"] = "calendar_$template";
-				$this->property["cssfile"]["value"] = "objcss/$template/calendar.css";
-				$this->property["onclick"]["value"] = "CALENDAR.show_picker(this); ".$this->property["onclick"]["value"];
+				if (defined('JAMP_ALTERNATIVE_CALENDAR')) {
+					call_user_func(JAMP_ALTERNATIVE_CALENDAR, 'BuildObj', $id, $this);
+				} else {
+					$this->property["java"]["value"][] = "calendar.js";
+					$template = empty($this->property["template"]["value"]) ? "default" : $this->property["template"]["value"];
+					$this->propertyJS["classcalendar"] = "calendar_$template";
+					$this->property["cssfile"]["value"] = "objcss/$template/calendar.css";
+					$this->property["onclick"]["value"] = "CALENDAR.show_picker(this); ".$this->property["onclick"]["value"];
+				}
 			}
 		}
 		if (!empty($this->property["keypress"]["value"]))
