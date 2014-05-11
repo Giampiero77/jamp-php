@@ -114,6 +114,7 @@ class ClsObj_graphic extends ClsObject {
 	*/
 	public function getPropertyName($property, $i = -1)
 	{	
+		$i = intval($i);
 		if (isset($this->property[$property]["value"][$i]))	 return $this->property[$property]["value"][$i];
 		else if ($i<0) if (isset($this->property[$property])) return $this->property[$property]["value"];
 		return null;
