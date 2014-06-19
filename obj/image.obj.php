@@ -11,7 +11,6 @@
 */
 
 class ClsObj_image extends ClsObject {
-
 	/**
 	* Construct
 	* @param string $id ID object
@@ -59,7 +58,10 @@ class ClsObj_image extends ClsObject {
 		$this->property["dimension"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["forcename"]	= array("value" => null, "inherit" => false, "html" => false);
 		$this->property["createdir"]	= array("value" => null, "inherit" => false, "html" => false);
-		$this->property["backgroundcolor"] = array("value" => null, "inherit" => false, "html" => false);		
+		$this->property["backgroundcolor"] = array("value" => null, "inherit" => false, "html" => false);
+
+		$this->property["emptyimage"] = array("value" => null, "inherit" => false, "html" => false);
+
 		$this->realpath = false;
 	}
 
@@ -123,7 +125,7 @@ class ClsObj_image extends ClsObject {
 		$this->propertyJS["action"] = $phpstore;
 		$this->propertyJS["directory"] = $this->property["directory"]["value"];
 		$this->propertyJS["extension"] = $this->property["extension"]["value"];
-		$this->propertyJS["empty"] = $system->dir_web_jamp.$system->dir_template."objcss/default/image/none.gif";
+		$this->propertyJS["empty"] = $this->getEmptyImage();
 		if ($this->property["fixed"]["value"]=="true") $style="width:".$this->property["width"]["value"]."; height:".$this->property["height"]["value"].";";
 		else $style = "width:0px; height:0px;";
  		$code = "\n$tab<div class=\"".$this->property["class"]["value"]."\" style=\"$style\">";
@@ -176,6 +178,17 @@ class ClsObj_image extends ClsObject {
 	public function refreshOBJ()
 	{
 		return "IMAGE.refreshObj(\"".$this->property["id"]["value"]."\");";
+	}
+
+	protected function getEmptyImage() {
+		global $system;
+
+		$img = $this->property["emptyimage"]["value"];
+		if (empty($img)) {
+			return $system->dir_web_jamp.$system->dir_template."objcss/default/image/none.gif";
+		} else {
+			return $this->property["directory"]["value"].$img;
+		}
 	}
 }
 ?>
