@@ -769,7 +769,7 @@ clsGridds.prototype =
 			pos = obj.DS.DSpos;
 			this.addROW(obj, pos);
 		}
-		eval(obj.bodyObj.rows[pos].refreshROW);
+		if (obj.bodyObj.rows[pos] != undefined) eval(obj.bodyObj.rows[pos].refreshROW);
 	}
 };
 
