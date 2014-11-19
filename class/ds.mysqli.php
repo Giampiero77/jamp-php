@@ -1532,7 +1532,13 @@ class mysqliDs extends iDS
 				$item = explode("-", $item[1]);
 				ClsError::showError("DS006", $item[0]);		        		 
 		}		
-		else ClsError::showError("DS003", $this->property["conn"], $qry);
+		else 
+		{
+		    $err[0] = $qry;		
+		    $err[1] = mysqli_errno($this->property["conn"]);		    
+		    $err[2] = mysqli_error($this->property["conn"]);		    
+		    ClsError::showError("DS003", $this, $err);
+		}
 	}
 	
 	/**
