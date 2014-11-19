@@ -1537,7 +1537,13 @@ class mysqlDs extends iDS
 			$item = explode("-", $item[1]);
 			ClsError::showError("DS006", $item[0]);
 		}
-		else ClsError::showError("DS003", $this->property["conn"], $qry);
+		else 
+		{
+		    $err[0] = $qry;		
+		    $err[1] = mysql_errno($this->property["conn"]);		    
+		    $err[2] = mysql_error($this->property["conn"]);		    
+		    ClsError::showError("DS003", $this, $err);
+		}
 	}
 	
 	/**
