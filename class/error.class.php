@@ -28,18 +28,9 @@ class ClsError
 		self::$param["errno"] = $e;
 		self::$param["obj"]   = $obj;
 		self::$param["extra"] = $extra;
-		self::$param['message'] = "";
-		self::$param['title'] = "Errore: $e";
-
-		switch ($e)
-		{
-			case "DS003": 
-				self::$param['message'] .= LANG::translate($e, array($extra, mysql_errno($obj), mysql_error($obj)));
-			break;
-			default:
-				self::$param['message'] .= LANG::translate($e, array($obj, $extra));
-			break;
-		}
+		self::$param['title'] = "Error: $e";
+		$extra = is_array($extra) ? $extra : array($extra);
+		self::$param['message'] = LANG::translate($e, $extra);
 		$return = userEvent::call("before_error");
 		if (is_null($return) || ($return==true))
 		{
@@ -120,6 +111,4 @@ class ClsError
 		if (is_null($return) || ($return==true)) die();
 	}
 }
-
-
 ?>
