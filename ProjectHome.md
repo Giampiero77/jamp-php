@@ -1,0 +1,1 @@
+JAMP is a next-generation open source framework for developing Web 2.0 applications, compatible with all major browsers (Firefox, Internet Explorer, Opera, Safari, Chrome, etc.). The most common areas where you can find some examples are: groupware, webmail, e-learning, surveys, forms, help desk, service management and management.
